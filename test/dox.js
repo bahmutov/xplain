@@ -22,6 +22,32 @@ gt.test('~ tilde tests', function () {
 	gt.ok(~-1 == false, '~-1 is false');
 });
 
+gt.test('param at start', function () {
+	var comment = '/** \n@param {Number} a */';
+	var parsed = dox.parseComment(comment);
+	gt.object(parsed, 'parsed comment');
+	// console.log(parsed);
+	gt.array(parsed.tags, 'have tags array');
+	gt.equal(parsed.tags.length, 1, 'one param');
+	var a = parsed.tags['0'];
+	gt.object(a, 'first parsed param');
+	gt.equal(a.type, 'param', 'this is a param');
+	gt.equal(a.name, 'a', 'correct name');
+});
+
+gt.test('param not at start', function () {
+	var comment = '/** \n @param a */';
+	var parsed = dox.parseComment(comment);
+	gt.object(parsed, 'parsed comment');
+	console.log(parsed);
+	gt.array(parsed.tags, 'have tags array');
+	gt.equal(parsed.tags.length, 1, 'one param');
+	var a = parsed.tags['0'];
+	gt.object(a, 'first parsed param');
+	gt.equal(a.type, 'param', 'this is a param');
+	gt.equal(a.name, 'a', 'correct name');
+});
+
 gt.test('sample comment', function () {
 	gt.func(dox.parseComment, 'parseComment is a function');
 	var comment = '/**\n\
@@ -31,9 +57,6 @@ gt.test('sample comment', function () {
 	*/';
 	var at = comment.indexOf('@');
 	gt.ok(at > 0, 'found @ character');
-	console.log('@ at', at);
-	console.log('~@', ~at);
-
 	var parsed = dox.parseComment(comment);
 	gt.object(parsed, 'could parse comment', comment);
 	console.log(parsed);
