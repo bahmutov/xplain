@@ -4,13 +4,12 @@
 */
 
 /**
-	Returns the sum of two numbers
-
-	@method add
-	@param a {Number}
-	@param b {Number}
-	@public
-*/
+ *	Returns the sum of two numbers
+ *
+ *	@param {Number} a
+ *	@param {Number} b
+ *	@public
+ */
 function add(a, b) {
 	return a + b;
 }
