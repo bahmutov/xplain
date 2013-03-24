@@ -1,0 +1,22 @@
+{
+  "name": "xplain",
+  "version": "0.0.0",
+  "description": "Generates API documentation with unit tested examples",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "keywords": [
+    "javascript",
+    "api",
+    "doc",
+    "node"
+  ],
+  "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "gt": "~0.6.4",
+    "dox": "~0.4.3"
+  }
+}
