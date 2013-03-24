@@ -1,7 +1,12 @@
 /**
+	@module xplain
+	@class Sample math
+*/
+
+/**
 	Returns the sum of two numbers
 
-	@function add
+	@method add
 	@param a {Number}
 	@param b {Number}
 	@public
