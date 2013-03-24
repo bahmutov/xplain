@@ -22,8 +22,36 @@ gt.test('~ tilde tests', function () {
 	gt.ok(~-1 == false, '~-1 is false');
 });
 
+gt.test('parse tags', function () {
+	gt.func(dox.parseTags, 'parseTags is a function');
+	var comment = ['/**',
+	'brief description',
+	'@module a',
+	'@class myClass',
+	'@param {Number} a',
+	'*/'
+	].join('\n');
+	var tags = dox.parseTags(comment);
+	gt.array(tags, 'returned tags array');
+	gt.equal(tags.length, 3, '3 tags');
+});
+
+gt.test('parse tags mixed white space', function () {
+	gt.func(dox.parseTags, 'parseTags is a function');
+	var comment = ['/**',
+	'brief description',
+	'\t@module a',
+	' @class myClass',
+	'    @param {Number} a',
+	'*/'
+	].join('\n');
+	var tags = dox.parseTags(comment);
+	gt.array(tags, 'returned tags array');
+	gt.equal(tags.length, 3, '3 tags');
+});
+
 gt.test('param at start', function () {
-	var comment = '/** \n@param {Number} a */';
+	var comment = '/** \n@param {Number} a \n*/';
 	var parsed = dox.parseComment(comment);
 	gt.object(parsed, 'parsed comment');
 	// console.log(parsed);
@@ -36,10 +64,11 @@ gt.test('param at start', function () {
 });
 
 gt.test('param not at start', function () {
-	var comment = '/** \n @param a */';
+	var comment = '/** \n @param {String} a \n*/';
 	var parsed = dox.parseComment(comment);
 	gt.object(parsed, 'parsed comment');
 	console.log(parsed);
+
 	gt.array(parsed.tags, 'have tags array');
 	gt.equal(parsed.tags.length, 1, 'one param');
 	var a = parsed.tags['0'];
@@ -59,5 +88,5 @@ gt.test('sample comment', function () {
 	gt.ok(at > 0, 'found @ character');
 	var parsed = dox.parseComment(comment);
 	gt.object(parsed, 'could parse comment', comment);
-	console.log(parsed);
+	// console.log(parsed);
 });
