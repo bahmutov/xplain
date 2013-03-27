@@ -2,6 +2,7 @@ var fs = require('fs');
 var path = require('path');
 var dox = require('dox');
 var check = require('check-types');
+var util = require('util');
 
 // switch to glob later
 var jsFilename = process.argv[2] || './src/add.js';

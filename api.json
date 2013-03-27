@@ -1,0 +1,62 @@
+[
+  {
+    "tags": [
+      {
+        "type": "module",
+        "string": "xplain"
+      },
+      {
+        "type": "class",
+        "string": "Sample math"
+      }
+    ],
+    "description": {
+      "full": "<p>Sample math operations</p>",
+      "summary": "<p>Sample math operations</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": false
+  },
+  {
+    "tags": [
+      {
+        "type": "method",
+        "string": "add"
+      },
+      {
+        "type": "param",
+        "types": [
+          "Number"
+        ],
+        "name": "a",
+        "description": "First argument"
+      },
+      {
+        "type": "param",
+        "types": [
+          "Number"
+        ],
+        "name": "b",
+        "description": "Second argument"
+      },
+      {
+        "type": "public",
+        "string": ""
+      }
+    ],
+    "description": {
+      "full": "<p>Returns the sum of two numbers</p>",
+      "summary": "<p>Returns the sum of two numbers</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "function add(a, b) {\n\treturn a + b;\n}\n\nmodule.exports = add;",
+    "ctx": {
+      "type": "function",
+      "name": "add",
+      "string": "add()"
+    }
+  }
+]
