@@ -67,7 +67,7 @@ gt.test('param not at start', function () {
 	var comment = '/** \n @param {String} a \n*/';
 	var parsed = dox.parseComment(comment);
 	gt.object(parsed, 'parsed comment');
-	console.log(parsed);
+	// console.log(parsed);
 
 	gt.array(parsed.tags, 'have tags array');
 	gt.equal(parsed.tags.length, 1, 'one param');

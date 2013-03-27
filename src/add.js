@@ -9,8 +9,8 @@ Sample math operations
 Returns the sum of two numbers
 
 @method add
-@param {Number} a
-@param {Number} b
+@param {Number} a First argument
+@param {Number} b Second argument
 @public
 */
 function add(a, b) {

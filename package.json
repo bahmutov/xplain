@@ -18,6 +18,7 @@
   "license": "MIT",
   "dependencies": {
     "gt": "~0.6.4",
-    "dox": "~0.4.3"
+    "dox": "~0.4.3",
+    "check-types": "~0.5.2"
   }
 }
