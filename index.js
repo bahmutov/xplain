@@ -7,7 +7,7 @@ var util = require('util');
 // switch to glob later
 var jsFilename = process.argv[2] || './src/add.js';
 check.verifyString(jsFilename, 'missing input filename');
-var outputJsonFilename = path.join(__dirname, 'out.json');
+var outputJsonFilename = path.join(__dirname, 'out.html');
 
 function getFileApi(filename) {
 	check.verifyString(filename, 'missing filename');
@@ -22,3 +22,6 @@ function getFileApi(filename) {
 var json = getFileApi(jsFilename);
 check.verifyArray(json, 'could not get api array from', jsFilename);
 console.log(json);
+
+var toDoc = require('./src/toHtml');
+toDoc(json, outputJsonFilename);
