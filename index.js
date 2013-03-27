@@ -19,7 +19,7 @@ function getFileApi(filename) {
 	return json;
 }
 
-var json = getFileApi(jsFilename);
+var json = getFileApi(jsFilename).concat(getFileApi('./test/add.js'));
 check.verifyArray(json, 'could not get api array from', jsFilename);
 console.log(json);
 

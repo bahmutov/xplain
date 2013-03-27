@@ -2,6 +2,9 @@ var add = require('../src/add');
 
 gt.module('add');
 
+/**
+@exampleFor add
+*/
 gt.test('testing add', function () {
 	gt.func(add, 'add is a function');
 	gt.arity(add, 2, 'expects two arguments');
