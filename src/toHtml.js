@@ -61,8 +61,9 @@ function examplesFor(name) {
 	return examples.join('\n');
 }
 
+var exampleDivId = 1;
 function exampleDiv(apiExample) {
-	var o = '<div>\n';
+	var o = '<div id="' + exampleDivId++ + '">\n';
 	o += '<pre>\n' + apiExample.code + '\n</pre>\n';
 	o += '</div>\n';
 	return o;
@@ -73,12 +74,13 @@ function methodDiv(apiComment) {
 	console.assert(apiComment.ctx, 'missing ctx property');
 	console.assert(apiComment.ctx.type === 'function', 'ctx is not function');
 	check.verifyString(apiComment.ctx.name, 'missing function name');
-	var o = '<div>\n';
+	var o = '<div id="' + apiComment.ctx.name + '">\n';
 	o += '<h3>' + apiComment.ctx.name + '</h3>\n';
 	o += apiComment.description.summary + '<br>\n';
 	var examples = examplesFor(apiComment.ctx.name);
 	o += examples + '\n';
-	o += '<pre>\n' + apiComment.code + '\n</pre>\n';
+	var id = apiComment.ctx.name + '_code';
+	o += '<pre id="' + id + '">\n' + apiComment.code + '\n</pre>\n';
 	o += '</div>\n';
 	return o;
 }

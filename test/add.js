@@ -11,3 +11,10 @@ gt.test('testing add', function () {
 	gt.equal(add(1, 4), 5, '1 + 4 = 5');
 	gt.equal(add(-1, 1), 0, '-1 + 1 = 0');
 });
+
+/**
+@sampleFor add
+*/
+gt.test('sample add usage', function () {
+	gt.equal(add(2, 3), 5);
+});
