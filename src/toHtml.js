@@ -91,10 +91,17 @@ function exampleDiv(apiExample) {
 	return o;
 }
 
+function sampleToCommentLike(testCode) {
+	check.verifyString(testCode, 'missing test code');
+	return testCode;
+}
+
 var sampleDivId = 1;
 function sampleDiv(apiExample) {
 	var o = '<div id="' + sampleDivId++ + '">\n';
-	o += '<pre>\n' + apiExample.code + '\n</pre>\n';
+	var sample = sampleToCommentLike(apiExample.code);
+	check.verifyString(sample, 'did not get sample');
+	o += '<pre>\n' + sample + '\n</pre>\n';
 	o += '</div>\n';
 	return o;
 }
