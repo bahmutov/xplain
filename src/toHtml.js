@@ -48,6 +48,15 @@ function isExampleFor(apiComment, name) {
 	});
 }
 
+function isSampleFor(apiComment, name) {
+	if (!Array.isArray(apiComment.tags)) {
+		return false;
+	}
+	return apiComment.tags.some(function (tag) {
+		return tag.type === 'sampleFor' && tag.string === name;
+	});
+}
+
 function examplesFor(name) {
 	check.verifyString(name, 'missing name');
 	check.verifyArray(apiComments, 'missing api comments');
@@ -61,9 +70,30 @@ function examplesFor(name) {
 	return examples.join('\n');
 }
 
+function samplesFor(name) {
+	check.verifyString(name, 'missing name');
+	check.verifyArray(apiComments, 'missing api comments');
+	var apiSamples = apiComments.filter(function (apiComment) {
+		return isSampleFor(apiComment, name);
+	});
+	console.log('have', apiSamples.length, 'samples for', name);
+	console.log(apiSamples);
+	var samples = apiSamples.map(sampleDiv);
+	console.log('samples', samples);
+	return samples.join('\n');
+}
+
 var exampleDivId = 1;
 function exampleDiv(apiExample) {
 	var o = '<div id="' + exampleDivId++ + '">\n';
+	o += '<pre>\n' + apiExample.code + '\n</pre>\n';
+	o += '</div>\n';
+	return o;
+}
+
+var sampleDivId = 1;
+function sampleDiv(apiExample) {
+	var o = '<div id="' + sampleDivId++ + '">\n';
 	o += '<pre>\n' + apiExample.code + '\n</pre>\n';
 	o += '</div>\n';
 	return o;
@@ -74,12 +104,20 @@ function methodDiv(apiComment) {
 	console.assert(apiComment.ctx, 'missing ctx property');
 	console.assert(apiComment.ctx.type === 'function', 'ctx is not function');
 	check.verifyString(apiComment.ctx.name, 'missing function name');
-	var o = '<div id="' + apiComment.ctx.name + '">\n';
-	o += '<h3>' + apiComment.ctx.name + '</h3>\n';
+	var name = apiComment.ctx.name;
+
+	var o = '<div id="' + name + '">\n';
+	o += '<h3>' + name + '</h3>\n';
 	o += apiComment.description.summary + '<br>\n';
-	var examples = examplesFor(apiComment.ctx.name);
+
+	var samples = samplesFor(name);
+	if (samples) {
+		o += samples + '\n';
+	}
+
+	var examples = examplesFor(name);
 	o += examples + '\n';
-	var id = apiComment.ctx.name + '_code';
+	var id = name + '_code';
 	o += '<pre id="' + id + '">\n' + apiComment.code + '\n</pre>\n';
 	o += '</div>\n';
 	return o;
