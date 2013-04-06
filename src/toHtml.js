@@ -1,6 +1,7 @@
 var fs = require('fs');
 var path = require('path');
 var check = require('check-types');
+var parseCode = require('./parser').parseCode;
 
 var apiComments = null;
 
@@ -105,15 +106,26 @@ function exampleDiv(apiExample) {
 
 function sampleToCommentLike(testCode) {
 	check.verifyString(testCode, 'missing test code');
-	return testCode;
+	var parsed = parseCode(testCode);
+	check.verifyObject(parsed, 'could not parse', testCode);
+	return parsed;
 }
 
 var sampleDivId = 1;
 function sampleDiv(apiExample) {
 	var o = '<div id="' + sampleDivId++ + '" class="sample">\n';
-	var sample = sampleToCommentLike(apiExample.code);
-	check.verifyString(sample, 'did not get sample');
-	o += '<pre>\n' + sample + '\n</pre>\n';
+	var code = apiExample.code;
+	check.verifyString(code, 'missing code for sample');
+	var parsed = sampleToCommentLike(code);
+	check.verifyObject(parsed, 'did not get sample from', code);
+	check.verifyString(parsed.name, 'there is no name for', code);
+	check.verifyString(parsed.code, 'there is no code for', code);
+	o += '<span class="sampleName">' + parsed.name + '</span>\n';
+	o += '<pre>\n';
+	o += '<code class="javascript">\n'
+	o += parsed.code + '\n';
+	o += '</code>\n';
+	o += '</pre>\n';
 	o += '</div>\n';
 	return o;
 }

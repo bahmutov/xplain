@@ -26,3 +26,7 @@
 	border-left: lightGray solid thick;
 	padding-left: 5px;
 }
+
+span.sampleName {
+	font-weight: bolder;
+}
