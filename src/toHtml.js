@@ -12,12 +12,12 @@ module.exports = function (apiJson, htmlFilename) {
 	var o = '<!DOCTYPE HTML>\n';
 	o += '<html>\n<head>\n';
 	o += '\t<title>Api</title>\n';
-	// o += '\t<link href="api.css" rel="stylesheet" type="text/css">\n';
 	var css = apiCss();
 	check.verifyString(css, 'could not get css');
 	o += '\t<style>\n' + css + '\n\t</style>\n';
 	o += '<head>\n';
 	o += '<body>\n';
+	o += '\t<div class="content">\n';
 
 	apiComments = apiJson;
 	apiComments.forEach(function (apiComment) {
@@ -31,6 +31,7 @@ module.exports = function (apiJson, htmlFilename) {
 		o += str + '\n';
 	});
 
+	o += '\t</div>\n';
 	o += '</body>\n</html>';
 	fs.writeFileSync(htmlFilename, o, 'utf-8');
 };
@@ -126,7 +127,7 @@ function methodDiv(apiComment) {
 
 	var o = '<div id="' + name + '" class="method">\n';
 	o += '<h3>' + name + '</h3>\n';
-	o += apiComment.description.summary + '<br>\n';
+	o += apiComment.description.summary + '\n';
 
 	var samples = samplesFor(name);
 	if (samples) {

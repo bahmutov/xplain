@@ -1,3 +1,10 @@
+.content {
+  width: 95%;
+  padding: 5px 5px 0px 5px;
+  margin: 10px auto 0 auto;
+  max-width: 700px;
+}
+
 .example {
 	border-left: Bisque solid thick;
 	padding-left: 5px;
