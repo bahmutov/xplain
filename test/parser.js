@@ -8,6 +8,12 @@ gt.test('no name', function () {
 	gt.null(parseName('something without quotes'));
 });
 
+gt.test('invalid code', function () {
+	gt.null(parseCode(''));
+	var parsed = parseCode('gt.test("4", () {});');
+	gt.null(parsed, 'null is returned for invalid input');
+});
+
 gt.test('multiple words', function () {
 	gt.equal(parseName('"foo bar"'), 'foo bar');
 });
