@@ -3,6 +3,11 @@ gt.module('test code parsing');
 var parseCode = require('../src/parser').parseCode;
 var parseName = require('../src/parser').parseName;
 
+gt.test('no name', function () {
+	gt.null(parseName(''));
+	gt.null(parseName('something without quotes'));
+});
+
 gt.test('multiple words', function () {
 	gt.equal(parseName('"foo bar"'), 'foo bar');
 });
