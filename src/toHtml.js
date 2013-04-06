@@ -1,4 +1,5 @@
 var fs = require('fs');
+var path = require('path');
 var check = require('check-types');
 
 var apiComments = null;
@@ -11,6 +12,10 @@ module.exports = function (apiJson, htmlFilename) {
 	var o = '<!DOCTYPE HTML>\n';
 	o += '<html>\n<head>\n';
 	o += '\t<title>Api</title>\n';
+	// o += '\t<link href="api.css" rel="stylesheet" type="text/css">\n';
+	var css = apiCss();
+	check.verifyString(css, 'could not get css');
+	o += '\t<style>\n' + css + '\n\t</style>\n';
 	o += '<head>\n';
 	o += '<body>\n';
 
@@ -29,6 +34,12 @@ module.exports = function (apiJson, htmlFilename) {
 	o += '</body>\n</html>';
 	fs.writeFileSync(htmlFilename, o, 'utf-8');
 };
+
+function apiCss() {
+	var cssFilename = path.join(__dirname, './api.css');
+	var cssText = fs.readFileSync(cssFilename, 'utf8');
+	return cssText;
+}
 
 function isMethod(apiComment) {
 	if (!Array.isArray(apiComment.tags)) {
@@ -85,7 +96,7 @@ function samplesFor(name) {
 
 var exampleDivId = 1;
 function exampleDiv(apiExample) {
-	var o = '<div id="' + exampleDivId++ + '">\n';
+	var o = '<div id="' + exampleDivId++ + '" class="example">\n';
 	o += '<pre>\n' + apiExample.code + '\n</pre>\n';
 	o += '</div>\n';
 	return o;
@@ -98,7 +109,7 @@ function sampleToCommentLike(testCode) {
 
 var sampleDivId = 1;
 function sampleDiv(apiExample) {
-	var o = '<div id="' + sampleDivId++ + '">\n';
+	var o = '<div id="' + sampleDivId++ + '" class="sample">\n';
 	var sample = sampleToCommentLike(apiExample.code);
 	check.verifyString(sample, 'did not get sample');
 	o += '<pre>\n' + sample + '\n</pre>\n';
@@ -113,7 +124,7 @@ function methodDiv(apiComment) {
 	check.verifyString(apiComment.ctx.name, 'missing function name');
 	var name = apiComment.ctx.name;
 
-	var o = '<div id="' + name + '">\n';
+	var o = '<div id="' + name + '" class="method">\n';
 	o += '<h3>' + name + '</h3>\n';
 	o += apiComment.description.summary + '<br>\n';
 
@@ -125,7 +136,7 @@ function methodDiv(apiComment) {
 	var examples = examplesFor(name);
 	o += examples + '\n';
 	var id = name + '_code';
-	o += '<pre id="' + id + '">\n' + apiComment.code + '\n</pre>\n';
+	o += '<pre id="' + id + '" class="methodCode">\n' + apiComment.code + '\n</pre>\n';
 	o += '</div>\n';
 	return o;
 }
