@@ -4,7 +4,7 @@
   "description": "Generates API documentation with unit tested examples",
   "main": "index.js",
   "scripts": {
-    "test": "gt test\\*.js",
+    "test": "gt test/*.js",
     "yuidoc": "yuidoc src test"
   },
   "repository": "",
