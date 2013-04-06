@@ -28,6 +28,21 @@ function parseName2(code) {
 	return parseName(matched[1]);
 }
 
+function parseCode2(code) {
+	check.verifyString(code, 'missing code');
+	var reg = /\(([\W\w]+),\s*function\s*\(([\W\w]+)\)/;
+
+	var matched = reg.exec(code);
+	console.log(matched);
+	if (!Array.isArray(matched)) {
+		return null;
+	}
+	if (!check.isString(matched[1])) {
+		return null;
+	}
+	return parseName(matched[1]);
+}
+
 function parseCode(code) {
 	check.verifyString(code, 'missing code');
 	var result = {};
