@@ -2,6 +2,7 @@ var fs = require('fs');
 var path = require('path');
 var check = require('check-types');
 var parseCode = require('./parser').parseCode;
+var parseUnitTestCode = require('./parser').parseUnitTestCode;
 
 var apiComments = null;
 
@@ -120,10 +121,16 @@ function sampleDiv(apiExample) {
 	check.verifyObject(parsed, 'did not get sample from', code);
 	check.verifyString(parsed.name, 'there is no name for', code);
 	check.verifyString(parsed.code, 'there is no code for', code);
+	var humanForm = parseUnitTestCode(parsed.code);
+	if (!check.isString(humanForm)) {
+		console.log('could not convert', parseCode, 'to human form');
+		humanForm = parsed.code;
+	}
+	check.verifyString(humanForm, 'could not convert to human form', parsed.code);
 	o += '<span class="sampleName">' + parsed.name + '</span>\n';
 	o += '<pre>\n';
 	o += '<code class="javascript">\n'
-	o += parsed.code + '\n';
+	o += humanForm + '\n';
 	o += '</code>\n';
 	o += '</pre>\n';
 	o += '</div>\n';

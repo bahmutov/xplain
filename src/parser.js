@@ -31,7 +31,17 @@ function parseCode(code) {
 	return parsed;
 }
 
+// parses multiline list of assertions in the code
+// replaces all gt.ok(...) and other assertions with 
+// human-readable code
+function parseUnitTestCode(code) {
+	check.verifyString(code, 'missing code text');
+	var txt = code;
+	return txt;
+}
+
 module.exports = {
 	parseName: parseName,
-	parseCode: parseCode
+	parseCode: parseCode,
+	parseUnitTestCode: parseUnitTestCode
 };
