@@ -30,3 +30,7 @@
 span.sampleName {
 	font-weight: bolder;
 }
+
+code {
+	margin-top: 0.5em;
+}

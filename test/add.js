@@ -19,4 +19,5 @@ gt.test('testing add', function () {
 gt.test('sample add usage', function () {
 	gt.equal(add(2, 3), 5);
 	gt.equal(add('a', 'b'), 'ab', 'concatenates strings');
+	gt.number(add(2, 3), 'returns a number');
 });

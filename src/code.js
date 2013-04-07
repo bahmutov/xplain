@@ -31,6 +31,12 @@ function split(expressions) {
 	return results;
 }
 
+function reformat(code) {
+	var tree = esprima.parse(code);
+	return generator.generate(tree, options);
+}
+
 module.exports = {
-	split: split
+	split: split,
+	reformat: reformat
 };

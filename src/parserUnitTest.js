@@ -13,28 +13,6 @@ function parseEqualArguments(equal) {
 		expected: split[1]
 	};
 	return result;
-	/*
-	var reg2 = /([\W\w+]),\s*([\W\w+])/;
-	var reg3 = /([\W\w+]),\s*([\W\w+]),\s*([\W\w+])/;
-	if (reg3.test(equal)) {
-		var parts = reg3.exec(equal);
-		console.log('have 3 parts to equal', parts);
-		return {
-			op: parts[0],
-			expected: parts[1],
-			message: parts[2]
-		};
-	} else if (reg2.test(equal)) {
-		var parts = reg2.exec(equal);
-		console.log('have 2 parts to equal', parts);
-		return {
-			op: parts[0],
-			expected: parts[1]
-		};
-	}
-	*/
-	// console.log('could not match ANY equal arguments in', equal);
-	// return null;
 }
 
 function parseEqual(line) {
