@@ -15,6 +15,18 @@ function parseEqualArguments(equal) {
 	return result;
 }
 
+function parseNumberArguments(args) {
+	check.verifyString(args, 'args is not a string');
+
+	console.log('splitting', args);
+	var split = code.split(args);
+	check.verifyArray(split, 'did not get array from', args);
+	var result = {
+		op: split[0]
+	};
+	return result;
+}
+
 function parseEqual(line) {
 	var isEqualReg = /(?:gt|QUnit)\.equal\(([\W\w]+)\);/;
 	if (!isEqualReg.test(line)) {
@@ -29,19 +41,38 @@ function parseEqual(line) {
 	return parsed.op + '; // ' + parsed.expected;
 }
 
+function parseNumber(line) {
+	var reg = /(?:gt|QUnit)\.number\(([\W\w]+)\);/;
+	if (!reg.test(line)) {
+		return null;
+	}
+	var matches = reg.exec(line);
+	console.log('number matches', matches);
+	var args = matches[1];
+	check.verifyString(args, 'invalid number arguments');
+	var parsed = parseNumberArguments(args);
+	check.verifyObject(parsed, 'did not get parsed arguments');
+	return parsed.op + '; // returns a number';
+}
+
 function parseAssertion(line) {
 	check.verifyString(line, 'missing line');
 
-	var equalParsed = parseEqual(line);
-	if (check.isString(equalParsed)) {
-		return equalParsed;
+	var parsed = parseEqual(line);
+	if (check.isString(parsed)) {
+		return parsed;
+	}
+	parsed = parseNumber(line);
+	if (check.isString(parsed)) {
+		return parsed;
 	}
 
 	var equalReg = /(?:gt|QUnit)\.equal\(([\W\w]+),\s*([\W\w]+)\s*\)/;
 	var matched = equalReg.exec(line);
 	console.log(matched);
 	if (!Array.isArray(matched)) {
-		return line;
+		var cleaned = code.reformat(line);
+		return cleaned;
 	}
 
 	var op = matched[1];
