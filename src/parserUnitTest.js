@@ -1,8 +1,19 @@
 var check = require('check-types');
+var code = require('./code');
 
 function parseEqualArguments(equal) {
 	check.verifyString(equal, 'equal is not a string');
 
+	console.log('splitting', equal);
+	var split = code.split(equal);
+	check.verifyArray(split, 'did not get array from', equal);
+	console.log(split);
+	var result = {
+		op: split[0],
+		expected: split[1]
+	};
+	return result;
+	/*
 	var reg2 = /([\W\w+]),\s*([\W\w+])/;
 	var reg3 = /([\W\w+]),\s*([\W\w+]),\s*([\W\w+])/;
 	if (reg3.test(equal)) {
@@ -21,8 +32,9 @@ function parseEqualArguments(equal) {
 			expected: parts[1]
 		};
 	}
-	console.log('could not match ANY equal arguments in', equal);
-	return null;
+	*/
+	// console.log('could not match ANY equal arguments in', equal);
+	// return null;
 }
 
 function parseEqual(line) {
