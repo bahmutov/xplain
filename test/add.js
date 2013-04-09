@@ -14,10 +14,25 @@ gt.test('testing add', function () {
 });
 
 /**
+@exampleFor add
+*/
+gt.test('testing add', function () {
+	gt.equal(add('a', 0), 'a0', 'result is string if first arg is string');
+	gt.equal(add(6, '3'), '63', 'result is number of second arg is a number');
+});
+
+/**
 @sampleFor add
 */
 gt.test('sample add usage', function () {
-	gt.equal(add(2, 3), 5);
-	gt.equal(add('a', 'b'), 'ab', 'concatenates strings');
 	gt.number(add(2, 3), 'returns a number');
+	gt.equal(add(2, 3), 5);
+});
+
+/**
+@sampleFor add
+*/
+gt.test('edge cases', function () {
+	gt.equal(add('a', 'b'), 'ab', 'concatenates strings');
+	gt.ok(add(2, 3), 'value is true');
 });

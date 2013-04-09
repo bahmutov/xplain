@@ -27,6 +27,18 @@ function parseNumberArguments(args) {
 	return result;
 }
 
+function parseOkArguments(args) {
+	check.verifyString(args, 'args is not a string');
+
+	console.log('splitting', args);
+	var split = code.split(args);
+	check.verifyArray(split, 'did not get array from', args);
+	var result = {
+		op: split[0]
+	};
+	return result;
+}
+
 function parseEqual(line) {
 	var isEqualReg = /(?:gt|QUnit)\.equal\(([\W\w]+)\);/;
 	if (!isEqualReg.test(line)) {
@@ -55,6 +67,20 @@ function parseNumber(line) {
 	return parsed.op + '; // returns a number';
 }
 
+function parseOk(line) {
+	var reg = /(?:gt|QUnit)\.ok\(([\W\w]+)\);/;
+	if (!reg.test(line)) {
+		return null;
+	}
+	var matches = reg.exec(line);
+	console.log('ok matches', matches);
+	var args = matches[1];
+	check.verifyString(args, 'invalid number arguments');
+	var parsed = parseOkArguments(args);
+	check.verifyObject(parsed, 'did not get parsed arguments');
+	return parsed.op + '; // returns truthy value';
+}
+
 function parseAssertion(line) {
 	check.verifyString(line, 'missing line');
 
@@ -63,6 +89,10 @@ function parseAssertion(line) {
 		return parsed;
 	}
 	parsed = parseNumber(line);
+	if (check.isString(parsed)) {
+		return parsed;
+	}
+	parsed = parseOk(line);
 	if (check.isString(parsed)) {
 		return parsed;
 	}
