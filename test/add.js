@@ -35,5 +35,6 @@ gt.test('sample add usage', function () {
 @sampleFor add
 */
 gt.test('edge cases', function () {
+	gt.func(add, 'add is a function');
 	gt.equal(add('a', 'b'), 'ab', 'concatenates strings');
 });
