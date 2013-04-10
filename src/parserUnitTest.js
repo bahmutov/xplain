@@ -49,6 +49,17 @@ function parseFuncArguments(args) {
 	return result;
 }
 
+function parseArityArguments(args) {
+	check.verifyString(args, 'args is not a string');
+	var split = code.split(args);
+	check.verifyArray(split, 'did not get array from', args);
+	var result = {
+		op: split[0],
+		number: split[1]
+	};
+	return result;
+}
+
 function parseEqual(line) {
 	var isEqualReg = /(?:gt|QUnit)\.equal\(([\W\w]+)\);/;
 	if (!isEqualReg.test(line)) {
@@ -104,6 +115,20 @@ function parseFunc(line) {
 	return '// ' + parsed.op + ' is a function';
 }
 
+function parseArity(line) {
+	var reg = /(?:gt|QUnit)\.arity\(([\W\w]+)\);/;
+	if (!reg.test(line)) {
+		return null;
+	}
+	var matches = reg.exec(line);
+	var args = matches[1];
+	check.verifyString(args, 'invalid number arguments');
+	var parsed = parseArityArguments(args);
+	check.verifyObject(parsed, 'did not get parsed arguments');
+	return '// ' + parsed.op + ' is a function that expects ' 
+		+ parsed.number + ' arguments';
+}
+
 function parseAssertion(line) {
 	check.verifyString(line, 'missing line');
 
@@ -124,6 +149,10 @@ function parseAssertion(line) {
 	}
 	*/
 	parsed = parseFunc(line);
+	if (check.isString(parsed)) {
+		return parsed;
+	}
+	parsed = parseArity(line);
 	if (check.isString(parsed)) {
 		return parsed;
 	}

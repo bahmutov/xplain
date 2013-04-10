@@ -36,5 +36,6 @@ gt.test('sample add usage', function () {
 */
 gt.test('edge cases', function () {
 	gt.func(add, 'add is a function');
+	gt.arity(add, 2, 'add expects two arguments');
 	gt.equal(add('a', 'b'), 'ab', 'concatenates strings');
 });
