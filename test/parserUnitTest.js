@@ -19,3 +19,10 @@ gt.test('single gt.equal with message', function () {
 	console.log(parsed);
 	gt.equal(parsed, 'add(2, 3); // 5');
 });
+
+gt.test('comments are preserved', function () {
+	var text = '// a comment';
+	var parsed = parse(text);
+	console.log('parsed:', parsed);
+	gt.equal(parsed, text);
+});

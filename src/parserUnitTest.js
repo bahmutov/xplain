@@ -101,22 +101,7 @@ function parseAssertion(line) {
 	}
 	*/
 
-	var equalReg = /(?:gt|QUnit)\.equal\(([\W\w]+),\s*([\W\w]+)\s*\)/;
-	var matched = equalReg.exec(line);
-	console.log(matched);
-	if (!Array.isArray(matched)) {
-		var cleaned = code.reformat(line);
-		return cleaned;
-	}
-
-	var op = matched[1];
-	var output = matched[2];
-	if (!check.isString(op) ||
-		!check.isString(output)) {
-		return line;
-	}
-
-	return op + '; // ' + output;
+	return line;
 }
 
 // parses multiline list of assertions in the code
