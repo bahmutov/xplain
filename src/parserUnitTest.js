@@ -96,6 +96,10 @@ function parseAssertion(line) {
 	if (check.isString(parsed)) {
 		return parsed;
 	}
+	/*
+	parsed = parseRaisesAssertion(line) {
+	}
+	*/
 
 	var equalReg = /(?:gt|QUnit)\.equal\(([\W\w]+),\s*([\W\w]+)\s*\)/;
 	var matched = equalReg.exec(line);

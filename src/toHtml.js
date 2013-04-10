@@ -108,7 +108,7 @@ function exampleDiv(apiExample) {
 function sampleToCommentLike(testCode) {
 	check.verifyString(testCode, 'missing test code');
 	var parsed = parseCode(testCode);
-	check.verifyObject(parsed, 'could not parse', testCode);
+	check.verifyObject(parsed, 'could not parse\n' + testCode);
 	return parsed;
 }
 

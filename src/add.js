@@ -14,6 +14,8 @@ Returns the sum of two numbers
 @public
 */
 function add(a, b) {
+	console.assert(a !== undefined, 'missing first argument');
+	console.assert(b !== undefined, 'missing second argument');
 	return a + b;
 }
 

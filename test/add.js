@@ -27,6 +27,7 @@ gt.test('testing add', function () {
 gt.test('sample add usage', function () {
 	gt.number(add(2, 3), 'returns a number');
 	gt.equal(add(2, 3), 5);
+	gt.ok(add(0, 1), 'returns 1 as true');
 });
 
 /**
@@ -34,5 +35,4 @@ gt.test('sample add usage', function () {
 */
 gt.test('edge cases', function () {
 	gt.equal(add('a', 'b'), 'ab', 'concatenates strings');
-	gt.ok(add(2, 3), 'value is true');
 });
