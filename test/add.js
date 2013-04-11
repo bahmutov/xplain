@@ -1,4 +1,5 @@
 var add = require('../src/add').add;
+var abs = require('../src/add').abs;
 
 gt.module('add');
 
@@ -38,4 +39,13 @@ gt.test('edge cases', function () {
 	gt.func(add, 'add is a function');
 	gt.arity(add, 2, 'add expects two arguments');
 	gt.equal(add('a', 'b'), 'ab', 'concatenates strings');
+});
+
+/**
+@sampleFor abs
+*/
+gt.test('using abs', function () {
+	gt.equal(abs(10), 10, 'absolute number remains itself');
+	gt.equal(abs(-15), 15, 'negative number changes sign');
+	gt.equal(abs(0), 0, 'zero remains zero');
 });
