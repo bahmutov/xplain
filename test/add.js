@@ -1,4 +1,4 @@
-var add = require('../src/add');
+var add = require('../src/add').add;
 
 gt.module('add');
 
