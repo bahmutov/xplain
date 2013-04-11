@@ -58,7 +58,8 @@ function isExampleFor(apiComment, name) {
 		return false;
 	}
 	return apiComment.tags.some(function (tag) {
-		return tag.type === 'exampleFor' && tag.string === name;
+		return (tag.type === 'exampleFor' || tag.type === 'example')
+			&& tag.string === name;
 	});
 }
 
@@ -67,7 +68,8 @@ function isSampleFor(apiComment, name) {
 		return false;
 	}
 	return apiComment.tags.some(function (tag) {
-		return tag.type === 'sampleFor' && tag.string === name;
+		return (tag.type === 'sampleFor' || tag.type === 'sample')
+			&& tag.string === name;
 	});
 }
 

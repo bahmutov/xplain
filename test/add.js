@@ -42,7 +42,7 @@ gt.test('edge cases', function () {
 });
 
 /**
-@sampleFor abs
+@sample abs
 */
 gt.test('using abs', function () {
 	gt.equal(abs(10), 10, 'absolute number remains itself');
