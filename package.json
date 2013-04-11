@@ -21,6 +21,7 @@
     "dox": "~0.4.3",
     "check-types": "~0.5.2",
     "esprima": "~1.0.2",
-    "escodegen": "0.0.20"
+    "escodegen": "0.0.20",
+    "lodash": "~1.1.1"
   }
 }
