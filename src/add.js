@@ -4,6 +4,8 @@ Sample math operations
 @module xplain
 @class Sample math
 */
+module.exports.add = add;
+module.exports.abs = abs;
 
 /**
 Returns the sum of two numbers
@@ -19,4 +21,13 @@ function add(a, b) {
 	return a + b;
 }
 
-module.exports = add;
+/**
+Returns the absolute value
+
+@method abs
+@param {Number} a Number
+@public
+*/
+function abs(a) {
+    return a >= 0 ? a : -a;
+}
