@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "gt test/*.js",
-    "yuidoc": "yuidoc src test"
+    "yuidoc": "yuidoc src test",
+    "doc": "gt test/*.js && node index.js"
   },
   "repository": "",
   "keywords": [
