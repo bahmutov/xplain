@@ -32,13 +32,19 @@ function split(expressions) {
 }
 
 // see https://github.com/Constellation/escodegen/issues/10
-function reformat(code) {
+function reformat(code, keepComments) {
+	keepComments = !!keepComments;
 	var tree = esprima.parse(code, {
 		range: true,
 		token: true,
-		comment: true
+		comment: keepComments
 	});
-	// tree = generator.attachComments(tree, tree.comments, tree.tokens);
+	if (keepComments) {
+		tree = generator.attachComments(tree, tree.comments, tree.tokens);
+		options.comment = true;
+	} else {
+		options.comment = false;
+	}
 	return generator.generate(tree, options);
 }
 
