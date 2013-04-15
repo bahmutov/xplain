@@ -1,5 +1,7 @@
 var check = require('check-types');
 var parsers = require('./parsers');
+var reformat = require('./code').reformat;
+check.verifyFunction(reformat, 'could not get code reformat');
 
 function parseAssertion(line) {
     check.verifyString(line, 'missing line');
@@ -23,7 +25,12 @@ function parseUnitTestCode(text) {
     var lines = text.split('\n');
     var transformedLines = lines.map(parseAssertion);
     var output = transformedLines.join('\n');
-    return output;
+    check.verifyString(output, 'could not get output text');
+
+    var pretty = output;
+    // var pretty = reformat(output);
+    check.verifyString(pretty, 'could not reformat output');
+    return pretty;
 }
 
 module.exports = {

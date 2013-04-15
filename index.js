@@ -27,3 +27,4 @@ inputFiles.forEach(function (filename) {
 var toDoc = require('./src/toHtml');
 var outputJsonFilename = path.join(__dirname, 'out.html');
 toDoc(api, outputJsonFilename);
+console.log('saved', outputJsonFilename);

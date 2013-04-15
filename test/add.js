@@ -27,6 +27,7 @@ gt.test('testing add', function () {
 */
 gt.test('sample add usage', function () {
 	// typical use
+	var add = require('../src/add').add;
 	gt.number(add(2, 3), 'returns a number');
 	gt.equal(add(2, 3), 5);
 	gt.ok(add(0, 1), 'returns 1 as true');

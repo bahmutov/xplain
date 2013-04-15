@@ -18,7 +18,7 @@ var options = {
 		"semicolons" : true
 	},
 	"parse"    : null,
-	"comment"  : false,
+	"comment"  : true,
 	"sourceMap": undefined
 };
 
@@ -31,8 +31,14 @@ function split(expressions) {
 	return results;
 }
 
+// see https://github.com/Constellation/escodegen/issues/10
 function reformat(code) {
-	var tree = esprima.parse(code);
+	var tree = esprima.parse(code, {
+		range: true,
+		token: true,
+		comment: true
+	});
+	// tree = generator.attachComments(tree, tree.comments, tree.tokens);
 	return generator.generate(tree, options);
 }
 
