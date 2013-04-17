@@ -27,8 +27,7 @@ function parseUnitTestCode(text) {
     var output = transformedLines.join('\n');
     check.verifyString(output, 'could not get output text');
 
-    var pretty = output;
-    // var pretty = reformat(output);
+    var pretty = reformat(output, true);
     check.verifyString(pretty, 'could not reformat output');
     return pretty;
 }

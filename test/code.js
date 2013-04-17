@@ -8,8 +8,15 @@ gt.test(function basic() {
 
 gt.test('reformat simple', function () {
     gt.string(code('var f = "foo";'), 'one liner');
-    var str = code('var f = "foo"; // comments');
+});
+
+gt.test('single with comments', function () {
+    var original = 'var f = "foo"; // comments';
+    var str = code(original);
     gt.string(str, 'one liner with comments');
-    console.log('reformatted', str);
     gt.ok(!/comments/.test(str), 'comments should be removed');
+
+    str = code(original, true);
+    gt.string(str, 'one liner with comments');
+    console.log('reformatted\n' + str);
 });
