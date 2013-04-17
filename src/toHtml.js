@@ -41,6 +41,7 @@ module.exports = function (apiJson, htmlFilename) {
 	var indexStr = '';
 	var docsStr = '';
 	methodDocs.forEach(function (info) {
+		indexStr += info.name + '\n';
 		docsStr += info.docs + '\n';
 	});
 
@@ -174,8 +175,11 @@ function methodDiv(apiComment) {
 	var id = name + '_code';
 	o += '<pre id="' + id + '" class="methodCode">\n' + apiComment.code + '\n</pre>\n';
 	o += '</div>\n';
+
+	var nameDiv = '<div><a href="#' + name + '">'
+		+ name + '</a></div>';
 	return {
-		name: name,
+		name: nameDiv,
 		docs: o
 	};
 }

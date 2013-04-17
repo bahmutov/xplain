@@ -20,7 +20,7 @@
     overflow-x: hidden;
     overflow-y: auto;
     left: 0;
-    top: 4em;
+    top: 5em;
     position: fixed;
     bottom: 0;
 }
@@ -31,7 +31,7 @@
     float: left;
     overflow-x: hidden;
     overflow-y: scroll;
-    top: 4em;
+    top: 5em;
     position: fixed;
     right: 0;
     bottom: 0;
