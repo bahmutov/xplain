@@ -29,7 +29,7 @@ function parseUnitTestCode(text) {
 
     var pretty = reformat(output, true);
     check.verifyString(pretty, 'could not reformat output');
-    return pretty;
+    return pretty.trim();
 }
 
 module.exports = {
