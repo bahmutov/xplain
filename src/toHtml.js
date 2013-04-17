@@ -32,15 +32,16 @@ module.exports = function (apiJson, htmlFilename) {
 			return;
 		}
 		console.log('found method comment');
-		var str = methodDiv(apiComment);
-		check.verifyString(str, 'did not get method div string');
-		methodDocs.push(str);
+		var info = methodDiv(apiComment);
+		check.verifyString(info.name, 'did not get method name string');
+		check.verifyString(info.docs, 'did not get method docs string');
+		methodDocs.push(info);
 	});
 
 	var indexStr = '';
 	var docsStr = '';
-	methodDocs.forEach(function (methodDoc) {
-		docsStr += methodDoc + '\n';
+	methodDocs.forEach(function (info) {
+		docsStr += info.docs + '\n';
 	});
 
 	o += '\t\t<div id="index">\n' + indexStr + '\t\t</div>\n';
@@ -173,5 +174,8 @@ function methodDiv(apiComment) {
 	var id = name + '_code';
 	o += '<pre id="' + id + '" class="methodCode">\n' + apiComment.code + '\n</pre>\n';
 	o += '</div>\n';
-	return o;
+	return {
+		name: name,
+		docs: o
+	};
 }
