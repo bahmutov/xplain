@@ -20,3 +20,10 @@ gt.test('single with comments', function () {
     gt.string(str, 'one liner with comments');
     console.log('reformatted\n' + str);
 });
+
+gt.test('two lines with comment', function () {
+    var original = 'var f = "foo"; // comments\nvar b;';
+    var str = code(original, true);
+    gt.string(str, 'reformatted code');
+    console.log('reformatted\n' + str);
+});
