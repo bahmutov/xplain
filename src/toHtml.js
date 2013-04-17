@@ -11,6 +11,7 @@ module.exports = function (apiJson, htmlFilename) {
 	check.verifyString(htmlFilename, 'missing output filename');
 
 	console.log('generating html to', htmlFilename);
+	var title = 'Sample API';
 	var o = '<!DOCTYPE HTML>\n';
 	o += '<html>\n<head>\n';
 	o += '\t<title>Api</title>\n';
@@ -20,7 +21,11 @@ module.exports = function (apiJson, htmlFilename) {
 	o += '<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>\n';
 	o += '<head>\n';
 	o += '<body>\n';
+	o += '<h1>' + title + ' <sub>by xplain</sub></h1>\n';
 	o += '\t<div class="content">\n';
+
+	o += '\t\t<div id="index">something here</div>\n';
+	o += '\t\t<div id="docs">\n';
 
 	apiComments = apiJson;
 	apiComments.forEach(function (apiComment) {
@@ -34,7 +39,8 @@ module.exports = function (apiJson, htmlFilename) {
 		o += str + '\n';
 	});
 
-	o += '\t</div>\n';
+	o += '\t\t</div>\n'; // docs
+	o += '\t</div>\n'; // content
 	o += '</body>\n</html>';
 	fs.writeFileSync(htmlFilename, o, 'utf-8');
 };

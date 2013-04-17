@@ -2,7 +2,7 @@
   width: 95%;
   padding: 5px 5px 0px 5px;
   margin: 10px auto 0 auto;
-  max-width: 700px;
+  /*max-width: 700px;*/
 }
 
 .content h3 {
@@ -11,6 +11,30 @@
 
 .content .method:last-child {
     border: none;
+}
+
+.content #index {
+    width: 20%;
+    padding-left: 1em;
+    padding-top: 1em;
+    overflow-x: hidden;
+    overflow-y: auto;
+    left: 0;
+    top: 4em;
+    position: fixed;
+    bottom: 0;
+}
+
+.content #docs {
+    padding-left: 2em;
+    width: 80%;
+    float: left;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    top: 4em;
+    position: fixed;
+    right: 0;
+    bottom: 0;
 }
 
 .example {
