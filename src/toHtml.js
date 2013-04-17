@@ -17,6 +17,7 @@ module.exports = function (apiJson, htmlFilename) {
 	var css = apiCss();
 	check.verifyString(css, 'could not get css');
 	o += '\t<style>\n' + css + '\n\t</style>\n';
+	o += '<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>\n';
 	o += '<head>\n';
 	o += '<body>\n';
 	o += '\t<div class="content">\n';
