@@ -24,9 +24,7 @@ module.exports = function (apiJson, htmlFilename) {
 	o += '<h1>' + title + ' <sub>by xplain</sub></h1>\n';
 	o += '\t<div class="content">\n';
 
-	o += '\t\t<div id="index">something here</div>\n';
-	o += '\t\t<div id="docs">\n';
-
+	var methodDocs = [];
 	apiComments = apiJson;
 	apiComments.forEach(function (apiComment) {
 		console.log('checking comment', apiComment);
@@ -36,10 +34,17 @@ module.exports = function (apiJson, htmlFilename) {
 		console.log('found method comment');
 		var str = methodDiv(apiComment);
 		check.verifyString(str, 'did not get method div string');
-		o += str + '\n';
+		methodDocs.push(str);
 	});
 
-	o += '\t\t</div>\n'; // docs
+	var indexStr = '';
+	var docsStr = '';
+	methodDocs.forEach(function (methodDoc) {
+		docsStr += methodDoc + '\n';
+	});
+
+	o += '\t\t<div id="index">\n' + indexStr + '\t\t</div>\n';
+	o += '\t\t<div id="docs">\n' + docsStr + '\t\t</div>\n';
 	o += '\t</div>\n'; // content
 	o += '</body>\n</html>';
 	fs.writeFileSync(htmlFilename, o, 'utf-8');
