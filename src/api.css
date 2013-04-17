@@ -9,6 +9,10 @@
     margin-bottom: 1em;
 }
 
+.content .method:last-child {
+    border: none;
+}
+
 .example {
 	border-left: Bisque solid thick;
 	padding-left: 5px;
@@ -23,6 +27,7 @@
 
 .method {
 	border: none;
+    border-bottom: 1px solid gray;
 	padding-left: 5px;
 }
 
