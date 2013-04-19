@@ -133,7 +133,7 @@ function exampleDiv(name, apiExample) {
 	check.verifyString(name, 'missing method name');
 	check.verifyObject(apiExample, 'missing example code string');
 
-	var id = name + '_example_' + exampleDivId++ + '_toggle';
+	var id = name + '_example_' + ++exampleDivId + '_toggle';
 	var toggle = '<input class="toggle" type="button" value="example ' + exampleDivId + '" id="' + id + '">\n';
 	var o = '<div id="' + id + 'd" class="example">\n';
 	o += '<pre>\n' + apiExample.code + '\n</pre>\n';
@@ -188,12 +188,10 @@ function methodDiv(apiComment) {
 	o += '<h3>' + name + '</h3>\n';
 	o += apiComment.description.summary + '\n';
 
-	/*
 	var samples = samplesFor(name);
 	if (samples) {
 		o += samples + '\n';
 	}
-	*/
 
 	var toggles = '';
 	var examplesText = '';
