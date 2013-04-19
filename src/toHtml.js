@@ -54,7 +54,7 @@ module.exports = function (apiJson, htmlFilename) {
 	o += '\t</div>\n'; // content
 	o += '<script>\n';
 	o += '$(document).ready(function () {\n';
-    o += '\tinitToggle(".toggle_buttons");\n';
+    o += '\tinitToggle(".toggle");\n';
     o += '});\n';
 	o += '</script>\n';
 	o += '</body>\n</html>';
@@ -111,7 +111,8 @@ function examplesFor(name) {
 		return exampleDiv(name, example);
 	});
 	// console.log('examples', examples);
-	return examples.join('\n');
+	// return examples.join('\n');
+	return examples;
 }
 
 function samplesFor(name) {
@@ -127,14 +128,20 @@ function samplesFor(name) {
 	return samples.join('\n');
 }
 
-var exampleDivId = 1;
+var exampleDivId = 0;
 function exampleDiv(name, apiExample) {
 	check.verifyString(name, 'missing method name');
 	check.verifyObject(apiExample, 'missing example code string');
-	var o = '<div id="' + name + '_example_' + exampleDivId++ + '" class="example">\n';
+
+	var id = name + '_example_' + exampleDivId++ + '_toggle';
+	var toggle = '<input class="toggle" type="button" value="example ' + exampleDivId + '" id="' + id + '">\n';
+	var o = '<div id="' + id + 'd" class="example">\n';
 	o += '<pre>\n' + apiExample.code + '\n</pre>\n';
 	o += '</div>\n';
-	return o;
+	return {
+		toggle: toggle,
+		code: o
+	};
 }
 
 function sampleToCommentLike(testCode) {
@@ -181,15 +188,33 @@ function methodDiv(apiComment) {
 	o += '<h3>' + name + '</h3>\n';
 	o += apiComment.description.summary + '\n';
 
+	/*
 	var samples = samplesFor(name);
 	if (samples) {
 		o += samples + '\n';
 	}
+	*/
+
+	var toggles = '';
+	var examplesText = '';
 
 	var examples = examplesFor(name);
-	o += examples + '\n';
-	var id = name + '_code';
-	o += '<pre id="' + id + '" class="methodCode">\n' + apiComment.code + '\n</pre>\n';
+	check.verifyArray(examples, 'could not get examples tags');
+	examples.forEach(function (example) {
+		toggles += example.toggle + '\n';
+		examplesText += example.code + '\n';
+	});
+
+	var id = name + '_code_toggle';
+	var toggle = '<input class="toggle" type="button" value="code" id="' + id + '">\n';
+	toggles += toggle;
+
+	o += toggles + '\n';
+	o += examplesText + '\n';
+	o += '<div id="' + id + 'd" class="methodCode">\n';
+	o += '<pre>\n' + apiComment.code + '\n</pre>\n';
+	o += '</div>\n';
+
 	o += '</div>\n';
 
 	var nameDiv = '<div><a href="#' + name + '">'

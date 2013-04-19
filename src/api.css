@@ -41,6 +41,7 @@
 	border-left: Bisque solid thick;
 	padding-left: 5px;
 	margin-bottom: 5px;
+    display: none;
 }
 
 .sample {
@@ -56,8 +57,9 @@
 }
 
 .methodCode {
-	border-left: lightGray solid thick;
+	/*border-left: lightGray solid thick;*/
 	padding-left: 5px;
+    display: none;
 }
 
 span.sampleName {
@@ -66,4 +68,8 @@ span.sampleName {
 
 code {
 	margin-top: 0.5em;
+}
+
+.showing {
+    color: red;
 }
