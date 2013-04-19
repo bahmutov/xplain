@@ -15,10 +15,14 @@ module.exports = function (apiJson, htmlFilename) {
 	var o = '<!DOCTYPE HTML>\n';
 	o += '<html>\n<head>\n';
 	o += '\t<title>Api</title>\n';
-	var css = apiCss();
+	var css = fileContents('./api.css');
 	check.verifyString(css, 'could not get css');
 	o += '\t<style>\n' + css + '\n\t</style>\n';
 	o += '<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>\n';
+
+	var script = fileContents('./toggle.js');
+	check.verifyString(script, 'could not get toggle script');
+	o += '<script>\n' + script + '\n</script>\n';
 	o += '<head>\n';
 	o += '<body>\n';
 	o += '<h1>' + title + ' <sub>by xplain</sub></h1>\n';
@@ -48,12 +52,18 @@ module.exports = function (apiJson, htmlFilename) {
 	o += '\t\t<div id="index">\n' + indexStr + '\t\t</div>\n';
 	o += '\t\t<div id="docs">\n' + docsStr + '\t\t</div>\n';
 	o += '\t</div>\n'; // content
+	o += '<script>\n';
+	o += '$(document).ready(function () {\n';
+    o += '\tinitToggle(".toggle_buttons");\n';
+    o += '});\n';
+	o += '</script>\n';
 	o += '</body>\n</html>';
 	fs.writeFileSync(htmlFilename, o, 'utf-8');
 };
 
-function apiCss() {
-	var cssFilename = path.join(__dirname, './api.css');
+function fileContents(name) {
+	check.verifyString(name, 'missing file name');
+	var cssFilename = path.join(__dirname, name);
 	var cssText = fs.readFileSync(cssFilename, 'utf8');
 	return cssText;
 }
@@ -94,9 +104,13 @@ function examplesFor(name) {
 		return isExampleFor(apiComment, name);
 	});
 	console.log('have', apiExamples.length, 'examples for', name);
-	console.log(apiExamples);
-	var examples = apiExamples.map(exampleDiv);
-	console.log('examples', examples);
+	// console.log(apiExamples);
+
+	var examples = apiExamples.map(function (example) {
+		console.log('example', example);
+		return exampleDiv(name, example);
+	});
+	// console.log('examples', examples);
 	return examples.join('\n');
 }
 
@@ -114,8 +128,10 @@ function samplesFor(name) {
 }
 
 var exampleDivId = 1;
-function exampleDiv(apiExample) {
-	var o = '<div id="' + exampleDivId++ + '" class="example">\n';
+function exampleDiv(name, apiExample) {
+	check.verifyString(name, 'missing method name');
+	check.verifyObject(apiExample, 'missing example code string');
+	var o = '<div id="' + name + '_example_' + exampleDivId++ + '" class="example">\n';
 	o += '<pre>\n' + apiExample.code + '\n</pre>\n';
 	o += '</div>\n';
 	return o;
