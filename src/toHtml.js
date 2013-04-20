@@ -169,8 +169,8 @@ function sampleDiv(apiExample) {
 	}
 	check.verifyString(humanForm, 'could not convert to human form', parsed.code);
 	o += '<span class="sampleName">' + parsed.name + '</span>\n';
-	o += '<pre>\n';
-	o += '<code class="javascript">'
+	o += '<pre class="prettyprint linenums">\n';
+	o += '<code>'
 	o += humanForm;
 	o += '</code>\n';
 	o += '</pre>\n';
