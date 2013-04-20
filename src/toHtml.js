@@ -32,11 +32,11 @@ module.exports = function (apiJson, htmlFilename) {
 	var methodDocs = [];
 	apiComments = apiJson;
 	apiComments.forEach(function (apiComment) {
-		console.log('checking comment', apiComment);
+		// console.log('checking comment', apiComment);
 		if (!isMethod(apiComment)) {
 			return;
 		}
-		console.log('found method comment');
+		// console.log('found method comment');
 		var info = methodDiv(apiComment);
 		check.verifyString(info.name, 'did not get method name string');
 		check.verifyString(info.docs, 'did not get method docs string');
@@ -108,7 +108,7 @@ function examplesFor(name) {
 	// console.log(apiExamples);
 
 	var examples = apiExamples.map(function (example) {
-		console.log('example', example);
+		// console.log('example', example);
 		return exampleDiv(name, example);
 	});
 	// console.log('examples', examples);
@@ -125,7 +125,7 @@ function samplesFor(name) {
 	console.log('have', apiSamples.length, 'samples for', name);
 	console.log(apiSamples);
 	var samples = apiSamples.map(sampleDiv);
-	console.log('samples', samples);
+	// console.log('samples', samples);
 	return samples.join('\n');
 }
 
@@ -162,7 +162,7 @@ function sampleDiv(apiExample) {
 	check.verifyString(parsed.name, 'there is no name for', code);
 	check.verifyString(parsed.code, 'there is no code for', code);
 	var humanForm = parseUnitTestCode(parsed.code);
-	console.log('human form', humanForm);
+	// console.log('human form', humanForm);
 	if (!check.isString(humanForm)) {
 		console.log('could not convert', parseCode, 'to human form');
 		humanForm = parsed.code;
