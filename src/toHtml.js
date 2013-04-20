@@ -19,6 +19,7 @@ module.exports = function (apiJson, htmlFilename) {
 	check.verifyString(css, 'could not get css');
 	o += '\t<style>\n' + css + '\n\t</style>\n';
 	o += '<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>\n';
+	o += '<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=desert"></script>\n';
 
 	var script = fileContents('./toggle.js');
 	check.verifyString(script, 'could not get toggle script');
@@ -210,7 +211,7 @@ function methodDiv(apiComment) {
 	o += toggles + '\n';
 	o += examplesText + '\n';
 	o += '<div id="' + id + 'd" class="methodCode">\n';
-	o += '<pre>\n' + apiComment.code + '\n</pre>\n';
+	o += '<pre class="prettyprint linenums">\n' + apiComment.code + '</pre>\n';
 	o += '</div>\n';
 
 	o += '</div>\n';
