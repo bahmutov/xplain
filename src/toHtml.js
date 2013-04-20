@@ -137,7 +137,7 @@ function exampleDiv(name, apiExample) {
 	var id = name + '_example_' + ++exampleDivId + '_toggle';
 	var toggle = '<input class="toggle" type="button" value="example ' + exampleDivId + '" id="' + id + '">\n';
 	var o = '<div id="' + id + 'd" class="example">\n';
-	o += '<pre>\n' + apiExample.code + '\n</pre>\n';
+	o += '<pre class="prettyprint linenums">\n' + apiExample.code + '</pre>\n';
 	o += '</div>\n';
 	return {
 		toggle: toggle,

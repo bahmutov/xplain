@@ -38,28 +38,28 @@
 }
 
 .example {
-	border-left: Bisque solid thick;
-	padding-left: 5px;
-	margin-bottom: 5px;
+	/* border-left: Bisque solid thick;*/
+	/* padding-left: 5px;*/
+	/*margin-bottom: 5px;*/
     display: none;
 }
 
 .sample {
-	border-left: lightGreen solid thick;
-	padding-left: 5px;
+	/*border-left: lightGreen solid thick;*/
+	/*padding-left: 5px;*/
 	margin-bottom: 5px;
 }
 
 .method {
 	border: none;
     border-bottom: 1px solid gray;
-	padding-left: 5px;
+	/*padding-left: 5px;*/
     padding-bottom: 3px;
 }
 
 .methodCode {
 	/*border-left: lightGray solid thick;*/
-	padding-left: 5px;
+	/*padding-left: 5px;*/
     display: none;
 }
 
@@ -68,7 +68,7 @@ span.sampleName {
 }
 
 code {
-	margin-top: 0.5em;
+	/*margin-top: 0.5em;*/
 }
 
 .showing {
