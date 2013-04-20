@@ -3,6 +3,7 @@ var path = require('path');
 var check = require('check-types');
 var parseCode = require('./parser').parseCode;
 var parseUnitTestCode = require('./parserUnitTest').parseUnitTestCode;
+var reformat = require('./code').reformat;
 
 var apiComments = null;
 
@@ -137,7 +138,9 @@ function exampleDiv(name, apiExample) {
 	var id = name + '_example_' + ++exampleDivId + '_toggle';
 	var toggle = '<input class="toggle" type="button" value="example ' + exampleDivId + '" id="' + id + '">\n';
 	var o = '<div id="' + id + 'd" class="example">\n';
-	o += '<pre class="prettyprint linenums">\n' + apiExample.code + '</pre>\n';
+	var prettyCode = reformat(apiExample.code, true);
+	check.verifyString(prettyCode, 'could not reformat\n', apiExample.code);
+	o += '<pre class="prettyprint linenums">\n' + prettyCode + '</pre>\n';
 	o += '</div>\n';
 	return {
 		toggle: toggle,
@@ -211,7 +214,9 @@ function methodDiv(apiComment) {
 	o += toggles + '\n';
 	o += examplesText + '\n';
 	o += '<div id="' + id + 'd" class="methodCode">\n';
-	o += '<pre class="prettyprint linenums">\n' + apiComment.code + '</pre>\n';
+	var prettyCode = reformat(apiComment.code, true);
+	check.verifyString(prettyCode, 'could not make code pretty for\n', apiComment.code);
+	o += '<pre class="prettyprint linenums">\n' + prettyCode + '</pre>\n';
 	o += '</div>\n';
 
 	o += '</div>\n';
