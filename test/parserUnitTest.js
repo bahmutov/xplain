@@ -35,14 +35,14 @@ gt.test('single gt.equal', function () {
 	var code = 'gt.equal(add(2, 3), 5);';
 	var parsed = parse(code);
 	console.log(parsed);
-	gt.equal(parsed, 'add(2, 3);  // 5');
+	gt.equal(parsed, 'add(2, 3); // 5');
 });
 
 gt.test('single gt.equal with message', function () {
 	var code = 'gt.equal(add(2, 3), 5, "2 + 3 = 5");';
 	var parsed = parse(code);
 	console.log(parsed);
-	gt.equal(parsed, 'add(2, 3);  // 5');
+	gt.equal(parsed, 'add(2, 3); // 5');
 });
 
 gt.test('comments are preserved', function () {

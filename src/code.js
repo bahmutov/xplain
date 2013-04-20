@@ -1,6 +1,7 @@
 var esprima = require('esprima');
 var generator = require('escodegen');
 var check = require('check-types');
+var beautify = require('js-beautify').js_beautify;
 
 var options = {
 	"format" : {
@@ -36,22 +37,15 @@ function split(expressions) {
 function reformat(code, keepComments) {
 	check.verifyString(code, 'expected code string');
 	keepComments = !!keepComments;
-	var tree = esprima.parse(code, {
-		range: true,
-		tokens: true,
-		comment: keepComments
-	});
+
 	if (keepComments) {
-		check.verifyArray(tree.comments, 'missing comments');
-		check.verifyArray(tree.tokens, 'missing tokens');
-		/*
-		console.log('comments', tree.comments);
-		console.log('tokens', tree.tokens);
-		console.log('tree', tree);
-		*/
-		tree = generator.attachComments(tree, tree.comments, tree.tokens);
-		options.comment = true;
+		return beautify(code, { indent_size: 2 });
 	} else {
+		var tree = esprima.parse(code, {
+			range: true,
+			tokens: true,
+			comment: keepComments
+		});
 		options.comment = false;
 	}
 	return generator.generate(tree, options);

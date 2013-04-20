@@ -14,7 +14,7 @@ gt.test('single with comments', function () {
     var original = 'var f = "foo"; // comments';
     var str = code(original);
     gt.string(str, 'one liner with comments');
-    gt.ok(!/comments/.test(str), 'comments should be removed');
+    gt.ok(!/comments/.test(str), 'comments are kept');
 
     str = code(original, true);
     gt.string(str, 'one liner with comments');
