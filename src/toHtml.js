@@ -123,7 +123,7 @@ function samplesFor(name) {
 		return isSampleFor(apiComment, name);
 	});
 	console.log('have', apiSamples.length, 'samples for', name);
-	console.log(apiSamples);
+	// console.log(apiSamples);
 	var samples = apiSamples.map(sampleDiv);
 	// console.log('samples', samples);
 	return samples.join('\n');

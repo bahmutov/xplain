@@ -26,7 +26,7 @@ var options = {
 function split(expressions) {
 	var tree = esprima.parse(expressions);
 	var results = tree.body[0].expression.expressions.map(function (node) {
-		console.log('node', node);
+		// console.log('node', node);
 		return generator.generate(node, options);
 	});
 	return results;
@@ -44,9 +44,11 @@ function reformat(code, keepComments) {
 	if (keepComments) {
 		check.verifyArray(tree.comments, 'missing comments');
 		check.verifyArray(tree.tokens, 'missing tokens');
+		/*
 		console.log('comments', tree.comments);
 		console.log('tokens', tree.tokens);
 		console.log('tree', tree);
+		*/
 		tree = generator.attachComments(tree, tree.comments, tree.tokens);
 		options.comment = true;
 	} else {
