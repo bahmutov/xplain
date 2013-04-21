@@ -4,6 +4,7 @@ var check = require('check-types');
 var parseCode = require('./parser').parseCode;
 var parseUnitTestCode = require('./parserUnitTest').parseUnitTestCode;
 var reformat = require('./code').reformat;
+var moment = require('moment');
 
 var apiComments = null;
 
@@ -52,7 +53,11 @@ module.exports = function (apiJson, htmlFilename) {
 	});
 
 	o += '\t\t<div id="index">\n' + indexStr + '\t\t</div>\n';
-	o += '\t\t<div id="docs">\n' + docsStr + '\t\t</div>\n';
+	o += '\t\t<div id="docs">\n' + docsStr + '\n';
+	o += '<span class="timestamp">Generated on ' +
+		moment().local().format('dddd, MMMM Do YYYY, h:mm:ss a') + '</span>\n';
+	o += '</div>\n';
+
 	o += '\t</div>\n'; // content
 	o += '<script>\n';
 	o += '$(document).ready(function () {\n';

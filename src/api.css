@@ -74,3 +74,10 @@ code {
 .showing {
     color: red;
 }
+
+.timestamp {
+    color: gray;
+    padding-top: 1em;
+    padding-left: 2em;
+    font-size: smaller;
+}

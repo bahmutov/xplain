@@ -20,6 +20,7 @@ with white space.
 * [js-beautify](https://github.com/einars/js-beautify) is used for final example code formatting.
 * [jQuery](https://github.com/jquery/jquery) is used to drive UI in the generated HMTL documentation.
 * [google-code-prettify](https://google-code-prettify.googlecode.com) is used to syntax highlight code samples in the generated documentation.
+* [moment.js](http://momentjs.com/) is used for date and time manipulation.
 
 ### Details
 Author: Gleb Bahmutov <gleb.bahmutov@gmail.com>

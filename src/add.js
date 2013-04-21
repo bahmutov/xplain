@@ -1,8 +1,7 @@
 /**
 Sample math operations
 
-@module xplain
-@class Sample math
+@module math
 */
 module.exports.add = add;
 module.exports.abs = abs;
