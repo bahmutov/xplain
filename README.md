@@ -12,7 +12,7 @@ tests as code samples.
 
 ### 3<sup>rd</sup> party libraries
 
-* [lo-dash](https://github.com/bestiejs/lodash) is used throught the code to deal with collections.
+* [lo-dash](https://github.com/bestiejs/lodash) is used throught the code to deal with collections. This library was insiration for this project, because it has excellent API documentation.
 * [forked](https://github.com/bahmutov/dox) version of [dox](https://github.com/visionmedia/dox) that fixes some problems parsing JSdoc style comments
 with white space.
 * [check-types](https://github.com/philbooth/check-types.js) is used to verify arguments through out the code.
