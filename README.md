@@ -21,6 +21,7 @@ with white space.
 * [jQuery](https://github.com/jquery/jquery) is used to drive UI in the generated HMTL documentation.
 * [google-code-prettify](https://google-code-prettify.googlecode.com) is used to syntax highlight code samples in the generated documentation.
 * [moment.js](http://momentjs.com/) is used for date and time manipulation.
+* [commander.js](https://github.com/visionmedia/commander.js/) is used to process command line arguments.
 
 ### Details
 Author: Gleb Bahmutov <gleb.bahmutov@gmail.com>
