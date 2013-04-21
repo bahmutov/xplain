@@ -27,6 +27,8 @@ gt.test('testing add', function () {
 */
 gt.test('sample add usage', function () {
 	// typical use
+	// var add = require('xplain').add;
+	// have to use relative paths inside the module
 	var add = require('../src/add').add;
 	gt.equal(add(2, 3), 5);
 });
