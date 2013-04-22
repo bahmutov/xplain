@@ -88,7 +88,9 @@ span.sampleName {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   background-color: #fff;
-  border: #ddd solid 1px;
+  border-left: #bbb solid 1px;
+  border-top: #bbb solid 1px;
+  border-right: #bbb solid 1px;
   margin-bottom: 0;
 }
 
