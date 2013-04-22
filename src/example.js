@@ -1,5 +1,6 @@
 var check = require('check-types');
 var reformat = require('./code').reformat;
+var getName = require('./parser').getNameFromTest;
 
 var exampleDivId = 0;
 function exampleDiv(name, apiExample) {
@@ -11,6 +12,10 @@ function exampleDiv(name, apiExample) {
     var o = '<div id="' + id + 'd" class="example">\n';
     var prettyCode = reformat(apiExample.code, true);
     check.verifyString(prettyCode, 'could not reformat\n', apiExample.code);
+
+    var exampleName = getName(apiExample.code);
+    check.verifyString(exampleName, 'could not get example name');
+    o += '<span class="sampleName">' + exampleName + '</span>\n';
     o += '<pre class="prettyprint linenums">\n' + prettyCode + '</pre>\n';
     o += '</div>\n';
     return {
