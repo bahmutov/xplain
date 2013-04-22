@@ -31,8 +31,12 @@ function parseCode(code) {
 	return parsed;
 }
 
+function getNameFromTest(code) {
+	return parseCode(code).name;
+}
 
 module.exports = {
 	parseName: parseName,
-	parseCode: parseCode
+	parseCode: parseCode,
+	getNameFromTest: getNameFromTest
 };
