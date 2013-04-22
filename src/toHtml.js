@@ -183,7 +183,9 @@ function methodDiv(apiComment) {
 	var toggle = '<input class="toggle" type="button" value="code" id="' + id + '">\n';
 	toggles += toggle;
 
+	o += '<div class="toggles">\n';
 	o += toggles + '\n';
+	o += '</div>\n';
 	o += examplesText + '\n';
 
 	var str = codeDiv(id, apiComment);
