@@ -139,6 +139,20 @@ function samplesFor(name) {
 	return samples.join('\n');
 }
 
+function codeDiv(id, apiComment) {
+	check.verifyString(id, 'missing code id');
+	check.verifyString(apiComment.code, 'missing code');
+
+	var o = '<div id="' + id + 'd" class="methodCode namedCode">\n';
+	var prettyCode = reformat(apiComment.code, true);
+	check.verifyString(prettyCode, 'could not make code pretty for\n', apiComment.code);
+	var name = apiComment.ctx.type + ' ' + apiComment.ctx.name;
+	o += '<span class="sampleName">' + name + '</span>\n';
+	o += '<pre class="prettyprint linenums">\n' + prettyCode + '</pre>\n';
+	o += '</div>\n';
+	return o;
+}
+
 function methodDiv(apiComment) {
 	check.verifyObject(apiComment, 'missing api comment object');
 	console.assert(apiComment.ctx, 'missing ctx property');
@@ -171,11 +185,9 @@ function methodDiv(apiComment) {
 
 	o += toggles + '\n';
 	o += examplesText + '\n';
-	o += '<div id="' + id + 'd" class="methodCode">\n';
-	var prettyCode = reformat(apiComment.code, true);
-	check.verifyString(prettyCode, 'could not make code pretty for\n', apiComment.code);
-	o += '<pre class="prettyprint linenums">\n' + prettyCode + '</pre>\n';
-	o += '</div>\n';
+
+	var str = codeDiv(id, apiComment);
+	o += str;
 
 	o += '</div>\n';
 
