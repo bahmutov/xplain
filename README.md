@@ -22,6 +22,7 @@ with white space.
 * [google-code-prettify](https://google-code-prettify.googlecode.com) is used to syntax highlight code samples in the generated documentation.
 * [moment.js](http://momentjs.com/) is used for date and time manipulation.
 * [commander.js](https://github.com/visionmedia/commander.js/) is used to process command line arguments.
+* [background pattern](http://subtlepatterns.com/) source for background pattern.
 
 ### Details
 Author: Gleb Bahmutov <gleb.bahmutov@gmail.com>
