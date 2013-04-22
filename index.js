@@ -24,6 +24,9 @@ program.command('doc')
     .option('-o, --output [output]', 'output filename')
     .action(function(options) {
         var inputFiles = options.input || ['./src/add.js', './test/add.js'];
+        if (typeof inputFiles === 'string') {
+            inputFiles = [inputFiles];
+        }
         var outputFilename = options.output || 'docs.html';
 
         check.verifyArray(inputFiles, 'missing input pattern');
