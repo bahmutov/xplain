@@ -6,7 +6,7 @@ gt.module('add');
 /**
 @exampleFor add
 */
-gt.test('testing add', function () {
+gt.test('functionality', function () {
 	gt.func(add, 'add is a function');
 	gt.arity(add, 2, 'expects two arguments');
 	gt.equal(add(1, 4), 5, '1 + 4 = 5');
@@ -17,7 +17,7 @@ gt.test('testing add', function () {
 /**
 @exampleFor add
 */
-gt.test('testing add', function () {
+gt.test('add as concatenate', function () {
 	gt.equal(add('a', 0), 'a0', 'result is string if first arg is string');
 	gt.equal(add(6, '3'), '63', 'result is number of second arg is a number');
 });

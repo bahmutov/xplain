@@ -9,7 +9,7 @@ function exampleDiv(name, apiExample) {
 
     var id = name + '_example_' + ++exampleDivId + '_toggle';
     var toggle = '<input class="toggle" type="button" value="example ' + exampleDivId + '" id="' + id + '">\n';
-    var o = '<div id="' + id + 'd" class="example">\n';
+    var o = '<div id="' + id + 'd" class="example namedCode">\n';
     var prettyCode = reformat(apiExample.code, true);
     check.verifyString(prettyCode, 'could not reformat\n', apiExample.code);
 

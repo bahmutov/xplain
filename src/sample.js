@@ -11,7 +11,7 @@ function sampleToCommentLike(testCode) {
 
 var sampleDivId = 1;
 function sampleDiv(apiExample) {
-    var o = '<div id="' + sampleDivId++ + '" class="sample">\n';
+    var o = '<div id="' + sampleDivId++ + '" class="sample namedCode">\n';
     var code = apiExample.code;
     check.verifyString(code, 'missing code for sample');
     var parsed = sampleToCommentLike(code);

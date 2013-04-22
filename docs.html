@@ -48,21 +48,30 @@
     bottom: 0;
 }
 
+.namedCode {
+  margin-bottom: 5px;
+  padding: 2px 0 0 0;
+  border-radius: 5px;
+  background-color: #eeeeee;
+}
+
 .example {
 	/* border-left: Bisque solid thick;*/
 	/* padding-left: 5px;*/
 	/*margin-bottom: 5px;*/
-    display: none;
+  display: none;
 }
 
 .sample {
 	/*border-left: lightGreen solid thick;*/
 	/*padding-left: 5px;*/
-	margin-bottom: 5px;
-  padding: 2px 0 0 0;
   /*border: gray solid thin;*/
+  /*
+  margin-bottom: 5px;
+  padding: 2px 0 0 0;
   border-radius: 5px;
   background-color: #eeeeee;
+  */
 }
 
 span.sampleName {
@@ -128,7 +137,7 @@ function initToggle(selector) {
 <div id="add" class="method">
 <h3>add</h3>
 <p>Returns the sum of two numbers</p>
-<div id="1" class="sample">
+<div id="1" class="sample namedCode">
 <span class="sampleName">sample add usage</span>
 <pre class="prettyprint linenums">
 <code>// typical use
@@ -139,7 +148,7 @@ add(2, 3); // 5</code>
 </pre>
 </div>
 
-<div id="2" class="sample">
+<div id="2" class="sample namedCode">
 <span class="sampleName">edge cases</span>
 <pre class="prettyprint linenums">
 <code>// add is a function
@@ -156,10 +165,10 @@ add('a', 'b'); // 'ab'</code>
 
 <input class="toggle" type="button" value="code" id="add_code_toggle">
 
-<div id="add_example_1_toggled" class="example">
-<span class="sampleName">testing add</span>
+<div id="add_example_1_toggled" class="example namedCode">
+<span class="sampleName">functionality</span>
 <pre class="prettyprint linenums">
-gt.test('testing add', function() {
+gt.test('functionality', function() {
   gt.func(add, 'add is a function');
   gt.arity(add, 2, 'expects two arguments');
   gt.equal(add(1, 4), 5, '1 + 4 = 5');
@@ -168,10 +177,10 @@ gt.test('testing add', function() {
 });</pre>
 </div>
 
-<div id="add_example_2_toggled" class="example">
-<span class="sampleName">testing add</span>
+<div id="add_example_2_toggled" class="example namedCode">
+<span class="sampleName">add as concatenate</span>
 <pre class="prettyprint linenums">
-gt.test('testing add', function() {
+gt.test('add as concatenate', function() {
   gt.equal(add('a', 0), 'a0', 'result is string if first arg is string');
   gt.equal(add(6, '3'), '63', 'result is number of second arg is a number');
 });</pre>
@@ -191,7 +200,7 @@ function add(a, b) {
 <div id="abs" class="method">
 <h3>abs</h3>
 <p>Returns the absolute value</p>
-<div id="3" class="sample">
+<div id="3" class="sample namedCode">
 <span class="sampleName">using abs</span>
 <pre class="prettyprint linenums">
 <code>abs(10); // 10
@@ -212,7 +221,7 @@ function abs(a) {
 </div>
 
 
-<span class="timestamp"><a href="https://github.com/bahmutov/xplain">xplained</a> on Sunday, April 21st 2013, 10:42:27 pm</span>
+<span class="timestamp"><a href="https://github.com/bahmutov/xplain">xplained</a> on Sunday, April 21st 2013, 10:50:57 pm</span>
 </div>
 	</div>
 <script>
