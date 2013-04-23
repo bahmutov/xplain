@@ -131,3 +131,7 @@ code {
 .toggles {
   margin-bottom: 5px;
 }
+
+div .moduleName {
+    margin-top: 1em;
+}

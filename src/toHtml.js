@@ -101,8 +101,10 @@ function docModule(aModule, doc) {
 	check.verifyString(doc.docs, 'missing docs string');
 
 	if (Array.isArray(aModule.methodDocs)) {
-		check.verifyString(aModule.name, 'missing module name');
-		doc.index += '<div class="moduleName">' + aModule.name + '</div>\n';
+		if (aModule.name) {
+			check.verifyString(aModule.name, 'missing module name');
+			doc.index += '<div class="moduleName">' + aModule.name + '</div>\n';
+		}
 		aModule.methodDocs.forEach(function (info) {
 			doc.index += info.name + '\n';
 			doc.docs += info.docs + '\n';
