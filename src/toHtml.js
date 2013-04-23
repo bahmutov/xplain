@@ -36,7 +36,7 @@ module.exports = function (apiJson, htmlFilename) {
 	var rootModule = {};
 	var currentModule = rootModule;
 
-	var methodDocs = [];
+	// var methodDocs = [];
 	apiComments = apiJson;
 	apiComments.forEach(function (apiComment) {
 		if (isModule(apiComment)) {
@@ -45,6 +45,10 @@ module.exports = function (apiJson, htmlFilename) {
 			currentModule = setupModule(name, rootModule);
 		}
 		check.verifyObject(currentModule, 'invalid current module');
+		if (typeof currentModule.methodDocs === 'undefined') {
+			currentModule.methodDocs = [];
+		}
+
 
 		// console.log('checking comment', apiComment);
 		if (!isMethod(apiComment)) {
@@ -54,20 +58,27 @@ module.exports = function (apiJson, htmlFilename) {
 		var info = methodDiv(apiComment);
 		check.verifyString(info.name, 'did not get method name string');
 		check.verifyString(info.docs, 'did not get method docs string');
-		methodDocs.push(info);
+		currentModule.methodDocs.push(info);
 	});
 
 	console.log('modules', rootModule);
 
-	var indexStr = '';
-	var docsStr = '';
+	var doc = {
+		index: '',
+		docs: ''
+	};
+	// var indexStr = '';
+	// var docsStr = '';
+	docModule(rootModule, doc);
+	/*
 	methodDocs.forEach(function (info) {
 		indexStr += info.name + '\n';
 		docsStr += info.docs + '\n';
 	});
+	*/
 
-	o += '\t\t<div id="index">\n' + indexStr + '\t\t</div>\n';
-	o += '\t\t<div id="docs">\n' + docsStr + '\n';
+	o += '\t\t<div id="index">\n' + doc.index + '\t\t</div>\n';
+	o += '\t\t<div id="docs">\n' + doc.docs + '\n';
 	var repoUrl = 'https://github.com/bahmutov/xplain';
 	var repoHref = '<a href="' + repoUrl + '">xplained</a>';
 	o += '<span class="timestamp">' + repoHref + ' on ' +
@@ -83,6 +94,31 @@ module.exports = function (apiJson, htmlFilename) {
 	o += '</body>\n</html>';
 	fs.writeFileSync(htmlFilename, o, 'utf-8');
 };
+
+function docModule(aModule, doc) {
+	check.verifyObject(aModule, 'missing module');
+	check.verifyString(doc.index, 'missing index string');
+	check.verifyString(doc.docs, 'missing docs string');
+
+	if (Array.isArray(aModule.methodDocs)) {
+		console.log('module', aModule.name, 'has methods');
+		aModule.methodDocs.forEach(function (info) {
+			doc.index += info.name + '\n';
+			doc.docs += info.docs + '\n';
+		});
+	}
+
+	Object.keys(aModule).forEach(function (key) {
+		if (key === 'methodDocs') {
+			return;
+		}
+		if (key === 'name') {
+			return;
+		}
+		var value = aModule[key];
+		docModule(value, doc);
+	});
+}
 
 function fileContents(name) {
 	check.verifyString(name, 'missing file name');
@@ -117,6 +153,7 @@ function setupModule(name, rootModule)
 		}
 		currentModule = currentModule[part];
 	});
+	currentModule.name = name;
 	return currentModule;
 }
 
