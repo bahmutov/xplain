@@ -21,28 +21,30 @@ program.command('help')
         program.help();
     });
 
-program.command('doc')
-    .description('generate API documentation')
-    .option('-i, --input [input]', 'input filenames')
-    .option('-o, --output [output]', 'output filename')
-    .action(function(options) {
-        var inputFiles = options.input || ['./src/add.js', './test/add.js'];
-        if (typeof inputFiles === 'string') {
-            inputFiles = [inputFiles];
-        }
-        var outputFilename = options.output || 'docs.html';
+function list(val) {
+  return val.split(',');
+}
 
-        check.verifyArray(inputFiles, 'missing input pattern');
-        check.verifyString(outputFilename, 'missing output filename');
-        console.log('generating docs from', inputFiles, 'to', outputFilename);
-
-        generateDocs(inputFiles, outputFilename);
-    });
+program
+    .option('-i, --input <comma separated list WITHOUT SPACES>', 'input filenames', list)
+    .option('-o, --output [string]', 'output filename');
 
 if (process.argv.length === 2) {
     process.argv.push('help');
 }
 program.parse(process.argv);
+
+var inputFiles = program.input;
+if (typeof inputFiles === 'string') {
+    inputFiles = [inputFiles];
+}
+
+var outputFilename = program.output || 'docs.html';
+check.verifyArray(inputFiles, 'missing input pattern array', inputFiles);
+check.verifyString(outputFilename, 'missing output filename');
+var fullFilename = path.resolve(process.cwd(), outputFilename);
+console.log('generating docs from', inputFiles, 'to', fullFilename);
+generateDocs(inputFiles, fullFilename);
 
 function generateDocs(patterns, outputFilename) {
     if (typeof patterns === 'string') {
@@ -65,9 +67,9 @@ function generateDocs(patterns, outputFilename) {
         api = api.concat(fileApi);
     });
 
-    var outputJsonFilename = path.join(__dirname, outputFilename);
-    toDoc(api, outputJsonFilename);
-    console.log('saved', outputJsonFilename);
+    // var outputJsonFilename = path.join(__dirname, outputFilename);
+    toDoc(api, outputFilename);
+    // console.log('saved', outputJsonFilename);
 }
 
 function getFileApi(filename) {
