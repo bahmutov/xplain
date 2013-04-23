@@ -65,7 +65,7 @@ module.exports = function (apiJson, htmlFilename) {
 		currentModule.methodDocs.push(info);
 	});
 
-	console.log('modules', rootModule);
+	// console.log('modules', rootModule);
 
 	var doc = {
 		index: '',
@@ -266,7 +266,7 @@ function methodDiv(apiComment) {
 	});
 
 	var id = name + '_code_toggle';
-	var toggle = '<input class="toggle" type="button" value="code" id="' + id + '">\n';
+	var toggle = '<input class="toggle" type="button" value="source" id="' + id + '">\n';
 	toggles += toggle;
 
 	o += '<div class="toggles">\n';
