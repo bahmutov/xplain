@@ -49,7 +49,6 @@ module.exports = function (apiJson, htmlFilename) {
 			currentModule.methodDocs = [];
 		}
 
-
 		// console.log('checking comment', apiComment);
 		if (!isMethod(apiComment)) {
 			return;
@@ -67,15 +66,7 @@ module.exports = function (apiJson, htmlFilename) {
 		index: '',
 		docs: ''
 	};
-	// var indexStr = '';
-	// var docsStr = '';
 	docModule(rootModule, doc);
-	/*
-	methodDocs.forEach(function (info) {
-		indexStr += info.name + '\n';
-		docsStr += info.docs + '\n';
-	});
-	*/
 
 	o += '\t\t<div id="index">\n' + doc.index + '\t\t</div>\n';
 	o += '\t\t<div id="docs">\n' + doc.docs + '\n';
