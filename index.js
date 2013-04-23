@@ -68,7 +68,12 @@ function getFileApi(filename) {
     check.verifyString(contents, 'could not load contents of', filename);
 
     // console.log('getting api help from\n', contents);
-    var json = dox.parseComments(contents);
-    // console.log(JSON.stringify(json));
-    return json;
+    var tags = dox.parseComments(contents);
+    check.verifyArray(tags, 'could not get tags array from', filename);
+    tags = tags.map(function (tag) {
+        tag.filename = filename;
+        return tag;
+    });
+    // console.log(JSON.stringify(tags));
+    return tags;
 }

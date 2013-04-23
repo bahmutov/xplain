@@ -33,12 +33,17 @@ module.exports = function (apiJson, htmlFilename) {
 	o += '<h1>' + title + ' <sub>by xplain</sub></h1>\n';
 	o += '\t<div class="content">\n';
 
+	var prevFilename = null;
 	var rootModule = {};
 	var currentModule = rootModule;
 
-	// var methodDocs = [];
 	apiComments = apiJson;
 	apiComments.forEach(function (apiComment) {
+		check.verifyString(apiComment.filename, 'missing filename');
+		if (apiComment.filename !== prevFilename) {
+			prevFilename = apiComment.filename;
+			currentModule = rootModule;
+		}
 		if (isModule(apiComment)) {
 			var name = getModuleName(apiComment);
 			check.verifyString(name, 'invalid module name');
