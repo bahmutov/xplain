@@ -6,7 +6,7 @@
   "scripts": {
     "test": "gt test/*.js",
     "yuidoc": "yuidoc src test",
-    "doc": "gt test/*.js && node index.js"
+    "doc": "gt test/*.js && node index.js doc -i src/*.js test/*.js"
   },
   "repository": "",
   "keywords": [
@@ -18,7 +18,7 @@
   "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "gt": "~0.6.4",
+    "gt": "0.8.*",
     "dox": "~0.4.3",
     "check-types": "~0.5.2",
     "esprima": "~1.0.2",
