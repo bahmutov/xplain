@@ -33,9 +33,19 @@ module.exports = function (apiJson, htmlFilename) {
 	o += '<h1>' + title + ' <sub>by xplain</sub></h1>\n';
 	o += '\t<div class="content">\n';
 
+	var rootModule = {};
+	var currentModule = rootModule;
+
 	var methodDocs = [];
 	apiComments = apiJson;
 	apiComments.forEach(function (apiComment) {
+		if (isModule(apiComment)) {
+			var name = getModuleName(apiComment);
+			check.verifyString(name, 'invalid module name');
+			currentModule = setupModule(name, rootModule);
+		}
+		check.verifyObject(currentModule, 'invalid current module');
+
 		// console.log('checking comment', apiComment);
 		if (!isMethod(apiComment)) {
 			return;
@@ -46,6 +56,8 @@ module.exports = function (apiJson, htmlFilename) {
 		check.verifyString(info.docs, 'did not get method docs string');
 		methodDocs.push(info);
 	});
+
+	console.log('modules', rootModule);
 
 	var indexStr = '';
 	var docsStr = '';
@@ -77,6 +89,44 @@ function fileContents(name) {
 	var cssFilename = path.join(__dirname, name);
 	var cssText = fs.readFileSync(cssFilename, 'utf8');
 	return cssText;
+}
+
+function getModuleName(apiComment)
+{
+	check.verifyObject(apiComment, 'invalid api comment');
+	var name = null;
+	apiComment.tags.some(function (tag) {
+		if (tag.type === 'module') {
+			name = tag.string;
+			return true;
+		}
+	});
+	return name;
+}
+
+function setupModule(name, rootModule)
+{
+	check.verifyString(name, 'invalid module name');
+	check.verifyObject(rootModule, 'invalid root module');
+	console.log('setup module', name);
+	var parts = name.split('/');
+	var currentModule = rootModule;
+	parts.forEach(function (part) {
+		if (typeof currentModule[part] === 'undefined') {
+			currentModule[part] = {};
+		}
+		currentModule = currentModule[part];
+	});
+	return currentModule;
+}
+
+function isModule(apiComment) {
+	if (!Array.isArray(apiComment.tags)) {
+		return false;
+	}
+	return apiComment.tags.some(function (tag) {
+		return tag.type === 'module';
+	});
 }
 
 function isMethod(apiComment) {

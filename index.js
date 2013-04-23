@@ -5,6 +5,7 @@ var path = require('path');
 var dox = require('dox');
 var check = require('check-types');
 var util = require('util');
+var toDoc = require('./src/toHtml');
 
 var program = require('commander');
 var package = require('./package.json');
@@ -56,7 +57,6 @@ function generateDocs(inputFiles, outputFilename) {
         api = api.concat(fileApi);
     });
 
-    var toDoc = require('./src/toHtml');
     var outputJsonFilename = path.join(__dirname, outputFilename);
     toDoc(api, outputJsonFilename);
     console.log('saved', outputJsonFilename);
@@ -69,5 +69,6 @@ function getFileApi(filename) {
 
     // console.log('getting api help from\n', contents);
     var json = dox.parseComments(contents);
+    // console.log(JSON.stringify(json));
     return json;
 }
