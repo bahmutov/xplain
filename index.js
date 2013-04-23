@@ -6,6 +6,8 @@ var dox = require('dox');
 var check = require('check-types');
 var util = require('util');
 var toDoc = require('./src/toHtml');
+var glob = require('glob');
+var unary = require('allong.es').es.unary;
 
 var program = require('commander');
 var package = require('./package.json');
@@ -42,13 +44,19 @@ if (process.argv.length === 2) {
 }
 program.parse(process.argv);
 
-function generateDocs(inputFiles, outputFilename) {
-    if (typeof inputFiles === 'string') {
-        inputFiles = [inputFiles];
+function generateDocs(patterns, outputFilename) {
+    if (typeof patterns === 'string') {
+        patterns = [patterns];
     }
-    check.verifyArray(inputFiles, 'missing input files');
+    check.verifyArray(patterns, 'missing input files');
     check.verifyString(outputFilename, 'missing output filename');
     console.assert(/\.html$/i.test(outputFilename), 'expected html output filename', outputFilename);
+
+    var inputFiles = discoverSourceFiles(patterns);
+    check.verifyArray(inputFiles, 'could not find filenames');
+    if (!inputFiles.length) {
+        throw new Error('Cannot find any source files for input', patterns);
+    }
 
     var api = [];
     inputFiles.forEach(function(filename) {
@@ -76,4 +84,18 @@ function getFileApi(filename) {
     });
     // console.log(JSON.stringify(tags));
     return tags;
+}
+
+function discoverSourceFiles(patterns) {
+    check.verifyArray(patterns, 'expect list of filenames/patterns');
+
+    var filenames = patterns.reduce(function (all, shortName) {
+        check.verifyString(shortName, 'missing filename');
+        var files = glob.sync(shortName);
+        return all.concat(files);
+    }, []);
+
+    console.log(filenames);
+    filenames = filenames.map(unary(path.resolve));
+    return filenames;
 }

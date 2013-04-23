@@ -23,6 +23,8 @@ with white space.
 * [moment.js](http://momentjs.com/) is used for date and time manipulation.
 * [commander.js](https://github.com/visionmedia/commander.js/) is used to process command line arguments.
 * [background pattern](http://subtlepatterns.com/) source for background pattern.
+* [glob](https://github.com/isaacs/node-glob) is used to match source files using wildcards.
+* [allong.es](http://allong.es/) provides convenient functional bits and pieces.
 
 ### Details
 Author: Gleb Bahmutov <gleb.bahmutov@gmail.com>
