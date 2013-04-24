@@ -17,10 +17,12 @@ module.exports = function (apiJson, options) {
 	check.verifyString(htmlFilename, 'missing output filename');
 
 	console.log('generating html to', htmlFilename);
-	var title = 'Sample API';
+	var title = options.title || 'API';
+	check.verifyString(title, 'missing title ' + title);
+
 	var o = '<!DOCTYPE HTML>\n';
 	o += '<html>\n<head>\n';
-	o += '\t<title>Api</title>\n';
+	o += '\t<title>' + title + '</title>\n';
 	var css = fileContents('./api.css');
 	check.verifyString(css, 'could not get css');
 	o += '\t<style>\n' + css + '\n\t</style>\n';
@@ -32,7 +34,9 @@ module.exports = function (apiJson, options) {
 	o += '<script>\n' + script + '\n</script>\n';
 	o += '<head>\n';
 	o += '<body>\n';
-	o += '<h1>' + title + ' <sub>by xplain</sub></h1>\n';
+
+	var apiVersion = options.apiVersion || '';
+	o += '<h1 id="mainTitle">' + title + ' <sub>' + apiVersion + '</sub></h1>\n';
 	o += '\t<div class="content">\n';
 
 	var prevFilename = null;
