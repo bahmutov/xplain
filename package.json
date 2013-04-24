@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "Generates API documentation with unit tested examples",
   "main": "index.js",
+  "bin": "index.js",
   "scripts": {
     "test": "gt test/*.js",
     "yuidoc": "yuidoc src test",
@@ -18,7 +19,6 @@
   "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "gt": "0.8.*",
     "dox": "~0.4.3",
     "check-types": "~0.5.2",
     "esprima": "~1.0.2",
@@ -29,5 +29,8 @@
     "commander": "~1.1.1",
     "glob": "~3.2.1",
     "allong.es": "~0.13.0"
+  },
+  "devDependencies": {
+    "gt": "0.6.4"
   }
 }
