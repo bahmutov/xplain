@@ -49,6 +49,7 @@ console.log('generating docs from', inputFiles, 'to', fullFilename);
 
 check.verifyString(program.title, 'invalid API title ' + program.title);
 check.verifyString(program.V, 'invalid API version ' + program.V);
+console.log('title', program.title, 'version', program.V);
 
 generateDocs({
     patterns: inputFiles, 

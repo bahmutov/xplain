@@ -6,7 +6,7 @@
   "scripts": {
     "test": "gt test/*.js",
     "yuidoc": "yuidoc src test",
-    "doc": "gt test/*.js && node index.js -i src/*.js,test/*.js"
+    "doc": "gt test/*.js && node index.js -i src/*.js,test/*.js -v 1.0.1"
   },
   "repository": "",
   "keywords": [
