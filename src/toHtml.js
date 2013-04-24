@@ -10,8 +10,10 @@ var exampleDiv = require('./example');
 
 var apiComments = null;
 
-module.exports = function (apiJson, htmlFilename) {
+module.exports = function (apiJson, options) {
 	check.verifyArray(apiJson, 'missing api array');
+	check.verifyObject(options, 'missing options');
+	var htmlFilename = options.outputFilename;
 	check.verifyString(htmlFilename, 'missing output filename');
 
 	console.log('generating html to', htmlFilename);

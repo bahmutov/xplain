@@ -27,7 +27,9 @@ function list(val) {
 
 program
     .option('-i, --input <comma separated list WITHOUT SPACES>', 'input filenames', list)
-    .option('-o, --output [string]', 'output filename');
+    .option('-o, --output [string]', 'output filename')
+    .option('-t, --title [string]', 'API title to use', 'API')
+    .option('-v [string]', 'API version to add to title', '');
 
 if (process.argv.length === 2) {
     process.argv.push('help');
@@ -40,21 +42,31 @@ if (typeof inputFiles === 'string') {
 }
 
 var outputFilename = program.output || 'docs.html';
-check.verifyArray(inputFiles, 'missing input pattern array', inputFiles);
+check.verifyArray(inputFiles, 'missing input pattern array ' + inputFiles);
 check.verifyString(outputFilename, 'missing output filename');
 var fullFilename = path.resolve(process.cwd(), outputFilename);
 console.log('generating docs from', inputFiles, 'to', fullFilename);
-generateDocs(inputFiles, fullFilename);
 
-function generateDocs(patterns, outputFilename) {
-    if (typeof patterns === 'string') {
-        patterns = [patterns];
+check.verifyString(program.title, 'invalid API title ' + program.title);
+check.verifyString(program.V, 'invalid API version ' + program.V);
+
+generateDocs({
+    patterns: inputFiles, 
+    outputFilename: fullFilename,
+    title: program.title,
+    apiVersion: program.V
+});
+
+function generateDocs(options) {
+    check.verifyObject(options, 'mising options');
+    if (typeof options.patterns === 'string') {
+        options.patterns = [options.patterns];
     }
-    check.verifyArray(patterns, 'missing input files');
-    check.verifyString(outputFilename, 'missing output filename');
-    console.assert(/\.html$/i.test(outputFilename), 'expected html output filename', outputFilename);
+    check.verifyArray(options.patterns, 'missing input files');
+    check.verifyString(options.outputFilename, 'missing output filename');
+    console.assert(/\.html$/i.test(options.outputFilename), 'expected html output filename', outputFilename);
 
-    var inputFiles = discoverSourceFiles(patterns);
+    var inputFiles = discoverSourceFiles(options.patterns);
     check.verifyArray(inputFiles, 'could not find filenames');
     if (!inputFiles.length) {
         throw new Error('Cannot find any source files for input', patterns);
@@ -67,9 +79,11 @@ function generateDocs(patterns, outputFilename) {
         api = api.concat(fileApi);
     });
 
-    // var outputJsonFilename = path.join(__dirname, outputFilename);
-    toDoc(api, outputFilename);
-    // console.log('saved', outputJsonFilename);
+    toDoc(api, {
+        outputFilename: options.outputFilename,
+        title: options.title,
+        apiVersion: options.apiVersion
+    });
 }
 
 function getFileApi(filename) {
