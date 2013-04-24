@@ -19,19 +19,19 @@ body {
 }
 
 .content .method:last-child {
-    border: none;
+  border: none;
 }
 
 .content #index {
-    width: 10%;
-    padding-left: 1em;
-    padding-top: 1em;
-    overflow-x: hidden;
-    overflow-y: auto;
-    left: 50px;
-    top: 5em;
-    position: fixed;
-    bottom: 0;
+  width: 10%;
+  padding-left: 1em;
+  padding-top: 1em;
+  overflow-x: hidden;
+  overflow-y: auto;
+  left: 50px;
+  top: 5em;
+  position: fixed;
+  bottom: 0;
 }
 
 .content #index a:link, a:visited {
@@ -41,16 +41,16 @@ body {
 }
 
 .content #docs {
-    padding-left: 2em;
-    padding-right: 105px;
-    width: 75%;
-    float: left;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    top: 5em;
-    position: fixed;
-    right: 0;
-    bottom: 0;
+  padding-left: 2em;
+  padding-right: 105px;
+  width: 75%;
+  float: left;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  top: 5em;
+  position: fixed;
+  right: 0;
+  bottom: 0;
 }
 
 .namedCode {
@@ -118,14 +118,14 @@ code {
 }
 
 .showing {
-    color: red;
+  color: red;
 }
 
 .timestamp {
-    color: gray;
-    padding-top: 1em;
-    padding-left: 2em;
-    font-size: smaller;
+  color: gray;
+  padding-top: 1em;
+  padding-left: 2em;
+  font-size: smaller;
 }
 
 .toggles {
@@ -133,6 +133,6 @@ code {
 }
 
 div .moduleName {
-    margin-top: 1em;
-    font-weight: bolder;
+  margin-top: 1em;
+  font-weight: bolder;
 }
