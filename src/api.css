@@ -28,7 +28,7 @@ body {
 }
 
 .content #index {
-  width: 10%;
+  max-width: 15%;
   padding-left: 1em;
   /*padding-top: 1em;*/
   overflow-x: hidden;
@@ -143,8 +143,12 @@ div .moduleName {
 }
 
 @media screen and (max-width: 980px) {
+  #mainTitle sub {
+    font-size: small
+  }
+
   .content {
-    width: 100%;
+    width: 99%;
   }
 
   .content #index {
@@ -152,6 +156,7 @@ div .moduleName {
   }
 
   .content #docs {
+    padding-left: 5px;
     right: 0;
   }
 }
