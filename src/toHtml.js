@@ -36,7 +36,7 @@ module.exports = function (apiJson, options) {
 	o += '<body>\n';
 
 	var apiVersion = options.apiVersion || '';
-	o += '<h1 id="mainTitle">' + title + ' <sub>' + apiVersion + '</sub></h1>\n';
+	// o += '<h1 id="mainTitle">' + title + ' <sub>' + apiVersion + '</sub></h1>\n';
 	o += '\t<div class="content">\n';
 
 	var prevFilename = null;
@@ -79,7 +79,10 @@ module.exports = function (apiJson, options) {
 	};
 	docModule(rootModule, doc);
 
-	o += '\t\t<div id="index">\n' + doc.index + '\t\t</div>\n';
+	o += '<div id="index">\n';
+	o += '<h1 id="mainTitle">' + title + ' <sub>' + apiVersion + '</sub></h1>\n';
+	o += doc.index + '\t\t</div>\n';
+
 	o += '\t\t<div id="docs">\n' + doc.docs + '\n';
 	var repoUrl = 'https://github.com/bahmutov/xplain';
 	var repoHref = '<a href="' + repoUrl + '">xplained</a>';
