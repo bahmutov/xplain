@@ -23,6 +23,10 @@ module.exports = function (apiJson, options) {
 	var o = '<!DOCTYPE HTML>\n';
 	o += '<html>\n<head>\n';
 	o += '\t<title>' + title + '</title>\n';
+	o += '<!--[if lt IE 9]>\n';
+	o += '\t<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>\n';
+	o += '<![endif]-->\n';
+
 	var css = fileContents('./api.css');
 	check.verifyString(css, 'could not get css');
 	o += '\t<style>\n' + css + '\n\t</style>\n';
@@ -37,7 +41,7 @@ module.exports = function (apiJson, options) {
 
 	var apiVersion = options.apiVersion || '';
 	// o += '<h1 id="mainTitle">' + title + ' <sub>' + apiVersion + '</sub></h1>\n';
-	o += '\t<div class="content">\n';
+	// o += '\t<div class="content">\n';
 
 	var prevFilename = null;
 	var rootModule = {};
@@ -90,7 +94,7 @@ module.exports = function (apiJson, options) {
 		moment().local().format('dddd, MMMM Do YYYY, h:mm:ss a') + '</span>\n';
 	o += '</div>\n';
 
-	o += '\t</div>\n'; // content
+	// o += '\t</div>\n'; // content
 	o += '<script>\n';
 	o += '$(document).ready(function () {\n';
     o += '\tinitToggle(".toggle");\n';
