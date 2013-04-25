@@ -23,6 +23,11 @@ module.exports = function (apiJson, options) {
 	var o = '<!DOCTYPE HTML>\n';
 	o += '<html>\n<head>\n';
 	o += '\t<title>' + title + '</title>\n';
+	o += '<meta http-equiv="x-ua-compatible" content="IE=edge" />\n';
+    o += '<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">\n';
+    o += '<meta name="apple-mobile-web-app-capable" content="yes">\n';
+    o += '<meta name="apple-touch-fullscreen" content="yes">\n';
+
 	o += '<!--[if lt IE 9]>\n';
 	o += '\t<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>\n';
 	o += '<![endif]-->\n';
@@ -32,6 +37,7 @@ module.exports = function (apiJson, options) {
 	o += '\t<style>\n' + css + '\n\t</style>\n';
 	o += '<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>\n';
 	o += '<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=desert"></script>\n';
+	o += '<script src="https://raw.github.com/jakiestfu/Snap.js/master/snap.min.js"></script>\n';
 
 	var script = fileContents('./toggle.js');
 	check.verifyString(script, 'could not get toggle script');
@@ -86,7 +92,7 @@ module.exports = function (apiJson, options) {
 	o += '<h1 id="mainTitle">' + title + ' <sub>' + apiVersion + '</sub></h1>\n';
 	o += doc.index + '\t\t</div>\n';
 
-	o += '\t\t<div id="docs">\n' + doc.docs + '\n';
+	o += '\t\t<div id="docs" class="absolute">\n' + doc.docs + '\n';
 	var repoUrl = 'https://github.com/bahmutov/xplain';
 	var repoHref = '<a href="' + repoUrl + '">xplained</a>';
 	o += '<span class="timestamp">' + repoHref + ' on ' +
@@ -99,6 +105,10 @@ module.exports = function (apiJson, options) {
     o += '\tinitToggle(".toggle");\n';
     o += '});\n';
 	o += '</script>\n';
+
+	o += '<script type="text/javascript">\n';
+    o += '\tvar snapper = new Snap({ element: document.getElementById("docs") });\n';
+    o += '</script>\n';
 	o += '</body>\n</html>';
 	fs.writeFileSync(htmlFilename, o, 'utf-8');
 };
