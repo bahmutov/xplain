@@ -3,6 +3,8 @@
 API generation tool for JavaScript that can include unit
 tests as code samples.
 
+***This is still very early release, probably would not work right away for your needs.***
+
 ## Usage
 
     npm test // runs unit tests
@@ -22,9 +24,10 @@ with white space.
 * [google-code-prettify](https://google-code-prettify.googlecode.com) is used to syntax highlight code samples in the generated documentation.
 * [moment.js](http://momentjs.com/) is used for date and time manipulation.
 * [commander.js](https://github.com/visionmedia/commander.js/) is used to process command line arguments.
-* [background pattern](http://subtlepatterns.com/) source for background pattern.
+* [background pattern](http://subtlepatterns.com/) source for the background pattern.
 * [glob](https://github.com/isaacs/node-glob) is used to match source files using wildcards.
 * [allong.es](http://allong.es/) provides convenient functional bits and pieces.
+* [intro.js](https://github.com/usablica/intro.js) was used to create the [feature tour](http://bahmutov.github.io/xplain/)
 
 ### Details
 Author: Gleb Bahmutov <gleb.bahmutov@gmail.com>
