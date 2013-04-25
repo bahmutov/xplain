@@ -30,12 +30,26 @@ module.exports = function (apiJson, options) {
 	var css = fileContents('./api.css');
 	check.verifyString(css, 'could not get css');
 	o += '\t<style>\n' + css + '\n\t</style>\n';
+
+	css = fileContents('./introjs/introjs.min.css');
+	check.verifyString(css, 'could not get introjs css');
+	o += '\t<style>\n' + css + '\n\t</style>\n';
+
+	css = fileContents('./introjs/introjs-ie.min.css');
+	check.verifyString(css, 'could not get introjs css');
+	o += '\t<style>\n' + css + '\n\t</style>\n';
+
 	o += '<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>\n';
 	o += '<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=desert"></script>\n';
 
 	var script = fileContents('./toggle.js');
 	check.verifyString(script, 'could not get toggle script');
 	o += '<script>\n' + script + '\n</script>\n';
+
+	var script = fileContents('./introjs/intro.min.js');
+	check.verifyString(script, 'could not get introjs script');
+	o += '<script>\n' + script + '\n</script>\n';
+
 	o += '<head>\n';
 	o += '<body>\n';
 
