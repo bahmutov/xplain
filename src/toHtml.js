@@ -1,4 +1,4 @@
-var fs = require('fs');
+var fs = require('fs.extra');
 var path = require('path');
 var check = require('check-types');
 var parseCode = require('./parser').parseCode;
@@ -7,6 +7,7 @@ var reformat = require('./code').reformat;
 var moment = require('moment');
 var sampleDiv = require('./sample');
 var exampleDiv = require('./example');
+var html = require('pithy');
 
 var apiComments = null;
 
@@ -29,9 +30,15 @@ module.exports = function (apiJson, options) {
 	o += '\t<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>\n';
 	o += '<![endif]-->\n';
 
-	var css = fileContents('./api.css');
-	check.verifyString(css, 'could not get css');
-	o += '\t<style>\n' + css + '\n\t</style>\n';
+	fs.copy('./src/api.css', path.join(options.outputFolder, 'api.css'), function (err) {
+		if (err) throw err;
+	});
+	var apiCss = html.link({
+    	rel: 'stylesheet',
+    	href: 'api.css'
+	});
+	o += apiCss.toString();
+
 	o += '<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>\n';
 	o += '<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=desert"></script>\n';
 

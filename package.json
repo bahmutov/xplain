@@ -31,7 +31,8 @@
     "allong.es": "~0.13.0",
     "pithy": "0.0.3",
     "html": "0.0.7",
-    "mkdirp": "~0.3.5"
+    "mkdirp": "~0.3.5",
+    "fs.extra": "~1.2.0"
   },
   "devDependencies": {
     "gt": "0.6.4"

@@ -31,6 +31,7 @@ with white space.
 * [pithy](https://github.com/caolan/pithy) is used to programmatically generate the output HTML.
 * [html](https://github.com/maxogden/commonjs-html-prettyprinter) is used to beautify the output HMTL (tabs and stuff).
 * [mkdirp](https://github.com/substack/node-mkdirp) simplified folder creation.
+* [fs.extra](https://npmjs.org/package/fs.extra) simplified usual file operations (file copy, move).
 
 ### Details
 Author: Gleb Bahmutov <gleb.bahmutov@gmail.com>
