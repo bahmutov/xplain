@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-var fs = require('fs');
+var fs = require('fs.extra');
 var path = require('path');
 var dox = require('dox');
 var check = require('check-types');
@@ -66,6 +66,9 @@ function generateDocs(options) {
     }
     check.verifyArray(options.patterns, 'missing input files');
     check.verifyString(options.outputFolder, 'missing output folder');
+
+    console.log('deleting output folder', options.outputFolder);
+    fs.rmrfSync(options.outputFolder);
     mkdirp(options.outputFolder, function (err) {
         if (err) {
             throw err;

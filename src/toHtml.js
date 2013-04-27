@@ -16,6 +16,7 @@ module.exports = function (apiJson, options) {
 	check.verifyObject(options, 'missing options');
 
 	check.verifyString(options.outputFolder, 'missing output folder in ' + JSON.stringify(options));
+
 	var htmlFilename = path.join(options.outputFolder, "index.html");
 	check.verifyString(htmlFilename, 'missing output filename');
 
@@ -30,17 +31,21 @@ module.exports = function (apiJson, options) {
 	o += '\t<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>\n';
 	o += '<![endif]-->\n';
 
-	fs.copy('./src/api.css', path.join(options.outputFolder, 'api.css'), function (err) {
-		if (err) throw err;
-	});
+	fs.copy(path.join(__dirname, 'api.css'),
+		path.join(options.outputFolder, 'api.css'),
+		function (err) {
+			if (err) throw err;
+		});
+
 	var apiCss = html.link({
     	rel: 'stylesheet',
     	href: 'api.css'
 	});
-	o += apiCss.toString();
+	o += apiCss.toString() + '\n';
 
 	o += '<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>\n';
 	o += '<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=desert"></script>\n';
+
 
 	var script = fileContents('./toggle.js');
 	check.verifyString(script, 'could not get toggle script');
