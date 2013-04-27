@@ -26,11 +26,16 @@ module.exports = function (apiJson, options) {
 	check.verifyString(title, 'missing title ' + title);
 
 	var o = '<!DOCTYPE HTML>\n';
-	o += '<html>\n<head>\n';
+	o += '<html>\n';
+	o += '<head>\n';
 	o += '\t<title>' + title + '</title>\n';
+
+	/* disable IE shim for now, need to figure out how to include this in pithy */
+	/*
 	o += '<!--[if lt IE 9]>\n';
 	o += '\t<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>\n';
 	o += '<![endif]-->\n';
+	*/
 
 	fs.copy(path.join(__dirname, 'api.css'),
 		path.join(options.outputFolder, 'api.css'),
