@@ -9,6 +9,7 @@ var toDoc = require('./src/toHtml');
 var glob = require('glob');
 var unary = require('allong.es').es.unary;
 var mkdirp = require('mkdirp');
+var rethrow = require('./src/errors').rethrow;
 
 var program = require('commander');
 var package = require('./package.json');
@@ -69,11 +70,7 @@ function generateDocs(options) {
 
     console.log('deleting output folder', options.outputFolder);
     fs.rmrfSync(options.outputFolder);
-    mkdirp(options.outputFolder, function (err) {
-        if (err) {
-            throw err;
-        }
-    });
+    mkdirp(options.outputFolder, rethrow);
 
     var inputFiles = discoverSourceFiles(options.patterns);
     check.verifyArray(inputFiles, 'could not find filenames');

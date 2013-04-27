@@ -8,6 +8,7 @@ var moment = require('moment');
 var sampleDiv = require('./sample');
 var exampleDiv = require('./example');
 var html = require('pithy');
+var rethrow = require('./errors').rethrow;
 
 var apiComments = null;
 
@@ -33,9 +34,7 @@ module.exports = function (apiJson, options) {
 
 	fs.copy(path.join(__dirname, 'api.css'),
 		path.join(options.outputFolder, 'api.css'),
-		function (err) {
-			if (err) throw err;
-		});
+		rethrow);
 
 	var apiCss = html.link({
     	rel: 'stylesheet',
