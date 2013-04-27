@@ -28,6 +28,8 @@ with white space.
 * [glob](https://github.com/isaacs/node-glob) is used to match source files using wildcards.
 * [allong.es](http://allong.es/) provides convenient functional bits and pieces.
 * [intro.js](https://github.com/usablica/intro.js) was used to create the [feature tour](http://bahmutov.github.io/xplain/)
+* [pithy](https://github.com/caolan/pithy) is used to programmatically generate the output HTML.
+* [html](https://github.com/maxogden/commonjs-html-prettyprinter) is used to beautify the output HMTL (tabs and stuff).
 
 ### Details
 Author: Gleb Bahmutov <gleb.bahmutov@gmail.com>

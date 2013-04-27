@@ -28,7 +28,9 @@
     "moment": "~2.0.0",
     "commander": "~1.1.1",
     "glob": "~3.2.1",
-    "allong.es": "~0.13.0"
+    "allong.es": "~0.13.0",
+    "pithy": "0.0.3",
+    "html": "0.0.7"
   },
   "devDependencies": {
     "gt": "0.6.4"
