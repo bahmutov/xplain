@@ -42,14 +42,25 @@ module.exports = function (apiJson, options) {
 	});
 	o += apiCss.toString() + '\n';
 
-	o += '<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>\n';
-	o += '<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=desert"></script>\n';
+	var jqueryJs = html.script({
+		src: 'http://code.jquery.com/jquery-1.9.1.min.js'
+	});
+	var codePrettifyJs = html.script({
+		src: 'https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=desert'
+	});
 
+	o += jqueryJs.toString() + '\n';
+	o += codePrettifyJs.toString() + '\n';
 
-	var script = fileContents('./toggle.js');
-	check.verifyString(script, 'could not get toggle script');
-	o += '<script>\n' + script + '\n</script>\n';
-	o += '<head>\n';
+	fs.copy(path.join(__dirname, 'toggle.js'),
+		path.join(options.outputFolder, 'toggle.js'),
+		rethrow);
+	var toggleJs = html.script({
+		src: 'toggle.js'
+	});
+
+	o += toggleJs.toString() + '\n';
+	o += '</head>\n';
 	o += '<body>\n';
 
 	var apiVersion = options.apiVersion || '';
