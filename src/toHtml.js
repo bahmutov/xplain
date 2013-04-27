@@ -13,10 +13,12 @@ var apiComments = null;
 module.exports = function (apiJson, options) {
 	check.verifyArray(apiJson, 'missing api array');
 	check.verifyObject(options, 'missing options');
-	var htmlFilename = options.outputFilename;
+
+	check.verifyString(options.outputFolder, 'missing output folder in ' + JSON.stringify(options));
+	var htmlFilename = path.join(options.outputFolder, "index.html");
 	check.verifyString(htmlFilename, 'missing output filename');
 
-	console.log('generating html to', htmlFilename);
+	console.log('generating docs', options.outputFolder);
 	var title = options.title || 'API';
 	check.verifyString(title, 'missing title ' + title);
 

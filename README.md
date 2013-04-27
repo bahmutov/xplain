@@ -30,6 +30,7 @@ with white space.
 * [intro.js](https://github.com/usablica/intro.js) was used to create the [feature tour](http://bahmutov.github.io/xplain/)
 * [pithy](https://github.com/caolan/pithy) is used to programmatically generate the output HTML.
 * [html](https://github.com/maxogden/commonjs-html-prettyprinter) is used to beautify the output HMTL (tabs and stuff).
+* [mkdirp](https://github.com/substack/node-mkdirp) simplified folder creation.
 
 ### Details
 Author: Gleb Bahmutov <gleb.bahmutov@gmail.com>

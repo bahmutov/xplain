@@ -8,6 +8,7 @@ var util = require('util');
 var toDoc = require('./src/toHtml');
 var glob = require('glob');
 var unary = require('allong.es').es.unary;
+var mkdirp = require('mkdirp');
 
 var program = require('commander');
 var package = require('./package.json');
@@ -27,7 +28,7 @@ function list(val) {
 
 program
     .option('-i, --input <comma separated list WITHOUT SPACES>', 'input filenames', list)
-    .option('-o, --output [string]', 'output filename')
+    .option('-o, --output [string]', 'output directory')
     .option('-t, --title [string]', 'API title to use', 'API')
     .option('-v [string]', 'API version to add to title', '');
 
@@ -40,20 +41,20 @@ var inputFiles = program.input;
 if (typeof inputFiles === 'string') {
     inputFiles = [inputFiles];
 }
-
-var outputFilename = program.output || 'docs.html';
 check.verifyArray(inputFiles, 'missing input pattern array ' + inputFiles);
-check.verifyString(outputFilename, 'missing output filename');
-var fullFilename = path.resolve(process.cwd(), outputFilename);
-console.log('generating docs from', inputFiles, 'to', fullFilename);
+
+var outputFolder = program.output || 'docs';
+check.verifyString(outputFolder, 'missing output folder');
+var fullFolder = path.resolve(process.cwd(), outputFolder);
+console.log('generating docs from', inputFiles, 'target folder', fullFolder);
 
 check.verifyString(program.title, 'invalid API title ' + program.title);
 check.verifyString(program.V, 'invalid API version ' + program.V);
 console.log('title', program.title, 'version', program.V);
 
 generateDocs({
-    patterns: inputFiles, 
-    outputFilename: fullFilename,
+    patterns: inputFiles,
+    outputFolder: fullFolder,
     title: program.title,
     apiVersion: program.V
 });
@@ -64,8 +65,12 @@ function generateDocs(options) {
         options.patterns = [options.patterns];
     }
     check.verifyArray(options.patterns, 'missing input files');
-    check.verifyString(options.outputFilename, 'missing output filename');
-    console.assert(/\.html$/i.test(options.outputFilename), 'expected html output filename', outputFilename);
+    check.verifyString(options.outputFolder, 'missing output folder');
+    mkdirp(options.outputFolder, function (err) {
+        if (err) {
+            throw err;
+        }
+    });
 
     var inputFiles = discoverSourceFiles(options.patterns);
     check.verifyArray(inputFiles, 'could not find filenames');
@@ -81,7 +86,7 @@ function generateDocs(options) {
     });
 
     toDoc(api, {
-        outputFilename: options.outputFilename,
+        outputFolder: options.outputFolder,
         title: options.title,
         apiVersion: options.apiVersion
     });
