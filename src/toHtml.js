@@ -81,10 +81,7 @@ module.exports = function (apiJson, options) {
 		]);
 	o += pretty(headElement.toString(), prettyOptions) + '\n';
 
-	o += '<body>\n';
-
 	var apiVersion = options.apiVersion || '';
-	o += '\t<div class="content">\n';
 
 	var prevFilename = null;
 	var rootModule = {};
@@ -143,18 +140,19 @@ module.exports = function (apiJson, options) {
 		' on ' + moment().local().format('dddd, MMMM Do YYYY, h:mm:ss a')
 	]);
 
-	o += indexElement.toString() + '\n';
 	var docsElement = html.div({
 		id: 'docs'
 	}, doc.docs.concat(signature));
-	o += docsElement.toString() + '\n';
 
-	o += '\t</div>\n'; // content
+	var contentElement = html.div({
+		class: 'content'
+	}, [indexElement, docsElement]);
 
 	var toggleStart = copyAndIncludeScript('toggleStart.js', options.outputFolder);
-	o += toggleStart.toString() + '\n';
 
-	o += '</body>\n</html>';
+	var body = html.body(null, [contentElement, toggleStart]);
+	o += body.toString() + '\n';
+	o += '</html>';
 	fs.writeFileSync(htmlFilename, o, 'utf-8');
 };
 
