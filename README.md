@@ -10,6 +10,12 @@ tests as code samples.
     npm test // runs unit tests
     npm run-script doc // runs unit tests and then generates api docs
 
+## Inspiration
+
+There are several API examples that I found particularly useful.
+
+* [lo-dash API](http://lodash.com/docs) is beautiful and extremely easy to use.
+
 ## Small print
 
 ### 3<sup>rd</sup> party libraries
