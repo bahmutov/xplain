@@ -10,6 +10,8 @@ var exampleDiv = require('./example');
 var html = require('pithy');
 var rethrow = require('./errors').rethrow;
 
+var pretty = require('html/lib/html').prettyPrint;
+var prettyOptions = { indent_size: 2 };
 var apiComments = null;
 
 module.exports = function (apiJson, options) {
@@ -71,13 +73,14 @@ module.exports = function (apiJson, options) {
 	// o += '</head>\n';
 
 	var headElement = html.head(null, [
-		title,
+		titleElement,
 		apiCss,
 		jqueryJs,
 		codePrettifyJs,
 		toggleJs
 		]);
-	o += headElement.toString() + '\n';
+	// o += headElement.toString() + '\n';
+	o += pretty(headElement.toString(), prettyOptions) + '\n';
 
 	o += '<body>\n';
 
