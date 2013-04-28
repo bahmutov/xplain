@@ -299,14 +299,23 @@ function codeDiv(id, apiComment) {
 	check.verifyString(id, 'missing code id');
 	check.verifyString(apiComment.code, 'missing code');
 
-	var o = '<div id="' + id + 'd" class="methodCode namedCode">\n';
 	var prettyCode = reformat(apiComment.code, true);
 	check.verifyString(prettyCode, 'could not make code pretty for\n', apiComment.code);
 	var name = apiComment.ctx.type + ' ' + apiComment.ctx.name;
-	o += '<span class="sampleName">' + name + '</span>\n';
-	o += '<pre class="prettyprint linenums">\n' + prettyCode + '</pre>\n';
-	o += '</div>\n';
-	return o;
+
+	var codeElement = html.div({
+		id: id + 'd',
+		class: "methodCode namedCode"
+	}, [
+		html.span({
+			class: "sampleName"
+		}, name),
+		html.pre({
+			class: "prettyprint linenums"
+		}, prettyCode)
+	]);
+
+	return codeElement;
 }
 
 function methodDiv(apiComment) {
