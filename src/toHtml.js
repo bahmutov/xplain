@@ -42,9 +42,6 @@ module.exports = function (apiJson, options) {
 	var title = options.title || 'API';
 	check.verifyString(title, 'missing title ' + title);
 
-	var o = '<!DOCTYPE HTML>\n';
-	// o += '<html>\n';
-
 	var titleElement = html.title(null, title);
 
 	/* disable IE shim for now, need to figure out how to include this in pithy */
@@ -79,7 +76,6 @@ module.exports = function (apiJson, options) {
 		codePrettifyJs,
 		toggleJs
 		]);
-	// o += pretty(headElement.toString(), prettyOptions) + '\n';
 
 	var apiVersion = options.apiVersion || '';
 
@@ -152,9 +148,9 @@ module.exports = function (apiJson, options) {
 
 	var body = html.body(null, [contentElement, toggleStart]);
 	var htmlElement = html.html(null, [headElement, body]);
-	// o += body.toString() + '\n';
-	// o += '</html>';
-	o += htmlElement.toString();
+
+	var o = '<!DOCTYPE HTML>\n';
+	o += pretty(htmlElement.toString(), prettyOptions);
 	fs.writeFileSync(htmlFilename, o, 'utf-8');
 };
 
