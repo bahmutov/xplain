@@ -71,14 +71,6 @@ module.exports = function (apiJson, options) {
 	});
 
 	var toggleJs = copyAndIncludeScript('toggle.js', options.outputFolder);
-	/*
-	fs.copy(path.join(__dirname, 'toggle.js'),
-		path.join(options.outputFolder, 'toggle.js'),
-		rethrow);
-	var toggleJs = html.script({
-		src: 'toggle.js'
-	});
-	*/
 
 	var headElement = html.head(null, [
 		titleElement,
@@ -121,12 +113,10 @@ module.exports = function (apiJson, options) {
 		}
 		// console.log('found method comment');
 		var info = methodDiv(apiComment);
-		check.verifyString(info.name, 'did not get method name string');
+		check.verifyObject(info.name, 'did not get method name string');
 		check.verifyString(info.docs, 'did not get method docs string');
 		currentModule.methodDocs.push(info);
 	});
-
-	// console.log('modules', rootModule);
 
 	var doc = {
 		index: '',
@@ -274,11 +264,8 @@ function examplesFor(name) {
 	// console.log(apiExamples);
 
 	var examples = apiExamples.map(function (example) {
-		// console.log('example', example);
 		return exampleDiv(name, example);
 	});
-	// console.log('examples', examples);
-	// return examples.join('\n');
 	return examples;
 }
 
@@ -360,10 +347,11 @@ function methodDiv(apiComment) {
 		.concat(codeElement)
 	);
 
-	var nameDiv = '<div><a href="#' + name + '">'
-		+ name + '</a></div>';
+	var nameElement = html.div(null, [
+		html.a({ href: '#' + name }, [name])
+	]);
 	return {
-		name: nameDiv,
+		name: nameElement,
 		docs: methodElement.toString()
 	};
 }
