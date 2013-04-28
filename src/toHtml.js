@@ -27,8 +27,11 @@ module.exports = function (apiJson, options) {
 
 	var o = '<!DOCTYPE HTML>\n';
 	o += '<html>\n';
-	o += '<head>\n';
-	o += '\t<title>' + title + '</title>\n';
+
+	// o += '<head>\n';
+	// o += '\t<title>' + title + '</title>\n';
+	var titleElement = html.title(null, title);
+	// o += titleElement.toString() + '\n';
 
 	/* disable IE shim for now, need to figure out how to include this in pithy */
 	/*
@@ -45,7 +48,7 @@ module.exports = function (apiJson, options) {
     	rel: 'stylesheet',
     	href: 'api.css'
 	});
-	o += apiCss.toString() + '\n';
+	// o += apiCss.toString() + '\n';
 
 	var jqueryJs = html.script({
 		src: 'http://code.jquery.com/jquery-1.9.1.min.js'
@@ -54,8 +57,8 @@ module.exports = function (apiJson, options) {
 		src: 'https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=desert'
 	});
 
-	o += jqueryJs.toString() + '\n';
-	o += codePrettifyJs.toString() + '\n';
+	// o += jqueryJs.toString() + '\n';
+	// o += codePrettifyJs.toString() + '\n';
 
 	fs.copy(path.join(__dirname, 'toggle.js'),
 		path.join(options.outputFolder, 'toggle.js'),
@@ -64,8 +67,18 @@ module.exports = function (apiJson, options) {
 		src: 'toggle.js'
 	});
 
-	o += toggleJs.toString() + '\n';
-	o += '</head>\n';
+	// o += toggleJs.toString() + '\n';
+	// o += '</head>\n';
+
+	var headElement = html.head(null, [
+		title,
+		apiCss,
+		jqueryJs,
+		codePrettifyJs,
+		toggleJs
+		]);
+	o += headElement.toString() + '\n';
+
 	o += '<body>\n';
 
 	var apiVersion = options.apiVersion || '';
