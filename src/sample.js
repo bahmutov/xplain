@@ -1,6 +1,7 @@
 var check = require('check-types');
 var parseCode = require('./parser').parseCode;
 var parseUnitTestCode = require('./parserUnitTest').parseUnitTestCode;
+var html = require('pithy');
 
 function sampleToCommentLike(testCode) {
     check.verifyString(testCode, 'missing test code');
@@ -11,7 +12,6 @@ function sampleToCommentLike(testCode) {
 
 var sampleDivId = 1;
 function sampleDiv(apiExample) {
-    var o = '<div id="' + sampleDivId++ + '" class="sample namedCode">\n';
     var code = apiExample.code;
     check.verifyString(code, 'missing code for sample');
     var parsed = sampleToCommentLike(code);
@@ -25,14 +25,21 @@ function sampleDiv(apiExample) {
         humanForm = parsed.code;
     }
     check.verifyString(humanForm, 'could not convert to human form', parsed.code);
-    o += '<span class="sampleName">' + parsed.name + '</span>\n';
-    o += '<pre class="prettyprint linenums">\n';
-    o += '<code>'
-    o += humanForm;
-    o += '</code>\n';
-    o += '</pre>\n';
-    o += '</div>\n';
-    return o;
+
+    var sampleElement = html.div({
+        id: sampleDivId++,
+        class: "sample namedCode"
+    }, [
+        html.span({
+            class: "sampleName"
+        }, parsed.name),
+        html.pre({
+            class: "prettyprint linenums"
+        }, [
+            html.code(null, humanForm)
+        ])
+    ]);
+    return sampleElement;
 }
 
 module.exports = sampleDiv;
