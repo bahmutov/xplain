@@ -119,9 +119,8 @@ module.exports = function (apiJson, options) {
 	});
 
 	var doc = {
-		// index: '',
 		index: [],
-		docs: ''
+		docs: []
 	};
 	docModule(rootModule, doc);
 
@@ -134,13 +133,8 @@ module.exports = function (apiJson, options) {
 			html.sub(null, [apiVersion])
 		])
 	].concat(doc.index));
-	/*
-	o += '<div id="index">\n';
-	o += '<h1 id="mainTitle">' + title + ' <sub>' + apiVersion + '</sub></h1>\n';
-	o += doc.index + '\t\t</div>\n';
-	*/
-	o += indexElement.toString() + '\n';
 
+	o += indexElement.toString() + '\n';
 	o += '\t\t<div id="docs">\n' + doc.docs + '\n';
 
 	var repoUrl = 'https://github.com/bahmutov/xplain';
@@ -167,20 +161,18 @@ module.exports = function (apiJson, options) {
 function docModule(aModule, doc) {
 	check.verifyObject(aModule, 'missing module');
 	check.verifyArray(doc.index, 'missing index array');
-	check.verifyString(doc.docs, 'missing docs string');
+	check.verifyArray(doc.docs, 'missing docs array');
 
 	if (Array.isArray(aModule.methodDocs)) {
 		if (aModule.name) {
 			check.verifyString(aModule.name, 'missing module name');
-			// doc.index += '<div class="moduleName">' + aModule.name + '</div>\n';
 			doc.index.push(html.div({
 				class: "moduleName"
 			}, [aModule.name]));
 		}
 		aModule.methodDocs.forEach(function (info) {
-			// doc.index += info.name + '\n';
 			doc.index.push(info.name);
-			doc.docs += info.docs + '\n';
+			doc.docs.push(info.docs);
 		});
 	}
 
