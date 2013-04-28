@@ -113,8 +113,8 @@ module.exports = function (apiJson, options) {
 		}
 		// console.log('found method comment');
 		var info = methodDiv(apiComment);
-		check.verifyObject(info.name, 'did not get method name string');
-		check.verifyString(info.docs, 'did not get method docs string');
+		check.verifyObject(info.name, 'did not get method name');
+		check.verifyObject(info.docs, 'did not get method docs');
 		currentModule.methodDocs.push(info);
 	});
 
@@ -134,9 +134,6 @@ module.exports = function (apiJson, options) {
 		])
 	].concat(doc.index));
 
-	o += indexElement.toString() + '\n';
-	o += '\t\t<div id="docs">\n' + doc.docs + '\n';
-
 	var repoUrl = 'https://github.com/bahmutov/xplain';
 	var repoHref = html.a({
 		href: repoUrl
@@ -145,9 +142,12 @@ module.exports = function (apiJson, options) {
 		repoHref,
 		' on ' + moment().local().format('dddd, MMMM Do YYYY, h:mm:ss a')
 	]);
-	o += signature.toString() + '\n';
 
-	o += '</div>\n';
+	o += indexElement.toString() + '\n';
+	var docsElement = html.div({
+		id: 'docs'
+	}, doc.docs.concat(signature));
+	o += docsElement.toString() + '\n';
 
 	o += '\t</div>\n'; // content
 
@@ -361,6 +361,6 @@ function methodDiv(apiComment) {
 	]);
 	return {
 		name: nameElement,
-		docs: methodElement.toString()
+		docs: methodElement
 	};
 }
