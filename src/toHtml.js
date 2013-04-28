@@ -43,7 +43,7 @@ module.exports = function (apiJson, options) {
 	check.verifyString(title, 'missing title ' + title);
 
 	var o = '<!DOCTYPE HTML>\n';
-	o += '<html>\n';
+	// o += '<html>\n';
 
 	var titleElement = html.title(null, title);
 
@@ -79,7 +79,7 @@ module.exports = function (apiJson, options) {
 		codePrettifyJs,
 		toggleJs
 		]);
-	o += pretty(headElement.toString(), prettyOptions) + '\n';
+	// o += pretty(headElement.toString(), prettyOptions) + '\n';
 
 	var apiVersion = options.apiVersion || '';
 
@@ -151,8 +151,10 @@ module.exports = function (apiJson, options) {
 	var toggleStart = copyAndIncludeScript('toggleStart.js', options.outputFolder);
 
 	var body = html.body(null, [contentElement, toggleStart]);
-	o += body.toString() + '\n';
-	o += '</html>';
+	var htmlElement = html.html(null, [headElement, body]);
+	// o += body.toString() + '\n';
+	// o += '</html>';
+	o += htmlElement.toString();
 	fs.writeFileSync(htmlFilename, o, 'utf-8');
 };
 
