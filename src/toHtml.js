@@ -30,10 +30,7 @@ module.exports = function (apiJson, options) {
 	var o = '<!DOCTYPE HTML>\n';
 	o += '<html>\n';
 
-	// o += '<head>\n';
-	// o += '\t<title>' + title + '</title>\n';
 	var titleElement = html.title(null, title);
-	// o += titleElement.toString() + '\n';
 
 	/* disable IE shim for now, need to figure out how to include this in pithy */
 	/*
@@ -50,7 +47,6 @@ module.exports = function (apiJson, options) {
     	rel: 'stylesheet',
     	href: 'api.css'
 	});
-	// o += apiCss.toString() + '\n';
 
 	var jqueryJs = html.script({
 		src: 'http://code.jquery.com/jquery-1.9.1.min.js'
@@ -59,18 +55,12 @@ module.exports = function (apiJson, options) {
 		src: 'https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=desert'
 	});
 
-	// o += jqueryJs.toString() + '\n';
-	// o += codePrettifyJs.toString() + '\n';
-
 	fs.copy(path.join(__dirname, 'toggle.js'),
 		path.join(options.outputFolder, 'toggle.js'),
 		rethrow);
 	var toggleJs = html.script({
 		src: 'toggle.js'
 	});
-
-	// o += toggleJs.toString() + '\n';
-	// o += '</head>\n';
 
 	var headElement = html.head(null, [
 		titleElement,
@@ -79,7 +69,6 @@ module.exports = function (apiJson, options) {
 		codePrettifyJs,
 		toggleJs
 		]);
-	// o += headElement.toString() + '\n';
 	o += pretty(headElement.toString(), prettyOptions) + '\n';
 
 	o += '<body>\n';
@@ -132,10 +121,17 @@ module.exports = function (apiJson, options) {
 	o += doc.index + '\t\t</div>\n';
 
 	o += '\t\t<div id="docs">\n' + doc.docs + '\n';
+
 	var repoUrl = 'https://github.com/bahmutov/xplain';
-	var repoHref = '<a href="' + repoUrl + '">xplained</a>';
-	o += '<span class="timestamp">' + repoHref + ' on ' +
-		moment().local().format('dddd, MMMM Do YYYY, h:mm:ss a') + '</span>\n';
+	var repoHref = html.a({
+		href: repoUrl
+	}, 'xplained');
+	var signature = html.span({	class: "timestamp" }, [
+		repoHref,
+		' on ' + moment().local().format('dddd, MMMM Do YYYY, h:mm:ss a')
+	]);
+	o += signature.toString() + '\n';
+
 	o += '</div>\n';
 
 	o += '\t</div>\n'; // content
