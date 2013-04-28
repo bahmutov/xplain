@@ -14,6 +14,21 @@ var pretty = require('html/lib/html').prettyPrint;
 var prettyOptions = { indent_size: 2 };
 var apiComments = null;
 
+function copyAndIncludeScript(filename, destinationFolder) {
+	check.verifyString(filename, 'missing script filename');
+	check.verifyString(destinationFolder, 'missing destination folder');
+
+	var basename = path.basename(filename);
+	check.verifyString(basename, 'could not get base name from ' + filename);
+	fs.copy(path.join(__dirname, filename),
+		path.join(destinationFolder, basename),
+		rethrow);
+	var script = html.script({
+		src: basename
+	});
+	return script;
+}
+
 module.exports = function (apiJson, options) {
 	check.verifyArray(apiJson, 'missing api array');
 	check.verifyObject(options, 'missing options');
@@ -55,12 +70,15 @@ module.exports = function (apiJson, options) {
 		src: 'https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=desert'
 	});
 
+	var toggleJs = copyAndIncludeScript('toggle.js', options.outputFolder);
+	/*
 	fs.copy(path.join(__dirname, 'toggle.js'),
 		path.join(options.outputFolder, 'toggle.js'),
 		rethrow);
 	var toggleJs = html.script({
 		src: 'toggle.js'
 	});
+	*/
 
 	var headElement = html.head(null, [
 		titleElement,
@@ -135,11 +153,10 @@ module.exports = function (apiJson, options) {
 	o += '</div>\n';
 
 	o += '\t</div>\n'; // content
-	o += '<script>\n';
-	o += '$(document).ready(function () {\n';
-    o += '\tinitToggle(".toggle");\n';
-    o += '});\n';
-	o += '</script>\n';
+
+	var toggleStart = copyAndIncludeScript('toggleStart.js', options.outputFolder);
+	o += toggleStart.toString() + '\n';
+
 	o += '</body>\n</html>';
 	fs.writeFileSync(htmlFilename, o, 'utf-8');
 };
