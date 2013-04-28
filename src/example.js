@@ -1,6 +1,7 @@
 var check = require('check-types');
 var reformat = require('./code').reformat;
 var getName = require('./parser').getNameFromTest;
+var html = require('pithy');
 
 var exampleDivId = 0;
 function exampleDiv(name, apiExample) {
@@ -11,18 +12,32 @@ function exampleDiv(name, apiExample) {
     check.verifyString(exampleName, 'could not get example name');
 
     var id = name + '_example_' + ++exampleDivId + '_toggle';
-    var toggle = '<input class="toggle" type="button" value="' + exampleName + '" id="' + id + '">\n';
-    var o = '<div id="' + id + 'd" class="example namedCode">\n';
     var prettyCode = reformat(apiExample.code, true);
     check.verifyString(prettyCode, 'could not reformat\n', apiExample.code);
 
-    o += '<span class="sampleName">' + exampleName + '</span>\n';
-    o += '<pre class="prettyprint linenums">\n' + prettyCode + '</pre>\n';
-    o += '</div>\n';
+    var toggleElement = html.input({
+        class: "toggle",
+        type: "button",
+        value: exampleName,
+        id: id
+    });
+
+    var codeElement = html.div({
+        id: id + 'd',
+        class: "example namedCode"
+    }, [
+        html.span({
+            class: "sampleName"
+        }, exampleName),
+        html.pre({
+            class: "prettyprint linenums"
+        }, prettyCode)
+    ]);
+
     return {
         name: exampleName,
-        toggle: toggle,
-        code: o
+        toggle: toggleElement,
+        code: codeElement
     };
 }
 

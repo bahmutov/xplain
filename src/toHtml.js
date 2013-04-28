@@ -7,9 +7,9 @@ var reformat = require('./code').reformat;
 var moment = require('moment');
 var sampleDiv = require('./sample');
 var exampleDiv = require('./example');
-var html = require('pithy');
 var rethrow = require('./errors').rethrow;
 
+var html = require('pithy');
 var pretty = require('html/lib/html').prettyPrint;
 var prettyOptions = { indent_size: 2 };
 var apiComments = null;
@@ -289,10 +289,8 @@ function samplesFor(name) {
 		return isSampleFor(apiComment, name);
 	});
 	console.log('have', apiSamples.length, 'samples for', name);
-	// console.log(apiSamples);
 	var samples = apiSamples.map(sampleDiv);
-	// console.log('samples', samples);
-	return samples.join('\n');
+	return samples;
 }
 
 function codeDiv(id, apiComment) {
@@ -325,43 +323,47 @@ function methodDiv(apiComment) {
 	check.verifyString(apiComment.ctx.name, 'missing function name');
 	var name = apiComment.ctx.name;
 
-	var o = '<div id="' + name + '" class="method">\n';
-	o += '<h3>' + name + '</h3>\n';
-	o += apiComment.description.summary + '\n';
-
 	var samples = samplesFor(name);
-	if (samples) {
-		o += samples + '\n';
-	}
-
-	var toggles = '';
-	var examplesText = '';
+	var toggles = [];
+	var exampleElements = [];
 
 	var examples = examplesFor(name);
 	check.verifyArray(examples, 'could not get examples tags');
 	examples.forEach(function (example) {
-		toggles += example.toggle + '\n';
-		examplesText += example.code + '\n';
+		toggles.push(example.toggle);
+		exampleElements.push(example.code);
 	});
 
 	var id = name + '_code_toggle';
-	var toggle = '<input class="toggle" type="button" value="source" id="' + id + '">\n';
-	toggles += toggle;
+	var sourceToggle = html.input({
+		class: "toggle",
+		type: "button",
+		value: "source",
+		id: id
+	});
+	toggles.push(sourceToggle);
 
-	o += '<div class="toggles">\n';
-	o += toggles + '\n';
-	o += '</div>\n';
-	o += examplesText + '\n';
+	var togglesElement = html.div({
+		class: "toggles"
+	}, toggles);
 
-	var str = codeDiv(id, apiComment);
-	o += str;
+	var codeElement = codeDiv(id, apiComment);
 
-	o += '</div>\n';
+	console.log(apiComment.description.summary);
+	var methodElement = html.div({
+		id: name,
+		class: "method"
+	}, [html.h3(null, name), new html.SafeString(apiComment.description.summary)]
+		.concat(samples)
+		.concat(togglesElement)
+		.concat(exampleElements)
+		.concat(codeElement)
+	);
 
 	var nameDiv = '<div><a href="#' + name + '">'
 		+ name + '</a></div>';
 	return {
 		name: nameDiv,
-		docs: o
+		docs: methodElement.toString()
 	};
 }
