@@ -51,6 +51,10 @@ module.exports = function (apiJson, options) {
 	o += '<![endif]-->\n';
 	*/
 
+	fs.copy(path.join(__dirname, 'background.png'),
+		path.join(options.outputFolder, 'background.png'),
+		rethrow);
+
 	fs.copy(path.join(__dirname, 'api.css'),
 		path.join(options.outputFolder, 'api.css'),
 		rethrow);
