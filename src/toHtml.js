@@ -168,36 +168,6 @@ function fileContents(name) {
 	return cssText;
 }
 
-function getModuleName(apiComment)
-{
-	check.verifyObject(apiComment, 'invalid api comment');
-	var name = null;
-	apiComment.tags.some(function (tag) {
-		if (tag.type === 'module') {
-			name = tag.string;
-			return true;
-		}
-	});
-	return name;
-}
-
-function setupModule(name, rootModule)
-{
-	check.verifyString(name, 'invalid module name');
-	check.verifyObject(rootModule, 'invalid root module');
-	console.log('setup module', name);
-	var parts = name.split('/');
-	var currentModule = rootModule;
-	parts.forEach(function (part) {
-		if (typeof currentModule[part] === 'undefined') {
-			currentModule[part] = {};
-		}
-		currentModule = currentModule[part];
-	});
-	currentModule.name = name;
-	return currentModule;
-}
-
 function isExampleFor(apiComment, name) {
 	if (!Array.isArray(apiComment.tags)) {
 		return false;
