@@ -1,4 +1,5 @@
 var check = require('check-types');
+var Documented = require('./Documented');
 
 var prevFilename = null;
 var rootModule = {};
@@ -16,7 +17,9 @@ function docsToModules(collectedDocs) {
             var name = getModuleName(apiComment);
             check.verifyString(name, 'invalid module name');
             currentModule = setupModule(name, rootModule);
+            return;
         }
+
         check.verifyObject(currentModule, 'invalid current module');
         if (typeof currentModule.methodDocs === 'undefined') {
             currentModule.methodDocs = [];
