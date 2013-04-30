@@ -28,13 +28,14 @@ function docsToModules(collectedDocs) {
         if (!isMethod(apiComment)) {
             return;
         }
+        var documented = new Documented(apiComment);
         /*
         var info = methodDiv(apiComment);
         check.verifyObject(info.name, 'did not get method name');
         check.verifyObject(info.docs, 'did not get method docs');
         currentModule.methodDocs.push(info);
         */
-        currentModule.methodDocs.push(apiComment);
+        currentModule.methodDocs.push(documented);
     });
     return rootModule;
 }
