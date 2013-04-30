@@ -8,6 +8,7 @@ var moment = require('moment');
 var sampleDiv = require('./sample');
 var exampleDiv = require('./example');
 var rethrow = require('./errors').rethrow;
+var docsToModules = require('./docsToModules');
 
 var html = require('pithy');
 var pretty = require('html/lib/html').prettyPrint;
@@ -82,38 +83,10 @@ module.exports = function (apiJson, options) {
 		]);
 
 	var apiVersion = options.apiVersion || '';
-
-	var prevFilename = null;
-	var rootModule = {};
-	var currentModule = rootModule;
-
 	apiComments = apiJson;
-	apiJson.forEach(function (apiComment) {
-		check.verifyString(apiComment.filename, 'missing filename');
-		if (apiComment.filename !== prevFilename) {
-			prevFilename = apiComment.filename;
-			currentModule = rootModule;
-		}
-		if (isModule(apiComment)) {
-			var name = getModuleName(apiComment);
-			check.verifyString(name, 'invalid module name');
-			currentModule = setupModule(name, rootModule);
-		}
-		check.verifyObject(currentModule, 'invalid current module');
-		if (typeof currentModule.methodDocs === 'undefined') {
-			currentModule.methodDocs = [];
-		}
 
-		// console.log('checking comment', apiComment);
-		if (!isMethod(apiComment)) {
-			return;
-		}
-		// console.log('found method comment');
-		var info = methodDiv(apiComment);
-		check.verifyObject(info.name, 'did not get method name');
-		check.verifyObject(info.docs, 'did not get method docs');
-		currentModule.methodDocs.push(info);
-	});
+	var rootModule = docsToModules(apiJson);
+	check.verifyObject(rootModule, 'could not convert docs to modules');
 
 	var doc = {
 		index: [],
@@ -193,54 +166,6 @@ function fileContents(name) {
 	var cssFilename = path.join(__dirname, name);
 	var cssText = fs.readFileSync(cssFilename, 'utf8');
 	return cssText;
-}
-
-function getModuleName(apiComment)
-{
-	check.verifyObject(apiComment, 'invalid api comment');
-	var name = null;
-	apiComment.tags.some(function (tag) {
-		if (tag.type === 'module') {
-			name = tag.string;
-			return true;
-		}
-	});
-	return name;
-}
-
-function setupModule(name, rootModule)
-{
-	check.verifyString(name, 'invalid module name');
-	check.verifyObject(rootModule, 'invalid root module');
-	console.log('setup module', name);
-	var parts = name.split('/');
-	var currentModule = rootModule;
-	parts.forEach(function (part) {
-		if (typeof currentModule[part] === 'undefined') {
-			currentModule[part] = {};
-		}
-		currentModule = currentModule[part];
-	});
-	currentModule.name = name;
-	return currentModule;
-}
-
-function isModule(apiComment) {
-	if (!Array.isArray(apiComment.tags)) {
-		return false;
-	}
-	return apiComment.tags.some(function (tag) {
-		return tag.type === 'module';
-	});
-}
-
-function isMethod(apiComment) {
-	if (!Array.isArray(apiComment.tags)) {
-		return false;
-	}
-	return apiComment.tags.some(function (tag) {
-		return tag.type === 'method';
-	});
 }
 
 function isExampleFor(apiComment, name) {

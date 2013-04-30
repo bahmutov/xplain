@@ -2,7 +2,6 @@
 
 var fs = require('fs.extra');
 var path = require('path');
-var dox = require('dox');
 var check = require('check-types');
 var util = require('util');
 var toDoc = require('./src/toHtml');
@@ -10,6 +9,7 @@ var glob = require('glob');
 var unary = require('allong.es').es.unary;
 var mkdirp = require('mkdirp');
 var rethrow = require('./src/errors').rethrow;
+var getApi = require('./src/getTaggedComments');
 
 var program = require('commander');
 var package = require('./package.json');
@@ -78,34 +78,14 @@ function generateDocs(options) {
         throw new Error('Cannot find any source files for input', patterns);
     }
 
-    var api = [];
-    inputFiles.forEach(function(filename) {
-        var fileApi = getFileApi(filename);
-        check.verifyArray(api, 'could not get api array from', filename);
-        api = api.concat(fileApi);
-    });
+    api = getApi(inputFiles);
+    check.verifyArray(api, 'did not get api from files');
 
     toDoc(api, {
         outputFolder: options.outputFolder,
         title: options.title,
         apiVersion: options.apiVersion
     });
-}
-
-function getFileApi(filename) {
-    check.verifyString(filename, 'missing filename');
-    var contents = fs.readFileSync(filename, 'utf-8');
-    check.verifyString(contents, 'could not load contents of', filename);
-
-    // console.log('getting api help from\n', contents);
-    var tags = dox.parseComments(contents);
-    check.verifyArray(tags, 'could not get tags array from', filename);
-    tags = tags.map(function (tag) {
-        tag.filename = filename;
-        return tag;
-    });
-    // console.log(JSON.stringify(tags));
-    return tags;
 }
 
 function discoverSourceFiles(patterns) {
