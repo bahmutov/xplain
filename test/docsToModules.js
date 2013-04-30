@@ -2,6 +2,10 @@ gt.module('docs to modules');
 
 var getComments = require('../src/getTaggedComments');
 var d2m = require('../src/docsToModules');
+var path = require('path');
+
+var foo = path.join(__dirname, '../examples/basic/src/foo.js');
+var fooTests = path.join(__dirname, '../examples/basic/test/fooTests.js');
 
 gt.test('basics', function () {
     gt.arity(d2m, 1, 'expects single argument');
@@ -9,7 +13,7 @@ gt.test('basics', function () {
 });
 
 gt.test('basic example', function () {
-    var files = ['../examples/basic/src/foo.js'];
+    var files = [foo];
     var comments = getComments(files);
     gt.array(comments, 'expected array back');
     gt.equal(comments.length, 1, 'single comment');
@@ -35,7 +39,7 @@ gt.test('empty modules tree', function () {
 })
 
 gt.test('skip samples', function () {
-    var files = ['../examples/basic/test/fooTests.js'];
+    var files = [fooTests];
     var comments = getComments(files);
     console.log(JSON.stringify(comments));
     gt.array(comments, 'get an array');
