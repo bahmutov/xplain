@@ -88,7 +88,7 @@ module.exports = function (apiJson, options) {
 	var currentModule = rootModule;
 
 	apiComments = apiJson;
-	apiComments.forEach(function (apiComment) {
+	apiJson.forEach(function (apiComment) {
 		check.verifyString(apiComment.filename, 'missing filename');
 		if (apiComment.filename !== prevFilename) {
 			prevFilename = apiComment.filename;

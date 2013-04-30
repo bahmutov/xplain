@@ -8,7 +8,8 @@
     "test": "gt test/*.js",
     "yuidoc": "yuidoc src test",
     "doc": "gt test/*.js && node index.js -i src/*.js,test/*.js -v 1.0.1",
-    "complexity": "jsc -p src/*.js"
+    "complexity": "jsc -p src/*.js",
+    "example1": "node index.js -i examples/basic/src/*.js,examples/basic/test/*.js -o examples/basic/docs"
   },
   "repository": "",
   "keywords": [
