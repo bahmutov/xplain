@@ -78,14 +78,6 @@ function generateDocs(options) {
         throw new Error('Cannot find any source files for input', patterns);
     }
 
-    /*
-    var api = [];
-    inputFiles.forEach(function(filename) {
-        var fileApi = getFileApi(filename);
-        check.verifyArray(api, 'could not get api array from', filename);
-        api = api.concat(fileApi);
-    });
-    */
     api = getApi(inputFiles);
     check.verifyArray(api, 'did not get api from files');
 
