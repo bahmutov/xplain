@@ -5,7 +5,15 @@ var prevFilename = null;
 var rootModule = {};
 var currentModule = rootModule;
 
+function init() {
+    prevFilename = null;
+    rootModule = {};
+    currentModule = rootModule;
+}
+
 function docsToModules(collectedDocs) {
+    init();
+
     check.verifyArray(collectedDocs, 'need collected docs');
     collectedDocs.forEach(function (apiComment) {
         check.verifyString(apiComment.filename, 'missing filename');
