@@ -18,4 +18,11 @@ gt.test('basic example', function () {
     gt.object(c.description, 'has description');
     gt.string(c.filename, 'has filename');
     // console.log(JSON.stringify(comments));
+
+    var root = d2m(comments);
+    gt.object(root, 'returns root module object');
+    console.log(JSON.stringify(root));
+    gt.undefined(root.name, 'root module has no name');
+    gt.array(root.methodDocs, 'root module has method docs');
+    gt.equal(root.methodDocs.length, 1, 'single method');
 });
