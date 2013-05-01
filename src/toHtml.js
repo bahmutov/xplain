@@ -176,26 +176,6 @@ function fileContents(name) {
 	return cssText;
 }
 
-function isExampleFor(apiComment, name) {
-	if (!Array.isArray(apiComment.tags)) {
-		return false;
-	}
-	return apiComment.tags.some(function (tag) {
-		return (tag.type === 'exampleFor' || tag.type === 'example')
-			&& tag.string === name;
-	});
-}
-
-function isSampleFor(apiComment, name) {
-	if (!Array.isArray(apiComment.tags)) {
-		return false;
-	}
-	return apiComment.tags.some(function (tag) {
-		return (tag.type === 'sampleFor' || tag.type === 'sample')
-			&& tag.string === name;
-	});
-}
-
 function examplesFor(name) {
 	check.verifyString(name, 'missing name');
 	check.verifyArray(apiComments, 'missing api comments');

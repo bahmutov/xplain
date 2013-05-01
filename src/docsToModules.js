@@ -14,6 +14,7 @@ function init() {
 
 function docsToModules(collectedDocs) {
     var root = primaryParsing(collectedDocs);
+    secondaryParsing(collectedDocs);
     return root;
 }
 
@@ -46,6 +47,37 @@ function primaryParsing(collectedDocs) {
         }
     });
     return rootModule;
+}
+
+// attach samples and examples to primary code fragments
+function secondaryParsing(collectedDocs) {
+    check.verifyArray(collectedDocs, 'need collected docs');
+    check.verifyObject(rootModule, 'missing root module');
+
+    collectedDocs.forEach(function (apiComment) {
+        console.assert(apiComment instanceof Comment, 'need wrapped Comment');
+        check.verifyString(apiComment.filename, 'missing filename');
+        if (apiComment.filename !== prevFilename) {
+            prevFilename = apiComment.filename;
+            currentModule = rootModule;
+        }
+        if (apiComment.isModule()) {
+            var name = apiComment.getModuleName();
+            check.verifyString(name, 'invalid module name');
+            currentModule = setupModule(name, rootModule);
+            return;
+        }
+
+        check.verifyObject(currentModule, 'invalid current module');
+
+        var documented = new Documented(apiComment);
+        if (apiComment.isSample()) {
+            // currentModule.methodDocs.push(documented);
+            // attach sample to method?
+        } else if (apiComment.isExample()) {
+            // attach comment to method?
+        }
+    });
 }
 
 function setupModule(name, rootModule)

@@ -19,11 +19,19 @@ Comment.prototype.isTagged = function (tag) {
 
 Comment.prototype.isModule = function (apiComment) {
     return this.isTagged('module');
-}
+};
 
 Comment.prototype.isMethod = function (apiComment) {
     return this.isTagged('method');
-}
+};
+
+Comment.prototype.isExample = function(name) {
+    return this.isTagged('example') || this.isTagged('exampleFor');
+};
+
+Comment.prototype.isSample = function (name) {
+    return this.isTagged('sample') || this.isTagged('sampleFor');
+};
 
 Comment.prototype.getModuleName = function ()
 {
