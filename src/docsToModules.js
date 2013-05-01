@@ -35,17 +35,16 @@ function docsToModules(collectedDocs) {
             currentModule.methodDocs = [];
         }
 
-        if (!apiComment.isMethod()) {
-            return;
-        }
         var documented = new Documented(apiComment);
+        if (apiComment.isMethod()) {
+            currentModule.methodDocs.push(documented);
+        }
         /*
         var info = methodDiv(apiComment);
         check.verifyObject(info.name, 'did not get method name');
         check.verifyObject(info.docs, 'did not get method docs');
         currentModule.methodDocs.push(info);
         */
-        currentModule.methodDocs.push(documented);
     });
     return rootModule;
 }

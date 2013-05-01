@@ -1,14 +1,17 @@
 var fs = require('fs.extra');
 var path = require('path');
 var check = require('check-types');
+var moment = require('moment');
+
 var parseCode = require('./parser').parseCode;
 var parseUnitTestCode = require('./parserUnitTest').parseUnitTestCode;
+
 var reformat = require('./code').reformat;
-var moment = require('moment');
 var sampleDiv = require('./sample');
 var exampleDiv = require('./example');
 var rethrow = require('./errors').rethrow;
 var docsToModules = require('./docsToModules');
+var Documented = require('./Documented');
 
 var html = require('pithy');
 var pretty = require('html/lib/html').prettyPrint;
@@ -30,8 +33,9 @@ function copyAndIncludeScript(filename, destinationFolder) {
 	return script;
 }
 
-module.exports = function (apiJson, options) {
-	check.verifyArray(apiJson, 'missing api array');
+module.exports = function (rootModule, options) {
+	// check.verifyArray(apiJson, 'missing api array');
+	check.verifyObject(rootModule, 'could not convert docs to modules');
 	check.verifyObject(options, 'missing options');
 
 	check.verifyString(options.outputFolder, 'missing output folder in ' + JSON.stringify(options));
@@ -83,11 +87,12 @@ module.exports = function (apiJson, options) {
 		]);
 
 	var apiVersion = options.apiVersion || '';
-	apiComments = apiJson;
+	// apiComments = apiJson;
 
+	/*
 	var rootModule = docsToModules(apiJson);
 	check.verifyObject(rootModule, 'could not convert docs to modules');
-
+	*/
 	var doc = {
 		index: [],
 		docs: []
@@ -136,6 +141,7 @@ function docModule(aModule, doc) {
 	check.verifyArray(doc.index, 'missing index array');
 	check.verifyArray(doc.docs, 'missing docs array');
 
+	console.log('documenting module', aModule.name);
 	if (Array.isArray(aModule.methodDocs)) {
 		if (aModule.name) {
 			check.verifyString(aModule.name, 'missing module name');
@@ -143,7 +149,9 @@ function docModule(aModule, doc) {
 				class: "moduleName"
 			}, [aModule.name]));
 		}
-		aModule.methodDocs.forEach(function (info) {
+		aModule.methodDocs.forEach(function (method) {
+			// console.log('documenting method', method);
+			var info = methodDiv(method);
 			doc.index.push(info.name);
 			doc.docs.push(info.docs);
 		});
@@ -237,18 +245,20 @@ function codeDiv(id, apiComment) {
 	return codeElement;
 }
 
-function methodDiv(apiComment) {
-	check.verifyObject(apiComment, 'missing api comment object');
+function methodDiv(commented) {
+	check.verifyObject(commented, 'missing api comment object');
+	console.assert(commented instanceof Documented, 'expected Documented');
+	var apiComment = commented.comment;
 	console.assert(apiComment.ctx, 'missing ctx property');
 	console.assert(apiComment.ctx.type === 'function', 'ctx is not function');
 	check.verifyString(apiComment.ctx.name, 'missing function name');
 	var name = apiComment.ctx.name;
 
-	var samples = samplesFor(name);
+	var samples = []; // samplesFor(name);
 	var toggles = [];
 	var exampleElements = [];
 
-	var examples = examplesFor(name);
+	var examples = []; // examplesFor(name);
 	check.verifyArray(examples, 'could not get examples tags');
 	examples.forEach(function (example) {
 		toggles.push(example.toggle);
