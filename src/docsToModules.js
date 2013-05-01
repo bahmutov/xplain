@@ -38,12 +38,15 @@ function primaryParsing(collectedDocs) {
 
         check.verifyObject(currentModule, 'invalid current module');
         if (typeof currentModule.methodDocs === 'undefined') {
-            currentModule.methodDocs = [];
+            currentModule.methodDocs = {};
         }
 
         var documented = new Documented(apiComment);
         if (apiComment.isMethod()) {
-            currentModule.methodDocs.push(documented);
+            // currentModule.methodDocs.push(documented);
+            var methodName = apiComment.getMethodName();
+            check.verifyString(methodName, 'missing method name');
+            currentModule.methodDocs[methodName] = documented;
         }
     });
     return rootModule;
@@ -74,9 +77,7 @@ function secondaryParsing(collectedDocs) {
         if (apiComment.isSample()) {
             // currentModule.methodDocs.push(documented);
             // attach sample to method?
-            var sampleFor = apiComment.sampleFor();
-            check.verifyString(sampleFor,
-                'could not get sample target from ' + JSON.stringify(apiComment));
+            attachSample(documented);
         } else if (apiComment.isExample()) {
             // attach comment to method?
             var exampleFor = apiComment.exampleFor();
@@ -84,6 +85,34 @@ function secondaryParsing(collectedDocs) {
                 'could not get example target from ' + JSON.stringify(apiComment));
         }
     });
+}
+
+function attachSample(documented) {
+    var sampleFor = documented.comment.sampleFor();
+    check.verifyString(sampleFor,
+        'could not get sample target from ' + JSON.stringify(documented));
+    var method = findDocumented(sampleFor);
+    check.verifyObject(method, 'could not find method for ' + sampleFor);
+}
+
+function findDocumented(name) {
+    check.verifyString(name, 'missing name');
+    check.verifyObject(rootModule, 'missing root module');
+    var parts = name.split('/');
+    console.assert(parts.length, 'empty name');
+
+    var m = rootModule;
+    var k;
+    for (k = 0; k < parts.length - 1; k += 1) {
+        if (m[parts[k]]) {
+            m = m[parts[k]];
+        } else {
+            throw new Error('cannot find path ' + name);
+        }
+    }
+    check.verifyObject(m, 'could not find module for ' + name);
+    check.verifyObject(m.methodDocs, 'missing method docs in ' + m.name);
+    return m.methodDocs[parts[parts.length - 1]];
 }
 
 function setupModule(name, rootModule)

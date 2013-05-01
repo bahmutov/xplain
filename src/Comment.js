@@ -53,23 +53,20 @@ Comment.prototype.isSample = function (name) {
 
 Comment.prototype.exampleFor = function() {
     return this.tagValue('example') || this.tagValue('exampleFor');
-}
+};
 
 Comment.prototype.sampleFor = function() {
     return this.tagValue('sample') || this.tagValue('sampleFor');
-}
+};
 
 Comment.prototype.getModuleName = function ()
 {
-    check.verifyArray(this.tags, 'missing tags');
-    var name = null;
-    this.tags.some(function (tag) {
-        if (tag.type === 'module') {
-            name = tag.string;
-            return true;
-        }
-    });
-    return name;
-}
+    return this.tagValue('module');
+};
+
+Comment.prototype.getMethodName = function ()
+{
+    return this.tagValue('method');
+};
 
 module.exports = Comment;
