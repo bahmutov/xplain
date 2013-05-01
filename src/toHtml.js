@@ -34,9 +34,10 @@ function copyAndIncludeScript(filename, destinationFolder) {
 }
 
 module.exports = function (rootModule, options) {
-	// check.verifyArray(apiJson, 'missing api array');
 	check.verifyObject(rootModule, 'could not convert docs to modules');
 	check.verifyObject(options, 'missing options');
+
+	console.dir(rootModule);
 
 	check.verifyString(options.outputFolder, 'missing output folder in ' + JSON.stringify(options));
 
@@ -87,12 +88,7 @@ module.exports = function (rootModule, options) {
 		]);
 
 	var apiVersion = options.apiVersion || '';
-	// apiComments = apiJson;
 
-	/*
-	var rootModule = docsToModules(apiJson);
-	check.verifyObject(rootModule, 'could not convert docs to modules');
-	*/
 	var doc = {
 		index: [],
 		docs: []
@@ -142,14 +138,16 @@ function docModule(aModule, doc) {
 	check.verifyArray(doc.docs, 'missing docs array');
 
 	console.log('documenting module', aModule.name);
-	if (Array.isArray(aModule.methodDocs)) {
+	var methods = aModule.methodDocs;
+	if (methods) {
 		if (aModule.name) {
 			check.verifyString(aModule.name, 'missing module name');
 			doc.index.push(html.div({
 				class: "moduleName"
 			}, [aModule.name]));
 		}
-		aModule.methodDocs.forEach(function (method) {
+		Object.keys(methods).forEach(function (name) {
+			var method = methods[name];
 			// console.log('documenting method', method);
 			var info = methodDiv(method);
 			doc.index.push(info.name);
@@ -176,28 +174,18 @@ function fileContents(name) {
 	return cssText;
 }
 
-function examplesFor(name) {
+function examplesToHtml(name, apiExamples) {
 	check.verifyString(name, 'missing name');
-	check.verifyArray(apiComments, 'missing api comments');
-	var apiExamples = apiComments.filter(function (apiComment) {
-		return isExampleFor(apiComment, name);
-	});
-	console.log('have', apiExamples.length, 'examples for', name);
-	// console.log(apiExamples);
+	check.verifyArray(apiExamples, 'missing api examples');
 
 	var examples = apiExamples.map(function (example) {
-		return exampleDiv(name, example);
+		return exampleDiv(name, example.comment);
 	});
 	return examples;
 }
 
-function samplesFor(name) {
-	check.verifyString(name, 'missing name');
-	check.verifyArray(apiComments, 'missing api comments');
-	var apiSamples = apiComments.filter(function (apiComment) {
-		return isSampleFor(apiComment, name);
-	});
-	console.log('have', apiSamples.length, 'samples for', name);
+function samplesToHtml(apiSamples) {
+	check.verifyArray(apiSamples, 'missing api samples');
 	var samples = apiSamples.map(sampleDiv);
 	return samples;
 }
@@ -234,12 +222,15 @@ function methodDiv(commented) {
 	check.verifyString(apiComment.ctx.name, 'missing function name');
 	var name = apiComment.ctx.name;
 
-	var samples = []; // samplesFor(name);
 	var toggles = [];
 	var exampleElements = [];
 
-	var examples = []; // examplesFor(name);
+	var samples = samplesToHtml(commented.sample);
+	var examples = examplesToHtml(name, commented.example);
+
+	check.verifyArray(samples, 'could not get examples tags');
 	check.verifyArray(examples, 'could not get examples tags');
+
 	examples.forEach(function (example) {
 		toggles.push(example.toggle);
 		exampleElements.push(example.code);

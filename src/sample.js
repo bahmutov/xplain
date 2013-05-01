@@ -12,7 +12,10 @@ function sampleToCommentLike(testCode) {
 
 var sampleDivId = 1;
 function sampleDiv(apiExample) {
-    var code = apiExample.code;
+    check.verifyObject(apiExample, 'missing documented');
+    check.verifyObject(apiExample.comment, 'missing comment')
+    // console.dir(apiExample);
+    var code = apiExample.comment.code;
     check.verifyString(code, 'missing code for sample');
     var parsed = sampleToCommentLike(code);
     check.verifyObject(parsed, 'did not get sample from', code);
