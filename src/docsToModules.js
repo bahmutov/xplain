@@ -76,8 +76,6 @@ function secondaryParsing(collectedDocs) {
         try {
             var documented = new Documented(apiComment);
             if (apiComment.isSample()) {
-                // currentModule.methodDocs.push(documented);
-                // attach sample to method?
                 attachSample(documented);
             } else if (apiComment.isExample()) {
                 // attach comment to method?
@@ -97,6 +95,10 @@ function attachSample(documented) {
         'could not get sample target from ' + JSON.stringify(documented));
     var method = findDocumented(sampleFor);
     check.verifyObject(method, 'could not find method for ' + sampleFor);
+    console.log('attaching sample to', sampleFor);
+    // console.dir(documented);
+    // console.dir(method);
+    method.addSample(documented);
 }
 
 function findDocumented(name) {
