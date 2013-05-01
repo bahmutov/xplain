@@ -6,4 +6,8 @@ function Documented(apiComment) {
     this.comment = apiComment;
 }
 
+Documented.prototype.isMethod = function () {
+
+};
+
 module.exports = Documented;

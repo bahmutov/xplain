@@ -4,12 +4,14 @@ var fs = require('fs.extra');
 var path = require('path');
 var check = require('check-types');
 var util = require('util');
-var toDoc = require('./src/toHtml');
 var glob = require('glob');
 var unary = require('allong.es').es.unary;
 var mkdirp = require('mkdirp');
+
+var toDoc = require('./src/toHtml');
 var rethrow = require('./src/errors').rethrow;
 var getApi = require('./src/getTaggedComments');
+var docsToModules = require('./src/docsToModules');
 
 var program = require('commander');
 var package = require('./package.json');
@@ -81,7 +83,10 @@ function generateDocs(options) {
     api = getApi(inputFiles);
     check.verifyArray(api, 'did not get api from files');
 
-    toDoc(api, {
+    var rootModule = docsToModules(api);
+    check.verifyObject(rootModule, 'could not convert docs to modules');
+
+    toDoc(rootModule, {
         outputFolder: options.outputFolder,
         title: options.title,
         apiVersion: options.apiVersion

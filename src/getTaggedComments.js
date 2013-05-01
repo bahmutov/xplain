@@ -1,6 +1,7 @@
 var check = require('check-types');
 var fs = require('fs.extra');
 var dox = require('dox');
+var Comment = require('./Comment');
 
 function getTaggedComments(inputFiles) {
     check.verifyArray(inputFiles, 'missing input filenames');
@@ -19,15 +20,17 @@ function getFileApi(filename) {
     var contents = fs.readFileSync(filename, 'utf-8');
     check.verifyString(contents, 'could not load contents of', filename);
 
-    // console.log('getting api help from\n', contents);
     var tags = dox.parseComments(contents);
     check.verifyArray(tags, 'could not get tags array from', filename);
     tags = tags.map(function (tag) {
         tag.filename = filename;
         return tag;
     });
-    // console.log(JSON.stringify(tags));
-    return tags;
+
+    var comments = tags.map(function (tag) {
+        return new Comment(tag);
+    });
+    return comments;
 }
 
 module.exports = getTaggedComments;
