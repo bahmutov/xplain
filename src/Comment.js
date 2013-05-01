@@ -17,6 +17,24 @@ Comment.prototype.isTagged = function (tag) {
     });
 }
 
+Comment.prototype.tagValue = function (tag) {
+    check.verifyString(tag, 'missing tag string');
+    if (!Array.isArray(this.tags)) {
+        return null;
+    }
+    var value = null;
+    this.tags.some(function (t) {
+        check.verifyString(t.type, 'missing type for ' + JSON.stringify(t));
+        if (t.type === tag) {
+            value = t.string;
+            return true;
+        } else {
+            return false;
+        }
+    });
+    return value;
+}
+
 Comment.prototype.isModule = function (apiComment) {
     return this.isTagged('module');
 };
@@ -32,6 +50,14 @@ Comment.prototype.isExample = function(name) {
 Comment.prototype.isSample = function (name) {
     return this.isTagged('sample') || this.isTagged('sampleFor');
 };
+
+Comment.prototype.exampleFor = function() {
+    return this.tagValue('example') || this.tagValue('exampleFor');
+}
+
+Comment.prototype.sampleFor = function() {
+    return this.tagValue('sample') || this.tagValue('sampleFor');
+}
 
 Comment.prototype.getModuleName = function ()
 {
