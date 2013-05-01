@@ -74,8 +74,14 @@ function secondaryParsing(collectedDocs) {
         if (apiComment.isSample()) {
             // currentModule.methodDocs.push(documented);
             // attach sample to method?
+            var sampleFor = apiComment.sampleFor();
+            check.verifyString(sampleFor,
+                'could not get sample target from ' + JSON.stringify(apiComment));
         } else if (apiComment.isExample()) {
             // attach comment to method?
+            var exampleFor = apiComment.exampleFor();
+            check.verifyString(exampleFor,
+                'could not get example target from ' + JSON.stringify(apiComment));
         }
     });
 }
