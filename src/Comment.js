@@ -59,6 +59,10 @@ Comment.prototype.sampleFor = function() {
     return this.tagValue('sample') || this.tagValue('sampleFor');
 };
 
+Comment.prototype.for = function() {
+    return this.sampleFor() || this.exampleFor();
+};
+
 Comment.prototype.getModuleName = function ()
 {
     return this.tagValue('module');

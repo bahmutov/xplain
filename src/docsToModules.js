@@ -76,12 +76,9 @@ function secondaryParsing(collectedDocs) {
         try {
             var documented = new Documented(apiComment);
             if (apiComment.isSample()) {
-                attachSample(documented);
+                attachComment(documented, 'sample');
             } else if (apiComment.isExample()) {
-                // attach comment to method?
-                var exampleFor = apiComment.exampleFor();
-                check.verifyString(exampleFor,
-                    'could not get example target from ' + JSON.stringify(apiComment));
+                attachComment(documented, 'example');
             }
         } catch (err) {
             console.error(err);
@@ -89,16 +86,15 @@ function secondaryParsing(collectedDocs) {
     });
 }
 
-function attachSample(documented) {
-    var sampleFor = documented.comment.sampleFor();
-    check.verifyString(sampleFor,
-        'could not get sample target from ' + JSON.stringify(documented));
-    var method = findDocumented(sampleFor);
-    check.verifyObject(method, 'could not find method for ' + sampleFor);
-    console.log('attaching sample to', sampleFor);
-    // console.dir(documented);
-    // console.dir(method);
-    method.addSample(documented);
+function attachComment(documented, commentType) {
+    check.verifyString(commentType, 'missing comment type');
+    var targetName = documented.comment.for();
+    check.verifyString(targetName,
+        'could not get target from ' + JSON.stringify(documented));
+    var target = findDocumented(targetName);
+    check.verifyObject(target, 'could not find method for ' + targetName);
+    console.log('adding', commentType, 'to', targetName);
+    target.add(documented, commentType);
 }
 
 function findDocumented(name) {
