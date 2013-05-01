@@ -13,9 +13,14 @@ function init() {
 }
 
 function docsToModules(collectedDocs) {
-    init();
+    var root = primaryParsing(collectedDocs);
+    return root;
+}
 
+function primaryParsing(collectedDocs) {
+    init();
     check.verifyArray(collectedDocs, 'need collected docs');
+
     collectedDocs.forEach(function (apiComment) {
         console.assert(apiComment instanceof Comment, 'need wrapped Comment');
         check.verifyString(apiComment.filename, 'missing filename');
