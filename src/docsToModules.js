@@ -39,12 +39,6 @@ function docsToModules(collectedDocs) {
         if (apiComment.isMethod()) {
             currentModule.methodDocs.push(documented);
         }
-        /*
-        var info = methodDiv(apiComment);
-        check.verifyObject(info.name, 'did not get method name');
-        check.verifyObject(info.docs, 'did not get method docs');
-        currentModule.methodDocs.push(info);
-        */
     });
     return rootModule;
 }
