@@ -29,10 +29,10 @@ gt.test('basic example', function () {
 
     var root = d2m(comments);
     gt.object(root, 'returns root module object');
-    // console.log(JSON.stringify(root));
+    // console.dir(root);
     gt.undefined(root.name, 'root module has no name');
-    gt.array(root.methodDocs, 'root module has method docs');
-    gt.equal(root.methodDocs.length, 1, 'single method');
+    gt.object(root.methodDocs, 'root module has method docs');
+    gt.equal(Object.keys(root.methodDocs).length, 1, 'single method');
 });
 
 gt.test('empty modules tree', function () {
@@ -51,10 +51,10 @@ gt.test('skip samples', function () {
 
     var root = d2m(comments);
     gt.object(root, 'returns root module object');
-    // console.log(JSON.stringify(root));
+    // console.dir(root);
     gt.undefined(root.name, 'root module has no name');
-    gt.array(root.methodDocs, 'root module has method docs');
-    gt.equal(root.methodDocs.length, 0, 'no methods');
+    gt.object(root.methodDocs, 'root module has method docs');
+    gt.equal(Object.keys(root.methodDocs).length, 0, 'no methods');
 });
 
 gt.test('submodules', function () {

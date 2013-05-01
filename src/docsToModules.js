@@ -73,16 +73,20 @@ function secondaryParsing(collectedDocs) {
 
         check.verifyObject(currentModule, 'invalid current module');
 
-        var documented = new Documented(apiComment);
-        if (apiComment.isSample()) {
-            // currentModule.methodDocs.push(documented);
-            // attach sample to method?
-            attachSample(documented);
-        } else if (apiComment.isExample()) {
-            // attach comment to method?
-            var exampleFor = apiComment.exampleFor();
-            check.verifyString(exampleFor,
-                'could not get example target from ' + JSON.stringify(apiComment));
+        try {
+            var documented = new Documented(apiComment);
+            if (apiComment.isSample()) {
+                // currentModule.methodDocs.push(documented);
+                // attach sample to method?
+                attachSample(documented);
+            } else if (apiComment.isExample()) {
+                // attach comment to method?
+                var exampleFor = apiComment.exampleFor();
+                check.verifyString(exampleFor,
+                    'could not get example target from ' + JSON.stringify(apiComment));
+            }
+        } catch (err) {
+            console.error(err);
         }
     });
 }
