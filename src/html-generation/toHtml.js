@@ -57,11 +57,11 @@ module.exports = function (rootModule, options) {
 	o += '<![endif]-->\n';
 	*/
 
-	fs.copy(path.join(__dirname, 'background.png'),
+	fs.copy(path.join(__dirname, 'assets/background.png'),
 		path.join(options.outputFolder, 'background.png'),
 		rethrow);
 
-	fs.copy(path.join(__dirname, 'api.css'),
+	fs.copy(path.join(__dirname, 'assets/api.css'),
 		path.join(options.outputFolder, 'api.css'),
 		rethrow);
 
@@ -77,7 +77,8 @@ module.exports = function (rootModule, options) {
 		src: 'https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=desert'
 	});
 
-	var toggleJs = copyAndIncludeScript('toggle.js', options.outputFolder);
+	var toggleJs = copyAndIncludeScript('assets/toggle.js',
+		options.outputFolder);
 
 	var headElement = html.head(null, [
 		titleElement,
@@ -122,7 +123,8 @@ module.exports = function (rootModule, options) {
 		class: 'content'
 	}, [indexElement, docsElement]);
 
-	var toggleStart = copyAndIncludeScript('toggleStart.js', options.outputFolder);
+	var toggleStart = copyAndIncludeScript('assets/toggleStart.js',
+		options.outputFolder);
 
 	var body = html.body(null, [contentElement, toggleStart]);
 	var htmlElement = html.html(null, [headElement, body]);
