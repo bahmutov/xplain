@@ -1,10 +1,10 @@
-var add = require('../src/add').add;
-var abs = require('../src/add').abs;
+var add = require('./add').add;
+var abs = require('./add').abs;
 
 gt.module('add');
 
 /**
-@exampleFor add
+@exampleFor math/add
 */
 gt.test('functionality', function () {
 	gt.func(add, 'add is a function');
@@ -15,7 +15,7 @@ gt.test('functionality', function () {
 });
 
 /**
-@exampleFor add
+@exampleFor math/add
 */
 gt.test('add as concatenate', function () {
 	gt.equal(add('a', 0), 'a0', 'result is string if first arg is string');
@@ -23,7 +23,7 @@ gt.test('add as concatenate', function () {
 });
 
 /**
-@sampleFor add
+@sampleFor math/add
 */
 gt.test('sample add usage', function () {
 	// typical use
@@ -34,7 +34,7 @@ gt.test('sample add usage', function () {
 });
 
 /**
-@sampleFor add
+@sampleFor math/add
 */
 gt.test('edge cases', function () {
 	gt.func(add, 'add is a function');
@@ -45,7 +45,7 @@ gt.test('edge cases', function () {
 });
 
 /**
-@sample abs
+@sample math/abs
 */
 gt.test('using abs', function () {
 	gt.equal(abs(10), 10, 'absolute number remains itself');
