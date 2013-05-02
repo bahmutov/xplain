@@ -3,15 +3,15 @@ var path = require('path');
 var check = require('check-types');
 var moment = require('moment');
 
-var parseCode = require('./parser').parseCode;
-var parseUnitTestCode = require('./parserUnitTest').parseUnitTestCode;
+var parseCode = require('../parser').parseCode;
+var parseUnitTestCode = require('../parserUnitTest').parseUnitTestCode;
 
-var reformat = require('./code').reformat;
+var reformat = require('../code').reformat;
 var sampleDiv = require('./sample');
 var exampleDiv = require('./example');
-var rethrow = require('./errors').rethrow;
-var docsToModules = require('./docsToModules');
-var Documented = require('./Documented');
+var rethrow = require('../errors').rethrow;
+var docsToModules = require('../docsToModules');
+var Documented = require('../Documented');
 
 var html = require('pithy');
 var pretty = require('html/lib/html').prettyPrint;
