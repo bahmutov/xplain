@@ -8,7 +8,7 @@ var mkdirp = require('mkdirp');
 
 var toDoc = require('./html-generation/toHtml');
 var rethrow = require('./utils/errors').rethrow;
-var getApi = require('./getTaggedComments');
+var getApi = require('./parsing/getTaggedComments');
 var docsToModules = require('./doc-model/docsToModules');
 
 function generateDocs(options) {
