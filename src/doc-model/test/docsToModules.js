@@ -1,12 +1,14 @@
 gt.module('docs to modules');
 
-var getComments = require('../src/getTaggedComments');
-var d2m = require('../src/docsToModules');
+var getComments = require('../../getTaggedComments');
+var d2m = require('../docsToModules');
 var path = require('path');
 
-var foo = path.join(__dirname, '../examples/basic/src/foo.js');
-var fooTests = path.join(__dirname, '../examples/basic/test/fooTests.js');
-var submodulesAt = path.join(__dirname, '../examples/submodules');
+var examples = path.join(__dirname, '../../../examples');
+var foo = path.join(examples, 'basic/src/foo.js');
+var fooTests = path.join(examples, 'basic/test/fooTests.js');
+var submodulesAt = path.join(examples, 'submodules');
+
 var submodules = ['A', 'B', 'C'].map(function (name) {
         return path.join(submodulesAt, name + '.js');
     });
