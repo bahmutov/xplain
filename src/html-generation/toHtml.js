@@ -10,8 +10,6 @@ var reformat = require('../code').reformat;
 var sampleDiv = require('./sample');
 var exampleDiv = require('./example');
 var rethrow = require('../utils/errors').rethrow;
-var docsToModules = require('../docsToModules');
-var Documented = require('../Documented');
 
 var html = require('pithy');
 var pretty = require('html/lib/html').prettyPrint;
@@ -217,8 +215,8 @@ function codeDiv(id, apiComment) {
 
 function methodDiv(commented) {
 	check.verifyObject(commented, 'missing api comment object');
-	console.assert(commented instanceof Documented, 'expected Documented');
 	var apiComment = commented.comment;
+	check.verifyObject(apiComment, 'expected comment object');
 	console.assert(apiComment.ctx, 'missing ctx property');
 	console.assert(apiComment.ctx.type === 'function', 'ctx is not function');
 	check.verifyString(apiComment.ctx.name, 'missing function name');

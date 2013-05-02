@@ -1,11 +1,4 @@
 /**
-Returns "bar"
-
-@method bar
-*/
-function bar() { return 'bar'; }
-
-/**
 Sample math operations
 
 @module math
@@ -36,17 +29,4 @@ Returns the absolute value
 */
 function abs(a) {
     return a >= 0 ? a : -a;
-}
-
-/**
-@module utils/string
-*/
-
-/**
-Returns "foo"
-
-@method foo
-*/
-function foo() {
-    return 'foo';
 }

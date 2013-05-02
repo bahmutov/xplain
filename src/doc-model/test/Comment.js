@@ -1,11 +1,12 @@
 gt.module('docs to modules');
 
 var path = require('path');
-var getComments = require('../src/getTaggedComments');
-var Comment = require('../src/Comment');
+var getComments = require('../../getTaggedComments');
+var Comment = require('../Comment');
 
-var foo = path.join(__dirname, '../examples/basic/src/foo.js');
-var fooTests = path.join(__dirname, '../examples/basic/test/fooTests.js');
+var examples = path.join(__dirname, '../../../examples');
+var foo = path.join(examples, 'basic/src/foo.js');
+var fooTests = path.join(examples, 'basic/test/fooTests.js');
 
 gt.test('basics', function () {
     gt.arity(Comment, 1, 'expects single argument');
