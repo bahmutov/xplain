@@ -8,8 +8,8 @@ var glob = require('glob');
 var unary = require('allong.es').es.unary;
 var mkdirp = require('mkdirp');
 
-var toDoc = require('./src/toHtml');
-var rethrow = require('./src/errors').rethrow;
+var toDoc = require('./src/html-generation/toHtml');
+var rethrow = require('./src/utils/errors').rethrow;
 var getApi = require('./src/getTaggedComments');
 var docsToModules = require('./src/docsToModules');
 
