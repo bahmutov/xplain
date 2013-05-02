@@ -1,4 +1,4 @@
-var code = require('../src/code').reformat;
+var code = require('../code').reformat;
 
 gt.module('code.reformat');
 

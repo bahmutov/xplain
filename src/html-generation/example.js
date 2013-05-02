@@ -1,5 +1,5 @@
 var check = require('check-types');
-var reformat = require('../code').reformat;
+var reformat = require('../utils/code').reformat;
 var getName = require('../parser').getNameFromTest;
 var html = require('pithy');
 

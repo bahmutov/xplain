@@ -1,6 +1,6 @@
 var check = require('check-types');
 var parsers = require('./parsers');
-var reformat = require('./code').reformat;
+var reformat = require('./utils/code').reformat;
 check.verifyFunction(reformat, 'could not get code reformat');
 
 function parseAssertion(line) {

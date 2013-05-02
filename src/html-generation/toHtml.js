@@ -6,7 +6,7 @@ var moment = require('moment');
 var parseCode = require('../parser').parseCode;
 var parseUnitTestCode = require('../parserUnitTest').parseUnitTestCode;
 
-var reformat = require('../code').reformat;
+var reformat = require('../utils/code').reformat;
 var sampleDiv = require('./sample');
 var exampleDiv = require('./example');
 var rethrow = require('../utils/errors').rethrow;
