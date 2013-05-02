@@ -1,20 +1,25 @@
 var check = require('check-types');
-var parseCode = require('../parser').parseCode;
-var parseUnitTestCode = require('../parserUnitTest').parseUnitTestCode;
+// var parseCode = require('../parser').parseCode;
+// var parseUnitTestCode = require('../parserUnitTest').parseUnitTestCode;
+var transform = require('../doc-transform/toHumanForm');
 var html = require('pithy');
 
+/*
 function sampleToCommentLike(testCode) {
     check.verifyString(testCode, 'missing test code');
     var parsed = parseCode(testCode);
     check.verifyObject(parsed, 'could not parse\n' + testCode);
     return parsed;
 }
+*/
 
 var sampleDivId = 1;
-function sampleDiv(apiExample) {
+function sampleDiv(name, apiExample) {
+    check.verifyString(name, 'missing name');
     check.verifyObject(apiExample, 'missing documented');
     check.verifyObject(apiExample.comment, 'missing comment')
     // console.dir(apiExample);
+    /*
     var code = apiExample.comment.code;
     check.verifyString(code, 'missing code for sample');
     var parsed = sampleToCommentLike(code);
@@ -28,6 +33,8 @@ function sampleDiv(apiExample) {
         humanForm = parsed.code;
     }
     check.verifyString(humanForm, 'could not convert to human form', parsed.code);
+    */
+    var humanForm = transform(apiExample);
 
     var sampleElement = html.div({
         id: sampleDivId++,
@@ -35,7 +42,7 @@ function sampleDiv(apiExample) {
     }, [
         html.span({
             class: "sampleName"
-        }, parsed.name),
+        }, name),
         html.pre({
             class: "prettyprint linenums"
         }, [
