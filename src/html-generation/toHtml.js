@@ -9,7 +9,7 @@ var parseUnitTestCode = require('../parserUnitTest').parseUnitTestCode;
 var reformat = require('../code').reformat;
 var sampleDiv = require('./sample');
 var exampleDiv = require('./example');
-var rethrow = require('../errors').rethrow;
+var rethrow = require('../utils/errors').rethrow;
 var docsToModules = require('../docsToModules');
 var Documented = require('../Documented');
 
