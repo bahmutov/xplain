@@ -26,12 +26,8 @@ function exampleDiv(name, apiExample) {
         id: id + 'd',
         class: "example namedCode"
     }, [
-        html.span({
-            class: "sampleName"
-        }, exampleName),
-        html.pre({
-            class: "prettyprint linenums"
-        }, prettyCode)
+        html.span(".sampleName", exampleName),
+        html.pre(".prettyprint.linenums", prettyCode)
     ]);
 
     return {

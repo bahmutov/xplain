@@ -99,11 +99,15 @@ span.sampleName {
   margin-bottom: 0;
 }
 
+pre.prettyprinted {
+  padding: 4px 0px;
+}
+
 pre {
   /*margin-top: 0.3em;*/
   margin-top: 0;
   margin-bottom: 0;
-  padding: 3px 3px;
+  padding: 4px 0.5em;
   background-color: #fff;
   border-right: #bbb solid 1px;
   border-bottom: #bbb solid 1px;
