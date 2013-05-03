@@ -117,6 +117,13 @@ pre {
   padding-bottom: 3px;
 }
 
+.method > h3 > .tag {
+  font-weight: normal;
+  font-size: smaller;
+  font-family: monospace;
+  padding-left: 0.6em;
+}
+
 .methodCode {
   /*border-left: lightGray solid thick;*/
   /*padding-left: 5px;*/

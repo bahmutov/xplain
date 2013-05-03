@@ -84,7 +84,12 @@ function methodDiv(commented) {
 
     var codeElement = codeDiv(id, apiComment);
 
-    var nameElement = html.h3(null, name);
+    var nameParts = [name];
+    if (!apiComment.isPublic()) {
+        nameParts.push(html.span({ class: "tag" }, "private"));
+    }
+    nameParts.push(html.span({ class: "tag" }, "method"));
+    var nameElement = html.h3(null, nameParts);
 
     // console.log(apiComment.description.summary);
     var methodElement = html.div({
