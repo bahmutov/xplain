@@ -102,17 +102,18 @@ function methodDiv(commented) {
         .concat(codeElement)
     );
 
-    var description = name;
+    var description = '<strong>' + name + '</strong>';
     var summary = apiComment.description.summary;
     if (summary) {
         var maxLength = 30;
         if (summary.length > maxLength) {
             summary = summary.substr(0, maxLength) + '...';
         }
-        description += '\n\n' + summary;
+        description += '<br>' + summary;
     }
     var indexAttributes = {
         href: '#' + name,
+        class: 'tooltip',
         title: description
     };
     if (!apiComment.isPublic()) {

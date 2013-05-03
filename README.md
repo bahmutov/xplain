@@ -67,6 +67,7 @@ with white space.
 * [html](https://github.com/maxogden/commonjs-html-prettyprinter) is used to beautify the output HMTL (tabs and stuff).
 * [mkdirp](https://github.com/substack/node-mkdirp) simplified folder creation.
 * [fs.extra](https://npmjs.org/package/fs.extra) simplified usual file operations (file copy, move).
+* [tooltipster](http://calebjacob.com/tooltipster/) is used in the generated API page to display tooltips.
 
 ### Details
 Author: Gleb Bahmutov <gleb.bahmutov@gmail.com>
