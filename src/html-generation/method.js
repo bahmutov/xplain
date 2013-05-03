@@ -102,9 +102,14 @@ function methodDiv(commented) {
         .concat(codeElement)
     );
 
-    var indexElement = html.div(null, [
-        html.a({ href: '#' + name }, [name])
-    ]);
+    var indexAttributes = {
+        href: '#' + name
+    };
+    if (!apiComment.isPublic()) {
+        indexAttributes.class = 'private';
+    }
+    var indexParts = [html.a(indexAttributes, name)];
+    var indexElement = html.div(null, indexParts);
     return {
         name: indexElement,
         docs: methodElement
