@@ -1,7 +1,7 @@
 gt.module('parse unit test code');
 
 var _ = require('lodash');
-var parse = require('../src/parserUnitTest').parseUnitTestCode;
+var parse = require('../parserUnitTest').parseUnitTestCode;
 
 gt.test('calling functions', function () {
 	function foo() { return 'foo'; };
