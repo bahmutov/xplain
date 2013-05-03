@@ -109,7 +109,7 @@ function methodDiv(commented) {
         if (summary.length > maxLength) {
             summary = summary.substr(0, maxLength) + '...';
         }
-        description += '<br>' + summary;
+        description += summary;
     }
     var indexAttributes = {
         href: '#' + name,

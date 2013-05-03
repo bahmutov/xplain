@@ -1,4 +1,6 @@
 $(document).ready(function () {
     initToggle(".toggle");
-    $('.tooltip').tooltipster();
+    $('.tooltip').tooltipster({
+        theme: '.tooltip-theme'
+    });
 });
