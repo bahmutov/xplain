@@ -84,22 +84,43 @@ function methodDiv(commented) {
 
     var codeElement = codeDiv(id, apiComment);
 
-    console.log(apiComment.description.summary);
+    var nameParts = [name];
+    if (!apiComment.isPublic()) {
+        nameParts.push(html.span({ class: "tag" }, "private"));
+    }
+    nameParts.push(html.span({ class: "tag" }, "method"));
+    var nameElement = html.h3(null, nameParts);
+
+    // console.log(apiComment.description.summary);
     var methodElement = html.div({
         id: name,
         class: "method"
-    }, [html.h3(null, name), new html.SafeString(apiComment.description.summary)]
+    }, [nameElement, new html.SafeString(apiComment.description.summary)]
         .concat(samples)
         .concat(togglesElement)
         .concat(exampleElements)
         .concat(codeElement)
     );
 
-    var nameElement = html.div(null, [
-        html.a({ href: '#' + name }, [name])
-    ]);
+    var description = name;
+    var summary = apiComment.description.summary;
+    if (summary) {
+        var maxLength = 30;
+        if (summary.length > maxLength) {
+            summary = summary.substr(0, maxLength) + '...';
+        }
+        description += '\n\n' + summary;
+    }
+    var indexAttributes = {
+        href: '#' + name,
+        title: description
+    };
+    if (!apiComment.isPublic()) {
+    }
+    var indexParts = [html.a(indexAttributes, name)];
+    var indexElement = html.div(null, indexParts);
     return {
-        name: nameElement,
+        name: indexElement,
         docs: methodElement
     };
 }

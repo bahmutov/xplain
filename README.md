@@ -5,10 +5,39 @@ tests as code samples.
 
 ***This is still very early release, probably would not work right away for your needs.***
 
-## Usage
+### inputs
 
-    npm test // runs unit tests
-    npm run-script doc // runs unit tests and then generates api docs
+*src/add.js*
+
+    /** @method add */
+    function add(a, b) { return a + b; }
+
+*test/add.js*
+
+    /** @sample add */
+    QUnit.test('adds numbers', function () {
+        QUnit.equal(add(2, 3), 5);
+    });
+
+### usage
+
+    xplain -i src/add.js,test/add.js
+
+produces HTML documentation:
+
+**add**
+
+    add(2, 3); // 5
+
+See the generated [example api](http://bahmutov.github.io/xplain/)
+
+## Details
+
+Stop writing unmaintainable source samples inside the
+help comments using *@example* tag. Instead tag your unit tests with *@sample* or *@example* tag and they will be included in the generated API documentation.
+
+The test code will be intelligently transformed into human
+readable format. [QUnit](http://qunitjs.com/) and [gt](https://github.com/bahmutov/gt) test syntax is supported. If the code cannot be transformed, it will be displayed in its original form.
 
 ## Inspiration
 

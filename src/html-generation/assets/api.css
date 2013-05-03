@@ -40,7 +40,7 @@ body {
   /*bottom: 0;*/
 }
 
-.content #index a:link, a:visited {
+.content a:link, a:visited {
   color: #444;
   /* font-family: monospace; */
   font-family: Consolas, 'Courier New', monospace;
@@ -115,6 +115,13 @@ pre {
   border-bottom: 1px solid gray;
   /*padding-left: 5px;*/
   padding-bottom: 3px;
+}
+
+.method > h3 > .tag {
+  font-weight: normal;
+  font-size: smaller;
+  font-family: monospace;
+  padding-left: 0.6em;
 }
 
 .methodCode {
