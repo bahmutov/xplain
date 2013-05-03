@@ -84,22 +84,24 @@ function methodDiv(commented) {
 
     var codeElement = codeDiv(id, apiComment);
 
-    console.log(apiComment.description.summary);
+    var nameElement = html.h3(null, name);
+
+    // console.log(apiComment.description.summary);
     var methodElement = html.div({
         id: name,
         class: "method"
-    }, [html.h3(null, name), new html.SafeString(apiComment.description.summary)]
+    }, [nameElement, new html.SafeString(apiComment.description.summary)]
         .concat(samples)
         .concat(togglesElement)
         .concat(exampleElements)
         .concat(codeElement)
     );
 
-    var nameElement = html.div(null, [
+    var indexElement = html.div(null, [
         html.a({ href: '#' + name }, [name])
     ]);
     return {
-        name: nameElement,
+        name: indexElement,
         docs: methodElement
     };
 }
