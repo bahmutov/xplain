@@ -102,11 +102,20 @@ function methodDiv(commented) {
         .concat(codeElement)
     );
 
+    var description = name;
+    var summary = apiComment.description.summary;
+    if (summary) {
+        var maxLength = 30;
+        if (summary.length > maxLength) {
+            summary = summary.substr(0, maxLength) + '...';
+        }
+        description += '\n\n' + summary;
+    }
     var indexAttributes = {
-        href: '#' + name
+        href: '#' + name,
+        title: description
     };
     if (!apiComment.isPublic()) {
-        indexAttributes.class = 'private';
     }
     var indexParts = [html.a(indexAttributes, name)];
     var indexElement = html.div(null, indexParts);
