@@ -173,3 +173,17 @@ div .moduleName {
     right: 0;
   }
 }
+
+.tooltip-theme {
+  border-radius: 5px;
+  border: 1px solid #000;
+  background: #f9f9f9;
+  color: #333;
+}
+
+.tooltip-theme .tooltipster-content {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  line-height: 16px;
+  padding: 8px 10px;
+}
