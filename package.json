@@ -11,7 +11,8 @@
     "complexity": "jsc -p src/**/*.js",
     "example1": "node index.js -i examples/basic/src/*.js,examples/basic/test/*.js -o examples/basic/docs",
     "example2": "node index.js -i examples/submodules/*.js -o examples/submodules/docs",
-    "example3": "node index.js -i examples/add/*.js -o examples/add/docs"
+    "example3": "node index.js -i examples/add/*.js -o examples/add/docs",
+    "qunit": "node index.js -i examples/qunit/*.js -o examples/qunit/docs"
   },
   "repository": "",
   "keywords": [
