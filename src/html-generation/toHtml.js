@@ -59,12 +59,12 @@ function generateHeadElement (options) {
     	href: 'tooltipster.css'
 	});
 
-	var jqueryJs = html.script({
-		src: 'http://code.jquery.com/jquery-1.9.1.min.js'
-	});
 	var codePrettifyJs = html.script({
 		src: 'https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=desert'
 	});
+
+	var jqueryJs = copyAndIncludeScript('assets/jquery-2.0.0.min.js',
+		options.outputFolder);
 
 	var toggleJs = copyAndIncludeScript('assets/toggle.js',
 		options.outputFolder);
