@@ -73,20 +73,7 @@ function generateHeadElement (options) {
 	return headElement;
 }
 
-module.exports = function (rootModule, options) {
-	check.verifyObject(rootModule, 'could not convert docs to modules');
-	check.verifyObject(options, 'missing options');
-
-	// console.dir(rootModule);
-	check.verifyString(options.outputFolder, 'missing output folder in ' + JSON.stringify(options));
-	var htmlFilename = path.join(options.outputFolder, "index.html");
-	check.verifyString(htmlFilename, 'missing output filename');
-
-	console.log('generating docs', options.outputFolder);
-
-	options.title = options.title || 'API';
-	check.verifyString(options.title, 'missing title ' + options.title);
-
+function generateHtmlElement (rootModule, options) {
 	var headElement = generateHeadElement(options);
 
 	var apiVersion = options.apiVersion || '';
@@ -130,6 +117,25 @@ module.exports = function (rootModule, options) {
 
 	var body = html.body(null, [contentElement, toggleStart]);
 	var htmlElement = html.html(null, [headElement, body]);
+	return htmlElement;
+}
+
+module.exports = function (rootModule, options) {
+	check.verifyObject(rootModule, 'could not convert docs to modules');
+	check.verifyObject(options, 'missing options');
+
+	// console.dir(rootModule);
+	check.verifyString(options.outputFolder, 'missing output folder in ' + JSON.stringify(options));
+	var htmlFilename = path.join(options.outputFolder, "index.html");
+	check.verifyString(htmlFilename, 'missing output filename');
+
+	console.log('generating docs', options.outputFolder);
+
+	options.title = options.title || 'API';
+	check.verifyString(options.title, 'missing title ' + options.title);
+
+	var htmlElement = generateHtmlElement(rootModule, options);
+	console.assert(htmlElement, 'could not get html');
 
 	var o = '<!DOCTYPE HTML>\n';
 	o += pretty(htmlElement.toString(), prettyOptions);
