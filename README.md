@@ -44,6 +44,7 @@ readable format. [QUnit](http://qunitjs.com/) and [gt](https://github.com/bahmut
 There are several API examples that I found particularly useful.
 
 * [lo-dash API](http://lodash.com/docs) is beautiful and extremely easy to use.
+* [tooltipster](http://calebjacob.com/tooltipster/) gently introduces its features from basic use to more advanced.
 
 ## Small print
 
