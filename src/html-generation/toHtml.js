@@ -50,6 +50,15 @@ function generateHeadElement (options) {
     	href: 'api.css'
 	});
 
+	fs.copy(path.join(__dirname, 'assets/tooltipster.css'),
+		path.join(options.outputFolder, 'tooltipster.css'),
+		rethrow);
+
+	var tooltipCss = html.link({
+    	rel: 'stylesheet',
+    	href: 'tooltipster.css'
+	});
+
 	var jqueryJs = html.script({
 		src: 'http://code.jquery.com/jquery-1.9.1.min.js'
 	});
@@ -60,12 +69,17 @@ function generateHeadElement (options) {
 	var toggleJs = copyAndIncludeScript('assets/toggle.js',
 		options.outputFolder);
 
+	var tooltipJs = copyAndIncludeScript('assets/jquery.tooltipster.min.js',
+		options.outputFolder);
+
 	var headElement = html.head(null, [
 		titleElement,
 		apiCss,
+		tooltipCss,
 		jqueryJs,
 		codePrettifyJs,
-		toggleJs
+		toggleJs,
+		tooltipJs
 		]);
 
 	return headElement;
@@ -110,10 +124,10 @@ function generateHtmlElement (rootModule, options) {
 		class: 'content'
 	}, [indexElement, docsElement]);
 
-	var toggleStart = copyAndIncludeScript('assets/toggleStart.js',
+	var onDocStart = copyAndIncludeScript('assets/onDocStart.js',
 		options.outputFolder);
 
-	var body = html.body(null, [contentElement, toggleStart]);
+	var body = html.body(null, [contentElement, onDocStart]);
 	var htmlElement = html.html(null, [headElement, body]);
 	return htmlElement;
 }

@@ -44,6 +44,7 @@ readable format. [QUnit](http://qunitjs.com/) and [gt](https://github.com/bahmut
 There are several API examples that I found particularly useful.
 
 * [lo-dash API](http://lodash.com/docs) is beautiful and extremely easy to use.
+* [tooltipster](http://calebjacob.com/tooltipster/) gently introduces its features from basic use to more advanced.
 
 ## Small print
 
@@ -67,6 +68,7 @@ with white space.
 * [html](https://github.com/maxogden/commonjs-html-prettyprinter) is used to beautify the output HMTL (tabs and stuff).
 * [mkdirp](https://github.com/substack/node-mkdirp) simplified folder creation.
 * [fs.extra](https://npmjs.org/package/fs.extra) simplified usual file operations (file copy, move).
+* [tooltipster](http://calebjacob.com/tooltipster/) is used in the generated API page to display tooltips.
 
 ### Details
 Author: Gleb Bahmutov <gleb.bahmutov@gmail.com>
