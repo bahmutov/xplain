@@ -176,10 +176,3 @@ function docModule(aModule, doc) {
 		docModule(value, doc);
 	});
 }
-
-function fileContents(name) {
-	check.verifyString(name, 'missing file name');
-	var cssFilename = path.join(__dirname, name);
-	var cssText = fs.readFileSync(cssFilename, 'utf8');
-	return cssText;
-}
