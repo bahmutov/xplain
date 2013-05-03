@@ -9,7 +9,11 @@ tests as code samples.
 
 *src/add.js*
 
-    /** @method add */
+    /**
+        Adds two numbers
+
+        @method add
+    */
     function add(a, b) { return a + b; }
 
 *test/add.js*
@@ -26,6 +30,7 @@ tests as code samples.
 produces HTML documentation:
 
 **add**
+    Adds two numbers
 
     add(2, 3); // 5
 
@@ -38,6 +43,15 @@ help comments using *@example* tag. Instead tag your unit tests with *@sample* o
 
 The test code will be intelligently transformed into human
 readable format. [QUnit](http://qunitjs.com/) and [gt](https://github.com/bahmutov/gt) test syntax is supported. If the code cannot be transformed, it will be displayed in its original form.
+
+### Multiple documentation levels
+
+There are 4 levels of details captured in the API.
+
+1. Method description from jsdoc comments
+2. Sample source code transformed from the unit tests and displayed under the method
+3. Unit test source code tagged *@example* can be displayed by clicking on the toggle
+4. Finally the original function source code can be shown by clicking on the *source* button.
 
 ## Inspiration
 
