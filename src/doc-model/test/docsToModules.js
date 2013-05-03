@@ -1,6 +1,6 @@
 gt.module('docs to modules');
 
-var getComments = require('../../getTaggedComments');
+var getComments = require('../../extract-jsdocs/getTaggedComments');
 var d2m = require('../docsToModules');
 var path = require('path');
 

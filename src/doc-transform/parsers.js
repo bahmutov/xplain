@@ -1,5 +1,5 @@
 var check = require('check-types');
-var code = require('./code');
+var code = require('../utils/code');
 
 function parseEqualArguments(equal) {
     check.verifyString(equal, 'equal is not a string');

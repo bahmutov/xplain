@@ -1,6 +1,6 @@
 var check = require('check-types');
-var reformat = require('../code').reformat;
-var getName = require('../parser').getNameFromTest;
+var reformat = require('../utils/code').reformat;
+var getName = require('../doc-transform/parser').getNameFromTest;
 var html = require('pithy');
 
 var exampleDivId = 0;

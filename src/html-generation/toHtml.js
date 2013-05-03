@@ -3,10 +3,7 @@ var path = require('path');
 var check = require('check-types');
 var moment = require('moment');
 
-var parseCode = require('../parser').parseCode;
-var parseUnitTestCode = require('../parserUnitTest').parseUnitTestCode;
-
-var reformat = require('../code').reformat;
+var reformat = require('../utils/code').reformat;
 var sampleDiv = require('./sample');
 var exampleDiv = require('./example');
 var rethrow = require('../utils/errors').rethrow;
@@ -184,9 +181,12 @@ function examplesToHtml(name, apiExamples) {
 	return examples;
 }
 
-function samplesToHtml(apiSamples) {
+function samplesToHtml(name, apiSamples) {
+	check.verifyString(name, 'missing name');
 	check.verifyArray(apiSamples, 'missing api samples');
-	var samples = apiSamples.map(sampleDiv);
+	var samples = apiSamples.map(function (example) {
+		return sampleDiv(name, example);
+	});
 	return samples;
 }
 
@@ -225,7 +225,7 @@ function methodDiv(commented) {
 	var toggles = [];
 	var exampleElements = [];
 
-	var samples = samplesToHtml(commented.sample);
+	var samples = samplesToHtml(name, commented.sample);
 	var examples = examplesToHtml(name, commented.example);
 
 	check.verifyArray(samples, 'could not get examples tags');

@@ -1,7 +1,7 @@
 gt.module('test code parsing');
 
-var parseCode = require('../src/parser').parseCode;
-var parseName = require('../src/parser').parseName;
+var parseCode = require('../parser').parseCode;
+var parseName = require('../parser').parseName;
 
 gt.test('no name', function () {
 	gt.null(parseName(''));

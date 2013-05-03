@@ -1,7 +1,7 @@
 gt.module('docs to modules');
 
 var path = require('path');
-var getComments = require('../../getTaggedComments');
+var getComments = require('../getTaggedComments');
 var Comment = require('../Comment');
 
 var examples = path.join(__dirname, '../../../examples');

@@ -1,6 +1,5 @@
 var check = require('check-types');
 var Documented = require('./Documented');
-var Comment = require('./Comment');
 
 var prevFilename = null;
 var rootModule = {};
@@ -23,7 +22,7 @@ function primaryParsing(collectedDocs) {
     check.verifyArray(collectedDocs, 'need collected docs');
 
     collectedDocs.forEach(function (apiComment) {
-        console.assert(apiComment instanceof Comment, 'need wrapped Comment');
+        console.assert(apiComment, 'need comment as input');
         check.verifyString(apiComment.filename, 'missing filename');
         if (apiComment.filename !== prevFilename) {
             prevFilename = apiComment.filename;
@@ -58,7 +57,6 @@ function secondaryParsing(collectedDocs) {
     check.verifyObject(rootModule, 'missing root module');
 
     collectedDocs.forEach(function (apiComment) {
-        console.assert(apiComment instanceof Comment, 'need wrapped Comment');
         check.verifyString(apiComment.filename, 'missing filename');
         if (apiComment.filename !== prevFilename) {
             prevFilename = apiComment.filename;

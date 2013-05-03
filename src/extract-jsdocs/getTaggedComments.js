@@ -1,7 +1,7 @@
 var check = require('check-types');
 var fs = require('fs.extra');
 var dox = require('dox');
-var Comment = require('./doc-model/Comment');
+var Comment = require('./Comment');
 
 function getTaggedComments(inputFiles) {
     check.verifyArray(inputFiles, 'missing input filenames');
