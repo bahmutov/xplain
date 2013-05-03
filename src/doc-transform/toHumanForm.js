@@ -1,5 +1,5 @@
 var check = require('check-types');
-var parseCode = require('../parser').parseCode;
+var parseCode = require('./parser').parseCode;
 var parseUnitTestCode = require('../parserUnitTest').parseUnitTestCode;
 
 function sampleToCommentLike(testCode) {
