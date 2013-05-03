@@ -158,7 +158,9 @@ function docModule(aModule, doc) {
 		}
 		Object.keys(methods).forEach(function (name) {
 			var method = methods[name];
-			// console.log('documenting method', method);
+			console.log('documenting method');
+			console.dir(method.comment);
+
 			var info = methodDiv(method);
 			doc.index.push(info.name);
 			doc.docs.push(info.docs);

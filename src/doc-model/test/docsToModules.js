@@ -22,7 +22,7 @@ gt.test('basic example', function () {
     var files = [foo];
     var comments = getComments(files);
     gt.array(comments, 'expected array back');
-    gt.equal(comments.length, 1, 'single comment');
+    gt.equal(comments.length, 2, 'number of comments');
     var c = comments[0];
     gt.array(c.tags, 'has tags');
     gt.object(c.description, 'has description');
@@ -34,7 +34,7 @@ gt.test('basic example', function () {
     // console.dir(root);
     gt.undefined(root.name, 'root module has no name');
     gt.object(root.methodDocs, 'root module has method docs');
-    gt.equal(Object.keys(root.methodDocs).length, 1, 'single method');
+    gt.equal(Object.keys(root.methodDocs).length, 2, 'methods');
 });
 
 gt.test('empty modules tree', function () {

@@ -15,7 +15,7 @@ Comment.prototype.isTagged = function (tag) {
         check.verifyString(t.type, 'missing type for ' + JSON.stringify(t));
         return t.type === tag;
     });
-}
+};
 
 Comment.prototype.tagValue = function (tag) {
     check.verifyString(tag, 'missing tag string');
@@ -33,21 +33,25 @@ Comment.prototype.tagValue = function (tag) {
         }
     });
     return value;
-}
+};
 
-Comment.prototype.isModule = function (apiComment) {
+Comment.prototype.isPublic = function () {
+    return this.isTagged('private') === false;
+};
+
+Comment.prototype.isModule = function () {
     return this.isTagged('module');
 };
 
-Comment.prototype.isMethod = function (apiComment) {
+Comment.prototype.isMethod = function () {
     return this.isTagged('method');
 };
 
-Comment.prototype.isExample = function(name) {
+Comment.prototype.isExample = function() {
     return this.isTagged('example') || this.isTagged('exampleFor');
 };
 
-Comment.prototype.isSample = function (name) {
+Comment.prototype.isSample = function () {
     return this.isTagged('sample') || this.isTagged('sampleFor');
 };
 
