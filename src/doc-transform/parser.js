@@ -12,7 +12,7 @@ function parseName(code) {
 }
 
 function parseCode(code) {
-	check.verifyString(code, 'missing code');
+	check.verifyString(code, 'missing code, have ' + code);
 	var reg = /(?:gt|QUnit)\.test\(([\W\w]+),\s*function\s*\(\)\s*\{([\W\w]*)}\s*\)/;
 
 	var matched = reg.exec(code);

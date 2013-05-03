@@ -194,11 +194,10 @@ function examplesToHtml(name, apiExamples) {
 	return examples;
 }
 
-function samplesToHtml(name, apiSamples) {
-	check.verifyString(name, 'missing name');
+function samplesToHtml(apiSamples) {
 	check.verifyArray(apiSamples, 'missing api samples');
 	var samples = apiSamples.map(function (example) {
-		return sampleDiv(name, example);
+		return sampleDiv(example);
 	});
 	return samples;
 }
@@ -238,7 +237,7 @@ function methodDiv(commented) {
 	var toggles = [];
 	var exampleElements = [];
 
-	var samples = samplesToHtml(name, commented.sample);
+	var samples = samplesToHtml(commented.sample);
 	var examples = examplesToHtml(name, commented.example);
 
 	check.verifyArray(samples, 'could not get examples tags');
