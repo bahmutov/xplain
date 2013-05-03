@@ -18,12 +18,8 @@ function sampleDiv(apiExample) {
         id: sampleDivId++,
         class: "sample namedCode"
     }, [
-        html.span({
-            class: "sampleName"
-        }, name),
-        html.pre({
-            class: "prettyprint linenums"
-        }, [
+        html.span(".sampleName", name),
+        html.pre(".prettyprint.linenums", [
             html.code(null, humanForm)
         ])
     ]);

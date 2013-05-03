@@ -60,7 +60,9 @@ function generateHeadElement (options) {
 	});
 
 	var codePrettifyJs = html.script({
-		src: 'https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=desert'
+		src: 'https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=desert',
+		async: 'async',
+		defer: 'defer'
 	});
 
 	var jqueryJs = copyAndIncludeScript('assets/jquery-2.0.0.min.js',
@@ -96,12 +98,8 @@ function generateHtmlElement (rootModule, options) {
 	};
 	docModule(rootModule, doc);
 
-	var indexElement = html.div({
-		id: 'index'
-	}, [
-		html.h1({
-			id: 'mainTitle'
-		}, [
+	var indexElement = html.div('#index', [
+		html.h1('#mainTitle', [
 			options.title,
 			html.sub(null, [apiVersion])
 		])
@@ -111,18 +109,14 @@ function generateHtmlElement (rootModule, options) {
 	var repoHref = html.a({
 		href: repoUrl
 	}, 'xplained');
-	var signature = html.span({	class: "timestamp" }, [
+	var signature = html.span(".timestamp", [
 		repoHref,
 		' on ' + moment().local().format('dddd, MMMM Do YYYY, h:mm:ss a')
 	]);
 
-	var docsElement = html.div({
-		id: 'docs'
-	}, doc.docs.concat(signature));
+	var docsElement = html.div('#docs', doc.docs.concat(signature));
 
-	var contentElement = html.div({
-		class: 'content'
-	}, [indexElement, docsElement]);
+	var contentElement = html.div('.content', [indexElement, docsElement]);
 
 	var onDocStart = copyAndIncludeScript('assets/onDocStart.js',
 		options.outputFolder);
@@ -164,9 +158,7 @@ function docModule(aModule, doc) {
 	if (methods) {
 		if (aModule.name) {
 			check.verifyString(aModule.name, 'missing module name');
-			doc.index.push(html.div({
-				class: "moduleName"
-			}, [aModule.name]));
+			doc.index.push(html.div(".moduleName", [aModule.name]));
 		}
 		Object.keys(methods).forEach(function (name) {
 			var method = methods[name];
