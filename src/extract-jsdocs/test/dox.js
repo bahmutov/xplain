@@ -1,9 +1,13 @@
 var dox = require('dox');
+var preprocess = require('../preprocess');
+var postTags = require('../postprocess').tags;
 
 gt.module('dox sanity checks');
 
 gt.test('dox basics', function () {
-	gt.func(dox.parseTags, 'parseTags is a function');
+	gt.func(dox.parseComments, 'parseComments is a function');
+	gt.func(preprocess, 'preprocess is a function');
+	gt.func(postTags, 'postprocess tags is a function');
 });
 
 gt.test('parse tags', function () {
@@ -14,13 +18,33 @@ gt.test('parse tags', function () {
 	'@param {Number} a',
 	'*/'
 	].join('\n');
-	var tags = dox.parseTags(comment);
-	gt.array(tags, 'returned tags array');
+
+	var clean = preprocess(comment);
+	var comments = dox.parseComments(clean);
+	gt.array(comments, 'returned comments array');
+	gt.equal(comments.length, 1, 'single comment');
+
+	var c = comments[0];
+	var tags = c.tags;
+	// console.dir(tags);
+	gt.array(tags, 'has tags array');
 	gt.equal(tags.length, 3, '3 tags');
 });
 
-gt.skip('parse tags mixed white space', function () {
-	gt.func(dox.parseTags, 'parseTags is a function');
+gt.test('single line comment', function () {
+	var comment = '/** brief description\n@module a\n   @class myClass\n    @param {Number} a */';
+	var clean = preprocess(comment);
+	var comments = dox.parseComments(clean, {raw: true});
+	// console.dir(comments);
+
+	gt.array(comments, 'returned comments array');
+	gt.equal(comments.length, 1, 'single comment');
+	var tags = comments[0].tags;
+	gt.array(tags, 'returned tags array');
+	// console.dir(tags);
+});
+
+gt.test('parse tags mixed white space', function () {
 	var comment = ['/**',
 	'brief description',
 	'\t@module a',
@@ -28,16 +52,28 @@ gt.skip('parse tags mixed white space', function () {
 	'    @param {Number} a',
 	'*/'
 	].join('\n');
-	var tags = dox.parseTags(comment);
+
+	// console.log(comment);
+	var clean = preprocess(comment);
+	var comments = dox.parseComments(clean);
+	// console.dir(comments);
+
+	gt.array(comments, 'returned comments array');
+	gt.equal(comments.length, 1, 'single comment');
+	var tags = comments[0].tags;
+	// console.log(tags);
 	gt.array(tags, 'returned tags array');
 	gt.equal(tags.length, 3, '3 tags');
 });
 
-gt.skip('param at start', function () {
+gt.test('param at start', function () {
 	var comment = '/** \n@param {Number} a \n*/';
-	var parsed = dox.parseComment(comment);
+	var clean = preprocess(comment);
+	console.log(clean);
+	var parsed = dox.parseComment(clean);
 	gt.object(parsed, 'parsed comment');
-	// console.log(parsed);
+
+	console.dir(parsed);
 	gt.array(parsed.tags, 'have tags array');
 	gt.equal(parsed.tags.length, 1, 'one param');
 	var a = parsed.tags['0'];

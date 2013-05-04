@@ -3,6 +3,20 @@ var fs = require('fs.extra');
 var dox = require('dox');
 var Comment = require('./Comment');
 
+function getComments(source) {
+    check.verifyString(source, 'missing source string ' + source);
+
+    var parsingOptions = {
+        raw: false
+    };
+    var comments = dox.parseComments(source, parsingOptions);
+    if (!check.isArray(comments)) {
+        console.log('could not extract comments from source');
+        comments = [];
+    }
+    return comments;
+}
+
 function getTaggedComments(inputFiles) {
     check.verifyArray(inputFiles, 'missing input filenames');
 
@@ -20,18 +34,16 @@ function getFileApi(filename) {
     var contents = fs.readFileSync(filename, 'utf-8');
     check.verifyString(contents, 'could not load contents of', filename);
 
-    var parsingOptions = {
-        raw: false
-    };
-    var tags = dox.parseComments(contents, parsingOptions);
-    check.verifyArray(tags, 'could not get tags array from', filename);
-    tags = tags.map(function (tag) {
-        tag.filename = filename;
-        return tag;
+    // var tags = dox.parseComments(contents, parsingOptions);
+    var raw = getComments(content);
+    check.verifyArray(raw, 'could not get tags array from ' + filename);
+    raw = raw.map(function (aComment) {
+        aComment.filename = filename;
+        return aComment;
     });
 
-    var comments = tags.map(function (tag) {
-        return new Comment(tag);
+    var comments = raw.map(function (rawComment) {
+        return new Comment(rawComment);
     });
     return comments;
 }
