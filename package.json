@@ -40,6 +40,6 @@
     "fs.extra": "~1.2.0"
   },
   "devDependencies": {
-    "gt": ">0.8.2"
+    "gt": "~0.8.3"
   }
 }
