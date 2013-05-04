@@ -10,7 +10,7 @@ function getComments(source) {
     var cleaned = preprocess(source);
 
     var parsingOptions = {
-        raw: true
+        raw: false
     };
     // console.log(cleaned);
     var comments = dox.parseComments(cleaned, parsingOptions);
