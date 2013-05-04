@@ -21,7 +21,7 @@ function transform(documented) {
     check.verifyString(parsed.code, 'there is no code for', code);
 
     var humanForm = parseUnitTestCode(parsed.code);
-    // console.log('human form', humanForm);
+    // console.log('human form\n', humanForm);
     if (!check.isString(humanForm)) {
         console.log('could not convert', parsed.code, 'to human form');
         humanForm = parsed.code;

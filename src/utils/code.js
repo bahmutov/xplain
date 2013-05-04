@@ -39,7 +39,12 @@ function reformat(code, keepComments) {
 	keepComments = !!keepComments;
 
 	if (keepComments) {
-		return beautify(code, { indent_size: 2 });
+		// https://npmjs.org/package/js-beautify
+		var opts = {
+			indent_size: 2,
+			keep_array_indentation: true
+		};
+		return beautify(code, opts);
 	} else {
 		var tree = esprima.parse(code, {
 			range: true,
