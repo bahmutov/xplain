@@ -2,18 +2,22 @@ var check = require('check-types');
 var fs = require('fs.extra');
 var dox = require('dox');
 var Comment = require('./Comment');
+var preprocess = require('./preprocess');
+var postprocess = require('./postprocess').comments;
 
 function getComments(source) {
     check.verifyString(source, 'missing source string ' + source);
+    var cleaned = preprocess(source);
 
     var parsingOptions = {
         raw: false
     };
-    var comments = dox.parseComments(source, parsingOptions);
+    var comments = dox.parseComments(cleaned, parsingOptions);
     if (!check.isArray(comments)) {
         console.log('could not extract comments from source');
         comments = [];
     }
+    comments = postprocess(comments);
     return comments;
 }
 
@@ -35,7 +39,7 @@ function getFileApi(filename) {
     check.verifyString(contents, 'could not load contents of', filename);
 
     // var tags = dox.parseComments(contents, parsingOptions);
-    var raw = getComments(content);
+    var raw = getComments(contents);
     check.verifyArray(raw, 'could not get tags array from ' + filename);
     raw = raw.map(function (aComment) {
         aComment.filename = filename;

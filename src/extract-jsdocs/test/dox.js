@@ -69,34 +69,37 @@ gt.test('parse tags mixed white space', function () {
 gt.test('param at start', function () {
 	var comment = '/** \n@param {Number} a \n*/';
 	var clean = preprocess(comment);
-	console.log(clean);
+	// console.log(clean);
 	var parsed = dox.parseComment(clean);
 	gt.object(parsed, 'parsed comment');
 
-	console.dir(parsed);
-	gt.array(parsed.tags, 'have tags array');
-	gt.equal(parsed.tags.length, 1, 'one param');
-	var a = parsed.tags['0'];
+	// console.dir(parsed);
+	var tags = postTags(parsed.tags);
+	gt.array(tags, 'have tags array');
+	gt.equal(tags.length, 1, 'one param');
+	var a = tags['0'];
 	gt.object(a, 'first parsed param');
 	gt.equal(a.type, 'param', 'this is a param');
 	gt.equal(a.name, 'a', 'correct name');
 });
 
-gt.skip('param not at start', function () {
+gt.test('param not at start', function () {
 	var comment = '/** \n @param {String} a \n*/';
-	var parsed = dox.parseComment(comment);
+	var clean = preprocess(comment);
+	var parsed = dox.parseComment(clean);
 	gt.object(parsed, 'parsed comment');
-	// console.log(parsed);
+	// console.dir(parsed);
 
-	gt.array(parsed.tags, 'have tags array');
-	gt.equal(parsed.tags.length, 1, 'one param');
+	var tags = postTags(parsed.tags);
+	gt.array(tags, 'have tags array');
+	gt.equal(tags.length, 1, 'one param');
 	var a = parsed.tags['0'];
 	gt.object(a, 'first parsed param');
 	gt.equal(a.type, 'param', 'this is a param');
 	gt.equal(a.name, 'a', 'correct name');
 });
 
-gt.skip('sample comment', function () {
+gt.test('sample comment', function () {
 	gt.func(dox.parseComment, 'parseComment is a function');
 	var comment = '/**\n\
 	short summary\n\
@@ -105,7 +108,8 @@ gt.skip('sample comment', function () {
 	*/';
 	var at = comment.indexOf('@');
 	gt.ok(at > 0, 'found @ character');
-	var parsed = dox.parseComment(comment);
+	var clean = preprocess(comment);
+	var parsed = dox.parseComment(clean);
 	gt.object(parsed, 'could parse comment', comment);
 	// console.log(parsed);
 });
