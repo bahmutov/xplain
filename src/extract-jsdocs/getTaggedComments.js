@@ -20,7 +20,10 @@ function getFileApi(filename) {
     var contents = fs.readFileSync(filename, 'utf-8');
     check.verifyString(contents, 'could not load contents of', filename);
 
-    var tags = dox.parseComments(contents);
+    var parsingOptions = {
+        raw: false
+    };
+    var tags = dox.parseComments(contents, parsingOptions);
     check.verifyArray(tags, 'could not get tags array from', filename);
     tags = tags.map(function (tag) {
         tag.filename = filename;

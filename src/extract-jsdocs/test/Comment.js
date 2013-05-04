@@ -52,7 +52,7 @@ gt.test('bar method in basic example', function () {
     gt.ok(!C.isPublic(), 'method is private');
 });
 
-gt.test('sample and example', function () {
+gt.test('@sample', function () {
     var files = [fooTests];
     var comments = getComments(files);
     gt.array(comments, 'expected array back');
@@ -62,9 +62,16 @@ gt.test('sample and example', function () {
     gt.array(C.tags, 'has tags');
     gt.ok(C.isSample(), 'comment is a sample');
     gt.equal(C.sampleFor(), 'foo', 'foo is target');
+});
 
-    c = comments[1];
-    C = new Comment(c);
+gt.test('@example', function () {
+    var files = [fooTests];
+    var comments = getComments(files);
+    gt.array(comments, 'expected array back');
+    gt.equal(comments.length, 2, 'two comments');
+
+    var c = comments[1];
+    var C = new Comment(c);
     gt.array(C.tags, 'has tags');
     gt.ok(C.isExample(), 'comment is an example');
     gt.equal(C.exampleFor(), 'foo', 'foo is target');

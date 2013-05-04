@@ -2,28 +2,11 @@ var dox = require('dox');
 
 gt.module('dox sanity checks');
 
-gt.test('~ integers', function () {
-	gt.equal(~0, -1, '~0 = -1');
-	gt.equal(~1, -2, '~1 = -2');
-	gt.equal(~2, -3, '~2 = -3');
-	// ~-1 is special: it is 0
-	gt.equal(~-1, 0, '~-1 = 0');
-	gt.equal(~-2, 1, '~-2 = 1');
-	gt.equal(~-3, 2, '~-3 = 2');
-});
-
-gt.test('~ tilde tests', function () {
-	gt.equal('some@etc'.indexOf('@'), 4, 'middle');
-	gt.equal(~'some@etc'.indexOf('@'), -5, '~middle');
-	gt.equal('@etc'.indexOf('@'), 0, 'start');
-	gt.equal(~'@etc'.indexOf('@'), -1, '~start');
-	gt.ok(~'@etc'.indexOf('@'), '~zero index in true');
-	gt.ok(~0, '~0 is true');
-	gt.ok(~-1 == false, '~-1 is false');
+gt.test('dox basics', function () {
+	gt.func(dox.parseTags, 'parseTags is a function');
 });
 
 gt.test('parse tags', function () {
-	gt.func(dox.parseTags, 'parseTags is a function');
 	var comment = ['/**',
 	'brief description',
 	'@module a',
@@ -36,7 +19,7 @@ gt.test('parse tags', function () {
 	gt.equal(tags.length, 3, '3 tags');
 });
 
-gt.test('parse tags mixed white space', function () {
+gt.skip('parse tags mixed white space', function () {
 	gt.func(dox.parseTags, 'parseTags is a function');
 	var comment = ['/**',
 	'brief description',
@@ -50,7 +33,7 @@ gt.test('parse tags mixed white space', function () {
 	gt.equal(tags.length, 3, '3 tags');
 });
 
-gt.test('param at start', function () {
+gt.skip('param at start', function () {
 	var comment = '/** \n@param {Number} a \n*/';
 	var parsed = dox.parseComment(comment);
 	gt.object(parsed, 'parsed comment');
@@ -63,7 +46,7 @@ gt.test('param at start', function () {
 	gt.equal(a.name, 'a', 'correct name');
 });
 
-gt.test('param not at start', function () {
+gt.skip('param not at start', function () {
 	var comment = '/** \n @param {String} a \n*/';
 	var parsed = dox.parseComment(comment);
 	gt.object(parsed, 'parsed comment');
@@ -77,7 +60,7 @@ gt.test('param not at start', function () {
 	gt.equal(a.name, 'a', 'correct name');
 });
 
-gt.test('sample comment', function () {
+gt.skip('sample comment', function () {
 	gt.func(dox.parseComment, 'parseComment is a function');
 	var comment = '/**\n\
 	short summary\n\
