@@ -75,6 +75,21 @@ module.exports.parseEqual = function (line) {
     return parsed.op + '; // ' + parsed.expected;
 }
 
+module.exports.parseArrayEqual = function (line) {
+    var isEqualReg = /(?:gt|QUnit)\.aequal\(([\W\w]+)\);/;
+    if (!isEqualReg.test(line)) {
+        return null;
+    }
+    var matches = isEqualReg.exec(line);
+    // console.log('matches', matches);
+    var equalArguments = matches[1];
+    check.verifyString(equalArguments, 'invalid array equal arguments');
+    var parsed = parseEqualArguments(equalArguments);
+    check.verifyObject(parsed, 'did not get parsed arguments');
+    // console.log('array expression', parsed.op);
+    return parsed.op + '; // ' + parsed.expected;
+}
+
 module.exports.parseNumber = function (line) {
     var reg = /(?:gt|QUnit)\.number\(([\W\w]+)\);/;
     if (!reg.test(line)) {
