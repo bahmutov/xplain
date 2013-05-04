@@ -10,13 +10,15 @@ function getComments(source) {
     var cleaned = preprocess(source);
 
     var parsingOptions = {
-        raw: false
+        raw: true
     };
+    // console.log(cleaned);
     var comments = dox.parseComments(cleaned, parsingOptions);
     if (!check.isArray(comments)) {
         console.log('could not extract comments from source');
         comments = [];
     }
+    // console.dir(comments);
     comments = postprocess(comments);
     return comments;
 }

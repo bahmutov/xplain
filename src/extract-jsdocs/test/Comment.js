@@ -20,7 +20,8 @@ gt.test('foo method in basic example', function () {
     var c = comments[0];
     var C = new Comment(c);
     // console.dir(C);
-    gt.array(C.tags, 'has tags');
+    gt.array(C.tags, 'has tags array');
+    gt.ok(C.hasTags(), 'has some tags');
     gt.object(C.description, 'has description');
     gt.string(C.filename, 'has filename');
 
@@ -57,9 +58,11 @@ gt.test('@sample', function () {
     var comments = getComments(files);
     gt.array(comments, 'expected array back');
     gt.equal(comments.length, 2, 'two comments');
+    // console.dir(comments);
     var c = comments[0];
     var C = new Comment(c);
-    gt.array(C.tags, 'has tags');
+    gt.array(C.tags, 'has tags array');
+    gt.ok(C.hasTags(), 'comment has some tags');
     gt.ok(C.isSample(), 'comment is a sample');
     gt.equal(C.sampleFor(), 'foo', 'foo is target');
 });
@@ -73,6 +76,7 @@ gt.test('@example', function () {
     var c = comments[1];
     var C = new Comment(c);
     gt.array(C.tags, 'has tags');
+    gt.ok(C.hasTags(), 'comment has some tags');
     gt.ok(C.isExample(), 'comment is an example');
     gt.equal(C.exampleFor(), 'foo', 'foo is target');
 });

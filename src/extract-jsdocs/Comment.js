@@ -6,6 +6,10 @@ function Comment(apiComment) {
     _.assign(this, apiComment);
 }
 
+Comment.prototype.hasTags = function () {
+    return this.tags.length > 0;
+};
+
 Comment.prototype.isTagged = function (tag) {
     check.verifyString(tag, 'missing tag string');
     if (!Array.isArray(this.tags)) {
