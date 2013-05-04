@@ -15,7 +15,7 @@ var options = {
 		"hexadecimal": false,
 		"quotes"     : "single",
 		"escapeless" : false,
-		"compact"    : false,
+		"compact"    : true,
 		"parentheses": true,
 		"semicolons" : true
 	},

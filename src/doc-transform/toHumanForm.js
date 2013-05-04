@@ -15,6 +15,7 @@ function transform(documented) {
 
     var code = documented.comment.code;
     check.verifyString(code, 'missing code for sample');
+
     var parsed = sampleToCommentLike(code);
     check.verifyObject(parsed, 'did not get sample from', code);
     check.verifyString(parsed.name, 'there is no name for', code);
