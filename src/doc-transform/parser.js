@@ -51,6 +51,27 @@ function parseAnonymousCode(code) {
 	return parsed;
 }
 
+function parseImmediateFunction(code) {
+	console.log('parsing immediate function');
+	check.verifyString(code, 'missing code, have ' + code);
+	var reg = /\(\s*function\s*\(\s*\)\s*\{([\W\w]*)}\s*(?:\)\s*\(\s*\)|\(\s*\)\s*\))/;
+
+	var matched = reg.exec(code);
+	console.log('from code\n', code);
+	console.log('matched\n', matched);
+	if (!Array.isArray(matched)) {
+		return null;
+	}
+	if (!check.isString(matched[1])) {
+		return null;
+	}
+
+	var parsed = {
+		code: matched[1].trim()
+	}
+	return parsed;
+}
+
 function parseCode(code) {
 	check.verifyString(code, 'missing code, have ' + code);
 	var parsed = parseNamedCode(code);
@@ -58,11 +79,16 @@ function parseCode(code) {
 		return parsed;
 	}
 
-	return parseAnonymousCode(code);
+	parsed = parseAnonymousCode(code);
+	if (parsed) {
+		return parsed;
+	}
+	return parseImmediateFunction(code);
 }
 
 function getNameFromTest(code) {
-	return parseCode(code).name;
+	var parsed = parseCode(code);
+	return parsed ? parsed.name : null;
 }
 
 module.exports = {
