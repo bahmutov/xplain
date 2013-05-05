@@ -54,7 +54,7 @@ function parseAnonymousCode(code) {
 function parseImmediateFunction(code) {
 	console.log('parsing immediate function');
 	check.verifyString(code, 'missing code, have ' + code);
-	var reg = /\(\s*function\s*\(\s*\)\s*\{([\W\w]*)}\s*\)\s*\(\s*\)/;
+	var reg = /\(\s*function\s*\(\s*\)\s*\{([\W\w]*)}\s*(?:\)\s*\(\s*\)|\(\s*\)\s*\))/;
 
 	var matched = reg.exec(code);
 	console.log('from code\n', code);
