@@ -16,3 +16,5 @@
 /examples/qunit/docs
 /src/doc-model/test/cover
 /examples/lodash/docs
+/npm-debug.log
+/examples/anonymous/doc
