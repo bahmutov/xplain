@@ -78,17 +78,15 @@ function methodDiv(commented) {
     });
     toggles.push(sourceToggle);
 
-    var togglesElement = html.div({
-        class: "toggles"
-    }, toggles);
+    var togglesElement = html.div('.toggles', toggles);
 
     var codeElement = codeDiv(id, apiComment);
 
     var nameParts = [name];
     if (!apiComment.isPublic()) {
-        nameParts.push(html.span({ class: "tag" }, "private"));
+        nameParts.push(html.span(".tag", "private"));
     }
-    nameParts.push(html.span({ class: "tag" }, "method"));
+    nameParts.push(html.span(".tag", "method"));
     var nameElement = html.h3(null, nameParts);
 
     // console.log(apiComment.description.summary);
