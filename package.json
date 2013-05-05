@@ -14,7 +14,8 @@
     "example3": "node index.js -i examples/add/*.js -o examples/add/docs",
     "qunit": "node index.js -i examples/qunit/*.js -o examples/qunit/docs",
     "lodash": "node index.js -i examples/lodash/*.js -o examples/lodash/docs",
-    "anonymous": "node index.js -i examples/anonymous/*.js -o examples/anonymous/doc"
+    "anonymous": "node index.js -i examples/anonymous/*.js -o examples/anonymous/doc",
+    "immediate": "node index.js -i examples/immediate/*.js -o examples/immediate/doc"
   },
   "repository": "",
   "keywords": [

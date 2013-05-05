@@ -5,7 +5,9 @@ var parseUnitTestCode = require('./parserUnitTest').parseUnitTestCode;
 function sampleToCommentLike(testCode) {
     check.verifyString(testCode, 'missing test code');
     var parsed = parseCode(testCode);
-    check.verifyObject(parsed, 'could not parse\n' + testCode);
+    if (parsed) {
+        check.verifyObject(parsed, 'could not parse\n' + testCode);
+    }
     return parsed;
 }
 
@@ -17,6 +19,11 @@ function transform(documented) {
     check.verifyString(code, 'missing code for sample');
 
     var parsed = sampleToCommentLike(code);
+    if (!parsed) {
+        console.log('failed to parse code\n', code);
+        return code;
+    }
+
     check.verifyObject(parsed, 'did not get sample from', code);
     if (parsed.name) {
         check.verifyString(parsed.name, 'there is no name for', code);
