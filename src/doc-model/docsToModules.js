@@ -119,7 +119,7 @@ function setupModule(name, rootModule)
 {
     check.verifyString(name, 'invalid module name');
     check.verifyObject(rootModule, 'invalid root module');
-    console.log('setup module', name);
+    // console.log('setup module', name);
     var parts = name.split('/');
     var currentModule = rootModule;
     parts.forEach(function (part) {
