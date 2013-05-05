@@ -18,7 +18,9 @@ function transform(documented) {
 
     var parsed = sampleToCommentLike(code);
     check.verifyObject(parsed, 'did not get sample from', code);
-    check.verifyString(parsed.name, 'there is no name for', code);
+    if (parsed.name) {
+        check.verifyString(parsed.name, 'there is no name for', code);
+    }
     check.verifyString(parsed.code, 'there is no code for', code);
 
     var humanForm = parseUnitTestCode(parsed.code);
