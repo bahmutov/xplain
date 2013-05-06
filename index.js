@@ -34,6 +34,12 @@ var program = require('optimist')
         description: 'API version to add to title',
         default: ''
     })
+    .options('framework', {
+        alias: 'f',
+        string: true,
+        description: 'unit testing framework name',
+        default: 'QUnit'
+    })
     .demand(['input'])
     .argv;
 
@@ -57,5 +63,6 @@ xplain({
     patterns: inputFiles,
     outputFolder: fullFolder,
     title: program.title,
-    apiVersion: program.version
+    apiVersion: program.version,
+    framework: program.framework
 });
