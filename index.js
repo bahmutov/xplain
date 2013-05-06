@@ -3,33 +3,39 @@
 var path = require('path');
 var check = require('check-types');
 var xplain = require('./src/xplain');
-
-var program = require('commander');
 var package = require('./package.json');
 
-program.command('help')
-    .description('show help and exit')
-    .action(function() {
-        console.log('xplain - JavaScript API documentation generator');
-        console.log('  version:', package.version);
-        console.log('  author:', package.author);
-        program.help();
-    });
+var info = 'xplain - JavaScript API documentation generator\n' +
+    '  version: ' + package.version + '\n' +
+    '  author: ' + package.author;
 
-function list(val) {
-  return val.split(',');
-}
-
-program
-    .option('-i, --input <comma separated list WITHOUT SPACES>', 'input filenames', list)
-    .option('-o, --output [string]', 'output directory')
-    .option('-t, --title [string]', 'API title to use', 'API')
-    .option('-v [string]', 'API version to add to title', '');
-
-if (process.argv.length === 2) {
-    process.argv.push('help');
-}
-program.parse(process.argv);
+var program = require('optimist')
+    .usage(info)
+    .options('input', {
+        alias: 'i',
+        string: true,
+        description: 'input file(s), you can use wildcards'
+    })
+    .options('output', {
+        alias: 'o',
+        string: true,
+        description: 'output folder name',
+        default: 'docs'
+    })
+    .options('title', {
+        alias: 't',
+        string: true,
+        description: 'API title to use',
+        default: 'API'
+    })
+    .options('version', {
+        alias: 'v',
+        string: true,
+        description: 'API version to add to title',
+        default: ''
+    })
+    .demand(['input'])
+    .argv;
 
 var inputFiles = program.input;
 if (typeof inputFiles === 'string') {
@@ -43,13 +49,13 @@ var fullFolder = path.resolve(process.cwd(), outputFolder);
 console.log('generating docs from', inputFiles, 'target folder', fullFolder);
 
 check.verifyString(program.title, 'invalid API title ' + program.title);
-check.verifyString(program.V, 'invalid API version ' + program.V);
-console.log('title', program.title, 'version', program.V);
+check.verifyString(program.version, 'invalid API version ' + program.version);
+console.log('title', program.title, 'version', program.version);
 
 check.verifyFunction(xplain, 'xplain should be a function');
 xplain({
     patterns: inputFiles,
     outputFolder: fullFolder,
     title: program.title,
-    apiVersion: program.V
+    apiVersion: program.version
 });

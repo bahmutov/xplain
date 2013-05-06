@@ -76,7 +76,7 @@ with white space.
 * [jQuery](https://github.com/jquery/jquery) is used to drive UI in the generated HMTL documentation.
 * [google-code-prettify](https://google-code-prettify.googlecode.com) is used to syntax highlight code samples in the generated documentation.
 * [moment.js](http://momentjs.com/) is used for date and time manipulation.
-* [commander.js](https://github.com/visionmedia/commander.js/) is used to process command line arguments.
+* [optimist](https://github.com/substack/node-optimist) is used to process command line arguments. I tried to use [commander.js](https://github.com/visionmedia/commander.js/), but it had problems grouping multiple arguments into arrays.
 * [background pattern](http://subtlepatterns.com/) source for the background pattern.
 * [glob](https://github.com/isaacs/node-glob) is used to match source files using wildcards.
 * [allong.es](http://allong.es/) provides convenient functional bits and pieces.
