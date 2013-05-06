@@ -49,9 +49,8 @@ if (typeof inputFiles === 'string') {
 }
 check.verifyArray(inputFiles, 'missing input pattern array ' + inputFiles);
 
-var outputFolder = program.output || 'docs';
-check.verifyString(outputFolder, 'missing output folder');
-var fullFolder = path.resolve(process.cwd(), outputFolder);
+check.verifyString(program.output, 'missing output folder');
+var fullFolder = path.resolve(process.cwd(), program.output);
 console.log('generating docs from', inputFiles, 'target folder', fullFolder);
 
 check.verifyString(program.title, 'invalid API title ' + program.title);
