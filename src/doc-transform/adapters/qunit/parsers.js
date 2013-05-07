@@ -74,8 +74,8 @@ function parseStrictEqual(line) {
     return parsed.op + '; // ' + parsed.expected;
 }
 
-function parseArrayEqual(line) {
-    var isEqualReg = /(?:gt|QUnit)\.aequal\(([\W\w]+)\);/;
+function parseDeepEqual(line) {
+    var isEqualReg = /(?:|QUnit\.)deepEqual\(([\W\w]+)\);/;
     if (!isEqualReg.test(line)) {
         return null;
     }
@@ -145,7 +145,7 @@ function parseArity(line) {
 }
 
 var lineParsers = [
-    parseStrictEqual/*, parseArrayEqual, parseNumber, parseOk, parseFunc, parseArity*/
+    parseStrictEqual, parseDeepEqual //, parseNumber, parseOk, parseFunc, parseArity
 ];
 
 function transformAssertion(line) {

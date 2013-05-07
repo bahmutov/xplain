@@ -20,6 +20,16 @@ gt.test('strictEqual', function () {
     gt.equal(transform(code), '_.first(array); // 1');
 });
 
+gt.test('QUnit.deepEqual', function () {
+    var code = 'QUnit.deepEqual(_.first(array, 2), [1, 2]);';
+    gt.equal(transform(code), '_.first(array,2); // [1,2]');
+});
+
+gt.test('deepEqual', function () {
+    var code = 'deepEqual(_.first(array, 2), [1, 2]);';
+    gt.equal(transform(code), '_.first(array,2); // [1,2]');
+});
+
 /*
 gt.test('single gt.equal with message', function () {
     var code = 'gt.equal(add(2, 3), 5, "2 + 3 = 5");';
