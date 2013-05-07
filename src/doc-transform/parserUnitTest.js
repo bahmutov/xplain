@@ -34,10 +34,12 @@ function parseUnitTestCode(code, framework) {
 
     var testName = parsers.topLevelParser.getNameFromTest(code);
     var innerCode = parsers.topLevelParser.parseCode(code);
+    // console.log('from code\n', code, 'got', innerCode);
     var outputCode = null;
 
     if (innerCode) {
-        var lines = code.split('\n');
+        check.verifyString(innerCode.code, 'missing inner code ' + JSON.stringify(innerCode));
+        var lines = innerCode.code.split('\n');
         var transformedLines = lines.map(function (line) {
             return parseAssertion(line, parsers.lineParsers);
         });
