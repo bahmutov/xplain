@@ -13,12 +13,8 @@ function sampleToCommentLike(testCode) {
 }
 */
 
-function transform(documented) {
-    check.verifyObject(documented, 'missing documented');
-    check.verifyObject(documented.comment, 'missing comment')
-
-    var code = documented.comment.code;
-    check.verifyString(code, 'missing code for sample');
+function transform(code) {
+    check.verifyString(code, 'missing code to parse');
 
     /*
     var parsed = sampleToCommentLike(code);
@@ -36,12 +32,13 @@ function transform(documented) {
 
     // var humanForm = parseUnitTestCode(parsed.code);
     var humanForm = parseUnitTestCode(code);
+    check.verifyObject(humanForm, 'could not convert to human form', code);
     // console.log('human form\n', humanForm);
-    if (!check.isString(humanForm)) {
-        console.log('could not convert', parsed.code, 'to human form');
-        humanForm = parsed.code;
+
+    if (!check.isString(humanForm.code)) {
+        console.log('could not convert', code, 'to human form');
+        humanForm.code = code;
     }
-    check.verifyString(humanForm, 'could not convert to human form', parsed.code);
     return humanForm;
 }
 

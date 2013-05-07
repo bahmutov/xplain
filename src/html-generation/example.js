@@ -9,6 +9,7 @@ function exampleDiv(name, apiExample) {
     check.verifyString(name, 'missing method name');
     check.verifyObject(apiExample, 'missing example code string');
 
+    console.dir(apiExample);
     var humanExample = transform(apiExample.code);
     // var exampleName = getName(apiExample.code);
     var exampleName = humanExample.name;

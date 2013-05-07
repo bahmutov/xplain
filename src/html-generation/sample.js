@@ -13,7 +13,7 @@ function sampleDiv(apiExample) {
 
     var code = apiExample.comment.code;
     check.verifyString(code, 'missing code');
-    var humanForm = transform(apiExample);
+    var humanForm = transform(code);
     check.verifyObject(humanForm, 'could not convert code ' + code + ' to human form');
     check.verifyString(humanForm.code, 'missing human form from code ' + code);
     // var name = getTestName(apiExample.comment.code);
