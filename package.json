@@ -9,7 +9,7 @@
     "yuidoc": "yuidoc src test",
     "doc": "gt test/*.js && node index.js -i src/*.js,test/*.js -v 1.0.1",
     "complexity": "jsc -p src/**/*.js --skip src/html-generation/assets/*.js --skip src/**/cover/**/*.js",
-    "example1": "node index.js -i examples/basic/src/*.js -i examples/basic/test/*.js -o examples/basic/docs",
+    "example1": "node index.js -i examples/basic/*.js -o examples/basic/docs",
     "example2": "node index.js -i examples/submodules/*.js -o examples/submodules/docs",
     "example3": "node index.js -i examples/add/*.js -o examples/add/docs",
     "qunit": "node index.js -i examples/qunit/*.js -o examples/qunit/docs",
