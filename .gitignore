@@ -26,3 +26,6 @@
 /src/doc-transform/adapters/gt/test/cover
 /src/doc-transform/test/cover
 /test/docs
+/examples/anonymous/docs
+/examples/immediate/docs
+/examples/unnamed/docs
