@@ -1,5 +1,5 @@
 var check = require('check-types');
-var code = require('../utils/code');
+var code = require('../../../utils/code');
 
 function parseEqualArguments(equal) {
     check.verifyString(equal, 'equal is not a string');
@@ -61,13 +61,12 @@ function parseArityArguments(args) {
 }
 
 // top level parsers for individual assertions
-module.exports.parseEqual = function (line) {
-    var isEqualReg = /(?:gt|QUnit)\.equal\(([\W\w]+)\);/;
+function parseStrictEqual(line) {
+    var isEqualReg = /(?:|QUnit\.)strictEqual\(([\W\w]+)\);/;
     if (!isEqualReg.test(line)) {
         return null;
     }
     var matches = isEqualReg.exec(line);
-    // console.log('matches', matches);
     var equalArguments = matches[1];
     check.verifyString(equalArguments, 'invalid equal arguments');
     var parsed = parseEqualArguments(equalArguments);
@@ -75,7 +74,7 @@ module.exports.parseEqual = function (line) {
     return parsed.op + '; // ' + parsed.expected;
 }
 
-module.exports.parseArrayEqual = function (line) {
+function parseArrayEqual(line) {
     var isEqualReg = /(?:gt|QUnit)\.aequal\(([\W\w]+)\);/;
     if (!isEqualReg.test(line)) {
         return null;
@@ -90,7 +89,7 @@ module.exports.parseArrayEqual = function (line) {
     return parsed.op + '; // ' + parsed.expected;
 }
 
-module.exports.parseNumber = function (line) {
+function parseNumber(line) {
     var reg = /(?:gt|QUnit)\.number\(([\W\w]+)\);/;
     if (!reg.test(line)) {
         return null;
@@ -104,7 +103,7 @@ module.exports.parseNumber = function (line) {
     return parsed.op + '; // returns a number';
 }
 
-module.exports.parseOk = function (line) {
+function parseOk(line) {
     var reg = /(?:gt|QUnit)\.ok\(([\W\w]+)\);/;
     if (!reg.test(line)) {
         return null;
@@ -118,7 +117,7 @@ module.exports.parseOk = function (line) {
     return parsed.op + '; // returns truthy value';
 }
 
-module.exports.parseFunc = function (line) {
+function parseFunc(line) {
     var reg = /(?:gt|QUnit)\.func\(([\W\w]+)\);/;
     if (!reg.test(line)) {
         return null;
@@ -131,7 +130,7 @@ module.exports.parseFunc = function (line) {
     return '// ' + parsed.op + ' is a function';
 }
 
-module.exports.parseArity = function (line) {
+function parseArity(line) {
     var reg = /(?:gt|QUnit)\.arity\(([\W\w]+)\);/;
     if (!reg.test(line)) {
         return null;
@@ -144,3 +143,21 @@ module.exports.parseArity = function (line) {
     return '// ' + parsed.op + ' is a function that expects '
         + parsed.number + ' arguments';
 }
+
+var lineParsers = [
+    parseStrictEqual/*, parseArrayEqual, parseNumber, parseOk, parseFunc, parseArity*/
+];
+
+function transformAssertion(line) {
+    check.verifyString(line, 'missing line');
+    var parsed = null;
+    lineParsers.some(function (method) {
+        return parsed = method(line);
+    });
+    if (check.isString(parsed)) {
+        return parsed;
+    }
+    return line;
+}
+
+module.exports = transformAssertion;
