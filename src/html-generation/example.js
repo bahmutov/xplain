@@ -1,7 +1,6 @@
 var check = require('check-types');
 var reformat = require('../utils/code').reformat;
 var transform = require('../doc-transform/toHumanForm');
-// var getName = require('../doc-transform/parser').getNameFromTest;
 var html = require('pithy');
 
 var exampleDivId = 0;
@@ -11,7 +10,6 @@ function exampleDiv(name, apiExample) {
 
     // console.dir(apiExample);
     var humanExample = transform(apiExample.code);
-    // var exampleName = getName(apiExample.code);
     var exampleName = humanExample.name;
     if (exampleName) {
         check.verifyString(exampleName, 'could not get example name');
@@ -24,17 +22,19 @@ function exampleDiv(name, apiExample) {
     var toggleElement = html.input({
         class: "toggle",
         type: "button",
-        value: exampleName,
+        value: exampleName || 'example',
         id: id
     });
 
+    var parts = [];
+    if (exampleName) {
+        parts.push(html.span(".sampleName", exampleName));
+    }
+    parts.push(html.pre(".prettyprint.linenums", prettyCode));
     var codeElement = html.div({
         id: id + 'd',
         class: "example namedCode"
-    }, [
-        html.span(".sampleName", exampleName),
-        html.pre(".prettyprint.linenums", prettyCode)
-    ]);
+    }, parts);
 
     return {
         name: exampleName,
