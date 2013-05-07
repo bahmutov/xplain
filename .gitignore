@@ -20,3 +20,12 @@
 /examples/anonymous/doc
 /examples/immediate/doc
 /examples/unnamed/doc
+/src/utils/cover
+/src/extract-jsdocs/cover
+/src/doc-transform/cover
+/src/doc-transform/adapters/gt/test/cover
+/src/doc-transform/test/cover
+/test/docs
+/examples/anonymous/docs
+/examples/immediate/docs
+/examples/unnamed/docs

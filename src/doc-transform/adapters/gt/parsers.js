@@ -61,7 +61,7 @@ function parseArityArguments(args) {
 }
 
 // top level parsers for individual assertions
-module.exports.parseEqual = function (line) {
+function parseEqual(line) {
     var isEqualReg = /(?:gt|QUnit)\.equal\(([\W\w]+)\);/;
     if (!isEqualReg.test(line)) {
         return null;
@@ -75,7 +75,7 @@ module.exports.parseEqual = function (line) {
     return parsed.op + '; // ' + parsed.expected;
 }
 
-module.exports.parseArrayEqual = function (line) {
+function parseArrayEqual(line) {
     var isEqualReg = /(?:gt|QUnit)\.aequal\(([\W\w]+)\);/;
     if (!isEqualReg.test(line)) {
         return null;
@@ -90,7 +90,7 @@ module.exports.parseArrayEqual = function (line) {
     return parsed.op + '; // ' + parsed.expected;
 }
 
-module.exports.parseNumber = function (line) {
+function parseNumber(line) {
     var reg = /(?:gt|QUnit)\.number\(([\W\w]+)\);/;
     if (!reg.test(line)) {
         return null;
@@ -104,7 +104,7 @@ module.exports.parseNumber = function (line) {
     return parsed.op + '; // returns a number';
 }
 
-module.exports.parseOk = function (line) {
+function parseOk(line) {
     var reg = /(?:gt|QUnit)\.ok\(([\W\w]+)\);/;
     if (!reg.test(line)) {
         return null;
@@ -118,7 +118,7 @@ module.exports.parseOk = function (line) {
     return parsed.op + '; // returns truthy value';
 }
 
-module.exports.parseFunc = function (line) {
+function parseFunc(line) {
     var reg = /(?:gt|QUnit)\.func\(([\W\w]+)\);/;
     if (!reg.test(line)) {
         return null;
@@ -131,7 +131,7 @@ module.exports.parseFunc = function (line) {
     return '// ' + parsed.op + ' is a function';
 }
 
-module.exports.parseArity = function (line) {
+function parseArity(line) {
     var reg = /(?:gt|QUnit)\.arity\(([\W\w]+)\);/;
     if (!reg.test(line)) {
         return null;
@@ -144,3 +144,21 @@ module.exports.parseArity = function (line) {
     return '// ' + parsed.op + ' is a function that expects '
         + parsed.number + ' arguments';
 }
+
+var lineParsers = [
+    parseEqual, parseArrayEqual, parseNumber, parseOk, parseFunc, parseArity
+];
+
+function transformAssertion(line) {
+    check.verifyString(line, 'missing line');
+    var parsed = null;
+    lineParsers.some(function (method) {
+        return parsed = method(line);
+    });
+    if (check.isString(parsed)) {
+        return parsed;
+    }
+    return line;
+}
+
+module.exports = transformAssertion;

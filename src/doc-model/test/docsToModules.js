@@ -5,8 +5,8 @@ var d2m = require('../docsToModules');
 var path = require('path');
 
 var examples = path.join(__dirname, '../../../examples');
-var foo = path.join(examples, 'basic/src/foo.js');
-var fooTests = path.join(examples, 'basic/test/fooTests.js');
+var foo = path.join(examples, 'basic/foo.js');
+var fooTests = path.join(examples, 'basic/fooTests.js');
 var submodulesAt = path.join(examples, 'submodules');
 
 var submodules = ['A', 'B', 'C'].map(function (name) {
