@@ -1,10 +1,10 @@
 var check = require('check-types');
-// var parsers = require('./parsers');
 
 var adapter = require('./adapters/adapter');
 var reformat = require('../utils/code').reformat;
 check.verifyFunction(reformat, 'could not get code reformat');
 
+/*
 function parseAssertion(line, parsers) {
     check.verifyString(line, 'missing line');
     check.verifyObject(parsers, 'missig parsers object, have ' + JSON.stringify(parsers));
@@ -19,6 +19,7 @@ function parseAssertion(line, parsers) {
     }
     return line;
 }
+*/
 
 // parses multiline list of assertions in the code
 // replaces all gt.ok(...) and other assertions with
@@ -40,9 +41,7 @@ function parseUnitTestCode(code, framework) {
     if (innerCode) {
         check.verifyString(innerCode.code, 'missing inner code ' + JSON.stringify(innerCode));
         var lines = innerCode.code.split('\n');
-        var transformedLines = lines.map(function (line) {
-            return parseAssertion(line, parsers.lineParsers);
-        });
+        var transformedLines = lines.map(parsers.lineTransformer);
         outputCode = transformedLines.join('\n');
     } else {
         outputCode = code;

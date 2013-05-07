@@ -5,8 +5,8 @@ var getComments = require('../getTaggedComments');
 var Comment = require('../Comment');
 
 var examples = path.join(__dirname, '../../../examples');
-var foo = path.join(examples, 'basic/src/foo.js');
-var fooTests = path.join(examples, 'basic/test/fooTests.js');
+var foo = path.join(examples, 'basic/foo.js');
+var fooTests = path.join(examples, 'basic/fooTests.js');
 
 gt.test('basics', function () {
     gt.arity(Comment, 1, 'expects single argument');
