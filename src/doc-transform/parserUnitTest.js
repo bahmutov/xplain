@@ -1,9 +1,10 @@
 var check = require('check-types');
-var parsers = require('./parsers');
+// var parsers = require('./parsers');
+
 var reformat = require('../utils/code').reformat;
 check.verifyFunction(reformat, 'could not get code reformat');
 
-function parseAssertion(line) {
+function parseAssertion(line, parsers) {
     check.verifyString(line, 'missing line');
 
     var parseMethods = Object.keys(parsers);
@@ -20,8 +21,13 @@ function parseAssertion(line) {
 // parses multiline list of assertions in the code
 // replaces all gt.ok(...) and other assertions with
 // human-readable code
-function parseUnitTestCode(text) {
+function parseUnitTestCode(text, framework) {
     check.verifyString(text, 'missing text');
+
+    framework = framework || 'qunit';
+    var parsers = require('./adapters/adapter')('gt');
+    check.verifyArray(parsers, 'could not get parsers, have ' + JSON.stringify(parsers));
+
     var lines = text.split('\n');
     var transformedLines = lines.map(parseAssertion);
     var output = transformedLines.join('\n');

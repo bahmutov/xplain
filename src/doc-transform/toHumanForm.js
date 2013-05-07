@@ -1,7 +1,8 @@
 var check = require('check-types');
-var parseCode = require('./parser').parseCode;
+// var parseCode = require('./parser').parseCode;
 var parseUnitTestCode = require('./parserUnitTest').parseUnitTestCode;
 
+/*
 function sampleToCommentLike(testCode) {
     check.verifyString(testCode, 'missing test code');
     var parsed = parseCode(testCode);
@@ -10,6 +11,7 @@ function sampleToCommentLike(testCode) {
     }
     return parsed;
 }
+*/
 
 function transform(documented) {
     check.verifyObject(documented, 'missing documented');
@@ -18,6 +20,7 @@ function transform(documented) {
     var code = documented.comment.code;
     check.verifyString(code, 'missing code for sample');
 
+    /*
     var parsed = sampleToCommentLike(code);
     if (!parsed) {
         console.log('failed to parse code\n', code);
@@ -29,8 +32,10 @@ function transform(documented) {
         check.verifyString(parsed.name, 'there is no name for', code);
     }
     check.verifyString(parsed.code, 'there is no code for', code);
+    */
 
-    var humanForm = parseUnitTestCode(parsed.code);
+    // var humanForm = parseUnitTestCode(parsed.code);
+    var humanForm = parseUnitTestCode(code);
     // console.log('human form\n', humanForm);
     if (!check.isString(humanForm)) {
         console.log('could not convert', parsed.code, 'to human form');
