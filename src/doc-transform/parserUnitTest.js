@@ -29,22 +29,29 @@ function parseUnitTestCode(code, framework) {
 
     framework = framework || 'qunit';
     var parsers = adapter('gt');
-    console.dir(parsers);
+    // console.dir(parsers);
     check.verifyObject(parsers, 'could not get parsers, have ' + JSON.stringify(parsers));
 
-    var lines = code.split('\n');
-    var transformedLines = lines.map(function (line) {
-        return parseAssertion(line, parsers);
-    });
-    var output = transformedLines.join('\n');
-    check.verifyString(output, 'could not get output text');
+    var testName = parsers.topLevelParser.getNameFromTest(code);
+    var innerCode = parsers.topLevelParser.parseCode(code);
+    var outputCode = null;
 
-    var pretty = reformat(output, true);
-    check.verifyString(pretty, 'could not reformat output');
+    if (innerCode) {
+        var lines = code.split('\n');
+        var transformedLines = lines.map(function (line) {
+            return parseAssertion(line, parsers.lineParsers);
+        });
+        outputCode = transformedLines.join('\n');
+    } else {
+        outputCode = code;
+    }
+
+    var pretty = reformat(outputCode, true);
+    check.verifyString(pretty, 'could not reformat output\n' + outputCode);
 
     return {
         code: pretty.trim(),
-        name: null
+        name: testName
     };
 }
 
