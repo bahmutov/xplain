@@ -30,14 +30,12 @@ gt.test('deepEqual', function () {
     gt.equal(transform(code), '_.first(array,2); // [1,2]');
 });
 
-/*
-gt.test('single gt.equal with message', function () {
-    var code = 'gt.equal(add(2, 3), 5, "2 + 3 = 5");';
-    gt.equal(transform(code), 'add(2,3); // 5');
+gt.test('QUnit.ok', function () {
+    var code = 'QUnit.ok(actual instanceof _);';
+    gt.equal(transform(code), 'actual instanceof _; // true');
 });
 
-gt.test('comments are preserved', function () {
-    var text = '// a comment';
-    gt.equal(transform(text), text);
+gt.test('ok', function () {
+    var code = 'ok(actual instanceof _);';
+    gt.equal(transform(code), 'actual instanceof _; // true');
 });
-*/

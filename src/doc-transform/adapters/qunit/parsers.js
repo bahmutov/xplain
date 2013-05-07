@@ -15,6 +15,7 @@ function parseEqualArguments(equal) {
     return result;
 }
 
+/*
 function parseNumberArguments(args) {
     check.verifyString(args, 'args is not a string');
 
@@ -26,11 +27,11 @@ function parseNumberArguments(args) {
     };
     return result;
 }
+*/
 
 function parseOkArguments(args) {
     check.verifyString(args, 'args is not a string');
 
-    // console.log('splitting', args);
     var split = code.split(args);
     check.verifyArray(split, 'did not get array from', args);
     var result = {
@@ -39,6 +40,7 @@ function parseOkArguments(args) {
     return result;
 }
 
+/*
 function parseFuncArguments(args) {
     check.verifyString(args, 'args is not a string');
     var split = code.split(args);
@@ -59,6 +61,7 @@ function parseArityArguments(args) {
     };
     return result;
 }
+*/
 
 // top level parsers for individual assertions
 function parseStrictEqual(line) {
@@ -89,6 +92,7 @@ function parseDeepEqual(line) {
     return parsed.op + '; // ' + parsed.expected;
 }
 
+/*
 function parseNumber(line) {
     var reg = /(?:gt|QUnit)\.number\(([\W\w]+)\);/;
     if (!reg.test(line)) {
@@ -102,9 +106,10 @@ function parseNumber(line) {
     check.verifyObject(parsed, 'did not get parsed arguments');
     return parsed.op + '; // returns a number';
 }
+*/
 
 function parseOk(line) {
-    var reg = /(?:gt|QUnit)\.ok\(([\W\w]+)\);/;
+    var reg = /(?:|QUnit\.)ok\(([\W\w]+)\);/;
     if (!reg.test(line)) {
         return null;
     }
@@ -114,9 +119,10 @@ function parseOk(line) {
     check.verifyString(args, 'invalid number arguments');
     var parsed = parseOkArguments(args);
     check.verifyObject(parsed, 'did not get parsed arguments');
-    return parsed.op + '; // returns truthy value';
+    return parsed.op + '; // true';
 }
 
+/*
 function parseFunc(line) {
     var reg = /(?:gt|QUnit)\.func\(([\W\w]+)\);/;
     if (!reg.test(line)) {
@@ -143,9 +149,9 @@ function parseArity(line) {
     return '// ' + parsed.op + ' is a function that expects '
         + parsed.number + ' arguments';
 }
-
+*/
 var lineParsers = [
-    parseStrictEqual, parseDeepEqual //, parseNumber, parseOk, parseFunc, parseArity
+    parseStrictEqual, parseDeepEqual, parseOk
 ];
 
 function transformAssertion(line) {

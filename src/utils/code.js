@@ -26,7 +26,14 @@ var options = {
 
 function split(expressions) {
 	var tree = esprima.parse(expressions);
-	var results = tree.body[0].expression.expressions.map(function (node) {
+	// console.dir(tree);
+	var exp = tree.body[0].expression;
+	if (Array.isArray(exp.expressions)) {
+		exp = exp.expressions;
+	} else {
+		exp = [exp];
+	}
+	var results = exp.map(function (node) {
 		// console.log('node', node);
 		return generator.generate(node, options);
 	});
