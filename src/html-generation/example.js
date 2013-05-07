@@ -1,6 +1,7 @@
 var check = require('check-types');
 var reformat = require('../utils/code').reformat;
-var getName = require('../doc-transform/parser').getNameFromTest;
+var transform = require('../doc-transform/toHumanForm');
+// var getName = require('../doc-transform/parser').getNameFromTest;
 var html = require('pithy');
 
 var exampleDivId = 0;
@@ -8,8 +9,13 @@ function exampleDiv(name, apiExample) {
     check.verifyString(name, 'missing method name');
     check.verifyObject(apiExample, 'missing example code string');
 
-    var exampleName = getName(apiExample.code);
-    check.verifyString(exampleName, 'could not get example name');
+    // console.dir(apiExample);
+    var humanExample = transform(apiExample.code);
+    // var exampleName = getName(apiExample.code);
+    var exampleName = humanExample.name;
+    if (exampleName) {
+        check.verifyString(exampleName, 'could not get example name');
+    }
 
     var id = name + '_example_' + ++exampleDivId + '_toggle';
     var prettyCode = reformat(apiExample.code, true);

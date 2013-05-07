@@ -38,10 +38,20 @@ var program = require('optimist')
         alias: 'f',
         string: true,
         description: 'unit testing framework name',
-        default: 'QUnit'
+        default: 'qunit',
+        check: function (value) {
+            return value === 'gt' || value === 'qunit'
+        }
     })
     .demand(['input'])
     .argv;
+
+var allowedFrameworks = {'gt': true, 'qunit': true};
+if (!(program.framework in allowedFrameworks)) {
+    console.error('Invalid framework ' + program.framework);
+    console.error('Available', allowedFrameworks);
+    process.exit(-1);
+}
 
 var inputFiles = program.input;
 if (typeof inputFiles === 'string') {

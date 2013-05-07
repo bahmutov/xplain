@@ -26,7 +26,7 @@ function generateDocs(options) {
     var inputFiles = discoverSourceFiles(options.patterns);
     check.verifyArray(inputFiles, 'could not find filenames');
     if (!inputFiles.length) {
-        throw new Error('Cannot find any source files for input', patterns);
+        throw new Error('Cannot find any source files for input ' + options.patterns);
     }
 
     api = getApi(inputFiles);
