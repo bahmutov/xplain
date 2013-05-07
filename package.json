@@ -6,6 +6,7 @@
   "bin": "index.js",
   "scripts": {
     "test": "gt src/**/test/*.js",
+    "e2e": "gt test/e2e.js",
     "yuidoc": "yuidoc src test",
     "doc": "gt test/*.js && node index.js -i src/*.js,test/*.js -v 1.0.1",
     "complexity": "jsc -p src/**/*.js --skip src/html-generation/assets/*.js --skip src/**/cover/**/*.js",
@@ -14,9 +15,9 @@
     "example3": "node index.js -i examples/add/*.js -o examples/add/docs",
     "qunit": "node index.js -i examples/qunit/*.js -o examples/qunit/docs",
     "lodash": "node index.js -i examples/lodash/*.js -o examples/lodash/docs",
-    "anonymous": "node index.js -i examples/anonymous/*.js -o examples/anonymous/doc",
-    "immediate": "node index.js -i examples/immediate/*.js -o examples/immediate/doc",
-    "unnamed": "node index.js -i examples/unnamed/*.js -o examples/unnamed/doc"
+    "anonymous": "node index.js -i examples/anonymous/*.js -o examples/anonymous/docs",
+    "immediate": "node index.js -i examples/immediate/*.js -o examples/immediate/docs",
+    "unnamed": "node index.js -i examples/unnamed/*.js -o examples/unnamed/docs"
   },
   "repository": "",
   "keywords": [
