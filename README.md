@@ -28,7 +28,7 @@ tests as code samples.
 
 ### usage
 
-    xplain -i src/add.js,test/add.js
+    xplain -i src/add.js -i test/add.js
 
 produces HTML documentation:
 
@@ -45,7 +45,7 @@ Stop writing unmaintainable source samples inside the
 help comments using *@example* tag. Instead tag your unit tests with *@sample* or *@example* tag and they will be included in the generated API documentation.
 
 The test code will be intelligently transformed into human
-readable format. [QUnit](http://qunitjs.com/) and [gt](https://github.com/bahmutov/gt) test syntax is supported. If the code cannot be transformed, it will be displayed in its original form.
+readable format. [QUnit](http://qunitjs.com/) and [gt](https://github.com/bahmutov/gt) test syntax is supported. If the code cannot be transformed, it will be displayed in its original form. *qunit* is assumed by default, specify an alternative using *-f* command line option, for example *-f gt*.
 
 ### Multiple documentation levels
 
