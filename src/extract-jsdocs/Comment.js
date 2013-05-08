@@ -48,7 +48,7 @@ Comment.prototype.isModule = function () {
 };
 
 Comment.prototype.isMethod = function () {
-    return this.isTagged('method');
+    return this.isTagged('method') || this.isTagged('function');
 };
 
 Comment.prototype.isExample = function() {
@@ -78,7 +78,7 @@ Comment.prototype.getModuleName = function ()
 
 Comment.prototype.getMethodName = function ()
 {
-    return this.tagValue('method');
+    return this.tagValue('method') || this.tagValue('function');
 };
 
 module.exports = Comment;

@@ -33,7 +33,7 @@ gt.test('foo method in basic example', function () {
     gt.ok(C.isPublic(), 'method is public');
 });
 
-gt.test('bar method in basic example', function () {
+gt.test('bar function in basic example', function () {
     var files = [foo];
     var comments = getComments(files);
     gt.array(comments, 'expected array back');

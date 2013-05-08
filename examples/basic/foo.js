@@ -10,7 +10,7 @@ function foo() {
 /**
 Does nothing, is private
 
-@method bar
+@function bar
 @private
 */
 function bar() {
