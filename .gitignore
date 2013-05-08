@@ -29,3 +29,5 @@
 /examples/anonymous/docs
 /examples/immediate/docs
 /examples/unnamed/docs
+/src/doc-transform/adapters/qunit/test/cover
+/src/utils/test/cover

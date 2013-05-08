@@ -13,7 +13,7 @@ function parseName(code) {
 
 function parseNamedCode(code) {
 	check.verifyString(code, 'missing code, have ' + code);
-	var reg = /(?:gt|QUnit)\.test\(([\W\w]+),\s*function\s*\(\)\s*\{([\W\w]*)}\s*\)/;
+	var reg = /(?:|QUnit\.)test\(([\W\w]+),\s*function\s*\(\)\s*\{([\W\w]*)}\s*\)/;
 
 	var matched = reg.exec(code);
 	// console.log(matched);
@@ -34,7 +34,7 @@ function parseNamedCode(code) {
 function parseAnonymousCode(code) {
 	console.log('parsing anonymous code');
 	check.verifyString(code, 'missing code, have ' + code);
-	var reg = /(?:gt|QUnit)\.test\(\s*function\s*\(\)\s*\{([\W\w]*)}\s*\)/;
+	var reg = /(?:|QUnit\.)test\(\s*function\s*\(\)\s*\{([\W\w]*)}\s*\)/;
 
 	var matched = reg.exec(code);
 	// console.log(matched);
@@ -57,8 +57,8 @@ function parseImmediateFunction(code) {
 	var reg = /\(\s*function\s*\(\s*\)\s*\{([\W\w]*)}\s*(?:\)\s*\(\s*\)|\(\s*\)\s*\))/;
 
 	var matched = reg.exec(code);
-	console.log('from code\n', code);
-	console.log('matched\n', matched);
+	// console.log('from code\n', code);
+	// console.log('matched\n', matched);
 	if (!Array.isArray(matched)) {
 		return null;
 	}

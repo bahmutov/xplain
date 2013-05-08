@@ -4,23 +4,6 @@ var adapter = require('./adapters/adapter');
 var reformat = require('../utils/code').reformat;
 check.verifyFunction(reformat, 'could not get code reformat');
 
-/*
-function parseAssertion(line, parsers) {
-    check.verifyString(line, 'missing line');
-    check.verifyObject(parsers, 'missig parsers object, have ' + JSON.stringify(parsers));
-
-    var parseMethods = Object.keys(parsers);
-    var parsed = null;
-    parseMethods.some(function (method) {
-        return parsed = parsers[method](line);
-    });
-    if (check.isString(parsed)) {
-        return parsed;
-    }
-    return line;
-}
-*/
-
 // parses multiline list of assertions in the code
 // replaces all gt.ok(...) and other assertions with
 // human-readable code,
@@ -29,9 +12,10 @@ function parseUnitTestCode(code, framework) {
     check.verifyString(code, 'missing code');
 
     framework = framework || 'qunit';
-    var parsers = adapter('gt');
-    // console.dir(parsers);
-    check.verifyObject(parsers, 'could not get parsers, have ' + JSON.stringify(parsers));
+    check.verifyString(framework, 'missing framework name, try gt or qunit');
+    var parsers = adapter(framework);
+    check.verifyObject(parsers, 'could not get parsers for ' + framework
+        + ', have ' + JSON.stringify(parsers));
 
     var testName = parsers.topLevelParser.getNameFromTest(code);
     var innerCode = parsers.topLevelParser.parseCode(code);

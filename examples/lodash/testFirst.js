@@ -13,12 +13,12 @@ QUnit.module('lodash.first');
 
   /** @sample first */
   QUnit.test('should return the first element', function() {
-    QUnit.equal(_.first([1, 2, 3]), 1);
+    QUnit.strictEqual(_.first([1, 2, 3]), 1);
   });
 
   /** @sample first */
-  QUnit.test('should return the first two elements', function() {
-    QUnit.aequal(_.first([1, 2, 3], 2), [1, 2]);
+  test('should return the first two elements', function() {
+    QUnit.deepEqual(_.first([1, 2, 3], 2), [1, 2]);
   });
 
   /** @sample first */
@@ -27,6 +27,6 @@ QUnit.module('lodash.first');
       return num < 3;
     });
 
-    QUnit.aequal(actual, [1, 2]);
+    QUnit.deepEqual(actual, [1, 2]);
   });
 }());

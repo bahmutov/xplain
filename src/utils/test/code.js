@@ -1,4 +1,16 @@
 var code = require('../code').reformat;
+var split = require('../code').split;
+
+gt.module('split');
+
+gt.test('split single string', function () {
+    gt.arity(split, 1, 'split expects 1 argument');
+    var text = 'foo instanceof bar';
+    var result = split(text);
+    gt.array(result, 'returns result');
+    gt.equal(result.length, 1, 'has single element');
+    gt.equal(result[0], text, 'nothing to split');
+});
 
 gt.module('code.reformat');
 
@@ -18,12 +30,12 @@ gt.test('single with comments', function () {
 
     str = code(original, true);
     gt.string(str, 'one liner with comments');
-    console.log('reformatted\n' + str);
+    // console.log('reformatted\n' + str);
 });
 
 gt.test('two lines with comment', function () {
     var original = 'var f = "foo"; // comments\nvar b;';
     var str = code(original, true);
     gt.string(str, 'reformatted code');
-    console.log('reformatted\n' + str);
+    // console.log('reformatted\n' + str);
 });
