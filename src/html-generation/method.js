@@ -91,11 +91,15 @@ function methodDiv(commented, framework) {
     nameParts.push(html.span(".tag", "method"));
     var nameElement = html.h3(null, nameParts);
 
+    var descriptionElement = html.div('.description',
+        [new html.SafeString(apiComment.description.summary)]);
+
     // console.log(apiComment.description.summary);
     var methodElement = html.div({
         id: name,
         class: "method"
-    }, [nameElement, new html.SafeString(apiComment.description.summary)]
+    }, [nameElement,
+        descriptionElement]
         .concat(samples)
         .concat(togglesElement)
         .concat(exampleElements)
