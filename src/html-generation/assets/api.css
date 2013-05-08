@@ -14,6 +14,7 @@ body {
   margin: 10px auto 0 auto;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 1.25em;
+  line-height: 1.5em;
   color: #222;
 }
 
@@ -83,11 +84,12 @@ span.sampleName {
 pre {
   margin-top: 0;
   margin-bottom: 0;
-  padding: 4px 0.5em;
+  padding: 4px 0.7em;
   background-color: #fff;
   border-right: #bbb solid 1px;
   border-bottom: #bbb solid 1px;
   border-left: #bbb solid 1px;
+  line-height: 1.3em;
 }
 
 .method {
