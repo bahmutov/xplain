@@ -80,12 +80,7 @@ span.sampleName {
   margin-bottom: 0;
 }
 
-pre.prettyprinted {
-  padding: 4px 0px;
-}
-
 pre {
-  /*margin-top: 0.3em;*/
   margin-top: 0;
   margin-bottom: 0;
   padding: 4px 0.5em;
