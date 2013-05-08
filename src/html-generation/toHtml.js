@@ -91,12 +91,14 @@ function generateHtmlElement (rootModule, options) {
 	var headElement = generateHeadElement(options);
 
 	var apiVersion = options.apiVersion || '';
+	var framework = options.framework || 'qunit';
+	check.verifyString(framework, 'missing framework string ' + framework);
 
 	var doc = {
 		index: [],
 		docs: []
 	};
-	docModule(rootModule, doc);
+	docModule(rootModule, doc, framework);
 
 	var indexElement = html.div('#index', [
 		html.h1('#mainTitle', [
@@ -148,10 +150,11 @@ module.exports = function (rootModule, options) {
 	fs.writeFileSync(htmlFilename, o, 'utf-8');
 };
 
-function docModule(aModule, doc) {
+function docModule(aModule, doc, framework) {
 	check.verifyObject(aModule, 'missing module');
 	check.verifyArray(doc.index, 'missing index array');
 	check.verifyArray(doc.docs, 'missing docs array');
+	check.verifyString(framework, 'missing framework string');
 
 	console.log('documenting module', aModule.name);
 	var methods = aModule.methodDocs;
@@ -165,7 +168,7 @@ function docModule(aModule, doc) {
 			console.log('documenting method', name);
 			// console.dir(method.comment);
 
-			var info = methodDiv(method);
+			var info = methodDiv(method, framework);
 			doc.index.push(info.name);
 			doc.docs.push(info.docs);
 		});
@@ -179,6 +182,6 @@ function docModule(aModule, doc) {
 			return;
 		}
 		var value = aModule[key];
-		docModule(value, doc);
+		docModule(value, doc, framework);
 	});
 }

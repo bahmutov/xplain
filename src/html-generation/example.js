@@ -4,12 +4,12 @@ var transform = require('../doc-transform/toHumanForm');
 var html = require('pithy');
 
 var exampleDivId = 0;
-function exampleDiv(name, apiExample) {
+function exampleDiv(name, apiExample, framework) {
     check.verifyString(name, 'missing method name');
     check.verifyObject(apiExample, 'missing example code string');
 
     // console.dir(apiExample);
-    var humanExample = transform(apiExample.code);
+    var humanExample = transform(apiExample.code, framework);
     var exampleName = humanExample.name;
     if (exampleName) {
         check.verifyString(exampleName, 'could not get example name');

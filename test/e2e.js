@@ -7,19 +7,19 @@ var examples = path.join(__dirname, '../examples');
 gt.async('basic', 1, function () {
     var js = path.join(examples, 'basic/*.js');
     var docs = path.join(examples, 'basic/docs');
-    gt.exec('node', [xplain, '--input', js, '--output', docs], 0, 'basic api');
+    gt.exec('node', [xplain, '-f', 'gt', '--input', js, '--output', docs], 0, 'basic api');
 }, 4000);
 
 gt.async('submodules', 1, function () {
     var js = path.join(examples, 'submodules/*.js');
     var docs = path.join(examples, 'submodules/docs');
-    gt.exec('node', [xplain, '--input', js, '--output', docs], 0, 'submodules');
+    gt.exec('node', [xplain, '-f', 'gt', '--input', js, '--output', docs], 0, 'submodules');
 }, 4000);
 
 gt.async('add', 1, function () {
     var js = path.join(examples, 'add/*.js');
     var docs = path.join(examples, 'add/docs');
-    gt.exec('node', [xplain, '--input', js, '--output', docs], 0, 'add');
+    gt.exec('node', [xplain, '-f', 'gt', '--input', js, '--output', docs], 0, 'add');
 }, 4000);
 
 gt.async('qunit', 1, function () {
@@ -37,17 +37,17 @@ gt.async('lodash', 1, function () {
 gt.async('anonymous', 1, function () {
     var js = path.join(examples, 'anonymous/*.js');
     var docs = path.join(examples, 'anonymous/docs');
-    gt.exec('node', [xplain, '--input', js, '--output', docs], 0, 'anonymous');
+    gt.exec('node', [xplain, '-f', 'gt', '--input', js, '--output', docs], 0, 'anonymous');
 }, 4000);
 
 gt.async('immediate', 1, function () {
     var js = path.join(examples, 'immediate/*.js');
     var docs = path.join(examples, 'immediate/docs');
-    gt.exec('node', [xplain, '--input', js, '--output', docs], 0, 'immediate');
+    gt.exec('node', [xplain, '-f', 'gt', '--input', js, '--output', docs], 0, 'immediate');
 }, 4000);
 
 gt.async('unnamed', 1, function () {
     var js = path.join(examples, 'unnamed/*.js');
     var docs = path.join(examples, 'unnamed/docs');
-    gt.exec('node', [xplain, '--input', js, '--output', docs], 0, 'unnamed');
+    gt.exec('node', [xplain, '-f', 'gt', '--input', js, '--output', docs], 0, 'unnamed');
 }, 4000);
