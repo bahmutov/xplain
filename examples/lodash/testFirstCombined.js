@@ -12,6 +12,30 @@ QUnit.module('lodash.first combined');
     { 'a': 0, 'b': 0 }
     ];
 
+    // should return the first element
+    strictEqual(_.first(array), 1);
+
+    // should return the first two elements
+    deepEqual(_.first(array, 2), [1, 2]);
+
+    // should work with a `callback`
+      var actual = _.first(array, function(num) {
+        return num < 3;
+    });
+
+      deepEqual(actual, [1, 2]);
+}());
+
+/** @example first */
+(function() {
+    var array = [1, 2, 3];
+
+    var objects = [
+    { 'a': 2, 'b': 2 },
+    { 'a': 1, 'b': 1 },
+    { 'a': 0, 'b': 0 }
+    ];
+
     test('should return the first element', function() {
       strictEqual(_.first(array), 1);
   });

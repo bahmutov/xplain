@@ -10,14 +10,14 @@
     "yuidoc": "yuidoc src test",
     "doc": "gt test/*.js && node index.js -i src/*.js,test/*.js -v 1.0.1",
     "complexity": "jsc -p src/**/*.js --skip src/html-generation/assets/*.js --skip src/**/cover/**/*.js",
-    "example1": "node index.js -i examples/basic/*.js -o examples/basic/docs",
-    "example2": "node index.js -i examples/submodules/*.js -o examples/submodules/docs",
-    "example3": "node index.js -i examples/add/*.js -o examples/add/docs",
+    "example1": "node index.js -f gt -i examples/basic/*.js -o examples/basic/docs",
+    "example2": "node index.js -f gt -i examples/submodules/*.js -o examples/submodules/docs",
+    "example3": "node index.js -f gt -i examples/add/*.js -o examples/add/docs",
     "qunit": "node index.js -i examples/qunit/*.js -o examples/qunit/docs",
     "lodash": "node index.js -i examples/lodash/*.js -o examples/lodash/docs",
-    "anonymous": "node index.js -i examples/anonymous/*.js -o examples/anonymous/docs",
-    "immediate": "node index.js -i examples/immediate/*.js -o examples/immediate/docs",
-    "unnamed": "node index.js -i examples/unnamed/*.js -o examples/unnamed/docs"
+    "anonymous": "node index.js -f gt -i examples/anonymous/*.js -o examples/anonymous/docs",
+    "immediate": "node index.js -f gt -i examples/immediate/*.js -o examples/immediate/docs",
+    "unnamed": "node index.js -f gt -i examples/unnamed/*.js -o examples/unnamed/docs"
   },
   "repository": "",
   "keywords": [

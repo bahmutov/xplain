@@ -13,7 +13,7 @@ function parseName(code) {
 
 function parseNamedCode(code) {
 	check.verifyString(code, 'missing code, have ' + code);
-	var reg = /(?:|QUnit\.)test\(([\W\w]+),\s*function\s*\(\)\s*\{([\W\w]*)}\s*\)/;
+	var reg = /^\s*(?:|QUnit\.)test\(([\W\w]+),\s*function\s*\(\)\s*\{([\W\w]*)}\s*\)/;
 
 	var matched = reg.exec(code);
 	// console.log(matched);
@@ -32,7 +32,7 @@ function parseNamedCode(code) {
 }
 
 function parseAnonymousCode(code) {
-	console.log('parsing anonymous code');
+	// console.log('parsing anonymous code');
 	check.verifyString(code, 'missing code, have ' + code);
 	var reg = /(?:|QUnit\.)test\(\s*function\s*\(\)\s*\{([\W\w]*)}\s*\)/;
 
@@ -52,9 +52,9 @@ function parseAnonymousCode(code) {
 }
 
 function parseImmediateFunction(code) {
-	console.log('parsing immediate function');
+	//console.log('parsing immediate function');
 	check.verifyString(code, 'missing code, have ' + code);
-	var reg = /\(\s*function\s*\(\s*\)\s*\{([\W\w]*)}\s*(?:\)\s*\(\s*\)|\(\s*\)\s*\))/;
+	var reg = /^\s*\(\s*function\s*\(\s*\)\s*\{([\W\w]*)}\s*(?:\)\s*\(\s*\)|\(\s*\)\s*\))/;
 
 	var matched = reg.exec(code);
 	// console.log('from code\n', code);
@@ -74,8 +74,10 @@ function parseImmediateFunction(code) {
 
 function parseCode(code) {
 	check.verifyString(code, 'missing code, have ' + code);
+	//console.log(code);
 	var parsed = parseNamedCode(code);
 	if (parsed) {
+		// console.log('got named code\n', parsed);
 		return parsed;
 	}
 

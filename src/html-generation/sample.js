@@ -4,13 +4,14 @@ var reformat = require('../utils/code').reformat;
 var html = require('pithy');
 
 var sampleDivId = 1;
-function sampleDiv(apiExample) {
+function sampleDiv(apiExample, framework) {
     check.verifyObject(apiExample, 'missing documented');
     check.verifyObject(apiExample.comment, 'missing comment')
+    check.verifyString(framework, 'missing framework name');
 
     var code = apiExample.comment.code;
     check.verifyString(code, 'missing code');
-    var humanForm = transform(code);
+    var humanForm = transform(code, framework);
     check.verifyObject(humanForm, 'could not convert code ' + code + ' to human form');
     check.verifyString(humanForm.code, 'missing human form from code ' + code);
 

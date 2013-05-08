@@ -5,20 +5,20 @@ var sampleDiv = require('./sample');
 var exampleDiv = require('./example');
 var reformat = require('../utils/code').reformat;
 
-function examplesToHtml(name, apiExamples) {
+function examplesToHtml(name, apiExamples, framework) {
     check.verifyString(name, 'missing name');
     check.verifyArray(apiExamples, 'missing api examples');
 
     var examples = apiExamples.map(function (example) {
-        return exampleDiv(name, example.comment);
+        return exampleDiv(name, example.comment, framework);
     });
     return examples;
 }
 
-function samplesToHtml(apiSamples) {
+function samplesToHtml(apiSamples, framework) {
     check.verifyArray(apiSamples, 'missing api samples');
     var samples = apiSamples.map(function (example) {
-        return sampleDiv(example);
+        return sampleDiv(example, framework);
     });
     return samples;
 }
@@ -46,8 +46,10 @@ function codeDiv(id, apiComment) {
     return codeElement;
 }
 
-function methodDiv(commented) {
+function methodDiv(commented, framework) {
     check.verifyObject(commented, 'missing api comment object');
+    check.verifyString(framework, 'missing framework');
+
     var apiComment = commented.comment;
     check.verifyObject(apiComment, 'expected comment object');
     console.assert(apiComment.ctx, 'missing ctx property');
@@ -58,8 +60,8 @@ function methodDiv(commented) {
     var toggles = [];
     var exampleElements = [];
 
-    var samples = samplesToHtml(commented.sample);
-    var examples = examplesToHtml(name, commented.example);
+    var samples = samplesToHtml(commented.sample, framework);
+    var examples = examplesToHtml(name, commented.example, framework);
 
     check.verifyArray(samples, 'could not get examples tags');
     check.verifyArray(examples, 'could not get examples tags');

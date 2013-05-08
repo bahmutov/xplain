@@ -38,7 +38,8 @@ function generateDocs(options) {
     toDoc(rootModule, {
         outputFolder: options.outputFolder,
         title: options.title,
-        apiVersion: options.apiVersion
+        apiVersion: options.apiVersion,
+        framework: options.framework
     });
 }
 
