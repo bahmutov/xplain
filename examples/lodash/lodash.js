@@ -453,6 +453,13 @@
         function toArray(collection) {
             return collection && "number" == typeof collection.length ? slice(collection) : values(collection);
         }
+
+        /**
+         * Creates an array with all falsey values of `array` removed. The values
+         * `false`, `null`, `0`, `""`, `undefined` and `NaN` are all falsey.
+         *
+         * @method compact
+         */
         function compact(array) {
             for (var index = -1, length = array ? array.length : 0, result = []; length > ++index; ) {
                 var value = array[index];
@@ -460,6 +467,13 @@
             }
             return result;
         }
+
+        /**
+         * Creates an array of `array` elements not present in the other arrays
+         * using strict equality for comparisons, i.e. `===`.
+         *
+         * @method difference
+         */
         function difference(array) {
             for (var index = -1, length = array ? array.length : 0, flattened = concat.apply(arrayRef, nativeSlice.call(arguments, 1)), contains = cachedContains(flattened), result = []; length > ++index; ) {
                 var value = array[index];
@@ -467,6 +481,13 @@
             }
             return result;
         }
+
+        /**
+         * This method is similar to `_.find`, except that it returns the index of
+         * the element that passes the callback check, instead of the element itself.
+         *
+         * @method findIndex
+         */
         function findIndex(array, callback, thisArg) {
             var index = -1, length = array ? array.length : 0;
             for (callback = lodash.createCallback(callback, thisArg); length > ++index; ) if (callback(array[index], index, array)) return index;
