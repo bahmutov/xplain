@@ -12,11 +12,8 @@ body {
   width: 85%;
   padding: 5px 5px 0px 5px;
   margin: 10px auto 0 auto;
-  /*max-width: 700px;*/
-  /* lodash.com has great looking API docs */
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 1.25em;
-  /* line-height: 1.25em; */
   color: #222;
 }
 
@@ -35,55 +32,39 @@ body {
   overflow-x: hidden;
   overflow-y: auto;
   left: 50px;
-  /*top: 5em;*/
   position: fixed;
-  /*bottom: 0;*/
 }
 
 .content a:link, a:visited {
   color: #444;
-  /* font-family: monospace; */
   font-family: Consolas, 'Courier New', monospace;
 }
 
 .content #docs {
   padding-left: 2em;
-  /*padding-right: 105px;*/
   width: 85%;
   float: right;
   overflow-x: hidden;
   overflow-y: auto;
   top: 0;
-  /*position: fixed;*/
-  /*right: 50px;*/
-  /*bottom: 0;*/
 }
 
 .namedCode {
   margin-bottom: 5px;
   padding: 4px 0 0 0;
   border-radius: 5px;
-  /*background-color: #fff;*/
-  /*border: #ddd solid 1px;*/
+}
+
+div.description > p > code {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  text-decoration: underline;
 }
 
 .example {
-  /* border-left: Bisque solid thick;*/
-  /* padding-left: 5px;*/
-  /*margin-bottom: 5px;*/
   display: none;
 }
 
 .sample {
-  /*border-left: lightGreen solid thick;*/
-  /*padding-left: 5px;*/
-  /*border: gray solid thin;*/
-  /*
-  margin-bottom: 5px;
-  padding: 2px 0 0 0;
-  border-radius: 5px;
-  background-color: #eeeeee;
-  */
 }
 
 span.sampleName {
@@ -117,7 +98,6 @@ pre {
 .method {
   border: none;
   border-bottom: 1px solid gray;
-  /*padding-left: 5px;*/
   padding-bottom: 3px;
 }
 
@@ -129,13 +109,10 @@ pre {
 }
 
 .methodCode {
-  /*border-left: lightGray solid thick;*/
-  /*padding-left: 5px;*/
   display: none;
 }
 
 code {
-  /*margin-top: 0.5em;*/
 }
 
 .showing {
