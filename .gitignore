@@ -31,3 +31,5 @@
 /examples/unnamed/docs
 /src/doc-transform/adapters/qunit/test/cover
 /src/utils/test/cover
+/examples/underscore/cover
+/examples/underscore/docs
