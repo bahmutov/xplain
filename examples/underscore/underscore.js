@@ -389,10 +389,11 @@
 
    @method first
   */
-  _.first = _.head = _.take = function(array, n, guard) {
+  _.first = function(array, n, guard) {
     if (array == null) return void 0;
     return (n != null) && !guard ? slice.call(array, 0, n) : array[0];
   };
+   _.head = _.take = _.first;
 
   /**
     Returns everything but the last entry of the array. Especially useful on
@@ -405,6 +406,7 @@
     return slice.call(array, 0, array.length - ((n == null) || guard ? 1 : n));
   };
 
+  /** */
   // Get the last element of an array. Passing **n** will return the last N
   // values in the array. The **guard** check allows it to work with `_.map`.
   _.last = function(array, n, guard) {
