@@ -1,13 +1,14 @@
-var _ = require('./underscore-min');
+var _ = require('./underscore');
 
 QUnit.module("Arrays");
 
-/** @sample first */
+/** @sample Arrays/first */
 QUnit.test(function () {
     QUnit.equal(_.first([5,4,3,2,1]), 5, 'returns first element');
+    QUnit.deepEqual(_.first([1,2,3], 2), [1, 2], 'can pass an index to first');
 });
 
-/** */
+/** @example Arrays/first */
 QUnit.test("first", function() {
     QUnit.equal(_.first([1,2,3]), 1, 'can pull out the first element of an array');
     QUnit.equal(_([1, 2, 3]).first(), 1, 'can perform OO-style "first()"');

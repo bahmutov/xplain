@@ -381,6 +381,7 @@
 
   // Array Functions
   // ---------------
+  /** @module Arrays */
 
   /**
    Get the first element of an array. Passing **n** will return the first N

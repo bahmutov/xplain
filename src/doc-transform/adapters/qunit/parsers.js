@@ -25,27 +25,25 @@ function parseOkArguments(args) {
 }
 
 // top level parsers for individual assertions
-function parseStrictEqual(line) {
-    var isEqualReg = /(?:|QUnit\.)strictEqual\(([\W\w]+)\);/;
-    if (!isEqualReg.test(line)) {
+function parseEqual(line) {
+    var isEqualReg = /(?:|QUnit\.)equal\(([\W\w]+)\);/;
+    var isStrictEqualReg = /(?:|QUnit\.)strictEqual\(([\W\w]+)\);/;
+    var isDeeptEqualReg = /(?:|QUnit\.)deepEqual\(([\W\w]+)\);/;
+    var equalRegs = [isEqualReg, isStrictEqualReg, isDeeptEqualReg];
+
+    var matchingReg = null;
+    equalRegs.some(function (reg) {
+        if (reg.test(line)) {
+            matchingReg = reg;
+            return true;
+        }
+    });
+    if (!matchingReg) {
         return null;
     }
-    var matches = isEqualReg.exec(line);
+    var matches = matchingReg.exec(line);
     var equalArguments = matches[1];
     check.verifyString(equalArguments, 'invalid equal arguments');
-    var parsed = parseEqualArguments(equalArguments);
-    check.verifyObject(parsed, 'did not get parsed arguments');
-    return parsed.op + '; // ' + parsed.expected;
-}
-
-function parseDeepEqual(line) {
-    var isEqualReg = /(?:|QUnit\.)deepEqual\(([\W\w]+)\);/;
-    if (!isEqualReg.test(line)) {
-        return null;
-    }
-    var matches = isEqualReg.exec(line);
-    var equalArguments = matches[1];
-    check.verifyString(equalArguments, 'invalid array equal arguments');
     var parsed = parseEqualArguments(equalArguments);
     check.verifyObject(parsed, 'did not get parsed arguments');
     return parsed.op + '; // ' + parsed.expected;
@@ -66,7 +64,7 @@ function parseOk(line) {
 }
 
 var lineParsers = [
-    parseStrictEqual, parseDeepEqual, parseOk
+    parseEqual, parseOk
 ];
 
 function transformAssertion(line) {
