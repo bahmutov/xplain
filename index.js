@@ -7,7 +7,7 @@ var package = require('./package.json');
 
 var info = 'xplain - JavaScript API documentation generator\n' +
     '  version: ' + package.version + '\n' +
-    '  author: ' + package.author;
+    '  author: ' + JSON.stringify(package.author);
 
 var program = require('optimist')
     .usage(info)

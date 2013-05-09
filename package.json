@@ -1,6 +1,6 @@
 {
   "name": "xplain",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Generates API documentation with unit tested examples",
   "main": "index.js",
   "bin": "index.js",
@@ -10,15 +10,16 @@
     "yuidoc": "yuidoc src test",
     "doc": "gt test/*.js && node index.js -i src/*.js,test/*.js -v 1.0.1",
     "complexity": "jsc -p src/**/*.js --skip src/html-generation/assets/*.js --skip src/**/cover/**/*.js",
-    "example1": "node index.js -f gt -i examples/basic/*.js -o examples/basic/docs",
-    "example2": "node index.js -f gt -i examples/submodules/*.js -o examples/submodules/docs",
-    "example3": "node index.js -f gt -i examples/add/*.js -o examples/add/docs",
+    "basic": "node index.js -f gt -i examples/basic/*.js -o examples/basic/docs",
+    "submodules": "node index.js -f gt -i examples/submodules/*.js -o examples/submodules/docs",
+    "add": "node index.js -f gt -i examples/add/*.js -o examples/add/docs",
     "qunit": "node index.js -i examples/qunit/*.js -o examples/qunit/docs",
     "lodash": "node index.js -i examples/lodash/*.js -o examples/lodash/docs",
     "underscore": "node index.js -i examples/underscore/*.js -o examples/underscore/docs",
     "anonymous": "node index.js -f gt -i examples/anonymous/*.js -o examples/anonymous/docs",
     "immediate": "node index.js -f gt -i examples/immediate/*.js -o examples/immediate/docs",
-    "unnamed": "node index.js -f gt -i examples/unnamed/*.js -o examples/unnamed/docs"
+    "unnamed": "node index.js -f gt -i examples/unnamed/*.js -o examples/unnamed/docs",
+    "deprecated": "node index.js -i examples/deprecated/*.js -o examples/deprecated/docs -t deprecated"
   },
   "repository": "",
   "keywords": [

@@ -2,7 +2,7 @@ var check = require('check-types');
 
 function parseName(code) {
 	check.verifyString(code, 'missing code');
-	var reg = /(?:'|")(\s*[\w\s]+\s*)(?:'|")/;
+	var reg = /(?:'|")(\s*[\w\W\s]+\s*)(?:'|")/;
 	var matched = reg.exec(code);
 	// console.log(matched);
 	if (!Array.isArray(matched)) {

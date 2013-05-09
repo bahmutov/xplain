@@ -85,6 +85,9 @@ function methodDiv(commented, framework) {
     var codeElement = codeDiv(id, apiComment);
 
     var nameParts = [name];
+    if (apiComment.isDeprecated()) {
+        nameParts.push(html.span(".tag", "deprecated"));
+    }
     if (!apiComment.isPublic()) {
         nameParts.push(html.span(".tag", "private"));
     }
@@ -97,7 +100,7 @@ function methodDiv(commented, framework) {
     // console.log(apiComment.description.summary);
     var methodElement = html.div({
         id: name,
-        class: "method"
+        class: 'method'
     }, [nameElement,
         descriptionElement]
         .concat(samples)
@@ -115,9 +118,13 @@ function methodDiv(commented, framework) {
         }
         description += summary;
     }
+    var indexClass = 'tooltip';
+    if (apiComment.isDeprecated()) {
+        indexClass += ' deprecated';
+    }
     var indexAttributes = {
         href: '#' + name,
-        class: 'tooltip',
+        class: indexClass,
         title: description
     };
     if (!apiComment.isPublic()) {

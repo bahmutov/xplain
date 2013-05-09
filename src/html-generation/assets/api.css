@@ -152,6 +152,10 @@ div .moduleName {
   }
 }
 
+.deprecated {
+  text-decoration: line-through;
+}
+
 .tooltip-theme {
   border-radius: 5px;
   border: 1px solid #000;

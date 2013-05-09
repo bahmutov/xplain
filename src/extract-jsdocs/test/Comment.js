@@ -8,6 +8,8 @@ var examples = path.join(__dirname, '../../../examples');
 var foo = path.join(examples, 'basic/foo.js');
 var fooTests = path.join(examples, 'basic/fooTests.js');
 
+var deprecated = path.join(examples, 'deprecated/test.js');
+
 gt.test('basics', function () {
     gt.arity(Comment, 1, 'expects single argument');
 });
@@ -33,7 +35,7 @@ gt.test('foo method in basic example', function () {
     gt.ok(C.isPublic(), 'method is public');
 });
 
-gt.test('bar method in basic example', function () {
+gt.test('bar function in basic example', function () {
     var files = [foo];
     var comments = getComments(files);
     gt.array(comments, 'expected array back');
@@ -75,8 +77,25 @@ gt.test('@example', function () {
 
     var c = comments[1];
     var C = new Comment(c);
+    // console.dir(C);
     gt.array(C.tags, 'has tags');
     gt.ok(C.hasTags(), 'comment has some tags');
     gt.ok(C.isExample(), 'comment is an example');
     gt.equal(C.exampleFor(), 'foo', 'foo is target');
+    gt.equal(C.filename, fooTests, 'correct filename');
+});
+
+gt.test('@deprecated', function () {
+    var files = [deprecated];
+    var comments = getComments(files);
+    gt.array(comments, 'expected array back');
+    gt.equal(comments.length, 1, 'single comment');
+
+    var c = comments[0];
+    var C = new Comment(c);
+    // console.dir(C);
+    gt.array(C.tags, 'has tags');
+    gt.ok(C.hasTags(), 'comment has some tags');
+    gt.ok(!C.isExample(), 'comment is not an example');
+    gt.ok(C.isDeprecated(), 'function is deprecated');
 });

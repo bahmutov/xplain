@@ -43,12 +43,16 @@ Comment.prototype.isPublic = function () {
     return this.isTagged('private') === false;
 };
 
+Comment.prototype.isDeprecated = function () {
+    return !!this.isTagged('deprecated');
+}
+
 Comment.prototype.isModule = function () {
     return this.isTagged('module');
 };
 
 Comment.prototype.isMethod = function () {
-    return this.isTagged('method');
+    return this.isTagged('method') || this.isTagged('function');
 };
 
 Comment.prototype.isExample = function() {
@@ -78,7 +82,7 @@ Comment.prototype.getModuleName = function ()
 
 Comment.prototype.getMethodName = function ()
 {
-    return this.tagValue('method');
+    return this.tagValue('method') || this.tagValue('function');
 };
 
 module.exports = Comment;

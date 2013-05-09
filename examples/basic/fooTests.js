@@ -8,7 +8,7 @@ gt.test('basic usage', function () {
 });
 
 /** @example foo */
-gt.test('advanced usage', function () {
+gt.test('advanced usage, foo', function () {
     gt.arity(foo, 0, 'no arguments expected');
     gt.string(foo(), 'returns a string');
 });

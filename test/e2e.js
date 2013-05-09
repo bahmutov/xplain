@@ -51,3 +51,9 @@ gt.async('unnamed', 1, function () {
     var docs = path.join(examples, 'unnamed/docs');
     gt.exec('node', [xplain, '-f', 'gt', '--input', js, '--output', docs], 0, 'unnamed');
 }, 4000);
+
+gt.async('deprecated', 1, function () {
+    var js = path.join(examples, 'deprecated/*.js');
+    var docs = path.join(examples, 'deprecated/docs');
+    gt.exec('node', [xplain, '-f', 'gt', '--input', js, '--output', docs], 0, 'deprecated');
+}, 4000);
