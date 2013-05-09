@@ -93,3 +93,10 @@ gt.test('single assertion', function () {
 	gt.equal(parsed.name, 'sample add usage');
 	gt.equal(parsed.code, 'gt.equal(add(2, 3), 5);');
 });
+
+gt.test('name with comma', function () {
+	var txt = 'gt.test("foo, bar",function() {});';
+	var p = parseCode(txt);
+	gt.equal(p.name, 'foo, bar', 'grabs test name, even if it has a comma');
+	gt.equal(p.code, '', 'there is no source code');
+});

@@ -77,10 +77,12 @@ gt.test('@example', function () {
 
     var c = comments[1];
     var C = new Comment(c);
+    // console.dir(C);
     gt.array(C.tags, 'has tags');
     gt.ok(C.hasTags(), 'comment has some tags');
     gt.ok(C.isExample(), 'comment is an example');
     gt.equal(C.exampleFor(), 'foo', 'foo is target');
+    gt.equal(C.filename, fooTests, 'correct filename');
 });
 
 gt.test('@deprecated', function () {
