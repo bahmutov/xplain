@@ -66,6 +66,7 @@ There are several API examples that I found particularly useful.
 ## New @- tags
 
 *xplain* uses two new custom *jsdoc* tags:
+
 1. **@sample** - transforms the unit test that follows into human readable form and displays the code block
 right under the method's description.
 2. **@example** - displays the unit test only when clicked on the button with the test's name.
