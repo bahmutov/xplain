@@ -60,8 +60,28 @@ There are 4 levels of details captured in the API.
 
 There are several API examples that I found particularly useful.
 
-* [lo-dash API](http://lodash.com/docs) is beautiful and extremely easy to use.
+* [lo-dash](http://lodash.com/docs) and [underscore](http://underscorejs.org/) APIs are beautiful and extremely easy to use.
 * [tooltipster](http://calebjacob.com/tooltipster/) gently introduces its features from basic use to more advanced.
+
+## New @- tags
+
+*xplain* uses two new custom *jsdoc* tags:
+1. **@sample** - transforms the unit test that follows into human readable form and displays the code block
+right under the method's description.
+2. **@example** - displays the unit test only when clicked on the button with the test's name.
+
+    /** @sample Arrays/first */
+    QUnit.test(function () {
+        QUnit.equal(_.first([5,4,3,2,1]), 5, 'returns first element');
+        QUnit.deepEqual(_.first([1,2,3], 2), [1, 2], 'can pass an index to first');
+    });
+
+will be transformed into
+
+    _.first([5, 4, 3, 2, 1]); // 5
+    _.first([1, 2, 3], 2); // [1,2]
+
+If a unit test has a name, it will be displayed above the transformed code.
 
 ## Small print
 
