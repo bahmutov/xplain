@@ -52,10 +52,11 @@ function methodDiv(commented, framework) {
 
     var apiComment = commented.comment;
     check.verifyObject(apiComment, 'expected comment object');
-    console.assert(apiComment.ctx, 'missing ctx property');
-    console.assert(apiComment.ctx.type === 'function', 'ctx is not function');
-    check.verifyString(apiComment.ctx.name, 'missing function name');
-    var name = apiComment.ctx.name;
+    var ctx = apiComment.ctx;
+    console.assert(ctx, 'missing ctx property, comment', apiComment);
+    // console.assert(ctx.type === 'function', 'ctx is not function, but', ctx);
+    check.verifyString(ctx.name, 'missing function name');
+    var name = ctx.name;
 
     var toggles = [];
     var exampleElements = [];

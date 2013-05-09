@@ -10,6 +10,11 @@ gt.test('empty code', function () {
     gt.equal(transform(''), '', 'empty input -> empty output');
 });
 
+gt.test('QUnit.equal', function () {
+    var code = 'QUnit.equal(_.first(array), 1);';
+    gt.equal(transform(code), '_.first(array); // 1');
+});
+
 gt.test('QUnit.strictEqual', function () {
     var code = 'QUnit.strictEqual(_.first(array), 1);';
     gt.equal(transform(code), '_.first(array); // 1');

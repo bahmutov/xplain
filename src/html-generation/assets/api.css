@@ -57,8 +57,10 @@ body {
 }
 
 div.description > p > code {
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  text-decoration: underline;
+  /* font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; */
+  font-family: monospace;
+  font-size: 1.25em;
+  text-decoration: none;
 }
 
 .example {
