@@ -157,12 +157,13 @@ function docModule(aModule, doc, framework) {
 	check.verifyString(framework, 'missing framework string');
 
 	console.log('documenting module', aModule.name);
+	if (aModule.name) {
+		check.verifyString(aModule.name, 'missing module name');
+		doc.index.push(html.div(".moduleName", [aModule.name]));
+	}
+
 	var methods = aModule.methodDocs;
 	if (methods) {
-		if (aModule.name) {
-			check.verifyString(aModule.name, 'missing module name');
-			doc.index.push(html.div(".moduleName", [aModule.name]));
-		}
 		Object.keys(methods).forEach(function (name) {
 			var method = methods[name];
 			console.log('documenting method', name);
