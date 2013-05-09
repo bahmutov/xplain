@@ -71,6 +71,9 @@ There are several API examples that I found particularly useful.
 right under the method's description.
 2. **@example** - displays the unit test only when clicked on the button with the test's name.
 
+
+### Example
+
     /** @sample Arrays/first */
     QUnit.test(function () {
         QUnit.equal(_.first([5,4,3,2,1]), 5, 'returns first element');
