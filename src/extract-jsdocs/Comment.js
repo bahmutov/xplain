@@ -43,6 +43,10 @@ Comment.prototype.isPublic = function () {
     return this.isTagged('private') === false;
 };
 
+Comment.prototype.isDeprecated = function () {
+    return !!this.isTagged('deprecated');
+}
+
 Comment.prototype.isModule = function () {
     return this.isTagged('module');
 };
