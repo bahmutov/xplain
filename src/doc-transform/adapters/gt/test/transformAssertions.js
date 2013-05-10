@@ -10,6 +10,16 @@ gt.test('empty code', function () {
     gt.equal(transform(''), '', 'empty input -> empty output');
 });
 
+gt.test('gt.ok', function () {
+    var code = 'gt.ok(true);';
+    gt.equal(transform(code), 'true; // true');
+});
+
+gt.test('gt.ok with message', function () {
+    var code = 'gt.ok(true, "should be true");';
+    gt.equal(transform(code), 'true; // true');
+});
+
 gt.test('single gt.equal', function () {
     var code = 'gt.equal(add(2, 3), 5);';
     gt.equal(transform(code), 'add(2,3); // 5');

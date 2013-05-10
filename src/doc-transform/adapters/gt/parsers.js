@@ -62,7 +62,7 @@ function parseArityArguments(args) {
 
 // top level parsers for individual assertions
 function parseEqual(line) {
-    var isEqualReg = /(?:gt|QUnit)\.equal\(([\W\w]+)\);/;
+    var isEqualReg = /(?:gt)\.equal\(([\W\w]+)\);/;
     if (!isEqualReg.test(line)) {
         return null;
     }
@@ -76,7 +76,7 @@ function parseEqual(line) {
 }
 
 function parseArrayEqual(line) {
-    var isEqualReg = /(?:gt|QUnit)\.aequal\(([\W\w]+)\);/;
+    var isEqualReg = /(?:gt)\.aequal\(([\W\w]+)\);/;
     if (!isEqualReg.test(line)) {
         return null;
     }
@@ -91,7 +91,7 @@ function parseArrayEqual(line) {
 }
 
 function parseNumber(line) {
-    var reg = /(?:gt|QUnit)\.number\(([\W\w]+)\);/;
+    var reg = /(?:gt)\.number\(([\W\w]+)\);/;
     if (!reg.test(line)) {
         return null;
     }
@@ -105,7 +105,7 @@ function parseNumber(line) {
 }
 
 function parseOk(line) {
-    var reg = /(?:gt|QUnit)\.ok\(([\W\w]+)\);/;
+    var reg = /(?:gt)\.ok\(([\W\w]+)\);/;
     if (!reg.test(line)) {
         return null;
     }
@@ -115,11 +115,11 @@ function parseOk(line) {
     check.verifyString(args, 'invalid number arguments');
     var parsed = parseOkArguments(args);
     check.verifyObject(parsed, 'did not get parsed arguments');
-    return parsed.op + '; // returns truthy value';
+    return parsed.op + '; // true';
 }
 
 function parseFunc(line) {
-    var reg = /(?:gt|QUnit)\.func\(([\W\w]+)\);/;
+    var reg = /(?:gt)\.func\(([\W\w]+)\);/;
     if (!reg.test(line)) {
         return null;
     }
@@ -132,7 +132,7 @@ function parseFunc(line) {
 }
 
 function parseArity(line) {
-    var reg = /(?:gt|QUnit)\.arity\(([\W\w]+)\);/;
+    var reg = /(?:gt)\.arity\(([\W\w]+)\);/;
     if (!reg.test(line)) {
         return null;
     }
