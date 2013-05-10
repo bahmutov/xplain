@@ -120,6 +120,9 @@ function methodDiv(commented, framework) {
         description += summary;
     }
     var indexClass = 'tooltip';
+    if (!apiComment.isPublic()) {
+        indexClass += ' private';
+    }
     if (apiComment.isDeprecated()) {
         indexClass += ' deprecated';
     }
