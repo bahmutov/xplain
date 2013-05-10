@@ -43,7 +43,7 @@ a:link, a:visited {
   font-family: Consolas, 'Courier New', monospace;
 }
 
-a:link, a:visited.private {
+a:link.private, a:visited.private {
   color: #AAA;
 }
 
