@@ -32,19 +32,20 @@ gt.test('basic example', function () {
     var root = d2m(comments);
     gt.object(root, 'returns root module object');
     // console.dir(root);
-    gt.undefined(root.name, 'root module has no name');
-    gt.object(root.methodDocs, 'root module has method docs');
-    gt.equal(Object.keys(root.methodDocs).length, 2, 'methods');
+    gt.null(root.name, 'root module has no name');
+    gt.object(root.docs, 'root module has method docs');
+    gt.equal(root.docNumber(), 2, 'number of docs');
 });
 
 gt.test('empty modules tree', function () {
     var root = d2m([]);
     gt.object(root, 'returns root module object');
-    gt.undefined(root.name, 'root module has no name');
-    gt.undefined(root.methodDocs, 'root module has no docs');
+    gt.null(root.name, 'root module has no name');
+    gt.equal(root.docNumber(), 0, 'root module has no docs');
 })
 
 gt.test('skip samples', function () {
+    // just tests, without functions, so nothing.
     var files = [fooTests];
     var comments = getComments(files);
     // console.log(JSON.stringify(comments));
@@ -54,9 +55,9 @@ gt.test('skip samples', function () {
     var root = d2m(comments);
     gt.object(root, 'returns root module object');
     // console.dir(root);
-    gt.undefined(root.name, 'root module has no name');
-    gt.object(root.methodDocs, 'root module has method docs');
-    gt.equal(Object.keys(root.methodDocs).length, 0, 'no methods');
+    gt.null(root.name, 'root module has no name');
+    gt.object(root.docs, 'root module has method docs');
+    gt.equal(root.docNumber(), 0, 'no methods');
 });
 
 gt.test('submodules', function () {
@@ -69,8 +70,8 @@ gt.test('submodules', function () {
     gt.object(root, 'returns root module object');
 
     // console.dir(root);
-    gt.undefined(root.name, 'root module name is undefined');
-    gt.equal(root['A'].name, 'A', 'first module is A');
-    gt.equal(root['B'].name, 'B', 'second module is B');
-    gt.equal(root['A']['C'].name, 'A/C', 'A/C submodule');
+    gt.null(root.name, 'root module name is undefined');
+    gt.equal(root.modules['A'].name, 'A', 'first module is A');
+    gt.equal(root.modules['B'].name, 'B', 'second module is B');
+    gt.equal(root.modules['A'].modules['C'].name, 'A/C', 'A/C submodule');
 });
