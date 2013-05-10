@@ -1,4 +1,5 @@
 var check = require('check-types');
+var _ = require('lodash');
 
 var DocModule = function () {
     this.name = null;
@@ -27,6 +28,14 @@ DocModule.prototype.addSubModule = function (name) {
     var fullName = this.name ? this.name + '/' + name : name;
     this.modules[name].name = fullName;
     return this.modules[name];
+};
+
+DocModule.prototype.getSubModules = function () {
+    return _.sortBy(this.modules, 'name');
+};
+
+DocModule.prototype.moduleNumber = function () {
+    return Object.keys(this.modules).length;
 };
 
 module.exports = DocModule;

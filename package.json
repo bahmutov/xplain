@@ -19,7 +19,8 @@
     "anonymous": "node index.js -f gt -i examples/anonymous/*.js -o examples/anonymous/docs",
     "immediate": "node index.js -f gt -i examples/immediate/*.js -o examples/immediate/docs",
     "unnamed": "node index.js -f gt -i examples/unnamed/*.js -o examples/unnamed/docs",
-    "deprecated": "node index.js -i examples/deprecated/*.js -o examples/deprecated/docs -t deprecated"
+    "deprecated": "node index.js -i examples/deprecated/*.js -o examples/deprecated/docs -t deprecated",
+    "sort": "node index.js -i examples/sort/*.js -o examples/sort/docs -t sorted"
   },
   "repository": "",
   "keywords": [

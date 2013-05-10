@@ -13,7 +13,11 @@ gt.test('modules are sorted', function () {
     var root = d2m(comments);
     gt.object(root, 'returns root module object');
     console.dir(root);
-    gt.undefined(root.name, 'root module has no name');
-    var names = Object.keys(root);
-    gt.aequal(names, ['A', 'B', 'Z'], 'modules are sorted by name');
+    gt.null(root.name, 'root module has no name');
+    gt.equal(root.moduleNumber(), 3);
+    var modules = root.getSubModules();
+    console.dir(modules);
+    gt.equal(modules[0].name, 'A');
+    gt.equal(modules[1].name, 'B');
+    gt.equal(modules[2].name, 'Z');
 });

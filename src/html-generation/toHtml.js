@@ -162,27 +162,17 @@ function docModule(aModule, doc, framework) {
 		doc.index.push(html.div(".moduleName", [aModule.name]));
 	}
 
-	var methods = aModule.methodDocs;
-	if (methods) {
-		Object.keys(methods).forEach(function (name) {
-			var method = methods[name];
-			console.log('documenting method', name);
-			// console.dir(method.comment);
+	Object.keys(aModule.docs).forEach(function (name) {
+		var method = aModule.docs[name];
+		console.log('documenting method', name);
 
-			var info = methodDiv(method, framework);
-			doc.index.push(info.name);
-			doc.docs.push(info.docs);
-		});
-	}
+		var info = methodDiv(method, framework);
+		doc.index.push(info.name);
+		doc.docs.push(info.docs);
+	});
 
-	Object.keys(aModule).forEach(function (key) {
-		if (key === 'methodDocs') {
-			return;
-		}
-		if (key === 'name') {
-			return;
-		}
-		var value = aModule[key];
-		docModule(value, doc, framework);
+	var submodules = aModule.getSubModules();
+	submodules.forEach(function (subModule) {
+		docModule(subModule, doc, framework);
 	});
 }
