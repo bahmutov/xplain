@@ -160,6 +160,10 @@ div .moduleName {
   }
 }
 
+.displayed {
+  display: block;
+}
+
 .deprecated {
   text-decoration: line-through;
 }

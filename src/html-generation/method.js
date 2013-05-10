@@ -23,7 +23,7 @@ function samplesToHtml(apiSamples, framework) {
     return samples;
 }
 
-function codeDiv(id, apiComment) {
+function codeDiv(id, apiComment, visible) {
     check.verifyString(id, 'missing code id');
     check.verifyString(apiComment.code, 'missing code');
 
@@ -31,10 +31,15 @@ function codeDiv(id, apiComment) {
     check.verifyString(prettyCode, 'could not make code pretty for\n', apiComment.code);
     var name = apiComment.ctx.type + ' ' + apiComment.ctx.name;
 
-    var codeElement = html.div({
+    var classNames = 'methodCode namedCode';
+    if (visible) {
+        classNames += ' displayed';
+    }
+    var attributes = {
         id: id + 'd',
-        class: "methodCode namedCode"
-    }, [
+        class: classNames
+    };
+    var codeElement = html.div(attributes, [
         html.span({
             class: "sampleName"
         }, name),
@@ -72,18 +77,27 @@ function methodDiv(commented, framework) {
         exampleElements.push(example.code);
     });
 
+    var MAX_CODE_LINES = 10;
+    var visibleCode = !samples.length &&
+        apiComment.getCodeLines() < MAX_CODE_LINES;
+    // console.dir(apiComment);
+
+    var toggleClass = 'toggle';
+    if (visibleCode) {
+        toggleClass += ' showing';
+    }
     var id = name + '_code_toggle';
     var sourceToggle = html.input({
-        class: "toggle",
-        type: "button",
-        value: "source",
+        class: toggleClass,
+        type: 'button',
+        value: 'source',
         id: id
     });
     toggles.push(sourceToggle);
 
     var togglesElement = html.div('.toggles', toggles);
 
-    var codeElement = codeDiv(id, apiComment);
+    var codeElement = codeDiv(id, apiComment, visibleCode);
 
     var nameParts = [name];
     if (apiComment.isDeprecated()) {

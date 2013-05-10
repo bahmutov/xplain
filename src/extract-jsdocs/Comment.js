@@ -85,4 +85,10 @@ Comment.prototype.getMethodName = function ()
     return this.tagValue('method') || this.tagValue('function');
 };
 
+// returns number of code lines
+Comment.prototype.getCodeLines = function ()
+{
+    return this.code ? (this.code.match(/\n/g) || []).length : 0;
+};
+
 module.exports = Comment;

@@ -33,6 +33,11 @@ gt.test('foo method in basic example', function () {
     gt.ok(!C.isPrivate, 'method is not private');
     gt.ok(!C.ignore, 'method is not ignored');
     gt.ok(C.isPublic(), 'method is public');
+    // console.dir(C);
+    var code = C.code;
+    gt.string(code, 'has code');
+    // console.dir((code.match(/\n/g) || []).length);
+    gt.equal(C.getCodeLines(), 2, 'number of code lines');
 });
 
 gt.test('bar function in basic example', function () {
