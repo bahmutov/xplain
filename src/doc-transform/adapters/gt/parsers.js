@@ -96,12 +96,24 @@ function parseNumber(line) {
         return null;
     }
     var matches = reg.exec(line);
-    // console.log('number matches', matches);
     var args = matches[1];
     check.verifyString(args, 'invalid number arguments');
     var parsed = parseNumberArguments(args);
     check.verifyObject(parsed, 'did not get parsed arguments');
-    return parsed.op + '; // returns a number';
+    return parsed.op + '; // a number';
+}
+
+function parseArray(line) {
+    var reg = /(?:gt)\.array\(([\W\w]+)\);/;
+    if (!reg.test(line)) {
+        return null;
+    }
+    var matches = reg.exec(line);
+    var args = matches[1];
+    check.verifyString(args, 'invalid array arguments');
+    var parsed = parseNumberArguments(args);
+    check.verifyObject(parsed, 'did not get parsed arguments');
+    return parsed.op + '; // Array';
 }
 
 function parseOk(line) {
@@ -146,7 +158,8 @@ function parseArity(line) {
 }
 
 var lineParsers = [
-    parseEqual, parseArrayEqual, parseNumber, parseOk, parseFunc, parseArity
+    parseEqual, parseArrayEqual, parseNumber,
+    parseArray, parseOk, parseFunc, parseArity
 ];
 
 function transformAssertion(line) {

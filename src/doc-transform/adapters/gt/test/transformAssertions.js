@@ -10,6 +10,11 @@ gt.test('empty code', function () {
     gt.equal(transform(''), '', 'empty input -> empty output');
 });
 
+gt.test('gt.array', function () {
+    var code = 'gt.array(a);';
+    gt.equal(transform(code), 'a; // Array');
+});
+
 gt.test('gt.ok', function () {
     var code = 'gt.ok(true);';
     gt.equal(transform(code), 'true; // true');
