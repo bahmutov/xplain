@@ -30,6 +30,11 @@ gt.test('strictEqual', function () {
     gt.equal(transform(code), '_.first(array); // 1');
 });
 
+gt.test('complicated QUnit.deepEqual', function () {
+    var code = '  QUnit.deepEqual(actual, [1, 2]);';
+    gt.equal(transform(code), 'actual; // [1,2]');
+});
+
 gt.test('QUnit.deepEqual', function () {
     var code = 'QUnit.deepEqual(_.first(array, 2), [1, 2]);';
     gt.equal(transform(code), '_.first(array,2); // [1,2]');
