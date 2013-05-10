@@ -157,13 +157,15 @@ function docModule(aModule, doc, framework) {
 	check.verifyString(framework, 'missing framework string');
 
 	console.log('documenting module', aModule.name);
-	if (aModule.name) {
+
+	var docs = aModule.getDocs();
+	check.verifyArray(docs, 'expected an array of docs');
+
+	if (aModule.name && docs.length) {
 		check.verifyString(aModule.name, 'missing module name');
 		doc.index.push(html.div(".moduleName", [aModule.name]));
 	}
 
-	var docs = aModule.getDocs();
-	check.verifyArray(docs, 'expected an array of docs');
 	docs.forEach(function (method) {
 		// var method = aModule.docs[name];
 		console.log('documenting method', method.name);
