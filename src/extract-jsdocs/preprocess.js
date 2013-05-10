@@ -3,6 +3,7 @@
 // so add some dummy text
 function preproces(source) {
     var clean = source.replace(/\n\s*@/g, '\n@');
+    clean = clean.replace(/\n\s*\*\s*@/g, '\n@');
     // tags that are common by themselves without description text
     clean = clean.replace(/\/\*\*\s*@sample/gi, '/**\nsample\n@sample');
     clean = clean.replace(/\/\*\*\s*@example/gi, '/**\nexample\n@example');

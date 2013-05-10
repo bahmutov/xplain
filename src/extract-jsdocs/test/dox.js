@@ -31,6 +31,52 @@ gt.test('parse tags', function () {
 	gt.equal(tags.length, 3, '3 tags');
 });
 
+gt.test('compact module', function () {
+	var comment = '/** @module a */';
+	var clean = preprocess(comment);
+	var comments = dox.parseComments(clean, {raw: true});
+	// console.dir(comments);
+
+	gt.array(comments, 'returned comments array');
+	gt.equal(comments.length, 1, 'single comment');
+	var tags = comments[0].tags;
+	gt.array(tags, 'returned tags array');
+	// console.dir(tags);
+	gt.equal(tags[0].type, 'module');
+	gt.equal(tags[0].string, 'a');
+});
+
+gt.test('three line module', function () {
+	var comment = '/**\n@module a\n*/';
+	var clean = preprocess(comment);
+	var comments = dox.parseComments(clean, {raw: true});
+	// console.dir(comments);
+
+	gt.array(comments, 'returned comments array');
+	gt.equal(comments.length, 1, 'single comment');
+	var tags = comments[0].tags;
+	gt.array(tags, 'returned tags array');
+	// console.dir(tags);
+	gt.equal(tags[0].type, 'module');
+	gt.equal(tags[0].string, 'a');
+});
+
+gt.test('three line module with wildcard', function () {
+	var comment = '/**\n* @module a\n*/';
+	var clean = preprocess(comment);
+	// console.log('clean\n' + clean);
+	var comments = dox.parseComments(clean, {raw: true});
+	// console.dir(comments);
+
+	gt.array(comments, 'returned comments array');
+	gt.equal(comments.length, 1, 'single comment');
+	var tags = comments[0].tags;
+	gt.array(tags, 'returned tags array');
+	// console.dir(tags);
+	gt.equal(tags[0].type, 'module');
+	gt.equal(tags[0].string, 'a');
+});
+
 gt.test('single line comment', function () {
 	var comment = '/** brief description\n@module a\n   @class myClass\n    @param {Number} a */';
 	var clean = preprocess(comment);
@@ -86,6 +132,7 @@ gt.test('param at start', function () {
 gt.test('param not at start', function () {
 	var comment = '/** \n @param {String} a \n*/';
 	var clean = preprocess(comment);
+	// console.log('clean\n' + clean);
 	var parsed = dox.parseComment(clean);
 	gt.object(parsed, 'parsed comment');
 	// console.dir(parsed);
