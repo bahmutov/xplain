@@ -1,6 +1,6 @@
 {
   "name": "xplain",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Generates API documentation with unit tested examples",
   "main": "index.js",
   "bin": "index.js",
