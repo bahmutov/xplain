@@ -1,13 +1,14 @@
 var check = require('check-types');
 var Documented = require('./Documented');
+var DocModule = require('./DocModule');
 
 var prevFilename = null;
-var rootModule = {};
+var rootModule = null;
 var currentModule = rootModule;
 
 function init() {
     prevFilename = null;
-    rootModule = {};
+    rootModule = new DocModule();
     currentModule = rootModule;
 }
 
@@ -36,18 +37,15 @@ function primaryParsing(collectedDocs) {
         }
 
         check.verifyObject(currentModule, 'invalid current module');
-        if (typeof currentModule.methodDocs === 'undefined') {
-            currentModule.methodDocs = {};
-        }
 
         var documented = new Documented(apiComment);
         if (apiComment.isMethod()) {
-            // currentModule.methodDocs.push(documented);
             var methodName = apiComment.getMethodName();
             check.verifyString(methodName, 'missing method name');
-            currentModule.methodDocs[methodName] = documented;
+            currentModule.add(methodName, documented);
         }
     });
+
     return rootModule;
 }
 
@@ -91,7 +89,6 @@ function attachComment(documented, commentType) {
         'could not get target from ' + JSON.stringify(documented));
     var target = findDocumented(targetName);
     check.verifyObject(target, 'could not find method for ' + targetName);
-    console.log('adding', commentType, 'to', targetName);
     target.add(documented, commentType);
 }
 
@@ -104,31 +101,37 @@ function findDocumented(name) {
     var m = rootModule;
     var k;
     for (k = 0; k < parts.length - 1; k += 1) {
-        if (m[parts[k]]) {
-            m = m[parts[k]];
+        var part = parts[k];
+        if (m.hasSubModule(part)) {
+            m = m.modules[parts[k]];
         } else {
             throw new Error('cannot find path ' + name);
         }
     }
     check.verifyObject(m, 'could not find module for ' + name);
-    check.verifyObject(m.methodDocs, 'missing method docs in ' + m.name);
-    return m.methodDocs[parts[parts.length - 1]];
+    check.verifyObject(m.docs, 'missing method docs in ' + m.name);
+    return m.docs[parts[parts.length - 1]];
 }
 
 function setupModule(name, rootModule)
 {
     check.verifyString(name, 'invalid module name');
     check.verifyObject(rootModule, 'invalid root module');
-    // console.log('setup module', name);
     var parts = name.split('/');
     var currentModule = rootModule;
+    var fullPath = null;
+
     parts.forEach(function (part) {
-        if (typeof currentModule[part] === 'undefined') {
-            currentModule[part] = {};
+        check.verifyString(part, 'missing part module string from ' + name);
+        fullPath = (fullPath ? fullPath + '/' + part : part);
+
+        if (currentModule.hasSubModule(part)) {
+            currentModule = currentModule.modules[part];
+        } else {
+            currentModule = currentModule.addSubModule(part);
         }
-        currentModule = currentModule[part];
     });
-    currentModule.name = name;
+    check.verifyObject(currentModule, 'missing module');
     return currentModule;
 }
 
