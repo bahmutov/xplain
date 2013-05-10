@@ -10,7 +10,13 @@ var DocModule = function () {
 DocModule.prototype.add = function (name, doc) {
     check.verifyString(name, 'missing doc name');
     check.verifyObject(doc, 'missing documentation');
+    doc.name = name;
     this.docs[name] = doc;
+};
+
+// returns individual docs sorted by name
+DocModule.prototype.getDocs = function () {
+    return _.sortBy(this.docs, 'name');
 };
 
 DocModule.prototype.docNumber = function () {
@@ -30,6 +36,7 @@ DocModule.prototype.addSubModule = function (name) {
     return this.modules[name];
 };
 
+// returns submodules sorted by name
 DocModule.prototype.getSubModules = function () {
     return _.sortBy(this.modules, 'name');
 };

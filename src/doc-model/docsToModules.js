@@ -3,7 +3,6 @@ var Documented = require('./Documented');
 var DocModule = require('./DocModule');
 
 var prevFilename = null;
-// var rootModule = {};
 var rootModule = null;
 var currentModule = rootModule;
 
@@ -102,8 +101,9 @@ function findDocumented(name) {
     var m = rootModule;
     var k;
     for (k = 0; k < parts.length - 1; k += 1) {
-        if (m[parts[k]]) {
-            m = m[parts[k]];
+        var part = parts[k];
+        if (m.hasSubModule(part)) {
+            m = m.modules[parts[k]];
         } else {
             throw new Error('cannot find path ' + name);
         }

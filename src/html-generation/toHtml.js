@@ -162,9 +162,11 @@ function docModule(aModule, doc, framework) {
 		doc.index.push(html.div(".moduleName", [aModule.name]));
 	}
 
-	Object.keys(aModule.docs).forEach(function (name) {
-		var method = aModule.docs[name];
-		console.log('documenting method', name);
+	var docs = aModule.getDocs();
+	check.verifyArray(docs, 'expected an array of docs');
+	docs.forEach(function (method) {
+		// var method = aModule.docs[name];
+		console.log('documenting method', method.name);
 
 		var info = methodDiv(method, framework);
 		doc.index.push(info.name);
