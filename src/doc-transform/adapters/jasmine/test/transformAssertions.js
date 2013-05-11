@@ -15,12 +15,12 @@ gt.test('gt.equal is ignored', function () {
     gt.equal(transform(code), 'gt.equal(1, 1);');
 });
 
-/*
-gt.test('QUnit.equal', function () {
-    var code = 'QUnit.equal(_.first(array), 1);';
-    gt.equal(transform(code), '_.first(array); // 1');
+gt.test('expect(foo).toBeTruthy();', function () {
+    var code = 'expect(foo).toBeTruthy();';
+    gt.equal(transform(code), 'foo; // true');
 });
 
+/*
 gt.test('QUnit.strictEqual', function () {
     var code = 'QUnit.strictEqual(_.first(array), 1);';
     gt.equal(transform(code), '_.first(array); // 1');

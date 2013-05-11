@@ -49,8 +49,8 @@ function parseEqual(line) {
     return parsed.op + '; // ' + parsed.expected;
 }
 
-function parseOk(line) {
-    var reg = /(?:\s+|^|QUnit\.)ok\(([\W\w]+)\);/;
+function parseExpectToBeTruthy(line) {
+    var reg = /^\s*expect\(([\W\w]+)\).toBeTruthy()/;
     if (!reg.test(line)) {
         return null;
     }
@@ -64,7 +64,7 @@ function parseOk(line) {
 }
 
 var lineParsers = [
-    parseEqual, parseOk
+    parseExpectToBeTruthy
 ];
 
 function transformAssertion(line) {
