@@ -1,6 +1,6 @@
 var check = require('check-types');
 
-var adapter = require('./adapters/adapter');
+var adapter = require('./adapters/adapter').adapter;
 var reformat = require('../utils/code').reformat;
 check.verifyFunction(reformat, 'could not get code reformat');
 
