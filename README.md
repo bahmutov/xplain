@@ -62,6 +62,7 @@ There are several API examples that I found particularly useful.
 
 * [lo-dash](http://lodash.com/docs) and [underscore](http://underscorejs.org/) APIs are beautiful and extremely easy to use.
 * [tooltipster](http://calebjacob.com/tooltipster/) gently introduces its features from basic use to more advanced.
+* [AngularJs](http://docs.angularjs.org/guide/expression) shows end to end unit test source as an example. The source code is not transformed from its original BDD Jasmine (?) style.
 
 ## New @- tags
 
