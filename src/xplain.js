@@ -6,7 +6,7 @@ var glob = require('glob');
 var unary = require('allong.es').es.unary;
 var mkdirp = require('mkdirp');
 
-var getApi = require('./extract-jsdocs/getTaggedComments');
+var getApi = require('./extract-jsdocs/getTaggedComments').getCommentsFromFiles;
 var toDoc = require('./html-generation/toHtml');
 var rethrow = require('./utils/errors').rethrow;
 var docsToModules = require('./doc-model/docsToModules');

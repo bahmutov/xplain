@@ -1,21 +1,16 @@
-/** foo
-@function foo */
+/** @function foo */
 function foo() {}
 
-/** foo
-@function foo1 */
+/** @function foo1 */
 function foo() {}
 
-/** foo
-@function foo2 */
+/** @function foo2 */
 function foo() {}
 
-/** foo
-@function foo3 */
+/** @function foo3 */
 function foo() {}
 
-/** foo
-@function foo4 */
+/** @function foo4 */
 function foo() {}
 
 /** foo

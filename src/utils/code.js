@@ -69,7 +69,7 @@ function countLines(code) {
 	}
 	check.verifyString(code, 'expected code string');
 	var lines = code.split('\n');
-	console.dir(lines);
+	// console.dir(lines);
 	var count = 0;
 	lines.forEach(function (line) {
 		if (/\w+/.test(line)) {

@@ -8,6 +8,7 @@ function preproces(source) {
     clean = clean.replace(/\/\*\*\s*@sample/gi, '/**\nsample\n@sample');
     clean = clean.replace(/\/\*\*\s*@example/gi, '/**\nexample\n@example');
     clean = clean.replace(/\/\*\*\s*@module/gi, '/**\nmodule\n@module');
+    clean = clean.replace(/\/\*\*\s*@function/gi, '/**\nfunction\n@function');
     return clean;
 }
 

@@ -8,6 +8,7 @@ var postprocess = require('./postprocess').comments;
 function getComments(source) {
     check.verifyString(source, 'missing source string ' + source);
     var cleaned = preprocess(source);
+    // console.log('cleaned', cleaned);
 
     var parsingOptions = {
         raw: false
@@ -54,4 +55,7 @@ function getFileApi(filename) {
     return comments;
 }
 
-module.exports = getTaggedComments;
+module.exports = {
+    getCommentsFromFiles: getTaggedComments,
+    getComments: getComments
+};
