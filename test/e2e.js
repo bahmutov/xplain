@@ -63,3 +63,9 @@ gt.async('sort', 1, function () {
     var docs = path.join(examples, 'sort/docs');
     gt.exec('node', [xplain, '-f', 'gt', '--input', js, '--output', docs], 0, 'sort');
 }, 2000);
+
+gt.async('long', 1, function () {
+    var js = path.join(examples, 'long/test.js');
+    var docs = path.join(examples, 'long/docs');
+    gt.exec('node', [xplain, '--input', js, '--output', docs], 0, 'long');
+}, 2000);
