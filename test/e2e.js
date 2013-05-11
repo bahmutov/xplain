@@ -69,3 +69,9 @@ gt.async('long', 1, function () {
     var docs = path.join(examples, 'long/docs');
     gt.exec('node', [xplain, '--input', js, '--output', docs], 0, 'long');
 }, 2000);
+
+gt.async('jasmine', 1, function () {
+    var js = path.join(examples, 'jasmine/spec.js');
+    var docs = path.join(examples, 'jasmine/docs');
+    gt.exec('node', [xplain, '-f', 'jasmine', '--input', js, '--output', docs], 0, 'jasmine');
+}, 2000);

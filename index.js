@@ -39,17 +39,14 @@ var program = require('optimist')
         string: true,
         description: 'unit testing framework name',
         default: 'qunit',
-        check: function (value) {
-            return value === 'gt' || value === 'qunit'
-        }
+        check: xplain.isSupported
     })
     .demand(['input'])
     .argv;
 
-var allowedFrameworks = {'gt': true, 'qunit': true};
-if (!(program.framework in allowedFrameworks)) {
+if (!xplain.isSupported(program.framework)) {
     console.error('Invalid framework ' + program.framework);
-    console.error('Available', allowedFrameworks);
+    console.error('Available', xplain.supportedFrameworks());
     process.exit(-1);
 }
 
@@ -74,8 +71,8 @@ if (program.title) {
 program.title && console.log('title', program.title);
 program.version && console.log('version', program.version);
 
-check.verifyFunction(xplain, 'xplain should be a function');
-xplain({
+check.verifyFunction(xplain.document, 'xplain have document function');
+xplain.document({
     patterns: inputFiles,
     outputFolder: fullFolder,
     title: program.title,

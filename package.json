@@ -21,7 +21,8 @@
     "unnamed": "node index.js -f gt -i examples/unnamed/*.js -o examples/unnamed/docs",
     "deprecated": "node index.js -i examples/deprecated/*.js -o examples/deprecated/docs -t deprecated",
     "sort": "node index.js -i examples/sort/*.js -o examples/sort/docs -t sorted",
-    "long": "node index.js -i examples/long/test.js -o examples/long/docs"
+    "long": "node index.js -i examples/long/test.js -o examples/long/docs",
+    "jasmine": "node index.js -f jasmine -t Jasmine -i examples/jasmine/spec.js -o examples/jasmine/docs"
   },
   "repository": "",
   "keywords": [

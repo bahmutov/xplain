@@ -11,6 +11,11 @@ var toDoc = require('./html-generation/toHtml');
 var rethrow = require('./utils/errors').rethrow;
 var docsToModules = require('./doc-model/docsToModules');
 
+var adapter = require('./doc-transform/adapters/adapter');
+check.verifyFunction(adapter.isSupported, 'missing is supported function');
+check.verifyFunction(adapter.supportedFrameworks, 'missing supported frameworks function '
+    + JSON.stringify(adapter));
+
 function generateDocs(options) {
     check.verifyObject(options, 'mising options');
     if (typeof options.patterns === 'string') {
@@ -57,4 +62,8 @@ function discoverSourceFiles(patterns) {
     return filenames;
 }
 
-module.exports = generateDocs;
+module.exports = {
+    document: generateDocs,
+    isSupported: adapter.isSupported,
+    supportedFrameworks: adapter.supportedFrameworks
+};
