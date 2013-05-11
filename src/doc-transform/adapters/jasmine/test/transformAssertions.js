@@ -30,6 +30,21 @@ gt.skip('expect(-5 + 5).toBeFalsy();', function () {
     gt.equal(transform(code), '-5 + 5; // false');
 });
 
+gt.test('expect(add(2, 4)).toEqual(6);', function () {
+    var code = 'expect(add(2, 4)).toEqual(6);';
+    gt.equal(transform(code), 'add(2,4); // 6');
+});
+
+gt.test('expect(add(2, 4)).toEqual(add(3, 3));', function () {
+    var code = 'expect(add(2, 4)).toEqual(add(3, 3));';
+    gt.equal(transform(code), 'add(2,4); // add(3,3)');
+});
+
+gt.test('expect(foo).toEqual(bar);', function () {
+    var code = 'expect(foo).toEqual(bar);';
+    gt.equal(transform(code), 'foo; // bar');
+});
+
 /*
 gt.test('QUnit.strictEqual', function () {
     var code = 'QUnit.strictEqual(_.first(array), 1);';

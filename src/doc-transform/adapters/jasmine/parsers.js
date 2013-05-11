@@ -25,15 +25,17 @@ function transformSingleArgument(args) {
 }
 
 // top level parsers for individual assertions
-function parseEqual(line) {
-    var isEqualReg = /(?:^\s*QUnit\.|^\s*)equal\(([\W\w]+)\);/;
-    var isStrictEqualReg = /(?:^\s*QUnit\.|^\s*)strictEqual\(([\W\w]+)\);/;
-    var isDeeptEqualReg = /(?:^\s*QUnit\.|^\s*)deepEqual\(([\W\w]+)\);/;
-    var equalRegs = [isEqualReg, isStrictEqualReg, isDeeptEqualReg];
+function parseExpectToEqual(line) {
+    var isEqualReg = /^\s*expect\(([\W\w]+)\)\.toEqual\(([\W\w]+)\)/;
+    // var isStrictEqualReg = /(?:^\s*QUnit\.|^\s*)strictEqual\(([\W\w]+)\);/;
+    // var isDeeptEqualReg = /(?:^\s*QUnit\.|^\s*)deepEqual\(([\W\w]+)\);/;
+    var equalRegs = [isEqualReg/*, isStrictEqualReg, isDeeptEqualReg*/];
 
+    // console.log('jasmine testing line\n' + line);
     var matchingReg = null;
     equalRegs.some(function (reg) {
         if (reg.test(line)) {
+            // console.log('jasmine line\n' + line + 'matches\n' + reg);
             matchingReg = reg;
             return true;
         }
@@ -42,11 +44,19 @@ function parseEqual(line) {
         return null;
     }
     var matches = matchingReg.exec(line);
-    var equalArguments = matches[1];
-    check.verifyString(equalArguments, 'invalid equal arguments');
-    var parsed = parseEqualArguments(equalArguments);
-    check.verifyObject(parsed, 'did not get parsed arguments');
-    return parsed.op + '; // ' + parsed.expected;
+
+    var computed = matches[1];
+    var expected = matches[2];
+    check.verifyString(computed, 'invalid computed expression');
+    check.verifyString(expected, 'invalid expected expression');
+
+    var computedTransformed = transformSingleArgument(computed);
+    check.verifyObject(computedTransformed, 'count not transform\n' + computed);
+
+    var expectedTransformed = transformSingleArgument(expected);
+    check.verifyObject(expectedTransformed, 'count not transform\n' + expected);
+
+    return computedTransformed.op + '; // ' + expectedTransformed.op;
 }
 
 function parseExpectToBeTruthy(line) {
@@ -91,7 +101,8 @@ function parseExpectToBeFalsy(line) {
 
 var lineParsers = [
     parseExpectToBeTruthy,
-    parseExpectToBeFalsy
+    parseExpectToBeFalsy,
+    parseExpectToEqual
 ];
 
 function transformAssertion(line) {
