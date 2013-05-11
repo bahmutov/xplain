@@ -1,4 +1,4 @@
-gt.module('parsing QUnit assertions');
+gt.module('parsing jasmine assertions');
 
 var transform = require('../parsers');
 
@@ -15,6 +15,7 @@ gt.test('gt.equal is ignored', function () {
     gt.equal(transform(code), 'gt.equal(1, 1);');
 });
 
+/*
 gt.test('QUnit.equal', function () {
     var code = 'QUnit.equal(_.first(array), 1);';
     gt.equal(transform(code), '_.first(array); // 1');
@@ -69,3 +70,4 @@ gt.test('ok with spaces', function () {
     var code = 'ok(actual instanceof _);';
     gt.equal(transform(code), 'actual instanceof _; // true');
 });
+*/

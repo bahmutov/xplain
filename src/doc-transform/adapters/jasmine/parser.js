@@ -13,7 +13,7 @@ function parseName(code) {
 
 function parseNamedCode(code) {
 	check.verifyString(code, 'missing code, have ' + code);
-	var reg = /^\s*(?:|QUnit\.)test\(([\W\w]+),\s*function\s*\(\)\s*\{([\W\w]*)}\s*\)/;
+	var reg = /^\s*(?:it)\(([\W\w]+),\s*function\s*\(\)\s*\{([\W\w]*)\}\s*\)/;
 
 	var matched = reg.exec(code);
 	// console.log(matched);
@@ -74,18 +74,23 @@ function parseImmediateFunction(code) {
 
 function parseCode(code) {
 	check.verifyString(code, 'missing code, have ' + code);
-	//console.log(code);
+	// console.log('jasmine parsing code:\n' + code);
 	var parsed = parseNamedCode(code);
 	if (parsed) {
-		// console.log('got named code\n', parsed);
+		// console.log('jasmine got named code\n' + parsed);
 		return parsed;
 	}
 
 	parsed = parseAnonymousCode(code);
 	if (parsed) {
+		// console.log('jasmine got anonymous code\n' + parsed);
 		return parsed;
 	}
-	return parseImmediateFunction(code);
+	parsed =  parseImmediateFunction(code);
+	if (parsed) {
+		// console.log('jasmine got immediate\n' + parsed);
+	}
+	return parsed;
 }
 
 function getNameFromTest(code) {
