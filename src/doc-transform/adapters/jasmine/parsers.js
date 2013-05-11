@@ -13,7 +13,7 @@ function parseEqualArguments(equal) {
     return result;
 }
 
-function parseOkArguments(args) {
+function transformSingleArgument(args) {
     check.verifyString(args, 'args is not a string');
 
     var split = code.split(args);
@@ -58,13 +58,40 @@ function parseExpectToBeTruthy(line) {
     // console.log('ok matches', matches);
     var args = matches[1];
     check.verifyString(args, 'invalid number arguments');
-    var parsed = parseOkArguments(args);
+    var parsed = transformSingleArgument(args);
     check.verifyObject(parsed, 'did not get parsed arguments');
     return parsed.op + '; // true';
 }
 
+function parseExpectToBeTruthy(line) {
+    var reg = /^\s*expect\(([\W\w]+)\).toBeTruthy()/;
+    if (!reg.test(line)) {
+        return null;
+    }
+    var matches = reg.exec(line);
+    var args = matches[1];
+    check.verifyString(args, 'invalid number arguments');
+    var parsed = transformSingleArgument(args);
+    check.verifyObject(parsed, 'did not get parsed arguments');
+    return parsed.op + '; // true';
+}
+
+function parseExpectToBeFalsy(line) {
+    var reg = /^\s*expect\(([\W\w]+)\).toBeFalsy()/;
+    if (!reg.test(line)) {
+        return null;
+    }
+    var matches = reg.exec(line);
+    var args = matches[1];
+    check.verifyString(args, 'invalid number arguments');
+    var parsed = transformSingleArgument(args);
+    check.verifyObject(parsed, 'did not get parsed arguments');
+    return parsed.op + '; // false';
+}
+
 var lineParsers = [
-    parseExpectToBeTruthy
+    parseExpectToBeTruthy,
+    parseExpectToBeFalsy
 ];
 
 function transformAssertion(line) {

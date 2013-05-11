@@ -20,6 +20,16 @@ gt.test('expect(foo).toBeTruthy();', function () {
     gt.equal(transform(code), 'foo; // true');
 });
 
+gt.test('expect(foo).toBeFalsy();', function () {
+    var code = 'expect(foo).toBeFalsy();';
+    gt.equal(transform(code), 'foo; // false');
+});
+
+gt.skip('expect(-5 + 5).toBeFalsy();', function () {
+    var code = 'expect(-5 + 5).toBeFalsy();';
+    gt.equal(transform(code), '-5 + 5; // false');
+});
+
 /*
 gt.test('QUnit.strictEqual', function () {
     var code = 'QUnit.strictEqual(_.first(array), 1);';
