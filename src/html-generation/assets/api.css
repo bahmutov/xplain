@@ -27,14 +27,17 @@ body {
 }
 
 .content #index {
+  width: 15%;
   max-width: 15%;
-  padding-left: 1em;
+  padding-left: 50px;
   /*padding-top: 1em;*/
   overflow-x: hidden;
   overflow-y: auto;
-  left: 50px;
+  height: 100%;
+  left: 0;
+  top 0;
   position: fixed;
-
+  white-space: nowrap;
   font-family: Consolas, 'Courier New', monospace;
 }
 
