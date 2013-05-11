@@ -14,7 +14,8 @@ QUnit.module('Arrays');
 
 /** @sample findIndex */
 (function() {
-  strictEqual(_.findIndex(['apple', 'banana', 'beet'], function(food) {
+  var found = _.findIndex(['apple', 'banana', 'beet'], function(food) {
     return /^b/.test(food);
-  }), 1);
+  });
+  strictEqual(found, 1);
 }());

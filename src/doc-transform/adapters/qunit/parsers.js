@@ -26,9 +26,9 @@ function parseOkArguments(args) {
 
 // top level parsers for individual assertions
 function parseEqual(line) {
-    var isEqualReg = /(?:^\s*QUnit\.|^)equal\(([\W\w]+)\);/;
-    var isStrictEqualReg = /(?:^\s*QUnit\.|^)strictEqual\(([\W\w]+)\);/;
-    var isDeeptEqualReg = /(?:^\s*QUnit\.|^)deepEqual\(([\W\w]+)\);/;
+    var isEqualReg = /(?:^\s*QUnit\.|^\s*)equal\(([\W\w]+)\);/;
+    var isStrictEqualReg = /(?:^\s*QUnit\.|^\s*)strictEqual\(([\W\w]+)\);/;
+    var isDeeptEqualReg = /(?:^\s*QUnit\.|^\s*)deepEqual\(([\W\w]+)\);/;
     var equalRegs = [isEqualReg, isStrictEqualReg, isDeeptEqualReg];
 
     var matchingReg = null;
