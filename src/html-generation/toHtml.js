@@ -88,19 +88,8 @@ function generateHeadElement (options) {
 	return headElement;
 }
 
-function generateHtmlElement (rootModule, options) {
-	var headElement = generateHeadElement(options);
-
+function generateTitleElement (options) {
 	var apiVersion = options.apiVersion || '';
-	var framework = options.framework || 'qunit';
-	check.verifyString(framework, 'missing framework string ' + framework);
-
-	var doc = {
-		index: [],
-		docs: []
-	};
-	docModule(rootModule, doc, framework);
-
 	var titleElement = null;
 	if (options.title) {
 		if (apiVersion) {
@@ -119,10 +108,22 @@ function generateHtmlElement (rootModule, options) {
 			]);
 		}
 	}
+	return titleElement;
+}
 
-	var elements = titleElement ? [titleElement] : [];
-	elements = elements.concat(doc.index);
-	var indexElement = html.div('#index', elements);
+function generateHtmlElement (rootModule, options) {
+	var headElement = generateHeadElement(options);
+
+	var framework = options.framework || 'qunit';
+	check.verifyString(framework, 'missing framework string ' + framework);
+
+	var doc = {
+		index: [],
+		docs: []
+	};
+	docModule(rootModule, doc, framework);
+
+	var indexElement = html.div('#index', doc.index);
 
 	var repoUrl = 'https://github.com/bahmutov/xplain';
 	var repoHref = html.a({
@@ -133,7 +134,10 @@ function generateHtmlElement (rootModule, options) {
 		' on ' + moment().local().format('dddd, MMMM Do YYYY, h:mm:ss a')
 	]);
 
-	var docsElement = html.div('#docs', doc.docs.concat(signature));
+	var titleElement = generateTitleElement(options);
+	var elements = titleElement ? [titleElement] : [];
+	elements = elements.concat(doc.docs).concat(signature);
+	var docsElement = html.div('#docs', elements);
 
 	var contentElement = html.div('.content', [indexElement, docsElement]);
 
