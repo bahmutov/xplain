@@ -26,7 +26,7 @@ var program = require('optimist')
         alias: 't',
         string: true,
         description: 'API title to use',
-        default: 'API'
+        default: ''
     })
     .options('version', {
         alias: 'v',
@@ -63,9 +63,16 @@ check.verifyString(program.output, 'missing output folder');
 var fullFolder = path.resolve(process.cwd(), program.output);
 console.log('generating docs from', inputFiles, 'target folder', fullFolder);
 
-check.verifyString(program.title, 'invalid API title ' + program.title);
-check.verifyString(program.version, 'invalid API version ' + program.version);
-console.log('title', program.title, 'version', program.version);
+if (program.version) {
+    program.version = '' + program.version;
+    program.version && check.verifyString(program.version, 'invalid API version ' + program.version);
+}
+if (program.title) {
+    program.title = '' + program.title;
+    program.title && check.verifyString(program.title, 'invalid API title ' + program.title);
+}
+program.title && console.log('title', program.title);
+program.version && console.log('version', program.version);
 
 check.verifyFunction(xplain, 'xplain should be a function');
 xplain({

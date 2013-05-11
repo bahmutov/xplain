@@ -28,7 +28,6 @@ function copyAndIncludeScript(filename, destinationFolder) {
 
 function generateHeadElement (options) {
 	check.verifyString(options.outputFolder, 'missing output folder');
-	var titleElement = html.title(null, options.title);
 
 	/* disable IE shim for now, need to figure out how to include this in pithy */
 	/*
@@ -74,6 +73,9 @@ function generateHeadElement (options) {
 	var tooltipJs = copyAndIncludeScript('assets/jquery.tooltipster.min.js',
 		options.outputFolder);
 
+	var title = options.title || 'API';
+	var titleElement = html.title(null, title);
+
 	var headElement = html.head(null, [
 		titleElement,
 		apiCss,
@@ -82,8 +84,7 @@ function generateHeadElement (options) {
 		codePrettifyJs,
 		toggleJs,
 		tooltipJs
-		]);
-
+	]);
 	return headElement;
 }
 
@@ -100,12 +101,28 @@ function generateHtmlElement (rootModule, options) {
 	};
 	docModule(rootModule, doc, framework);
 
-	var indexElement = html.div('#index', [
-		html.h1('#mainTitle', [
-			options.title,
-			html.sub(null, [apiVersion])
-		])
-	].concat(doc.index));
+	var titleElement = null;
+	if (options.title) {
+		if (apiVersion) {
+			titleElement = html.h1('#mainTitle', [
+				options.title,
+				html.sub(null, [apiVersion])
+			]);
+		} else {
+			titleElement = html.h1('#mainTitle',
+				[options.title]);
+		}
+	} else {
+		if (apiVersion) {
+			titleElement = html.h1('#mainTitle', [
+				apiVersion
+			]);
+		}
+	}
+
+	var elements = titleElement ? [titleElement] : [];
+	elements = elements.concat(doc.index);
+	var indexElement = html.div('#index', elements);
 
 	var repoUrl = 'https://github.com/bahmutov/xplain';
 	var repoHref = html.a({
@@ -139,8 +156,7 @@ module.exports = function (rootModule, options) {
 
 	console.log('generating docs', options.outputFolder);
 
-	options.title = options.title || 'API';
-	check.verifyString(options.title, 'missing title ' + options.title);
+	options.title && check.verifyString(options.title, 'missing title ' + options.title);
 
 	var htmlElement = generateHtmlElement(rootModule, options);
 	console.assert(htmlElement, 'could not get html');
