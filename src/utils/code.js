@@ -63,7 +63,25 @@ function reformat(code, keepComments) {
 	return generator.generate(tree, options);
 }
 
+function countLines(code) {
+	if (!code) {
+		return 0;
+	}
+	check.verifyString(code, 'expected code string');
+	var lines = code.split('\n');
+	console.dir(lines);
+	var count = 0;
+	lines.forEach(function (line) {
+		if (/\w+/.test(line)) {
+			count += 1;
+		}
+	});
+	// return (code.match(/\n/g) || []).length + 1;
+	return count;
+}
+
 module.exports = {
 	split: split,
-	reformat: reformat
+	reformat: reformat,
+	countLines: countLines
 };

@@ -1,5 +1,6 @@
 var check = require('check-types');
 var _ = require('lodash');
+var count = require('../utils/code').countLines;
 
 // utility wrapper around parsed dox comment
 function Comment(apiComment) {
@@ -88,7 +89,7 @@ Comment.prototype.getMethodName = function ()
 // returns number of code lines
 Comment.prototype.getCodeLines = function ()
 {
-    return this.code ? (this.code.match(/\n/g) || []).length : 0;
+    return this.code ? count(this.code) : 0;
 };
 
 module.exports = Comment;

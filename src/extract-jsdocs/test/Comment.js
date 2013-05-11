@@ -36,7 +36,6 @@ gt.test('foo method in basic example', function () {
     // console.dir(C);
     var code = C.code;
     gt.string(code, 'has code');
-    // console.dir((code.match(/\n/g) || []).length);
     gt.equal(C.getCodeLines(), 2, 'number of code lines');
 });
 

@@ -1,5 +1,21 @@
 var code = require('../code').reformat;
 var split = require('../code').split;
+var count = require('../code').countLines;
+
+gt.module('count lines');
+
+gt.test('one line', function () {
+    gt.arity(count, 1);
+    gt.equal(count('var foo;'), 1, 'single line');
+});
+
+gt.test('two lines', function () {
+    gt.equal(count('var foo;\nvar bar;'), 2);
+});
+
+gt.test('just braces', function () {
+    gt.equal(count('(\n;\n\n'), 0, 'no lines, just braces');
+});
 
 gt.module('split');
 
