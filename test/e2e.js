@@ -75,3 +75,9 @@ gt.async('jasmine', 1, function () {
     var docs = path.join(examples, 'jasmine/docs');
     gt.exec('node', [xplain, '-f', 'jasmine', '--input', js, '--output', docs], 0, 'jasmine');
 }, 2000);
+
+gt.async('external', 1, function () {
+    var js = path.join(examples, 'external/test.js');
+    var docs = path.join(examples, 'external/docs');
+    gt.exec('node', [xplain, '-f', 'gt', '--input', js, '--output', docs], 0, 'external');
+}, 2000);

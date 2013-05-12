@@ -25,6 +25,10 @@ function samplesToHtml(apiSamples, framework) {
 
 function codeDiv(id, apiComment, visible) {
     check.verifyString(id, 'missing code id');
+    check.verifyObject(apiComment, 'missing comment');
+    if (!apiComment.code) {
+        return null;
+    }
     check.verifyString(apiComment.code, 'missing code');
 
     var prettyCode = reformat(apiComment.code, true);
@@ -57,11 +61,20 @@ function methodDiv(commented, framework) {
 
     var apiComment = commented.comment;
     check.verifyObject(apiComment, 'expected comment object');
+
+    var name = null;
     var ctx = apiComment.ctx;
-    console.assert(ctx, 'missing ctx property, comment', apiComment);
-    // console.assert(ctx.type === 'function', 'ctx is not function, but', ctx);
-    check.verifyString(ctx.name, 'missing function name');
-    var name = ctx.name;
+    if (ctx) {
+        console.assert(ctx, 'missing ctx property, comment', apiComment);
+        check.verifyString(ctx.name, 'missing function name');
+        name = ctx.name;
+    } else {
+        name = apiComment.tagValue('function');
+    }
+    if (!name) {
+        return null;
+    }
+    console.log('documenting method', name);
 
     var toggles = [];
     var exampleElements = [];
@@ -87,13 +100,15 @@ function methodDiv(commented, framework) {
         toggleClass += ' showing';
     }
     var id = name + '_code_toggle';
-    var sourceToggle = html.input({
-        class: toggleClass,
-        type: 'button',
-        value: 'source',
-        id: id
-    });
-    toggles.push(sourceToggle);
+    if (ctx) {
+        var sourceToggle = html.input({
+            class: toggleClass,
+            type: 'button',
+            value: 'source',
+            id: id
+        });
+        toggles.push(sourceToggle);
+    }
 
     var togglesElement = html.div('.toggles', toggles);
 
@@ -109,20 +124,25 @@ function methodDiv(commented, framework) {
     nameParts.push(html.span(".tag", "method"));
     var nameElement = html.h3(null, nameParts);
 
-    var descriptionElement = html.div('.description',
-        [new html.SafeString(apiComment.description.summary)]);
+    var descriptionElement = (ctx ? html.div('.description',
+        [new html.SafeString(apiComment.description.summary)]) : null);
 
     // console.log(apiComment.description.summary);
+    var methodParts = [nameElement];
+    if (descriptionElement) {
+        methodParts.push(descriptionElement);
+    }
+    methodParts = methodParts
+        .concat(samples)
+        .concat(togglesElement)
+        .concat(exampleElements);
+    if (ctx) {
+        methodParts.push(codeElement);
+    }
     var methodElement = html.div({
         id: name,
         class: 'method'
-    }, [nameElement,
-        descriptionElement]
-        .concat(samples)
-        .concat(togglesElement)
-        .concat(exampleElements)
-        .concat(codeElement)
-    );
+    }, methodParts);
 
     var description = '<strong>' + name + '</strong>';
     var summary = apiComment.description.summary;
