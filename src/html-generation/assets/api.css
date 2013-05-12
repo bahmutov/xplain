@@ -92,6 +92,12 @@ span.sampleName {
   margin-bottom: 0;
 }
 
+span.disabledSample {
+  font-weight: bolder;
+  padding: 0 0.5em;
+  color: magenta;
+}
+
 pre {
   margin-top: 0;
   margin-bottom: 0;

@@ -30,7 +30,10 @@ function sampleDiv(apiExample, framework) {
 
     var parts = [];
     if (name) {
-        parts.push(html.span(".sampleName", name));
+        parts.push(html.span('.sampleName', name));
+    }
+    if (humanForm.disabled) {
+        parts.push(html.span('.disabledSample', 'not tested'));
     }
     parts.push(codeElement);
 
