@@ -100,13 +100,15 @@ function methodDiv(commented, framework) {
         toggleClass += ' showing';
     }
     var id = name + '_code_toggle';
-    var sourceToggle = html.input({
-        class: toggleClass,
-        type: 'button',
-        value: 'source',
-        id: id
-    });
-    toggles.push(sourceToggle);
+    if (ctx) {
+        var sourceToggle = html.input({
+            class: toggleClass,
+            type: 'button',
+            value: 'source',
+            id: id
+        });
+        toggles.push(sourceToggle);
+    }
 
     var togglesElement = html.div('.toggles', toggles);
 
