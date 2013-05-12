@@ -25,6 +25,10 @@ function samplesToHtml(apiSamples, framework) {
 
 function codeDiv(id, apiComment, visible) {
     check.verifyString(id, 'missing code id');
+    check.verifyObject(apiComment, 'missing comment');
+    if (!apiComment.code) {
+        return null;
+    }
     check.verifyString(apiComment.code, 'missing code');
 
     var prettyCode = reformat(apiComment.code, true);
@@ -57,11 +61,20 @@ function methodDiv(commented, framework) {
 
     var apiComment = commented.comment;
     check.verifyObject(apiComment, 'expected comment object');
+
+    var name = null;
     var ctx = apiComment.ctx;
-    console.assert(ctx, 'missing ctx property, comment', apiComment);
-    // console.assert(ctx.type === 'function', 'ctx is not function, but', ctx);
-    check.verifyString(ctx.name, 'missing function name');
-    var name = ctx.name;
+    if (ctx) {
+        console.assert(ctx, 'missing ctx property, comment', apiComment);
+        check.verifyString(ctx.name, 'missing function name');
+        name = ctx.name;
+    } else {
+        name = apiComment.tagValue('function');
+    }
+    if (!name) {
+        return null;
+    }
+    console.log('documenting method', name);
 
     var toggles = [];
     var exampleElements = [];
