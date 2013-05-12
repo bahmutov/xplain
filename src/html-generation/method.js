@@ -124,11 +124,15 @@ function methodDiv(commented, framework) {
     nameParts.push(html.span(".tag", "method"));
     var nameElement = html.h3(null, nameParts);
 
-    var descriptionElement = html.div('.description',
-        [new html.SafeString(apiComment.description.summary)]);
+    var descriptionElement = (ctx ? html.div('.description',
+        [new html.SafeString(apiComment.description.summary)]) : null);
 
     // console.log(apiComment.description.summary);
-    var methodParts = [nameElement, descriptionElement]
+    var methodParts = [nameElement];
+    if (descriptionElement) {
+        methodParts.push(descriptionElement);
+    }
+    methodParts = methodParts
         .concat(samples)
         .concat(togglesElement)
         .concat(exampleElements);
