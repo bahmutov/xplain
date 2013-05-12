@@ -128,16 +128,17 @@ function methodDiv(commented, framework) {
         [new html.SafeString(apiComment.description.summary)]);
 
     // console.log(apiComment.description.summary);
+    var methodParts = [nameElement, descriptionElement]
+        .concat(samples)
+        .concat(togglesElement)
+        .concat(exampleElements);
+    if (ctx) {
+        methodParts.push(codeElement);
+    }
     var methodElement = html.div({
         id: name,
         class: 'method'
-    }, [nameElement,
-        descriptionElement]
-        .concat(samples)
-        .concat(togglesElement)
-        .concat(exampleElements)
-        .concat(codeElement)
-    );
+    }, methodParts);
 
     var description = '<strong>' + name + '</strong>';
     var summary = apiComment.description.summary;
