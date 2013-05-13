@@ -15,7 +15,7 @@
     "add": "node index.js -f gt -i examples/add/*.js -o examples/add/docs",
     "qunit": "node index.js -i examples/qunit/*.js -o examples/qunit/docs",
     "lodash": "node index.js -i examples/lodash/*.js -o examples/lodash/docs",
-    "underscore": "node index.js -i examples/underscore/*.js -o examples/underscore/docs",
+    "underscore": "node index.js -i examples/underscore/*.js -o examples/underscore/docs --title underscore",
     "anonymous": "node index.js -f gt -i examples/anonymous/*.js -o examples/anonymous/docs",
     "immediate": "node index.js -f gt -i examples/immediate/*.js -o examples/immediate/docs",
     "unnamed": "node index.js -f gt -i examples/unnamed/*.js -o examples/unnamed/docs",

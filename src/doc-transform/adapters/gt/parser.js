@@ -118,8 +118,8 @@ function getNameFromTest(code) {
 }
 
 function isSkippedTest(code) {
-	var parsed = parseCode(code);
-	return parsed ? parsed.name : null;
+	var parsed = parseSkippedTestCode(code);
+	return parsed ? true : null;
 }
 
 module.exports = {
