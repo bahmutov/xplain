@@ -19,6 +19,7 @@ function parseUnitTestCode(code, framework) {
 
     var testName = parsers.topLevelParser.getNameFromTest(code);
     var innerCode = parsers.topLevelParser.parseCode(code);
+    var disabled = parsers.topLevelParser.isSkippedTest(code);
     // console.log('from code\n', code, 'got', innerCode);
     var outputCode = null;
 
@@ -36,7 +37,8 @@ function parseUnitTestCode(code, framework) {
 
     return {
         code: pretty.trim(),
-        name: testName
+        name: testName,
+        disabled: disabled
     };
 }
 

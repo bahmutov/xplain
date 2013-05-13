@@ -1,7 +1,9 @@
 gt.module('test code parsing');
 
-var parseCode = require('../parser').parseCode;
-var parseName = require('../parser').parseName;
+var parser = require('../parser');
+var parseCode = parser.parseCode;
+var parseName = parser.parseName;
+var isSkippedTest = parser.isSkippedTest;
 
 gt.test('no name', function () {
 	gt.null(parseName(''));
@@ -39,6 +41,7 @@ gt.test('two lines of code', function () {
 	var p = parseCode(txt);
 	gt.equal(p.name, 'foo');
 	gt.equal(p.code, 'var foo;\n\t\tconsole.log(foo);');
+	gt.ok(!isSkippedTest(txt), 'unit test is not skipped');
 });
 
 gt.test('name and code', function () {
@@ -59,22 +62,9 @@ gt.test('name and code', function () {
 	gt.equal(p.code, 'var foo;');
 });
 
-gt.test('name and code using QUnit', function () {
+gt.test('name and code using QUnit are not parsed', function () {
 	var p = parseCode("QUnit.test('foo', function () {})");
-	gt.equal(p.name, 'foo');
-	gt.equal(p.code, '');
-
-	p = parseCode('QUnit.test("foo", function(){})');
-	gt.equal(p.name, 'foo');
-	gt.equal(p.code, '');
-
-	p = parseCode('QUnit.test("foo",function() {} )');
-	gt.equal(p.name, 'foo');
-	gt.equal(p.code, '');
-
-	p = parseCode('QUnit.test("foo",function() {\nvar foo;\n} )');
-	gt.equal(p.name, 'foo');
-	gt.equal(p.code, 'var foo;');
+	gt.null(p, 'does not parse QUnit');
 });
 
 gt.test('empty code', function () {
@@ -99,4 +89,13 @@ gt.test('name with comma', function () {
 	var p = parseCode(txt);
 	gt.equal(p.name, 'foo, bar', 'grabs test name, even if it has a comma');
 	gt.equal(p.code, '', 'there is no source code');
+});
+
+gt.test('skipped test', function () {
+	gt.func(isSkippedTest);
+	var txt = 'gt.skip("foo",function() {});';
+	var p = parseCode(txt);
+	gt.equal(p.name, 'foo', 'grabs skip test name');
+	gt.equal(p.code, '', 'there is no source code');
+	gt.ok(isSkippedTest(txt));
 });

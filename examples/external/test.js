@@ -9,3 +9,8 @@ gt.test('adding numbers', function () {
     gt.equal(add(2, 3), 5);
     gt.equal(add(100, 1), 101);
 });
+
+/** @sample main/math/add */
+gt.skip('concatenating strings', function () {
+    gt.equal(add('a', 'b'), 'ab');
+});

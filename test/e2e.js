@@ -31,7 +31,7 @@ gt.async('qunit', 1, function () {
 gt.async('lodash', 1, function () {
     var js = path.join(examples, 'lodash/*.js');
     var docs = path.join(examples, 'lodash/docs');
-    gt.exec('node', [xplain, '--input', js, '--output', docs], 0, 'lodash');
+    gt.exec('node', [xplain, '--input', js, '--output', docs, '--title', 'lodash example'], 0, 'lodash');
 }, 4000);
 
 gt.async('anonymous', 1, function () {
@@ -80,4 +80,10 @@ gt.async('external', 1, function () {
     var js = path.join(examples, 'external/test.js');
     var docs = path.join(examples, 'external/docs');
     gt.exec('node', [xplain, '-f', 'gt', '--input', js, '--output', docs], 0, 'external');
+}, 2000);
+
+gt.async('underscore', 1, function () {
+    var js = path.join(examples, 'underscore/test.js');
+    var docs = path.join(examples, 'underscore/docs');
+    gt.exec('node', [xplain, '--input', js, '--output', docs, '--title', 'underscore'], 0, 'underscore');
 }, 2000);

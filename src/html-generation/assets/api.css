@@ -79,10 +79,7 @@ div.description > p > code {
 .sample {
 }
 
-span.sampleName {
-  font-weight: bolder;
-  padding: 0 0.5em;
-
+span.sampleLabel {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   background-color: #fff;
@@ -90,6 +87,16 @@ span.sampleName {
   border-top: #bbb solid 1px;
   border-right: #999 solid 1px;
   margin-bottom: 0;
+  padding: 0 0.5em;
+}
+
+span.sampleName {
+  font-weight: bolder;
+}
+
+span.disabledSample {
+  font-weight: bolder;
+  color: magenta;
 }
 
 pre {

@@ -30,7 +30,14 @@ function sampleDiv(apiExample, framework) {
 
     var parts = [];
     if (name) {
-        parts.push(html.span(".sampleName", name));
+        parts.push(html.span('.sampleName.sampleLabel', name));
+    }
+    if (humanForm.disabled) {
+        parts.push(html.span({
+            class: 'disabledSample sampleLabel',
+            title: 'This code example is NOT automatically tested. ' +
+            'Might not be up to date'
+        }, 'not tested'));
     }
     parts.push(codeElement);
 

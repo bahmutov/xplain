@@ -98,8 +98,13 @@ function getNameFromTest(code) {
 	return parsed ? parsed.name : null;
 }
 
+function isSkippedTest(code) {
+	return false;
+}
+
 module.exports = {
 	parseName: parseName,
 	parseCode: parseCode,
-	getNameFromTest: getNameFromTest
+	getNameFromTest: getNameFromTest,
+	isSkippedTest: isSkippedTest
 };
