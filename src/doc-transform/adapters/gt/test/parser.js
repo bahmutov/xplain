@@ -59,22 +59,9 @@ gt.test('name and code', function () {
 	gt.equal(p.code, 'var foo;');
 });
 
-gt.test('name and code using QUnit', function () {
+gt.test('name and code using QUnit are not parsed', function () {
 	var p = parseCode("QUnit.test('foo', function () {})");
-	gt.equal(p.name, 'foo');
-	gt.equal(p.code, '');
-
-	p = parseCode('QUnit.test("foo", function(){})');
-	gt.equal(p.name, 'foo');
-	gt.equal(p.code, '');
-
-	p = parseCode('QUnit.test("foo",function() {} )');
-	gt.equal(p.name, 'foo');
-	gt.equal(p.code, '');
-
-	p = parseCode('QUnit.test("foo",function() {\nvar foo;\n} )');
-	gt.equal(p.name, 'foo');
-	gt.equal(p.code, 'var foo;');
+	gt.null(p, 'does not parse QUnit');
 });
 
 gt.test('empty code', function () {

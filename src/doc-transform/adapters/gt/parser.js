@@ -13,7 +13,7 @@ function parseName(code) {
 
 function parseNamedCode(code) {
 	check.verifyString(code, 'missing code, have ' + code);
-	var reg = /(?:gt|QUnit)\.test\(([\W\w]+),\s*function\s*\(\)\s*\{([\W\w]*)}\s*\)/;
+	var reg = /(?:gt)\.test\(([\W\w]+),\s*function\s*\(\)\s*\{([\W\w]*)}\s*\)/;
 
 	var matched = reg.exec(code);
 	// console.log(matched);
@@ -27,7 +27,28 @@ function parseNamedCode(code) {
 	var parsed = {
 		name: parseName(matched[1]),
 		code: matched[2].trim()
+	};
+	return parsed;
+}
+
+function parseSkippedTestCode(code) {
+	check.verifyString(code, 'missing code, have ' + code);
+	var reg = /(?:gt)\.skip\(([\W\w]+),\s*function\s*\(\)\s*\{([\W\w]*)}\s*\)/;
+
+	var matched = reg.exec(code);
+	// console.log(matched);
+	if (!Array.isArray(matched)) {
+		return null;
 	}
+	if (!check.isString(matched[1])) {
+		return null;
+	}
+
+	var parsed = {
+		name: parseName(matched[1]),
+		code: matched[2].trim(),
+		skipped: true
+	};
 	return parsed;
 }
 
@@ -79,6 +100,11 @@ function parseCode(code) {
 		return parsed;
 	}
 
+	parsed = parseSkippedTestCode(code);
+	if (parsed) {
+		return parsed;
+	}
+
 	parsed = parseAnonymousCode(code);
 	if (parsed) {
 		return parsed;
@@ -92,7 +118,8 @@ function getNameFromTest(code) {
 }
 
 function isSkippedTest(code) {
-	return false;
+	var parsed = parseCode(code);
+	return parsed ? parsed.name : null;
 }
 
 module.exports = {
