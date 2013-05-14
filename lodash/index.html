@@ -1,0 +1,274 @@
+<!DOCTYPE HTML>
+<html>
+
+  <head>
+    <title>lodash example</title>
+    <link rel="stylesheet" href="api.css" />
+    <link rel="stylesheet" href="tooltipster.css" />
+    <script src="jquery-2.0.0.min.js"></script>
+    <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=desert"
+    async="async" defer="defer"></script>
+    <script src="toggle.js"></script>
+    <script src="jquery.tooltipster.min.js"></script>
+  </head>
+
+  <body>
+    <div class="content">
+      <div id="index">
+        <div><a href="#compact" class="tooltip" title="&lt;strong&gt;compact&lt;/strong&gt;&lt;p&gt;Creates an array with all f...">compact</a>
+        </div>
+        <div><a href="#difference" class="tooltip" title="&lt;strong&gt;difference&lt;/strong&gt;&lt;p&gt;Creates an array of &lt;code&gt;a...">difference</a>
+        </div>
+        <div><a href="#findIndex" class="tooltip" title="&lt;strong&gt;findIndex&lt;/strong&gt;&lt;p&gt;This method is similar to &lt;...">findIndex</a>
+        </div>
+        <div><a href="#first" class="tooltip" title="&lt;strong&gt;first&lt;/strong&gt;&lt;p&gt;Examines each element in a ...">first</a>
+        </div>
+      </div>
+      <div id="docs">
+        <h1 id="mainTitle">lodash example</h1>
+        This API documentation was generated from <a href="src/lodash.js">lodash source fragment</a> with a few functions and
+        <a href="src/testArrays.js">several</a> <a href="src/testFirst.js">unit</a> <a href="src/testFirstCombined.js">tests</a>.
+
+        <p>
+        Note that the functions in the lodash source fragment do not have <i>@example</i> jsdoc tag anymore. Instead the unit tests are marked with <i>@sample</i>
+        and <i>@example</i> tags. Sample unit tests are visible by default, and are transformed from QUnit syntax into human
+        readable format. Unit tests tagged with example keyword are behind a toggle button, and are not transformed by default.
+
+        <div id="compact" class="method">
+          <h3>compact<span class="tag">method</span></h3>
+          <div class="description">
+            <p>Creates an array with all falsey values of <code>array</code> removed. The
+              values
+              <br /><code>false</code>, <code>null</code>, <code>0</code>, <code>""</code>, <code>undefined</code> and <code>NaN</code> are
+              all falsey.</p>
+          </div>
+          <div id="1" class="sample namedCode"><pre class="prettyprint linenums"><code>_.compact([0, 1, false, 2, &#39;&#39;, 3]); // [1,2,3]</code></pre>
+          </div>
+          <div class="toggles">
+            <input class="toggle" type="button" value="source" id="compact_code_toggle"
+            />
+          </div>
+          <div id="compact_code_toggled" class="methodCode namedCode"><span class="sampleName">function compact</span><pre class="prettyprint linenums">function compact(array) {
+  for (var index = -1, length = array ? array.length : 0, result = []; length &gt; ++index;) {
+    var value = array[index];
+    value &amp;&amp; result.push(value);
+  }
+  return result;
+}</pre>
+          </div>
+        </div>
+        <div id="difference" class="method">
+          <h3>difference<span class="tag">method</span></h3>
+          <div class="description">
+            <p>Creates an array of <code>array</code> elements not present in the other
+              arrays
+              <br />using strict equality for comparisons, i.e. <code>===</code>.</p>
+          </div>
+          <div id="2" class="sample namedCode"><pre class="prettyprint linenums"><code>_.difference([1, 2, 3, 4, 5], [5, 2, 10]); // [1,3,4]</code></pre>
+          </div>
+          <div class="toggles">
+            <input class="toggle" type="button" value="source" id="difference_code_toggle"
+            />
+          </div>
+          <div id="difference_code_toggled" class="methodCode namedCode"><span class="sampleName">function difference</span><pre class="prettyprint linenums">function difference(array) {
+  for (var index = -1, length = array ? array.length : 0, flattened = concat.apply(arrayRef, nativeSlice.call(arguments, 1)), contains = cachedContains(flattened), result = []; length &gt; ++index;) {
+    var value = array[index];
+    contains(value) || result.push(value);
+  }
+  return result;
+}</pre>
+          </div>
+        </div>
+        <div id="findIndex" class="method">
+          <h3>findIndex<span class="tag">method</span></h3>
+          <div class="description">
+            <p>This method is similar to <code>_.find</code>, except that it returns the
+              index of
+              <br />the element that passes the callback check, instead of the element itself.</p>
+          </div>
+          <div id="3" class="sample namedCode"><pre class="prettyprint linenums"><code>var found = _.findIndex([&#39;apple&#39;, &#39;banana&#39;, &#39;beet&#39;], function(food) {
+  return /^b/.test(food);
+});
+found; // 1</code></pre>
+          </div>
+          <div class="toggles">
+            <input class="toggle" type="button" value="source" id="findIndex_code_toggle"
+            />
+          </div>
+          <div id="findIndex_code_toggled" class="methodCode namedCode"><span class="sampleName">function findIndex</span><pre class="prettyprint linenums">function findIndex(array, callback, thisArg) {
+  var index = -1,
+    length = array ? array.length : 0;
+  for (callback = lodash.createCallback(callback, thisArg); length &gt; ++index;) if (callback(array[index], index, array)) return index;
+  return -1;
+}</pre>
+          </div>
+        </div>
+        <div id="first" class="method">
+          <h3>first<span class="tag">method</span></h3>
+          <div class="description">
+            <p>Examines each element in a <code>collection</code>, returning the first
+              that the <code>callback</code>
+              <br />returns truthy for. The <code>callback</code> is bound to <code>thisArg</code> and
+              invoked with three
+              <br />arguments; (value, index|key, collection).</p>
+          </div>
+          <div id="4" class="sample namedCode"><span class="sampleName sampleLabel">should return the first element</span>
+            <pre
+            class="prettyprint linenums"><code>_.first([1, 2, 3]); // 1</code>
+              </pre>
+          </div>
+          <div id="5" class="sample namedCode"><span class="sampleName sampleLabel">should return the first two elements</span>
+            <pre
+            class="prettyprint linenums"><code>_.first([1, 2, 3], 2); // [1,2]</code>
+              </pre>
+          </div>
+          <div id="6" class="sample namedCode"><span class="sampleName sampleLabel">should work with a callback</span>
+            <pre
+            class="prettyprint linenums"><code>var actual = _.first([1, 2, 3], function(num) {
+  return num &lt; 3;
+});
+
+actual; // [1,2]</code>
+              </pre>
+          </div>
+          <div id="7" class="sample namedCode"><pre class="prettyprint linenums"><code>var array = [1, 2, 3];
+
+var objects = [
+  {
+    &#39;a&#39;: 2,
+    &#39;b&#39;: 2
+  },
+  {
+    &#39;a&#39;: 1,
+    &#39;b&#39;: 1
+  },
+  {
+    &#39;a&#39;: 0,
+    &#39;b&#39;: 0
+  }
+];
+
+// should return the first element
+_.first(array); // 1
+
+// should return the first two elements
+_.first(array, 2); // [1,2]
+
+// should work with a `callback`
+var actual = _.first(array, function(num) {
+  return num &lt; 3;
+});
+
+actual; // [1,2]</code></pre>
+          </div>
+          <div class="toggles">
+            <input class="toggle" type="button" value="example" id="first_example_1_toggle"
+            />
+            <input class="toggle" type="button" value="source" id="first_code_toggle"
+            />
+          </div>
+          <div id="first_example_1_toggled" class="example namedCode"><pre class="prettyprint linenums">(function() {
+  var array = [1, 2, 3];
+
+  var objects = [
+    {
+      &#39;a&#39;: 2,
+      &#39;b&#39;: 2
+    },
+    {
+      &#39;a&#39;: 1,
+      &#39;b&#39;: 1
+    },
+    {
+      &#39;a&#39;: 0,
+      &#39;b&#39;: 0
+    }
+  ];
+
+  test(&#39;should return the first element&#39;, function() {
+    strictEqual(_.first(array), 1);
+  });
+
+  test(&#39;should return the first two elements&#39;, function() {
+    deepEqual(_.first(array, 2), [1, 2]);
+  });
+
+  test(&#39;should work with a `callback`&#39;, function() {
+    var actual = _.first(array, function(num) {
+      return num &lt; 3;
+    });
+
+    deepEqual(actual, [1, 2]);
+  });
+
+  test(&#39;should pass the correct `callback` arguments&#39;, function() {
+    var args;
+
+    _.first(array, function() {
+      args || (args = slice.call(arguments));
+    });
+
+    deepEqual(args, [1, 0, array]);
+  });
+
+  test(&#39;supports the `thisArg` argument&#39;, function() {
+    var actual = _.first(array, function(value, index) {
+      return this[index] &lt; 3;
+    }, array);
+
+    deepEqual(actual, [1, 2]);
+  });
+
+  test(&#39;should chain when passing `n`, `callback`, or `thisArg`&#39;, function() {
+    var actual = _(array).first(2);
+
+    ok(actual instanceof _);
+
+    actual = _(array).first(function(num) {
+      return num &lt; 3;
+    });
+
+    ok(actual instanceof _);
+
+    actual = _(array).first(function(value, index) {
+      return this[index] &lt; 3;
+    }, array);
+
+    ok(actual instanceof _);
+  });
+
+  test(&#39;should not chain when no arguments are passed&#39;, function() {
+    var actual = _(array).first();
+    strictEqual(actual, 1);
+  });
+
+  test(&#39;should work with an object for `callback`&#39;, function() {
+    deepEqual(_.first(objects, {
+      &#39;b&#39;: 2
+    }), objects.slice(0, 1));
+  });
+
+  test(&#39;should work with a string for `callback`&#39;, function() {
+    deepEqual(_.first(objects, &#39;b&#39;), objects.slice(0, 2));
+  });
+}());</pre>
+          </div>
+          <div id="first_code_toggled" class="methodCode namedCode"><span class="sampleName">function first</span><pre class="prettyprint linenums">function first(array, callback, thisArg) {
+  if (array) {
+    var n = 0,
+      length = array.length;
+    if (&quot;number&quot; != typeof callback &amp;&amp; null != callback) {
+      var index = -1;
+      for (callback = lodash.createCallback(callback, thisArg); length &gt; ++index &amp;&amp; callback(array[index], index, array);) n++;
+    } else if (n = callback, null == n || thisArg) return array[0];
+    return slice(array, 0, nativeMin(nativeMax(0, n), length));
+  }
+}</pre>
+          </div>
+        </div><span class="timestamp"><a href="https://github.com/bahmutov/xplain">xplained</a> on Sunday, May 12th 2013, 9:54:45 pm</span>
+      </div>
+    </div>
+    <script src="onDocStart.js"></script>
+  </body>
+
+</html>
