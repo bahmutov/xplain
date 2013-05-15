@@ -160,3 +160,23 @@ gt.test('sample comment', function () {
 	gt.object(parsed, 'could parse comment', comment);
 	// console.log(parsed);
 });
+
+gt.test('@function with $ in name', function () {
+	var comment = '/**\n@function $a */\nfunction foo() {}';
+	var clean = preprocess(comment);
+	var comments = dox.parseComments(clean, {raw: true});
+	// console.dir(comments);
+
+	gt.array(comments, 'returned comments array');
+	gt.equal(comments.length, 1, 'single comment');
+	var c = comments[0];
+	console.dir(c);
+	gt.equal(c.ctx.type, 'function');
+	gt.equal(c.ctx.name, 'foo');
+
+	var tags = c.tags;
+	gt.array(tags, 'returned tags array');
+	// console.dir(tags);
+	gt.equal(tags[0].type, 'function');
+	gt.equal(tags[0].string, '$a');
+});
