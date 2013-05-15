@@ -24,3 +24,13 @@ QUnit.test("first", function() {
 
     QUnit.equal(_.first(null), undefined, 'handles nulls');
 });
+
+/** @sample Arrays/initial */
+test("initial", function() {
+    equal(_.initial([1,2,3,4,5]).join(", "), "1, 2, 3, 4", 'working initial()');
+    equal(_.initial([1,2,3,4],2).join(", "), "1, 2", 'initial can take an index');
+    var result = (function(){ return _(arguments).initial(); })(1, 2, 3, 4);
+    equal(result.join(", "), "1, 2, 3", 'initial works on arguments object');
+    result = _.map([[1,2,3],[1,2,3]], _.initial);
+    equal(_.flatten(result).join(','), '1,2,1,2', 'initial works with _.map');
+});
