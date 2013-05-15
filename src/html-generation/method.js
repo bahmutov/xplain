@@ -45,7 +45,7 @@ function codeDiv(id, apiComment, visible) {
     };
     var codeElement = html.div(attributes, [
         html.span({
-            class: "sampleName"
+            class: "sampleName sampleLabel"
         }, name),
         html.pre({
             class: "prettyprint linenums"
