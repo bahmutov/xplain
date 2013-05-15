@@ -28,7 +28,7 @@ function exampleDiv(name, apiExample, framework) {
 
     var parts = [];
     if (exampleName) {
-        parts.push(html.span(".sampleName", exampleName));
+        parts.push(html.span(".sampleName.sampleLabel", exampleName));
     }
     parts.push(html.pre(".prettyprint.linenums", prettyCode));
     var codeElement = html.div({
