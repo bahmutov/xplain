@@ -1,0 +1,114 @@
+<!DOCTYPE HTML>
+<html>
+
+  <head>
+    <title>underscore</title>
+    <link rel="stylesheet" href="api.css" />
+    <link rel="stylesheet" href="tooltipster.css" />
+    <script src="jquery-2.0.0.min.js"></script>
+    <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=desert"
+    async="async" defer="defer"></script>
+    <script src="toggle.js"></script>
+    <script src="jquery.tooltipster.min.js"></script>
+  </head>
+
+  <body>
+    <div class="content">
+      <div id="index">
+        <div class="moduleName">Arrays</div>
+        <div><a href="#first" class="tooltip" title="&lt;strong&gt;first&lt;/strong&gt;&lt;p&gt;Get the first element of an...">first</a>
+        </div>
+        <div><a href="#initial" class="tooltip" title="&lt;strong&gt;initial&lt;/strong&gt;&lt;p&gt;Returns everything but the ...">initial</a>
+        </div>
+      </div>
+      <div id="docs">
+        <h1 id="mainTitle">underscore example</h1>
+
+        This API documentation was generated from <a href="src/underscore.js">underscore source fragment</a> with a few functions and
+        <a href="src/testArrays.js">several unit tests</a>.
+
+        <p>
+        Note that the functions in the library source do not have <i>@example</i> jsdoc tag anymore. Instead the unit tests are marked with <i>@sample</i> and <i>@example</i> tags.
+        Sample unit tests are visible by default, and are transformed from QUnit syntax into human
+        readable format. Unit tests tagged with example keyword are behind a toggle button, and are not transformed by default.
+
+        <div id="first" class="method">
+          <h3>first<span class="tag">method</span></h3>
+          <div class="description">
+            <p>Get the first element of an array. Passing <strong>n</strong> will return
+              the first N
+              <br />values in the array. Aliased as <code>head</code> and <code>take</code>.
+              The <strong>guard</strong> check
+              <br />allows it to work with <code>_.map</code>.</p>
+          </div>
+          <div id="1" class="sample namedCode"><pre class="prettyprint linenums"><code>_.first([5, 4, 3, 2, 1]); // 5
+_.first([1, 2, 3], 2); // [1,2]</code></pre>
+          </div>
+          <div class="toggles">
+            <input class="toggle" type="button" value="first" id="first_example_1_toggle"
+            />
+            <input class="toggle" type="button" value="source" id="first_code_toggle"
+            />
+          </div>
+          <div id="first_example_1_toggled" class="example namedCode"><span class="sampleName sampleLabel">first</span><pre class="prettyprint linenums">QUnit.test(&quot;first&quot;, function() {
+  QUnit.equal(_.first([1, 2, 3]), 1, &#39;can pull out the first element of an array&#39;);
+  QUnit.equal(_([1, 2, 3]).first(), 1, &#39;can perform OO-style &quot;first()&quot;&#39;);
+  QUnit.equal(_.first([1, 2, 3], 0).join(&#39;, &#39;), &quot;&quot;, &#39;can pass an index to first&#39;);
+  QUnit.equal(_.first([1, 2, 3], 2).join(&#39;, &#39;), &#39;1, 2&#39;, &#39;can pass an index to first&#39;);
+  QUnit.equal(_.first([1, 2, 3], 5).join(&#39;, &#39;), &#39;1, 2, 3&#39;, &#39;can pass an index to first&#39;);
+  var result = (function() {
+    return _.first(arguments);
+  })(4, 3, 2, 1);
+  QUnit.equal(result, 4, &#39;works on an arguments object.&#39;);
+  result = _.map([[1, 2, 3], [1, 2, 3]], _.first);
+  QUnit.equal(result.join(&#39;,&#39;), &#39;1,1&#39;, &#39;works well with _.map&#39;);
+  result = (function() {
+    return _.take([1, 2, 3], 2);
+  })();
+  QUnit.equal(result.join(&#39;,&#39;), &#39;1,2&#39;, &#39;aliased as take&#39;);
+
+  QUnit.equal(_.first(null), undefined, &#39;handles nulls&#39;);
+});</pre>
+          </div>
+          <div id="first_code_toggled" class="methodCode namedCode"><span class="sampleName sampleLabel">method first</span><pre class="prettyprint linenums">_.first = function(array, n, guard) {
+  if (array == null) return void 0;
+  return (n != null) &amp;&amp; !guard ? slice.call(array, 0, n) : array[0];
+};
+_.head = _.take = _.first;</pre>
+          </div>
+        </div>
+        <div id="initial" class="method">
+          <h3>initial<span class="tag">method</span></h3>
+          <div class="description">
+            <p>Returns everything but the last entry of the array. Especially useful
+              on
+              <br />the arguments object. Passing <strong>n</strong> will return all the values
+              in
+              <br />the array, excluding the last N. The <strong>guard</strong> check allows
+              it to work with
+              <br /> <code>_.map</code>.</p>
+          </div>
+          <div id="2" class="sample namedCode"><span class="sampleName sampleLabel">initial</span><pre class="prettyprint linenums"><code>_.initial([1, 2, 3, 4, 5]).join(&#39;, &#39;); // &#39;1, 2, 3, 4&#39;
+_.initial([1, 2, 3, 4], 2).join(&#39;, &#39;); // &#39;1, 2&#39;
+var result = (function() {
+  return _(arguments).initial();
+})(1, 2, 3, 4);
+result.join(&#39;, &#39;); // &#39;1, 2, 3&#39;
+result = _.map([[1, 2, 3], [1, 2, 3]], _.initial);
+_.flatten(result).join(&#39;,&#39;); // &#39;1,2,1,2&#39;</code></pre>
+          </div>
+          <div class="toggles">
+            <input class="toggle" type="button" value="source" id="initial_code_toggle"
+            />
+          </div>
+          <div id="initial_code_toggled" class="methodCode namedCode"><span class="sampleName sampleLabel">method initial</span><pre class="prettyprint linenums">_.initial = function(array, n, guard) {
+  return slice.call(array, 0, array.length - ((n == null) || guard ? 1 : n));
+};</pre>
+          </div>
+        </div><span class="timestamp"><a href="https://github.com/bahmutov/xplain">xplained</a> on Tuesday, May 14th 2013, 11:22:46 pm</span>
+      </div>
+    </div>
+    <script src="onDocStart.js"></script>
+  </body>
+
+</html>
