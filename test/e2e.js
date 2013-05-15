@@ -83,7 +83,7 @@ gt.async('external', 1, function () {
 }, 2000);
 
 gt.async('underscore', 1, function () {
-    var js = path.join(examples, 'underscore/test.js');
+    var js = path.join(examples, 'underscore/*.js');
     var docs = path.join(examples, 'underscore/docs');
     gt.exec('node', [xplain, '--input', js, '--output', docs, '--title', 'underscore'], 0, 'underscore');
 }, 2000);
