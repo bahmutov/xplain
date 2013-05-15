@@ -33,6 +33,7 @@ function codeDiv(id, apiComment, visible) {
 
     var prettyCode = reformat(apiComment.code, true);
     check.verifyString(prettyCode, 'could not make code pretty for\n', apiComment.code);
+    check.verifyObject(apiComment.ctx, 'missing ctx in ' + JSON.stringify(apiComment));
     var name = apiComment.ctx.type + ' ' + apiComment.ctx.name;
 
     var classNames = 'methodCode namedCode';
