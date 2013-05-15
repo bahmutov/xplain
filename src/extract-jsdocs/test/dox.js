@@ -171,6 +171,7 @@ gt.test('@function with $ in tag', function () {
 	gt.equal(comments.length, 1, 'single comment');
 	var c = comments[0];
 	// console.dir(c);
+	gt.object(c.ctx, 'comment has ctx property');
 	gt.equal(c.ctx.type, 'function');
 	gt.equal(c.ctx.name, 'foo');
 
@@ -191,6 +192,7 @@ gt.test('@function with $ in name', function () {
 	gt.equal(comments.length, 1, 'single comment');
 	var c = comments[0];
 	console.dir(c);
+	gt.object(c.ctx, 'comment has ctx property');
 	gt.equal(c.ctx.type, 'function');
 	gt.equal(c.ctx.name, '$foo');
 
