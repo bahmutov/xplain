@@ -1,9 +1,10 @@
 var check = require('check-types');
 var fs = require('fs.extra');
-var dox = require('dox');
 var Comment = require('./Comment');
 var preprocess = require('./preprocess');
 var postprocess = require('./postprocess').comments;
+
+var dox = require('./dox');
 
 function getComments(source) {
     check.verifyString(source, 'missing source string ' + source);

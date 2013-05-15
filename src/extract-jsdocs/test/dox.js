@@ -1,4 +1,4 @@
-var dox = require('dox');
+var dox = require('../dox');
 var preprocess = require('../preprocess');
 var postTags = require('../postprocess').tags;
 
