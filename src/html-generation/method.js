@@ -26,6 +26,7 @@ function samplesToHtml(apiSamples, framework) {
 function codeDiv(id, apiComment, visible) {
     check.verifyString(id, 'missing code id');
     check.verifyObject(apiComment, 'missing comment');
+    // console.log('code div for\n', apiComment);
     if (!apiComment.code) {
         return null;
     }
@@ -33,6 +34,7 @@ function codeDiv(id, apiComment, visible) {
 
     var prettyCode = reformat(apiComment.code, true);
     check.verifyString(prettyCode, 'could not make code pretty for\n', apiComment.code);
+
     check.verifyObject(apiComment.ctx, 'missing ctx in ' + JSON.stringify(apiComment));
     var name = apiComment.ctx.type + ' ' + apiComment.ctx.name;
 
@@ -101,6 +103,7 @@ function methodDiv(commented, framework) {
         toggleClass += ' showing';
     }
     var id = name + '_code_toggle';
+    id = id.replace(/[$]/i, '_');
     if (ctx) {
         var sourceToggle = html.input({
             class: toggleClass,
