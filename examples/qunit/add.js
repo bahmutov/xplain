@@ -14,3 +14,10 @@ QUnit.test('adding numbers', function () {
 QUnit.test('QUnit assertions', function () {
     QUnit.deepEqual([1, 2], [1, 2]);
 });
+
+/** @sample add */
+QUnit.test('QUnit assertions test with multiple words', function () {
+    QUnit.deepEqual([1, 2], [1, 2]);
+    QUnit.equal('foo', 'foo');
+    QUnit.ok(true, 'true is true');
+});

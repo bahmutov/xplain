@@ -165,10 +165,20 @@ module.exports = function (rootModule, options) {
 	var htmlElement = generateHtmlElement(rootModule, options);
 	console.assert(htmlElement, 'could not get html');
 
-	var o = '<!DOCTYPE HTML>\n';
-	o += pretty(htmlElement.toString(), prettyOptions);
+	var rawHtml = htmlElement.toString();
+	rawHtml = prettifyHtml(rawHtml);
+
+	var o = '<!doctype html>\n';
+	o += rawHtml;
 	fs.writeFileSync(htmlFilename, o, 'utf-8');
 };
+
+function prettifyHtml(str) {
+	check.verifyString(str, 'missing input html string');
+	var result = pretty(str, prettyOptions);
+	result = result.replace(/<\/code>\n\s*<\/pre>/g, '</code></pre>');
+	return result;
+}
 
 function docModule(aModule, doc, framework) {
 	check.verifyObject(aModule, 'missing module');

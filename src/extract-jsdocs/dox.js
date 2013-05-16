@@ -18,7 +18,7 @@ function parseCodeContextExtra(str) {
           , string: RegExp.$1 + '()'
         };
     }
-    console.error('could not parse code\n' + str);
+    // console.error('dox: could not parse code\n' + str);
     return null;
 }
 

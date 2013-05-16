@@ -12,6 +12,8 @@ function transform(code, framework) {
         console.log('could not convert', code, 'to human form');
         humanForm.code = code;
     }
+
+    humanForm.code.trim();
     return humanForm;
 }
 
