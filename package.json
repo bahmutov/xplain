@@ -12,6 +12,7 @@
     "complexity": "jsc -p src/**/*.js --skip src/html-generation/assets/*.js --skip src/**/cover/**/*.js",
     "basic": "node index.js -f gt -i examples/basic/*.js -o examples/basic/docs -t Basic -v 1.0.2",
     "submodules": "node index.js -f gt -i examples/submodules/*.js -o examples/submodules/docs",
+    "submodules2": "node index.js -f gt -i examples/submodules/*.js",
     "add": "node index.js -f gt -i examples/add/*.js -o examples/add/docs",
     "qunit": "node index.js -i examples/qunit/*.js -o examples/qunit/docs",
     "lodash": "node index.js -i examples/lodash/*.js -o examples/lodash/docs",

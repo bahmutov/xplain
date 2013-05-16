@@ -88,6 +88,10 @@ will be transformed into
 
 If a unit test has a name, it will be displayed above the transformed code.
 
+## Known issues
+
+On some systems, OS wildcard expansion can be misleading. For example on Windows when using Git bash shell, when calling using -i foo/\*.js the shell will expand wild card to match the FIRST file only. If you find that wildcard is not working as correctly, please switch the slash direction. For example -i foo\\*.js
+
 ## Small print
 
 ### 3<sup>rd</sup> party libraries

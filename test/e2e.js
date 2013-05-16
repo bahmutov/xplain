@@ -62,7 +62,7 @@ gt.async('sort', 1, function () {
     var js = path.join(examples, 'sort/*.js');
     var docs = path.join(examples, 'sort/docs');
     gt.exec('node', [xplain, '-f', 'gt', '--input', js, '--output', docs], 0, 'sort');
-}, 2000);
+}, 4000);
 
 gt.async('long', 1, function () {
     var js = path.join(examples, 'long/test.js');
