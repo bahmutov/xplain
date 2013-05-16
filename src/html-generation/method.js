@@ -153,7 +153,11 @@ function methodDiv(commented, framework) {
     if (summary) {
         var maxLength = 30;
         if (summary.length > maxLength) {
-            summary = summary.substr(0, maxLength) + '...';
+            // should it check if it breaks inside the html element?
+            summary = summary.replace(/<\/p>/gi, '');
+            if (summary.length > maxLength) {
+                summary = summary.substr(0, maxLength) + '...';
+            }
         }
         description += summary;
     }
