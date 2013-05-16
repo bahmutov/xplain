@@ -13,7 +13,27 @@ function parseName(code) {
 
 function parseNamedCode(code) {
 	check.verifyString(code, 'missing code, have ' + code);
-	var reg = /^\s*(?:|QUnit\.)test\(([\W\w]+),\s*function\s*\(\)\s*\{([\W\w]*)}\s*\)/;
+	var reg = /^\s*(?:|QUnit\.)(?:test|asyncTest)\(([\W\w]+),\s*function\s*\(\)\s*\{([\W\w]*)}\s*\)/;
+
+	var matched = reg.exec(code);
+	// console.log(matched);
+	if (!Array.isArray(matched)) {
+		return null;
+	}
+	if (!check.isString(matched[1])) {
+		return null;
+	}
+
+	var parsed = {
+		name: parseName(matched[1]),
+		code: matched[2].trim()
+	}
+	return parsed;
+}
+
+function parseImplicitNameCode(code) {
+	check.verifyString(code, 'missing code, have ' + code);
+	var reg = /^\s*(?:|QUnit\.)(?:test|asyncTest)\(\s*function\s*([\W\w]+)\s*\(\)\s*\{([\W\w]*)}\s*\)/;
 
 	var matched = reg.exec(code);
 	// console.log(matched);
@@ -34,7 +54,7 @@ function parseNamedCode(code) {
 function parseAnonymousCode(code) {
 	// console.log('parsing anonymous code');
 	check.verifyString(code, 'missing code, have ' + code);
-	var reg = /(?:|QUnit\.)test\(\s*function\s*\(\)\s*\{([\W\w]*)}\s*\)/;
+	var reg = /(?:|QUnit\.)(?:test|asyncTest)\(\s*function\s*\(\)\s*\{([\W\w]*)}\s*\)/;
 
 	var matched = reg.exec(code);
 	// console.log(matched);
@@ -76,6 +96,12 @@ function parseCode(code) {
 	check.verifyString(code, 'missing code, have ' + code);
 	//console.log(code);
 	var parsed = parseNamedCode(code);
+	if (parsed) {
+		// console.log('got named code\n', parsed);
+		return parsed;
+	}
+
+	parsed = parseImplicitNameCode(code);
 	if (parsed) {
 		// console.log('got named code\n', parsed);
 		return parsed;

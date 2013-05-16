@@ -43,3 +43,21 @@ QUnit.test('QUnit assertions test with multiple words', function () {
 QUnit.test('sample for $sum', function () {
     QUnit.equal($sum(2, 3), 5);
 });
+
+/** @sample $sum */
+QUnit.asyncTest('async1', function () {
+    // unit test with explicit name
+    QUnit.ok(true);
+});
+
+/** @sample $sum */
+QUnit.asyncTest(function async2() {
+    // unit test with implicit name from function name
+    QUnit.ok(true);
+});
+
+/** @sample $sum */
+QUnit.asyncTest(function(){
+    // unit test without any name
+    QUnit.ok(true);
+});

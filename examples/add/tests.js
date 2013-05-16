@@ -52,3 +52,9 @@ gt.test('using abs', function () {
 	gt.equal(abs(-15), 15, 'negative number changes sign');
 	gt.equal(abs(0), 0, 'zero remains zero');
 });
+
+/** @sample math/add */
+gt.test(function addImplicit() {
+    // unit test with implicit name from function name
+    gt.ok(true);
+});

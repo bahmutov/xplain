@@ -31,6 +31,26 @@ function parseNamedCode(code) {
 	return parsed;
 }
 
+function parseImplicitNameCode(code) {
+	check.verifyString(code, 'missing code, have ' + code);
+	var reg = /^\s*(?:gt\.)(?:test)\(\s*function\s*([\W\w]+)\s*\(\)\s*\{([\W\w]*)}\s*\)/;
+
+	var matched = reg.exec(code);
+	// console.log(matched);
+	if (!Array.isArray(matched)) {
+		return null;
+	}
+	if (!check.isString(matched[1])) {
+		return null;
+	}
+
+	var parsed = {
+		name: parseName(matched[1]),
+		code: matched[2].trim()
+	}
+	return parsed;
+}
+
 function parseSkippedTestCode(code) {
 	check.verifyString(code, 'missing code, have ' + code);
 	var reg = /(?:gt)\.skip\(([\W\w]+),\s*function\s*\(\)\s*\{([\W\w]*)}\s*\)/;
@@ -104,6 +124,8 @@ function parseCode(code) {
 	if (parsed) {
 		return parsed;
 	}
+
+	if (parsed = parseImplicitNameCode(code)) return parsed;
 
 	parsed = parseAnonymousCode(code);
 	if (parsed) {
