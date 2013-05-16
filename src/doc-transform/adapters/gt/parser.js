@@ -115,22 +115,12 @@ function parseImmediateFunction(code) {
 
 function parseCode(code) {
 	check.verifyString(code, 'missing code, have ' + code);
-	var parsed = parseNamedCode(code);
-	if (parsed) {
-		return parsed;
-	}
+	var parsed;
 
-	parsed = parseSkippedTestCode(code);
-	if (parsed) {
-		return parsed;
-	}
-
+	if (parsed = parseNamedCode(code)) return parsed;
+	if (parsed = parseSkippedTestCode(code)) return parsed;
 	if (parsed = parseImplicitNameCode(code)) return parsed;
-
-	parsed = parseAnonymousCode(code);
-	if (parsed) {
-		return parsed;
-	}
+	if (parsed = parseAnonymousCode(code)) return parsed;
 	return parseImmediateFunction(code);
 }
 
