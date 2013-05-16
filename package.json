@@ -24,7 +24,8 @@
     "sort": "node index.js -i examples/sort/*.js -o examples/sort/docs -t sorted",
     "long": "node index.js -i examples/long/test.js -o examples/long/docs",
     "jasmine": "node index.js -f jasmine -t Jasmine -i examples/jasmine/spec.js -o examples/jasmine/docs",
-    "external": "node index.js -f gt -t External -i examples/external/test.js -o examples/external/docs"
+    "external": "node index.js -f gt -t External -i examples/external/test.js -o examples/external/docs",
+    "console": "node index.js -f console -t console.assert -i examples/console/test.js -o examples/console/docs"
   },
   "repository": "",
   "keywords": [

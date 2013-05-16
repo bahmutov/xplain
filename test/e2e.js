@@ -87,3 +87,9 @@ gt.async('underscore', 1, function () {
     var docs = path.join(examples, 'underscore/docs');
     gt.exec('node', [xplain, '--input', js, '--output', docs, '--title', 'underscore'], 0, 'underscore');
 }, 2000);
+
+gt.async('console', 1, function () {
+    var js = path.join(examples, 'console/test.js');
+    var docs = path.join(examples, 'console/docs');
+    gt.exec('node', [xplain, '-f', 'console', '--input', js, '--output', docs, '--title', 'console.assert'], 0, 'console');
+}, 2000);

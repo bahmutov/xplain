@@ -3,7 +3,8 @@ var check = require('check-types');
 var supported = {
     gt: true,
     qunit: true,
-    jasmine: true
+    jasmine: true,
+    console: true
 };
 
 function isSupported(framework) {
