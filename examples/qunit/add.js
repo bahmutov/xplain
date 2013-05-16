@@ -8,7 +8,7 @@ function add(a, b) { return a + b; }
 /**
     Function name starts with dollar sign
 
-    @method $sum
+    @function $sum
 */
 function $sum(a, b) { return a + b; }
 

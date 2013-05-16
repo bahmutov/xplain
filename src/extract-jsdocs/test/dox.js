@@ -191,7 +191,7 @@ gt.test('@function with $ in name', function () {
 	gt.array(comments, 'returned comments array');
 	gt.equal(comments.length, 1, 'single comment');
 	var c = comments[0];
-	console.dir(c);
+	// console.dir(c);
 	gt.object(c.ctx, 'comment has ctx property');
 	gt.equal(c.ctx.type, 'function');
 	gt.equal(c.ctx.name, '$foo');
@@ -201,4 +201,21 @@ gt.test('@function with $ in name', function () {
 	// console.dir(tags);
 	gt.equal(tags[0].type, 'function');
 	gt.equal(tags[0].string, '$a');
+});
+
+gt.test('@function with $ in name has code', function () {
+	var comment = '/**\n@function $a */\nfunction $foo() {var v;}';
+	var clean = preprocess(comment);
+	var comments = dox.parseComments(clean, {raw: true});
+	// console.dir(comments);
+
+	gt.array(comments, 'returned comments array');
+	gt.equal(comments.length, 1, 'single comment');
+	var c = comments[0];
+	// console.dir(c);
+	gt.object(c.ctx, 'comment has ctx property');
+	gt.equal(c.ctx.type, 'function');
+	gt.equal(c.ctx.name, '$foo');
+	gt.string(c.code);
+	gt.equal(c.code, 'function $foo() {var v;}');
 });
