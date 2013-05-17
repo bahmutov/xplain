@@ -1,9 +1,8 @@
 var check = require('check-types');
 var transform = require('../doc-transform/toHumanForm');
-var reformat = require('../utils/code').reformat;
 var html = require('pithy');
+var makeCodeElement = require('./code');
 
-var sampleDivId = 1;
 function sampleDiv(apiExample, framework) {
     check.verifyObject(apiExample, 'missing documented');
     check.verifyObject(apiExample.comment, 'missing comment')
@@ -14,37 +13,8 @@ function sampleDiv(apiExample, framework) {
     var humanForm = transform(code, framework);
     check.verifyObject(humanForm, 'could not convert code ' + code + ' to human form');
     check.verifyString(humanForm.code, 'missing human form from code ' + code);
-    // console.log('from\n', code, 'to\n', humanForm.code);
-
-    var name = humanForm.name;
-    if (name) {
-        check.verifyString(name, 'missing test name');
-    }
-
-    var prettyCode = reformat(humanForm.code, true);
-    check.verifyString(prettyCode, 'could not reformat\n' + humanForm.code);
-
-    var codeElement = html.pre(".prettyprint.linenums", [
-        html.code(null, prettyCode)
-    ]);
-
-    var parts = [];
-    if (name) {
-        parts.push(html.span('.sampleName.sampleLabel', name));
-    }
-    if (humanForm.disabled) {
-        parts.push(html.span({
-            class: 'disabledSample sampleLabel',
-            title: 'This code example is NOT automatically tested. ' +
-            'Might not be up to date'
-        }, 'not tested'));
-    }
-    parts.push(codeElement);
-
-    var sampleElement = html.div({
-        id: sampleDivId++,
-        class: "sample namedCode"
-    }, parts);
+    var sampleElement = makeCodeElement(humanForm.name,
+        humanForm.code, humanForm.disabled);
     return sampleElement;
 }
 
