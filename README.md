@@ -39,6 +39,8 @@ produces HTML documentation:
 
 See the generated [example api](http://bahmutov.github.io/xplain/)
 
+To see (the very few) command line options run `xplain` or `xplain -h` command.
+
 ## Details
 
 Stop writing unmaintainable source samples inside the
