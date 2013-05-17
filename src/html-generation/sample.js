@@ -13,9 +13,9 @@ function sampleDiv(apiExample, framework) {
     var humanForm = transform(code, framework);
     check.verifyObject(humanForm, 'could not convert code ' + code + ' to human form');
     check.verifyString(humanForm.code, 'missing human form from code ' + code);
-    var sampleElement = makeCodeElement(humanForm.name,
+    var sample = makeCodeElement(humanForm.name,
         humanForm.code, humanForm.disabled);
-    return sampleElement;
+    return sample.element;
 }
 
 module.exports = sampleDiv;
