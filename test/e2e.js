@@ -7,7 +7,8 @@ var examples = path.join(__dirname, '../examples');
 gt.async('basic', 1, function () {
     var js = path.join(examples, 'basic/*.js');
     var docs = path.join(examples, 'basic/docs');
-    gt.exec('node', [xplain, '-f', 'gt', '--input', js, '--output', docs], 0, 'basic api');
+    var header = path.join(examples, 'basic/header.md');
+    gt.exec('node', [xplain, '-f', 'gt', '--input', js, '--output', docs, '--header', header], 0, 'basic api');
 }, 4000);
 
 gt.async('submodules', 1, function () {
