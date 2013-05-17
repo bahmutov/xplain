@@ -22,23 +22,6 @@ function exampleDiv(name, apiExample, framework) {
         humanExample.disabled, 'example');
     check.verifyObject(codeElement, 'could not get code element');
 
-    /*
-    var id = name + '_example_' + ++exampleDivId + '_toggle';
-    var prettyCode = reformat(apiExample.code, true);
-    check.verifyString(prettyCode, 'could not reformat\n', apiExample.code);
-
-
-    var parts = [];
-    if (exampleName) {
-        parts.push(html.span(".sampleName.sampleLabel", exampleName));
-    }
-    parts.push(html.pre(".prettyprint.linenums", prettyCode));
-    var codeElement = html.div({
-        id: id + 'd',
-        class: "example namedCode"
-    }, parts);
-    */
-    // console.log('example code element id', codeElement.id);
     var toggleElement = makeToggle(codeElement.id, exampleName || 'example');
 
     return {

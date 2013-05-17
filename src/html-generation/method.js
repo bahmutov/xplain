@@ -5,7 +5,6 @@ var sampleDiv = require('./sample');
 var exampleDiv = require('./example');
 var makeToggle = require('./toggle');
 var makeCodeElement = require('./code');
-// var reformat = require('../utils/code').reformat;
 
 function examplesToHtml(name, apiExamples, framework) {
     check.verifyString(name, 'missing name');
@@ -24,40 +23,6 @@ function samplesToHtml(apiSamples, framework) {
     });
     return samples;
 }
-
-/*
-function codeDiv(id, apiComment, visible) {
-    check.verifyString(id, 'missing code id');
-    check.verifyObject(apiComment, 'missing comment');
-    // console.log('code div for\n', apiComment);
-    if (!apiComment.code) {
-        return null;
-    }
-    check.verifyString(apiComment.code, 'missing code');
-
-    var prettyCode = reformat(apiComment.code, true);
-    check.verifyString(prettyCode, 'could not make code pretty for\n', apiComment.code);
-
-    check.verifyObject(apiComment.ctx, 'missing ctx in ' + JSON.stringify(apiComment));
-    var name = apiComment.ctx.type + ' ' + apiComment.ctx.name;
-
-    var classNames = 'methodCode namedCode';
-    if (visible) {
-        classNames += ' displayed';
-    }
-    var attributes = {
-        id: id + 'd',
-        class: classNames
-    };
-    var codeElement = html.div(attributes, [
-        html.span(".sampleName.sampleLabel", name),
-        html.pre(".prettyprint.linenums", [
-            html.code(null, prettyCode)])
-    ]);
-
-    return codeElement;
-}
-*/
 
 function methodDiv(commented, framework) {
     check.verifyObject(commented, 'missing api comment object');
@@ -98,12 +63,8 @@ function methodDiv(commented, framework) {
     var visibleCode = !samples.length &&
         apiComment.getCodeLines() < MAX_CODE_LINES;
 
-    // var id = name + '_code_toggle';
-
-    // var codeElement = codeDiv(id, apiComment, visibleCode);
-    var label = apiComment.ctx.type + ' ' + apiComment.ctx.name;
-    var codeElement = makeCodeElement(label, apiComment.code,
-        false, 'methodCode');
+    var codeElement = makeCodeElement(name, apiComment.code,
+        false, 'methodCode', visibleCode);
 
     if (ctx) {
         var toggleElement = makeToggle(codeElement.id, 'source', visibleCode);
@@ -133,8 +94,8 @@ function methodDiv(commented, framework) {
         .concat(samples)
         .concat(togglesElement)
         .concat(exampleElements);
-    if (ctx) {
-        methodParts.push(codeElement);
+    if (ctx && codeElement && codeElement.element) {
+        methodParts.push(codeElement.element);
     }
     var methodElement = html.div({
         id: name,
