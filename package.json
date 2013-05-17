@@ -1,6 +1,6 @@
 {
   "name": "xplain",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Generates API documentation with unit tested examples",
   "main": "index.js",
   "bin": "index.js",
@@ -10,7 +10,7 @@
     "yuidoc": "yuidoc src test",
     "doc": "gt test/*.js && node index.js -i src/*.js,test/*.js -v 1.0.1",
     "complexity": "jsc -p src/**/*.js --skip src/html-generation/assets/*.js --skip src/**/cover/**/*.js",
-    "basic": "node index.js -f gt -i examples/basic/*.js -o examples/basic/docs -t Basic -v 1.0.2",
+    "basic": "node index.js -f gt -i examples/basic/*.js -o examples/basic/docs -t Basic -v 1.0.2 --header examples/basic/header.md",
     "submodules": "node index.js -f gt -i examples/submodules/*.js -o examples/submodules/docs",
     "submodules2": "node index.js -f gt -i examples/submodules/*.js",
     "add": "node index.js -f gt -i examples/add/*.js -o examples/add/docs",
@@ -51,7 +51,8 @@
     "mkdirp": "~0.3.5",
     "fs.extra": "~1.2.0",
     "node-beautify": "0.0.2",
-    "optimist": "~0.4.0"
+    "optimist": "~0.4.0",
+    "marked": "~0.2.8"
   },
   "devDependencies": {
     "gt": "~0.8.3"
