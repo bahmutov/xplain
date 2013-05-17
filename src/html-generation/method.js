@@ -4,7 +4,8 @@ var html = require('pithy');
 var sampleDiv = require('./sample');
 var exampleDiv = require('./example');
 var makeToggle = require('./toggle');
-var reformat = require('../utils/code').reformat;
+var makeCodeElement = require('./code');
+// var reformat = require('../utils/code').reformat;
 
 function examplesToHtml(name, apiExamples, framework) {
     check.verifyString(name, 'missing name');
@@ -24,6 +25,7 @@ function samplesToHtml(apiSamples, framework) {
     return samples;
 }
 
+/*
 function codeDiv(id, apiComment, visible) {
     check.verifyString(id, 'missing code id');
     check.verifyObject(apiComment, 'missing comment');
@@ -55,6 +57,7 @@ function codeDiv(id, apiComment, visible) {
 
     return codeElement;
 }
+*/
 
 function methodDiv(commented, framework) {
     check.verifyObject(commented, 'missing api comment object');
@@ -95,15 +98,18 @@ function methodDiv(commented, framework) {
     var visibleCode = !samples.length &&
         apiComment.getCodeLines() < MAX_CODE_LINES;
 
-    var id = name + '_code_toggle';
+    // var id = name + '_code_toggle';
+
+    // var codeElement = codeDiv(id, apiComment, visibleCode);
+    var label = apiComment.ctx.type + ' ' + apiComment.ctx.name;
+    var codeElement = makeCodeElement(label, apiComment.code,
+        false, 'methodCode');
+
     if (ctx) {
-        var toggleElement = makeToggle(id, 'source', visibleCode);
+        var toggleElement = makeToggle(codeElement.id, 'source', visibleCode);
         toggles.push(toggleElement);
     }
-
     var togglesElement = html.div('.toggles', toggles);
-
-    var codeElement = codeDiv(id, apiComment, visibleCode);
 
     var nameParts = [name];
     if (apiComment.isDeprecated()) {

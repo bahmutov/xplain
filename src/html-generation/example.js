@@ -38,7 +38,7 @@ function exampleDiv(name, apiExample, framework) {
         class: "example namedCode"
     }, parts);
     */
-    console.log('example code element id', codeElement.id);
+    // console.log('example code element id', codeElement.id);
     var toggleElement = makeToggle(codeElement.id, exampleName || 'example');
 
     return {
