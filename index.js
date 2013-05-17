@@ -4,6 +4,7 @@ var path = require('path');
 var check = require('check-types');
 var xplain = require('./src/xplain');
 var package = require('./package.json');
+var fs = require('fs');
 
 var info = 'xplain - JavaScript API documentation generator\n' +
     '  version: ' + package.version + '\n' +
@@ -41,6 +42,15 @@ var program = require('optimist')
         default: 'qunit',
         check: xplain.isSupported
     })
+    .options('header', {
+        alias: 'e',
+        string: true,
+        description: 'optional Markdown doc to use as header',
+        default: '',
+        check: function (value) {
+            return /\.md$/.test(value);
+        }
+    })
     .demand(['input'])
     .argv;
 
@@ -70,6 +80,7 @@ if (program.title) {
 }
 program.title && console.log('title', program.title);
 program.version && console.log('version', program.version);
+program.header && console.log('header', program.header);
 
 check.verifyFunction(xplain.document, 'xplain have document function');
 xplain.document({
@@ -77,5 +88,6 @@ xplain.document({
     outputFolder: fullFolder,
     title: program.title,
     apiVersion: program.version,
-    framework: program.framework
+    framework: program.framework,
+    header: program.header
 });

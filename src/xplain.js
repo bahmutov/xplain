@@ -44,7 +44,8 @@ function generateDocs(options) {
         outputFolder: options.outputFolder,
         title: options.title,
         apiVersion: options.apiVersion,
-        framework: options.framework
+        framework: options.framework,
+        header: options.header
     });
 }
 

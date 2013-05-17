@@ -5,6 +5,7 @@ var moment = require('moment');
 
 var methodDiv = require('./method');
 var rethrow = require('../utils/errors').rethrow;
+var markedToHtml = require('../utils/header');
 
 var html = require('pithy');
 var pretty = require('html/lib/html').prettyPrint;
@@ -136,6 +137,11 @@ function generateHtmlElement (rootModule, options) {
 
 	var titleElement = generateTitleElement(options);
 	var elements = titleElement ? [titleElement] : [];
+	if (options.header) {
+		var headerHtml = markedToHtml(options.header);
+		var prefixElement = new html.SafeString(headerHtml);
+		elements.push(prefixElement);
+	}
 	elements = elements.concat(doc.docs).concat(signature);
 	var docsElement = html.div('#docs', elements);
 

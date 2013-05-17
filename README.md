@@ -114,6 +114,7 @@ On some systems, OS wildcard expansion can be misleading. For example on Windows
 * [mkdirp](https://github.com/substack/node-mkdirp) simplified folder creation.
 * [fs.extra](https://npmjs.org/package/fs.extra) simplified usual file operations (file copy, move).
 * [tooltipster](http://calebjacob.com/tooltipster/) is used in the generated API page to display tooltips.
+* [marked](https://npmjs.org/package/marked) to parse optional header markdown document to place in the output.
 
 ### Details
 Author: Gleb Bahmutov <gleb.bahmutov@gmail.com>
