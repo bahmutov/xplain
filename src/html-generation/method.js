@@ -3,6 +3,7 @@ var html = require('pithy');
 
 var sampleDiv = require('./sample');
 var exampleDiv = require('./example');
+var makeToggle = require('./toggle');
 var reformat = require('../utils/code').reformat;
 
 function examplesToHtml(name, apiExamples, framework) {
@@ -93,22 +94,11 @@ function methodDiv(commented, framework) {
     var MAX_CODE_LINES = 10;
     var visibleCode = !samples.length &&
         apiComment.getCodeLines() < MAX_CODE_LINES;
-    // console.dir(apiComment);
 
-    var toggleClass = 'toggle';
-    if (visibleCode) {
-        toggleClass += ' showing';
-    }
     var id = name + '_code_toggle';
-    id = id.replace(/[$]/i, '_');
     if (ctx) {
-        var sourceToggle = html.input({
-            class: toggleClass,
-            type: 'button',
-            value: 'source',
-            id: id
-        });
-        toggles.push(sourceToggle);
+        var toggleElement = makeToggle(id, 'source', visibleCode);
+        toggles.push(toggleElement);
     }
 
     var togglesElement = html.div('.toggles', toggles);

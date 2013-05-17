@@ -6,8 +6,6 @@ var makeToggle = require('./toggle');
 
 var exampleDivId = 0;
 
-
-
 function exampleDiv(name, apiExample, framework) {
     check.verifyString(name, 'missing method name');
     check.verifyObject(apiExample, 'missing example code string');
