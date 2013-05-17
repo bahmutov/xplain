@@ -4,6 +4,19 @@ var transform = require('../doc-transform/toHumanForm');
 var html = require('pithy');
 
 var exampleDivId = 0;
+
+function makeToggle(id, label) {
+    check.verifyString(id, 'missing id');
+    check.verifyString(label, 'missing toggle label');
+    var toggleElement = html.input({
+        class: "toggle",
+        type: "button",
+        value: label,
+        id: id
+    });
+    return toggleElement;
+}
+
 function exampleDiv(name, apiExample, framework) {
     check.verifyString(name, 'missing method name');
     check.verifyObject(apiExample, 'missing example code string');
@@ -19,12 +32,7 @@ function exampleDiv(name, apiExample, framework) {
     var prettyCode = reformat(apiExample.code, true);
     check.verifyString(prettyCode, 'could not reformat\n', apiExample.code);
 
-    var toggleElement = html.input({
-        class: "toggle",
-        type: "button",
-        value: exampleName || 'example',
-        id: id
-    });
+    var toggleElement = makeToggle(id, exampleName || 'example');
 
     var parts = [];
     if (exampleName) {
