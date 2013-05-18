@@ -115,7 +115,7 @@ gt.test('two arguments to add', function () {
     // console.dir(c);
     var tags = c.tags;
     gt.array(tags);
-    gt.equal(tags.length, 4);
+    gt.equal(tags.length, 5);
     gt.equal(tags[0].string, 'add');
     gt.equal(tags[1].name, 'a');
     gt.equal(tags[2].name, 'b');
@@ -147,4 +147,22 @@ gt.test('math has description', function () {
     var C = new Comment(c);
     gt.string(C.getSummary(), 'has brief description');
     gt.string(C.getFullDescription(), 'has full description');
+});
+
+gt.module('return value');
+
+gt.test('function add returns', function () {
+    var comments = getComments(add);
+    gt.array(comments);
+    gt.equal(comments.length, 3);
+    var c = comments[1];
+    var tags = c.tags;
+    gt.array(tags);
+    gt.equal(tags.length, 5);
+
+    //console.dir(c);
+    gt.equal(tags[3].type, 'returns');
+    var C = new Comment(c);
+    var returns = C.getReturns();
+    gt.equal(returns, 'a + b');
 });

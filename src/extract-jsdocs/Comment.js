@@ -113,4 +113,9 @@ Comment.prototype.getFullDescription = function ()
     return this.description.full;
 };
 
+Comment.prototype.getReturns = function ()
+{
+    return this.tagValue('returns');
+};
+
 module.exports = Comment;

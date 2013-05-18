@@ -12,6 +12,7 @@ Returns the sum of two numbers
 @method add
 @param {Number} a First argument
 @param {Number} b Second argument
+@returns a + b
 @public
 */
 function add(a, b) {
