@@ -103,4 +103,14 @@ Comment.prototype.getArguments = function ()
     });
 };
 
+Comment.prototype.getSummary = function ()
+{
+    return this.description.summary;
+};
+
+Comment.prototype.getFullDescription = function ()
+{
+    return this.description.full;
+};
+
 module.exports = Comment;

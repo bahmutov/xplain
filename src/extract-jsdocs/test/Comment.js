@@ -135,3 +135,16 @@ gt.test('get add arguments', function () {
     gt.equal(args[0].type, 'param');
     gt.equal(args[0].name, 'a');
 });
+
+gt.module('module description');
+
+gt.test('math has description', function () {
+    var comments = getComments(add);
+    gt.array(comments);
+    gt.equal(comments.length, 3);
+    var c = comments[0];
+    // console.dir(c);
+    var C = new Comment(c);
+    gt.string(C.getSummary(), 'has brief description');
+    gt.string(C.getFullDescription(), 'has full description');
+});
