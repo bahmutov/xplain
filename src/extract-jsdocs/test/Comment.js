@@ -10,6 +10,7 @@ var fooTests = path.join(examples, 'basic/fooTests.js');
 
 var deprecated = path.join(examples, 'deprecated/test.js');
 var add = path.join(examples, 'add/add.js');
+var objectTest = path.join(examples, 'object/test.js');
 
 gt.test('basics', function () {
     gt.arity(Comment, 1, 'expects single argument');
@@ -165,4 +166,24 @@ gt.test('function add returns', function () {
     var C = new Comment(c);
     var returns = C.getReturns();
     gt.equal(returns, 'a + b');
+});
+
+gt.module('instance');
+
+gt.test('instance foo', function () {
+    var comments = getComments(objectTest);
+    gt.array(comments);
+    gt.equal(comments.length, 1);
+    var c = comments[0];
+    console.dir(c);
+    gt.equal(c.tags[0].type, 'name');
+    gt.equal(c.tags[0].string, 'foo');
+    gt.equal(c.tags[1].type, 'instance');
+
+    /*
+    gt.equal(tags[3].type, 'returns');
+    var C = new Comment(c);
+    var returns = C.getReturns();
+    gt.equal(returns, 'a + b');
+    */
 });

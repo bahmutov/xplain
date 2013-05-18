@@ -68,7 +68,7 @@ There are several API examples that I found particularly useful.
 
 ## New @- tags
 
-*xplain* uses two new custom *jsdoc* tags:
+*xplain* uses two new custom [*jsdoc*](http://usejsdoc.org/) tags:
 
 1. **@sample** - transforms the unit test that follows into human readable form and displays the code block
 right under the method's description.
