@@ -29,3 +29,14 @@ gt.test('function $foo with space', function () {
     gt.equal(ctx.type, 'function');
     gt.equal(ctx.name, '$foo');
 });
+
+gt.module('function arguments');
+
+gt.test('add(b, b)', function () {
+    var txt = 'function add(a, b) {}';
+    var ctx = dox.parseCodeContext(txt);
+    gt.object(ctx);
+    gt.equal(ctx.type, 'function');
+    gt.equal(ctx.name, 'add');
+    console.dir(ctx);
+});
