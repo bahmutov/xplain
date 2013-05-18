@@ -5,6 +5,7 @@ var sampleDiv = require('./sample');
 var exampleDiv = require('./example');
 var makeToggle = require('./toggle');
 var makeCodeElement = require('./code');
+var getIndexWithTooltip = require('./indexElement');
 
 function examplesToHtml(name, apiExamples, framework) {
     check.verifyString(name, 'missing name');
@@ -128,35 +129,8 @@ function methodDiv(commented, framework) {
         class: 'method'
     }, methodParts);
 
-    var description = '<strong>' + name + '</strong>';
-    var summary = apiComment.description.summary;
-    if (summary) {
-        var maxLength = 50;
-        if (summary.length > maxLength) {
-            // should it check if it breaks inside the html element?
-            summary = summary.replace(/<\/p>/gi, '');
-            if (summary.length > maxLength) {
-                summary = summary.substr(0, maxLength) + '...';
-            }
-        }
-        description += summary;
-    }
-    var indexClass = 'tooltip';
-    if (!apiComment.isPublic()) {
-        indexClass += ' private';
-    }
-    if (apiComment.isDeprecated()) {
-        indexClass += ' deprecated';
-    }
-    var indexAttributes = {
-        href: '#' + name,
-        class: indexClass,
-        title: description
-    };
-    if (!apiComment.isPublic()) {
-    }
-    var indexParts = [html.a(indexAttributes, name)];
-    var indexElement = html.div(null, indexParts);
+    var indexElement = getIndexWithTooltip(apiComment, name);
+
     return {
         name: indexElement,
         docs: methodElement
