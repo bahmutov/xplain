@@ -45,6 +45,9 @@ function methodDiv(commented, framework) {
     }
     console.log('documenting method', name);
 
+    var params = apiComment.getArguments();
+    check.verifyArray(params, 'expected array of arguments');
+
     var toggles = [];
     var exampleElements = [];
 
@@ -72,7 +75,20 @@ function methodDiv(commented, framework) {
     }
     var togglesElement = html.div('.toggles', toggles);
 
-    var nameParts = [name];
+    var nameParts = [];
+    if (params.length) {
+        nameParts.push(name + '(');
+        params.forEach(function (param, index) {
+            if (index < params.length - 1) {
+                nameParts.push(param.name + ', ');
+            } else {
+                nameParts.push(param.name + ')');
+            }
+        });
+    } else {
+        nameParts.push(name + '()');
+    }
+
     if (apiComment.isDeprecated()) {
         nameParts.push(html.span(".tag", "deprecated"));
     }
@@ -90,6 +106,16 @@ function methodDiv(commented, framework) {
     if (descriptionElement) {
         methodParts.push(descriptionElement);
     }
+
+    if (params.length) {
+        methodParts.push(html.h4(null, ['Arguments']));
+        var paramParts = params.map(function (param) {
+            return html.li(null, [param.name + ': ' + param.description]);
+        });
+        var paramList = html.ol(null, paramParts);
+        methodParts.push(paramList);
+    }
+
     methodParts = methodParts
         .concat(samples)
         .concat(togglesElement)
