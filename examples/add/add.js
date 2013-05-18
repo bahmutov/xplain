@@ -26,6 +26,7 @@ Returns the absolute value
 
 @method abs
 @param {Number} a Number
+@returns positive number
 @public
 */
 function abs(a) {

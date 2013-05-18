@@ -116,6 +116,15 @@ function methodDiv(commented, framework) {
         var paramList = html.ol(null, paramParts);
         methodParts.push(paramList);
     }
+    var returns = apiComment.getReturns();
+    if (returns) {
+        if (returns) {
+            methodParts.push(html.h4(null, ['Returns']));
+            methodParts.push(html.p(null, [
+                html.p(null, [new html.SafeString(returns)])
+                ]));
+        }
+    }
 
     methodParts = methodParts
         .concat(samples)
