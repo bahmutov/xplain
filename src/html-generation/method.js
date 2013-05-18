@@ -105,7 +105,7 @@ function methodDiv(commented, framework) {
     var description = '<strong>' + name + '</strong>';
     var summary = apiComment.description.summary;
     if (summary) {
-        var maxLength = 30;
+        var maxLength = 50;
         if (summary.length > maxLength) {
             // should it check if it breaks inside the html element?
             summary = summary.replace(/<\/p>/gi, '');
