@@ -26,6 +26,9 @@ function getComments(source) {
 }
 
 function getTaggedComments(inputFiles) {
+    if (check.isString(inputFiles)) {
+        inputFiles = [inputFiles];
+    }
     check.verifyArray(inputFiles, 'missing input filenames');
 
     var api = [];

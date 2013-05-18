@@ -9,6 +9,7 @@ var foo = path.join(examples, 'basic/foo.js');
 var fooTests = path.join(examples, 'basic/fooTests.js');
 
 var deprecated = path.join(examples, 'deprecated/test.js');
+var add = path.join(examples, 'add/add.js');
 
 gt.test('basics', function () {
     gt.arity(Comment, 1, 'expects single argument');
@@ -102,4 +103,29 @@ gt.test('@deprecated', function () {
     gt.ok(C.hasTags(), 'comment has some tags');
     gt.ok(!C.isExample(), 'comment is not an example');
     gt.ok(C.isDeprecated(), 'function is deprecated');
+});
+
+gt.module('params');
+
+gt.test('two arguments to add', function () {
+    var comments = getComments(add);
+    gt.array(comments);
+    gt.equal(comments.length, 3);
+    var c = comments[1];
+    // console.dir(c);
+    var tags = c.tags;
+    gt.array(tags);
+    gt.equal(tags.length, 4);
+    gt.equal(tags[0].string, 'add');
+    gt.equal(tags[1].name, 'a');
+    gt.equal(tags[2].name, 'b');
+});
+
+gt.test('get add arguments', function () {
+    var comments = getComments(add);
+    gt.array(comments);
+    gt.equal(comments.length, 3);
+    var c = comments[1];
+    var C = new Comment(c);
+    console.dir(C);
 });
