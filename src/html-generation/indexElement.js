@@ -1,9 +1,14 @@
 var check = require('check-types');
 var html = require('pithy');
 
-function getIndexWithTooltip(apiComment, name) {
-    var description = '<strong>' + name + '</strong>';
-    var summary = apiComment.getSummary();
+function getIndexWithTooltip(options) {
+    check.verifyObject(options, 'missing options object');
+
+    check.verifyObject(options.comment, 'missing api comment object');
+    check.verifyString(options.name, 'missing name');
+
+    var description = '<strong>' + options.name + '</strong>';
+    var summary = options.comment.getSummary();
     if (summary) {
         var maxLength = 50;
         if (summary.length > maxLength) {
@@ -16,20 +21,31 @@ function getIndexWithTooltip(apiComment, name) {
         description += summary;
     }
     var indexClass = 'tooltip';
-    if (!apiComment.isPublic()) {
+    if (!options.comment.isPublic()) {
         indexClass += ' private';
     }
-    if (apiComment.isDeprecated()) {
+    if (options.comment.isDeprecated()) {
         indexClass += ' deprecated';
     }
-    var indexAttributes = {
-        href: '#' + name,
-        class: indexClass,
-        title: description
-    };
-    if (!apiComment.isPublic()) {
+    if (options.className) {
+        indexClass += ' ' + options.className;
     }
-    var indexParts = [html.a(indexAttributes, name)];
+
+    var indexParts;
+    if (options.link) {
+        var indexAttributes = {
+            href: '#' + options.name,
+            class: indexClass,
+            title: description
+        };
+        indexParts = [html.a(indexAttributes, options.name)];
+    } else {
+        var indexAttributes = {
+            class: indexClass,
+            title: description
+        };
+        indexParts = [html.span(indexAttributes, options.name)];
+    }
     var indexElement = html.div(null, indexParts);
     return indexElement;
 }

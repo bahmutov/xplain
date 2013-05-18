@@ -129,7 +129,11 @@ function methodDiv(commented, framework) {
         class: 'method'
     }, methodParts);
 
-    var indexElement = getIndexWithTooltip(apiComment, name);
+    var indexElement = getIndexWithTooltip({
+        comment: apiComment,
+        name: name,
+        link: true
+    });
 
     return {
         name: indexElement,

@@ -6,6 +6,7 @@ var moment = require('moment');
 var methodDiv = require('./method');
 var rethrow = require('../utils/errors').rethrow;
 var markedToHtml = require('../utils/header');
+var getIndexWithTooltip = require('./indexElement');
 
 var html = require('pithy');
 var pretty = require('html/lib/html').prettyPrint;
@@ -200,7 +201,15 @@ function docModule(aModule, doc, framework) {
 
 	if (aModule.name && docs.length) {
 		check.verifyString(aModule.name, 'missing module name');
-		doc.index.push(html.div(".moduleName", [aModule.name]));
+
+		// doc.index.push(html.div(".moduleName", [aModule.name]));
+		// console.dir(aModule);
+		var indexElement = getIndexWithTooltip({
+			comment: aModule.comment,
+			name: aModule.name,
+			className: 'moduleName'
+		});
+		doc.index.push(indexElement);
 	}
 
 	docs.forEach(function (method) {

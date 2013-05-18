@@ -33,6 +33,7 @@ function primaryParsing(collectedDocs) {
             var name = apiComment.getModuleName();
             check.verifyString(name, 'invalid module name');
             currentModule = setupModule(name, rootModule);
+            currentModule.comment = apiComment;
             return;
         }
 
