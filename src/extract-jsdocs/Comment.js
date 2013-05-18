@@ -92,4 +92,15 @@ Comment.prototype.getCodeLines = function ()
     return this.code ? count(this.code) : 0;
 };
 
+Comment.prototype.getArguments = function ()
+{
+    console.assert(this.isMethod(), 'cannot get arguments from', this, 'not a function');
+    if (!this.hasTags()) {
+        return [];
+    }
+    return this.tags.filter(function (tag) {
+        return (tag.type === 'param');
+    });
+};
+
 module.exports = Comment;

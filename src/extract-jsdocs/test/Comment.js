@@ -127,5 +127,11 @@ gt.test('get add arguments', function () {
     gt.equal(comments.length, 3);
     var c = comments[1];
     var C = new Comment(c);
-    console.dir(C);
+    // console.dir(C);
+    var args = C.getArguments();
+    gt.array(args, 'got arguments array');
+    gt.equal(args.length, 2, 'has two arguments');
+    // console.dir(args);
+    gt.equal(args[0].type, 'param');
+    gt.equal(args[0].name, 'a');
 });
