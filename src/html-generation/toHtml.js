@@ -140,7 +140,8 @@ function generateHtmlElement (rootModule, options) {
 	if (options.header) {
 		var headerHtml = markedToHtml(options.header);
 		var prefixElement = new html.SafeString(headerHtml);
-		elements.push(prefixElement);
+		var headerElement = html.div('.header', [prefixElement]);
+		elements.push(headerElement);
 	}
 	elements = elements.concat(doc.docs).concat(signature);
 	var docsElement = html.div('#docs', elements);

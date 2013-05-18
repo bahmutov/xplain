@@ -41,6 +41,10 @@ body {
   font-family: Consolas, 'Courier New', monospace;
 }
 
+.content .header {
+  border-bottom: 1px solid gray;
+}
+
 a:link, a:visited {
   color: #444;
   font-family: Consolas, 'Courier New', monospace;
