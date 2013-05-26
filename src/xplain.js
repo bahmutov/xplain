@@ -1,7 +1,6 @@
 var fs = require('fs.extra');
 var path = require('path');
 var check = require('check-types');
-var util = require('util');
 var glob = require('glob');
 var unary = require('allong.es').es.unary;
 var mkdirp = require('mkdirp');
@@ -13,8 +12,8 @@ var docsToModules = require('./doc-model/docsToModules');
 
 var adapter = require('./doc-transform/adapters/adapter');
 check.verifyFunction(adapter.isSupported, 'missing is supported function');
-check.verifyFunction(adapter.supportedFrameworks, 'missing supported frameworks function '
-    + JSON.stringify(adapter));
+check.verifyFunction(adapter.supportedFrameworks,
+    'missing supported frameworks function ' + JSON.stringify(adapter));
 
 function generateDocs(options) {
     check.verifyObject(options, 'mising options');
@@ -34,7 +33,7 @@ function generateDocs(options) {
         throw new Error('Cannot find any source files for input ' + options.patterns);
     }
 
-    api = getApi(inputFiles);
+    var api = getApi(inputFiles);
     check.verifyArray(api, 'did not get api from files');
 
     var rootModule = docsToModules(api);
