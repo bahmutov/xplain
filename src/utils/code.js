@@ -4,24 +4,24 @@ var check = require('check-types');
 var beautify = require('js-beautify').js_beautify;
 
 var options = {
-	"format" : {
-		"indent" : {
-			"style" : "  ",
-			"base"  : 0,
-			"adjustMultilineComment" : true
+	'format' : {
+		'indent' : {
+			'style' : '  ',
+			'base'  : 0,
+			'adjustMultilineComment' : true
 		},
-		"json"       : false,
-		"renumber"   : false,
-		"hexadecimal": false,
-		"quotes"     : "single",
-		"escapeless" : false,
-		"compact"    : true,
-		"parentheses": true,
-		"semicolons" : true
+		'json'       : false,
+		'renumber'   : false,
+		'hexadecimal': false,
+		'quotes'     : 'single',
+		'escapeless' : false,
+		'compact'    : true,
+		'parentheses': true,
+		'semicolons' : true
 	},
-	"parse"    : null,
-	"comment"  : true,
-	"sourceMap": undefined
+	'parse'    : null,
+	'comment'  : true,
+	'sourceMap': undefined
 };
 
 function split(expressions) {
@@ -52,14 +52,14 @@ function reformat(code, keepComments) {
 			keep_array_indentation: true
 		};
 		return beautify(code, opts);
-	} else {
-		var tree = esprima.parse(code, {
-			range: true,
-			tokens: true,
-			comment: keepComments
-		});
-		options.comment = false;
 	}
+
+	var tree = esprima.parse(code, {
+		range: true,
+		tokens: true,
+		comment: keepComments
+	});
+	options.comment = false;
 	return generator.generate(tree, options);
 }
 

@@ -8,7 +8,7 @@ function isValidHeader(filename) {
         return false;
     }
 
-    return /\.md$/.test(filename);
+    return (/\.md$/).test(filename);
 }
 
 function markedToHtml(filename) {

@@ -6,9 +6,14 @@ module.exports = function (grunt) {
         jshint: {
             options: {
                 jshintrc: '.jshintrc',
+                ignores: [
+                'src/html-generation/assets/jquery-2.0.0.min.js',
+                'src/html-generation/assets/jquery.tooltipster.min.js',
+                'src/**/cover/**'
+                ]
             },
             'default': {
-                src: [ 'index.js', 'src/*.js' ]
+                src: [ 'index.js', 'src/**/*.js' ]
             }
         }
     });

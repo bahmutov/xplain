@@ -11,7 +11,6 @@ var getIndexWithTooltip = require('./indexElement');
 var html = require('pithy');
 var pretty = require('html/lib/html').prettyPrint;
 var prettyOptions = { indent_size: 2 };
-var apiComments = null;
 
 function copyAndIncludeScript(filename, destinationFolder) {
 	check.verifyString(filename, 'missing script filename');
@@ -28,13 +27,13 @@ function copyAndIncludeScript(filename, destinationFolder) {
 	return script;
 }
 
-function generateHeadElement (options) {
+function generateHeadElement(options) {
 	check.verifyString(options.outputFolder, 'missing output folder');
 
 	/* disable IE shim for now, need to figure out how to include this in pithy */
 	/*
 	o += '<!--[if lt IE 9]>\n';
-	o += '\t<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>\n';
+	o += '\t<script src='http://html5shim.googlecode.com/svn/trunk/html5.js'></script>\n';
 	o += '<![endif]-->\n';
 	*/
 
@@ -47,8 +46,8 @@ function generateHeadElement (options) {
 		rethrow);
 
 	var apiCss = html.link({
-    	rel: 'stylesheet',
-    	href: 'api.css'
+		rel: 'stylesheet',
+		href: 'api.css'
 	});
 
 	fs.copy(path.join(__dirname, 'assets/tooltipster.css'),
@@ -56,8 +55,8 @@ function generateHeadElement (options) {
 		rethrow);
 
 	var tooltipCss = html.link({
-    	rel: 'stylesheet',
-    	href: 'tooltipster.css'
+		rel: 'stylesheet',
+		href: 'tooltipster.css'
 	});
 
 	var codePrettifyJs = html.script({
@@ -90,7 +89,7 @@ function generateHeadElement (options) {
 	return headElement;
 }
 
-function generateTitleElement (options) {
+function generateTitleElement(options) {
 	var apiVersion = options.apiVersion || '';
 	var titleElement = null;
 	if (options.title) {
@@ -113,7 +112,7 @@ function generateTitleElement (options) {
 	return titleElement;
 }
 
-function generateHtmlElement (rootModule, options) {
+function generateHtmlElement(rootModule, options) {
 	var headElement = generateHeadElement(options);
 
 	var framework = options.framework || 'qunit';
@@ -131,7 +130,7 @@ function generateHtmlElement (rootModule, options) {
 	var repoHref = html.a({
 		href: repoUrl
 	}, 'xplained');
-	var signature = html.span(".timestamp", [
+	var signature = html.span('.timestamp', [
 		repoHref,
 		' on ' + moment().local().format('dddd, MMMM Do YYYY, h:mm:ss a')
 	]);
@@ -163,12 +162,14 @@ module.exports = function (rootModule, options) {
 
 	// console.dir(rootModule);
 	check.verifyString(options.outputFolder, 'missing output folder in ' + JSON.stringify(options));
-	var htmlFilename = path.join(options.outputFolder, "index.html");
+	var htmlFilename = path.join(options.outputFolder, 'index.html');
 	check.verifyString(htmlFilename, 'missing output filename');
 
 	console.log('generating docs', options.outputFolder);
 
-	options.title && check.verifyString(options.title, 'missing title ' + options.title);
+	if (options.title) {
+		check.verifyString(options.title, 'missing title ' + options.title);
+	}
 
 	var htmlElement = generateHtmlElement(rootModule, options);
 	console.assert(htmlElement, 'could not get html');
@@ -202,7 +203,7 @@ function docModule(aModule, doc, framework) {
 	if (aModule.name && docs.length) {
 		check.verifyString(aModule.name, 'missing module name');
 
-		// doc.index.push(html.div(".moduleName", [aModule.name]));
+		// doc.index.push(html.div('.moduleName', [aModule.name]));
 		// console.dir(aModule);
 		var indexElement = getIndexWithTooltip({
 			comment: aModule.comment,

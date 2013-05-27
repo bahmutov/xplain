@@ -15,7 +15,7 @@ function makeToggle(id, label, visibleByDefault) {
 
     var toggleElement = html.input({
         class: toggleClass,
-        type: "button",
+        type: 'button',
         value: label,
         id: id
     });
