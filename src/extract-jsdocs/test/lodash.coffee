@@ -17,6 +17,8 @@ gt.test 'basic', ->
     # console.dir c
     gt.equal c.tagValue('method'), 'first'
     gt.equal c.tagValue('alias'), 'detect'
+    gt.equal c.getFullName(), '_.first'
+
     gt.equal c.getMemberOf(), '_'
     gt.equal c.tagValue('category'), 'Collections'
-    gt.equal c.getFullName(), '_.first'
+    gt.equal c.getCategory(), 'Collections'

@@ -144,4 +144,8 @@ Comment.prototype.getFullName = function () {
     return fullName;
 };
 
+Comment.prototype.getCategory = function () {
+    return this.tagValue('category');
+};
+
 module.exports = Comment;
