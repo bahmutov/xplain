@@ -27,7 +27,7 @@ function parseNamedCode(code) {
 	var parsed = {
 		name: parseName(matched[1]),
 		code: matched[2].trim()
-	}
+	};
 	return parsed;
 }
 
@@ -47,7 +47,7 @@ function parseImplicitNameCode(code) {
 	var parsed = {
 		name: parseName(matched[1]),
 		code: matched[2].trim()
-	}
+	};
 	return parsed;
 }
 
@@ -67,7 +67,7 @@ function parseAnonymousCode(code) {
 
 	var parsed = {
 		code: matched[1].trim()
-	}
+	};
 	return parsed;
 }
 
@@ -96,9 +96,9 @@ function parseCode(code) {
 	check.verifyString(code, 'missing code, have ' + code);
 	//console.log(code);
 	var parsed;
-	if (parsed = parseNamedCode(code)) return parsed;
-	if (parsed = parseImplicitNameCode(code)) return parsed;
-	if (parsed = parseAnonymousCode(code)) return parsed;
+	if (parsed = parseNamedCode(code)) { return parsed; }
+	if (parsed = parseImplicitNameCode(code)) { return parsed; }
+	if (parsed = parseAnonymousCode(code)) { return parsed; }
 	return parseImmediateFunction(code);
 }
 

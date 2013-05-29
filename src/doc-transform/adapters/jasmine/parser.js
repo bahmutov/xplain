@@ -27,7 +27,7 @@ function parseNamedCode(code) {
 	var parsed = {
 		name: parseName(matched[1]),
 		code: matched[2].trim()
-	}
+	};
 	return parsed;
 }
 
@@ -47,7 +47,7 @@ function parseAnonymousCode(code) {
 
 	var parsed = {
 		code: matched[1].trim()
-	}
+	};
 	return parsed;
 }
 
@@ -87,9 +87,6 @@ function parseCode(code) {
 		return parsed;
 	}
 	parsed =  parseImmediateFunction(code);
-	if (parsed) {
-		// console.log('jasmine got immediate\n' + parsed);
-	}
 	return parsed;
 }
 
@@ -98,7 +95,7 @@ function getNameFromTest(code) {
 	return parsed ? parsed.name : null;
 }
 
-function isSkippedTest(code) {
+function isSkippedTest() {
 	return false;
 }
 

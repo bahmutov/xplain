@@ -153,8 +153,8 @@ function parseArity(line) {
     check.verifyString(args, 'invalid number arguments');
     var parsed = parseArityArguments(args);
     check.verifyObject(parsed, 'did not get parsed arguments');
-    return '// ' + parsed.op + ' is a function that expects '
-        + parsed.number + ' arguments';
+    return '// ' + parsed.op + ' is a function that expects ' +
+        parsed.number + ' arguments';
 }
 
 var lineParsers = [

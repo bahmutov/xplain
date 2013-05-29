@@ -9,7 +9,7 @@ module.exports = function (grunt) {
                 ignores: [
                 'src/html-generation/assets/jquery-2.0.0.min.js',
                 'src/html-generation/assets/jquery.tooltipster.min.js',
-                'src/extract-jsdocs/test/**/*.js',
+                'src/**/test/**/*.js',
                 'src/**/cover/**'
                 ]
             },

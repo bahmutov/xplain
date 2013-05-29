@@ -14,8 +14,8 @@ function parseUnitTestCode(code, framework) {
     framework = framework || 'qunit';
     check.verifyString(framework, 'missing framework name, try gt or qunit');
     var parsers = adapter(framework);
-    check.verifyObject(parsers, 'could not get parsers for ' + framework
-        + ', have ' + JSON.stringify(parsers));
+    check.verifyObject(parsers, 'could not get parsers for ' + framework +
+            ', have ' + JSON.stringify(parsers));
 
     var testName = parsers.topLevelParser.getNameFromTest(code);
     var innerCode = parsers.topLevelParser.parseCode(code);

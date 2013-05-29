@@ -32,7 +32,7 @@ function getTaggedComments(inputFiles) {
     check.verifyArray(inputFiles, 'missing input filenames');
 
     var api = [];
-    inputFiles.forEach(function(filename) {
+    inputFiles.forEach(function (filename) {
         var fileApi = getFileApi(filename);
         check.verifyArray(api, 'could not get api array from', filename);
         api = api.concat(fileApi);
