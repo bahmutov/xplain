@@ -1,4 +1,4 @@
-(function(window) {
+(function (window) {
     function runInContext(context) {
         function lodash(value) {
             return value && "object" == typeof value && !isArray(value) && hasOwnProperty.call(value, "__wrapped__") ? value : new lodashWrapper(value);
@@ -31,8 +31,8 @@
         function createBound(func, thisArg, partialArgs, indicator) {
             function bound() {
                 var args = arguments, thisBinding = isPartial ? this : thisArg;
-                if (isFunc || (func = thisArg[key]), partialArgs.length && (args = args.length ? (args = nativeSlice.call(args), 
-                rightIndicator ? args.concat(partialArgs) : partialArgs.concat(args)) : partialArgs), 
+                if (isFunc || (func = thisArg[key]), partialArgs.length && (args = args.length ? (args = nativeSlice.call(args),
+                rightIndicator ? args.concat(partialArgs) : partialArgs.concat(args)) : partialArgs),
                 this instanceof bound) {
                     noop.prototype = func.prototype, thisBinding = new noop(), noop.prototype = null;
                     var result = func.apply(thisBinding, args);
@@ -81,9 +81,9 @@
         }
         function clone(value, deep, callback, thisArg, stackA, stackB) {
             var result = value;
-            if ("function" == typeof deep && (thisArg = callback, callback = deep, deep = !1), 
+            if ("function" == typeof deep && (thisArg = callback, callback = deep, deep = !1),
             "function" == typeof callback) {
-                if (callback = thisArg === undefined ? callback : lodash.createCallback(callback, thisArg, 1), 
+                if (callback = thisArg === undefined ? callback : lodash.createCallback(callback, thisArg, 1),
                 result = callback(result), result !== undefined) return result;
                 result = value;
             }
@@ -109,8 +109,8 @@
             }
             stackA || (stackA = []), stackB || (stackB = []);
             for (var length = stackA.length; length--; ) if (stackA[length] == value) return stackB[length];
-            return result = isArr ? ctor(result.length) : {}, isArr && (hasOwnProperty.call(value, "index") && (result.index = value.index), 
-            hasOwnProperty.call(value, "input") && (result.input = value.input)), stackA.push(value), 
+            return result = isArr ? ctor(result.length) : {}, isArr && (hasOwnProperty.call(value, "index") && (result.index = value.index),
+            hasOwnProperty.call(value, "input") && (result.input = value.input)), stackA.push(value),
             stackB.push(result), (isArr ? forEach : forOwn)(value, function(objValue, key) {
                 result[key] = clone(objValue, deep, callback, undefined, stackA, stackB);
             }), result;
@@ -169,7 +169,7 @@
             if (a === a && (!a || "function" != type && "object" != type) && (!b || "function" != otherType && "object" != otherType)) return !1;
             if (null == a || null == b) return a === b;
             var className = toString.call(a), otherClass = toString.call(b);
-            if (className == argsClass && (className = objectClass), otherClass == argsClass && (otherClass = objectClass), 
+            if (className == argsClass && (className = objectClass), otherClass == argsClass && (otherClass = objectClass),
             className != otherClass) return !1;
             switch (className) {
               case boolClass:
@@ -237,7 +237,7 @@
         function merge(object, source, deepIndicator) {
             var args = arguments, index = 0, length = 2;
             if (!isObject(object)) return object;
-            if (deepIndicator === indicatorObject) var callback = args[3], stackA = args[4], stackB = args[5]; else stackA = [], 
+            if (deepIndicator === indicatorObject) var callback = args[3], stackA = args[4], stackB = args[5]; else stackA = [],
             stackB = [], "number" != typeof deepIndicator && (length = args.length), length > 3 && "function" == typeof args[length - 2] ? callback = lodash.createCallback(args[--length - 1], args[length--], 2) : length > 2 && "function" == typeof args[length - 1] && (callback = args[--length]);
             for (;length > ++index; ) (isArray(args[index]) ? forEach : forOwn)(args[index], function(source, key) {
                 var found, isArr, result = source, value = object[key];
@@ -248,11 +248,11 @@
                     }
                     if (!found) {
                         var isShallow;
-                        callback && (result = callback(value, source), (isShallow = result !== undefined) && (value = result)), 
-                        isShallow || (value = isArr ? isArray(value) ? value : [] : isPlainObject(value) ? value : {}), 
+                        callback && (result = callback(value, source), (isShallow = result !== undefined) && (value = result)),
+                        isShallow || (value = isArr ? isArray(value) ? value : [] : isPlainObject(value) ? value : {}),
                         stackA.push(source), stackB.push(value), isShallow || (value = merge(value, source, indicatorObject, callback, stackA, stackB));
                     }
-                } else callback && (result = callback(value, source), result === undefined && (result = source)), 
+                } else callback && (result = callback(value, source), result === undefined && (result = source)),
                 result !== undefined && (value = result);
                 object[key] = value;
             });
@@ -292,7 +292,7 @@
         }
         function contains(collection, target, fromIndex) {
             var index = -1, length = collection ? collection.length : 0, result = !1;
-            return fromIndex = (0 > fromIndex ? nativeMax(0, length + fromIndex) : fromIndex) || 0, 
+            return fromIndex = (0 > fromIndex ? nativeMax(0, length + fromIndex) : fromIndex) || 0,
             "number" == typeof length ? result = (isString(collection) ? collection.indexOf(target, fromIndex) : indexOf(collection, target, fromIndex)) > -1 : forOwn(collection, function(value) {
                 return ++index >= fromIndex ? !(result = value === target) : undefined;
             }), result;
@@ -340,7 +340,7 @@
         }
         function forEach(collection, callback, thisArg) {
             var index = -1, length = collection ? collection.length : 0;
-            if (callback = callback && thisArg === undefined ? callback : lodash.createCallback(callback, thisArg), 
+            if (callback = callback && thisArg === undefined ? callback : lodash.createCallback(callback, thisArg),
             "number" == typeof length) for (;length > ++index && callback(collection[index], index, collection) !== !1; ) ; else forOwn(collection, callback);
             return collection;
         }
@@ -358,7 +358,7 @@
         }
         function map(collection, callback, thisArg) {
             var index = -1, length = collection ? collection.length : 0;
-            if (callback = lodash.createCallback(callback, thisArg), "number" == typeof length) for (var result = Array(length); length > ++index; ) result[index] = callback(collection[index], index, collection); else result = [], 
+            if (callback = lodash.createCallback(callback, thisArg), "number" == typeof length) for (var result = Array(length); length > ++index; ) result[index] = callback(collection[index], index, collection); else result = [],
             forOwn(collection, function(value, key, collection) {
                 result[++index] = callback(value, key, collection);
             });
@@ -369,7 +369,7 @@
             if (!callback && isArray(collection)) for (var index = -1, length = collection.length; length > ++index; ) {
                 var value = collection[index];
                 value > result && (result = value);
-            } else callback = !callback && isString(collection) ? charAtCallback : lodash.createCallback(callback, thisArg), 
+            } else callback = !callback && isString(collection) ? charAtCallback : lodash.createCallback(callback, thisArg),
             forEach(collection, function(value, index, collection) {
                 var current = callback(value, index, collection);
                 current > computed && (computed = current, result = value);
@@ -381,7 +381,7 @@
             if (!callback && isArray(collection)) for (var index = -1, length = collection.length; length > ++index; ) {
                 var value = collection[index];
                 result > value && (result = value);
-            } else callback = !callback && isString(collection) ? charAtCallback : lodash.createCallback(callback, thisArg), 
+            } else callback = !callback && isString(collection) ? charAtCallback : lodash.createCallback(callback, thisArg),
             forEach(collection, function(value, index, collection) {
                 var current = callback(value, index, collection);
                 computed > current && (computed = current, result = value);
@@ -410,7 +410,7 @@
                 length = props.length;
             }
             return callback = lodash.createCallback(callback, thisArg, 4), forEach(collection, function(value, index, collection) {
-                index = props ? props[--length] : --length, accumulator = noaccum ? (noaccum = !1, 
+                index = props ? props[--length] : --length, accumulator = noaccum ? (noaccum = !1,
                 iterable[index]) : callback(accumulator, iterable[index], index, collection);
             }), accumulator;
         }
@@ -531,7 +531,7 @@
         /** */
         function flatten(array, isShallow, callback, thisArg) {
             var index = -1, length = array ? array.length : 0, result = [];
-            for ("boolean" != typeof isShallow && null != isShallow && (thisArg = callback, 
+            for ("boolean" != typeof isShallow && null != isShallow && (thisArg = callback,
             callback = isShallow, isShallow = !1), null != callback && (callback = lodash.createCallback(callback, thisArg)); length > ++index; ) {
                 var value = array[index];
                 callback && (value = callback(value, index, array)), isArray(value) ? push.apply(result, isShallow ? value : flatten(value)) : result.push(value);
@@ -540,7 +540,7 @@
         }
         function indexOf(array, value, fromIndex) {
             var index = -1, length = array ? array.length : 0;
-            if ("number" == typeof fromIndex) index = (0 > fromIndex ? nativeMax(0, length + fromIndex) : fromIndex || 0) - 1; else if (fromIndex) return index = sortedIndex(array, value), 
+            if ("number" == typeof fromIndex) index = (0 > fromIndex ? nativeMax(0, length + fromIndex) : fromIndex || 0) - 1; else if (fromIndex) return index = sortedIndex(array, value),
             array[index] === value ? index : -1;
             for (;length > ++index; ) if (array[index] === value) return index;
             return -1;
@@ -586,7 +586,7 @@
         }
         function range(start, end, step) {
             start = +start || 0, step = +step || 1, null == end && (end = start, start = 0);
-            for (var index = -1, length = nativeMax(0, ceil((end - start) / step)), result = Array(length); length > ++index; ) result[index] = start, 
+            for (var index = -1, length = nativeMax(0, ceil((end - start) / step)), result = Array(length); length > ++index; ) result[index] = start,
             start += step;
             return result;
         }
@@ -599,7 +599,7 @@
         }
         function sortedIndex(array, value, callback, thisArg) {
             var low = 0, high = array ? array.length : low;
-            for (callback = callback ? lodash.createCallback(callback, thisArg, 1) : identity, 
+            for (callback = callback ? lodash.createCallback(callback, thisArg, 1) : identity,
             value = callback(value); high > low; ) {
                 var mid = low + high >>> 1;
                 value > callback(array[mid]) ? low = mid + 1 : high = mid;
@@ -607,19 +607,19 @@
             return low;
         }
         function union(array) {
-            return isArray(array) || (arguments[0] = array ? nativeSlice.call(array) : arrayRef), 
+            return isArray(array) || (arguments[0] = array ? nativeSlice.call(array) : arrayRef),
             uniq(concat.apply(arrayRef, arguments));
         }
         function uniq(array, isSorted, callback, thisArg) {
             var index = -1, length = array ? array.length : 0, result = [], seen = result;
-            "boolean" != typeof isSorted && null != isSorted && (thisArg = callback, callback = isSorted, 
+            "boolean" != typeof isSorted && null != isSorted && (thisArg = callback, callback = isSorted,
             isSorted = !1);
             var isLarge = !isSorted && length >= largeArraySize;
             if (isLarge) var cache = {};
             for (null != callback && (seen = [], callback = lodash.createCallback(callback, thisArg)); length > ++index; ) {
                 var value = array[index], computed = callback ? callback(value, index, array) : value;
                 if (isLarge) var key = keyPrefix + computed, inited = cache[key] ? !(seen = cache[key]) : seen = cache[key] = [];
-                (isSorted ? !index || seen[seen.length - 1] !== computed : inited || 0 > indexOf(seen, computed)) && ((callback || isLarge) && seen.push(computed), 
+                (isSorted ? !index || seen[seen.length - 1] !== computed : inited || 0 > indexOf(seen, computed)) && ((callback || isLarge) && seen.push(computed),
                 result.push(value));
             }
             return result;
@@ -700,7 +700,7 @@
                 trailing = !1;
             } else options && objectTypes[typeof options] && (leading = options.leading, trailing = "trailing" in options ? options.trailing : trailing);
             return function() {
-                return args = arguments, thisArg = this, clearTimeout(timeoutId), !inited && leading ? (inited = !0, 
+                return args = arguments, thisArg = this, clearTimeout(timeoutId), !inited && leading ? (inited = !0,
                 result = func.apply(thisArg, args)) : timeoutId = setTimeout(delayed, wait), result;
             };
         }
@@ -726,7 +726,7 @@
         function once(func) {
             var ran, result;
             return function() {
-                return ran ? result : (ran = !0, result = func.apply(this, arguments), func = null, 
+                return ran ? result : (ran = !0, result = func.apply(this, arguments), func = null,
                 result);
             };
         }
@@ -741,13 +741,13 @@
                 timeoutId = null, trailing && (lastCalled = new Date(), result = func.apply(thisArg, args));
             }
             var args, result, thisArg, timeoutId, lastCalled = 0, leading = !0, trailing = !0;
-            return options === !1 ? leading = !1 : options && objectTypes[typeof options] && (leading = "leading" in options ? options.leading : leading, 
+            return options === !1 ? leading = !1 : options && objectTypes[typeof options] && (leading = "leading" in options ? options.leading : leading,
             trailing = "trailing" in options ? options.trailing : trailing), function() {
                 var now = new Date();
                 timeoutId || leading || (lastCalled = now);
                 var remaining = wait - (now - lastCalled);
-                return args = arguments, thisArg = this, 0 >= remaining ? (clearTimeout(timeoutId), 
-                timeoutId = null, lastCalled = now, result = func.apply(thisArg, args)) : timeoutId || (timeoutId = setTimeout(trailingCall, remaining)), 
+                return args = arguments, thisArg = this, 0 >= remaining ? (clearTimeout(timeoutId),
+                timeoutId = null, lastCalled = now, result = func.apply(thisArg, args)) : timeoutId || (timeoutId = setTimeout(trailingCall, remaining)),
                 result;
             };
         }
@@ -778,7 +778,7 @@
             return context._ = oldDash, this;
         }
         function random(min, max) {
-            return null == min && null == max && (max = 1), min = +min || 0, null == max && (max = min, 
+            return null == min && null == max && (max = 1), min = +min || 0, null == max && (max = min,
             min = 0), min + floor(nativeRandom() * ((+max || 0) - min + 1));
         }
         function result(object, property) {
@@ -790,14 +790,14 @@
             text || (text = ""), options = defaults({}, options, settings);
             var isEvaluating, imports = defaults({}, options.imports, settings.imports), importsKeys = keys(imports), importsValues = values(imports), index = 0, interpolate = options.interpolate || reNoMatch, source = "__p += '", reDelimiters = RegExp((options.escape || reNoMatch).source + "|" + interpolate.source + "|" + (interpolate === reInterpolate ? reEsTemplate : reNoMatch).source + "|" + (options.evaluate || reNoMatch).source + "|$", "g");
             text.replace(reDelimiters, function(match, escapeValue, interpolateValue, esTemplateValue, evaluateValue, offset) {
-                return interpolateValue || (interpolateValue = esTemplateValue), source += text.slice(index, offset).replace(reUnescapedString, escapeStringChar), 
-                escapeValue && (source += "' +\n__e(" + escapeValue + ") +\n'"), evaluateValue && (isEvaluating = !0, 
-                source += "';\n" + evaluateValue + ";\n__p += '"), interpolateValue && (source += "' +\n((__t = (" + interpolateValue + ")) == null ? '' : __t) +\n'"), 
+                return interpolateValue || (interpolateValue = esTemplateValue), source += text.slice(index, offset).replace(reUnescapedString, escapeStringChar),
+                escapeValue && (source += "' +\n__e(" + escapeValue + ") +\n'"), evaluateValue && (isEvaluating = !0,
+                source += "';\n" + evaluateValue + ";\n__p += '"), interpolateValue && (source += "' +\n((__t = (" + interpolateValue + ")) == null ? '' : __t) +\n'"),
                 index = offset + match.length, match;
             }), source += "';\n";
             var variable = options.variable, hasVariable = variable;
-            hasVariable || (variable = "obj", source = "with (" + variable + ") {\n" + source + "\n}\n"), 
-            source = (isEvaluating ? source.replace(reEmptyStringLeading, "") : source).replace(reEmptyStringMiddle, "$1").replace(reEmptyStringTrailing, "$1;"), 
+            hasVariable || (variable = "obj", source = "with (" + variable + ") {\n" + source + "\n}\n"),
+            source = (isEvaluating ? source.replace(reEmptyStringLeading, "") : source).replace(reEmptyStringMiddle, "$1").replace(reEmptyStringTrailing, "$1;"),
             source = "function(" + variable + ") {\n" + (hasVariable ? "" : variable + " || (" + variable + " = {});\n") + "var __t, __p = '', __e = _.escape" + (isEvaluating ? ", __j = Array.prototype.join;\nfunction print() { __p += __j.call(arguments, '') }\n" : ";\n") + source + "return __p\n}";
             var sourceURL = "\n/*\n//@ sourceURL=" + (options.sourceURL || "/lodash/template/source[" + templateCounter++ + "]") + "\n*/";
             try {
@@ -831,8 +831,8 @@
         }
         context = context ? _.defaults(window.Object(), context, _.pick(window, contextProps)) : window;
         var Array = context.Array, Boolean = context.Boolean, Date = context.Date, Function = context.Function, Math = context.Math, Number = context.Number, Object = context.Object, RegExp = context.RegExp, String = context.String, TypeError = context.TypeError, arrayRef = Array(), objectRef = Object(), oldDash = context._, reNative = RegExp("^" + String(objectRef.valueOf).replace(/[.*+?^${}()|[\]\\]/g, "\\$&").replace(/valueOf|for [^\]]+/g, ".+?") + "$"), ceil = Math.ceil, clearTimeout = context.clearTimeout, concat = arrayRef.concat, floor = Math.floor, getPrototypeOf = reNative.test(getPrototypeOf = Object.getPrototypeOf) && getPrototypeOf, hasOwnProperty = objectRef.hasOwnProperty, push = arrayRef.push, setImmediate = context.setImmediate, setTimeout = context.setTimeout, toString = objectRef.toString, nativeBind = reNative.test(nativeBind = toString.bind) && nativeBind, nativeIsArray = reNative.test(nativeIsArray = Array.isArray) && nativeIsArray, nativeIsFinite = context.isFinite, nativeIsNaN = context.isNaN, nativeKeys = reNative.test(nativeKeys = Object.keys) && nativeKeys, nativeMax = Math.max, nativeMin = Math.min, nativeParseInt = context.parseInt, nativeRandom = Math.random, nativeSlice = arrayRef.slice, isIeOpera = reNative.test(context.attachEvent), isV8 = nativeBind && !/\n|true/.test(nativeBind + isIeOpera), ctorByClass = {};
-        ctorByClass[arrayClass] = Array, ctorByClass[boolClass] = Boolean, ctorByClass[dateClass] = Date, 
-        ctorByClass[objectClass] = Object, ctorByClass[numberClass] = Number, ctorByClass[regexpClass] = RegExp, 
+        ctorByClass[arrayClass] = Array, ctorByClass[boolClass] = Boolean, ctorByClass[dateClass] = Date,
+        ctorByClass[objectClass] = Object, ctorByClass[numberClass] = Number, ctorByClass[regexpClass] = RegExp,
         ctorByClass[stringClass] = String;
         var support = lodash.support = {};
         support.fastBind = nativeBind && !isV8, lodash.templateSettings = {
@@ -865,17 +865,17 @@
             if (argsLength > 3 && "function" == typeof args[argsLength - 2]) var callback = lodash.createCallback(args[--argsLength - 1], args[argsLength--], 2); else argsLength > 2 && "function" == typeof args[argsLength - 1] && (callback = args[--argsLength]);
             for (;argsLength > ++argsIndex; ) if (iterable = args[argsIndex], iterable && objectTypes[typeof iterable]) {
                 var length = iterable.length;
-                if (index = -1, isArray(iterable)) for (;length > ++index; ) result[index] = callback ? callback(result[index], iterable[index]) : iterable[index]; else for (var ownIndex = -1, ownProps = objectTypes[typeof iterable] ? keys(iterable) : [], length = ownProps.length; length > ++ownIndex; ) index = ownProps[ownIndex], 
+                if (index = -1, isArray(iterable)) for (;length > ++index; ) result[index] = callback ? callback(result[index], iterable[index]) : iterable[index]; else for (var ownIndex = -1, ownProps = objectTypes[typeof iterable] ? keys(iterable) : [], length = ownProps.length; length > ++ownIndex; ) index = ownProps[ownIndex],
                 result[index] = callback ? callback(result[index], iterable[index]) : iterable[index];
             }
             return result;
         }, defaults = function(object, source, guard) {
             var index, iterable = object, result = iterable;
             if (!iterable) return result;
-            for (var args = arguments, argsIndex = 0, argsLength = "number" == typeof guard ? 2 : args.length; argsLength > ++argsIndex; ) if (iterable = args[argsIndex], 
+            for (var args = arguments, argsIndex = 0, argsLength = "number" == typeof guard ? 2 : args.length; argsLength > ++argsIndex; ) if (iterable = args[argsIndex],
             iterable && objectTypes[typeof iterable]) {
                 var length = iterable.length;
-                if (index = -1, isArray(iterable)) for (;length > ++index; ) result[index] === undefined && (result[index] = iterable[index]); else for (var ownIndex = -1, ownProps = objectTypes[typeof iterable] ? keys(iterable) : [], length = ownProps.length; length > ++ownIndex; ) index = ownProps[ownIndex], 
+                if (index = -1, isArray(iterable)) for (;length > ++index; ) result[index] === undefined && (result[index] = iterable[index]); else for (var ownIndex = -1, ownProps = objectTypes[typeof iterable] ? keys(iterable) : [], length = ownProps.length; length > ++ownIndex; ) index = ownProps[ownIndex],
                 result[index] === undefined && (result[index] = iterable[index]);
             }
             return result;
@@ -891,7 +891,7 @@
             if (!iterable) return result;
             if (!objectTypes[typeof iterable]) return result;
             callback = callback && thisArg === undefined ? callback : lodash.createCallback(callback, thisArg);
-            for (var ownIndex = -1, ownProps = objectTypes[typeof iterable] ? keys(iterable) : [], length = ownProps.length; length > ++ownIndex; ) if (index = ownProps[ownIndex], 
+            for (var ownIndex = -1, ownProps = objectTypes[typeof iterable] ? keys(iterable) : [], length = ownProps.length; length > ++ownIndex; ) if (index = ownProps[ownIndex],
             callback(iterable[index], index, collection) === !1) return result;
             return result;
         }, isPlainObject = function(value) {
@@ -903,50 +903,50 @@
         var parseInt = 8 == nativeParseInt(whitespace + "08") ? nativeParseInt : function(value, radix) {
             return nativeParseInt(isString(value) ? value.replace(reLeadingSpacesAndZeros, "") : value, radix || 0);
         };
-        return lodash.after = after, lodash.assign = assign, lodash.at = at, lodash.bind = bind, 
-        lodash.bindAll = bindAll, lodash.bindKey = bindKey, lodash.compact = compact, lodash.compose = compose, 
-        lodash.countBy = countBy, lodash.createCallback = createCallback, lodash.debounce = debounce, 
-        lodash.defaults = defaults, lodash.defer = defer, lodash.delay = delay, lodash.difference = difference, 
-        lodash.filter = filter, lodash.flatten = flatten, lodash.forEach = forEach, lodash.forIn = forIn, 
-        lodash.forOwn = forOwn, lodash.functions = functions, lodash.groupBy = groupBy, 
-        lodash.initial = initial, lodash.intersection = intersection, lodash.invert = invert, 
-        lodash.invoke = invoke, lodash.keys = keys, lodash.map = map, lodash.max = max, 
-        lodash.memoize = memoize, lodash.merge = merge, lodash.min = min, lodash.omit = omit, 
-        lodash.once = once, lodash.pairs = pairs, lodash.partial = partial, lodash.partialRight = partialRight, 
-        lodash.pick = pick, lodash.pluck = pluck, lodash.range = range, lodash.reject = reject, 
-        lodash.rest = rest, lodash.shuffle = shuffle, lodash.sortBy = sortBy, lodash.tap = tap, 
-        lodash.throttle = throttle, lodash.times = times, lodash.toArray = toArray, lodash.union = union, 
-        lodash.uniq = uniq, lodash.unzip = unzip, lodash.values = values, lodash.where = where, 
-        lodash.without = without, lodash.wrap = wrap, lodash.zip = zip, lodash.zipObject = zipObject, 
-        lodash.collect = map, lodash.drop = rest, lodash.each = forEach, lodash.extend = assign, 
-        lodash.methods = functions, lodash.object = zipObject, lodash.select = filter, lodash.tail = rest, 
-        lodash.unique = uniq, mixin(lodash), lodash.clone = clone, lodash.cloneDeep = cloneDeep, 
-        lodash.contains = contains, lodash.escape = escape, lodash.every = every, lodash.find = find, 
-        lodash.findIndex = findIndex, lodash.findKey = findKey, lodash.has = has, lodash.identity = identity, 
-        lodash.indexOf = indexOf, lodash.isArguments = isArguments, lodash.isArray = isArray, 
-        lodash.isBoolean = isBoolean, lodash.isDate = isDate, lodash.isElement = isElement, 
-        lodash.isEmpty = isEmpty, lodash.isEqual = isEqual, lodash.isFinite = isFinite, 
-        lodash.isFunction = isFunction, lodash.isNaN = isNaN, lodash.isNull = isNull, lodash.isNumber = isNumber, 
-        lodash.isObject = isObject, lodash.isPlainObject = isPlainObject, lodash.isRegExp = isRegExp, 
-        lodash.isString = isString, lodash.isUndefined = isUndefined, lodash.lastIndexOf = lastIndexOf, 
-        lodash.mixin = mixin, lodash.noConflict = noConflict, lodash.parseInt = parseInt, 
-        lodash.random = random, lodash.reduce = reduce, lodash.reduceRight = reduceRight, 
-        lodash.result = result, lodash.runInContext = runInContext, lodash.size = size, 
-        lodash.some = some, lodash.sortedIndex = sortedIndex, lodash.template = template, 
-        lodash.unescape = unescape, lodash.uniqueId = uniqueId, lodash.all = every, lodash.any = some, 
-        lodash.detect = find, lodash.foldl = reduce, lodash.foldr = reduceRight, lodash.include = contains, 
+        return lodash.after = after, lodash.assign = assign, lodash.at = at, lodash.bind = bind,
+        lodash.bindAll = bindAll, lodash.bindKey = bindKey, lodash.compact = compact, lodash.compose = compose,
+        lodash.countBy = countBy, lodash.createCallback = createCallback, lodash.debounce = debounce,
+        lodash.defaults = defaults, lodash.defer = defer, lodash.delay = delay, lodash.difference = difference,
+        lodash.filter = filter, lodash.flatten = flatten, lodash.forEach = forEach, lodash.forIn = forIn,
+        lodash.forOwn = forOwn, lodash.functions = functions, lodash.groupBy = groupBy,
+        lodash.initial = initial, lodash.intersection = intersection, lodash.invert = invert,
+        lodash.invoke = invoke, lodash.keys = keys, lodash.map = map, lodash.max = max,
+        lodash.memoize = memoize, lodash.merge = merge, lodash.min = min, lodash.omit = omit,
+        lodash.once = once, lodash.pairs = pairs, lodash.partial = partial, lodash.partialRight = partialRight,
+        lodash.pick = pick, lodash.pluck = pluck, lodash.range = range, lodash.reject = reject,
+        lodash.rest = rest, lodash.shuffle = shuffle, lodash.sortBy = sortBy, lodash.tap = tap,
+        lodash.throttle = throttle, lodash.times = times, lodash.toArray = toArray, lodash.union = union,
+        lodash.uniq = uniq, lodash.unzip = unzip, lodash.values = values, lodash.where = where,
+        lodash.without = without, lodash.wrap = wrap, lodash.zip = zip, lodash.zipObject = zipObject,
+        lodash.collect = map, lodash.drop = rest, lodash.each = forEach, lodash.extend = assign,
+        lodash.methods = functions, lodash.object = zipObject, lodash.select = filter, lodash.tail = rest,
+        lodash.unique = uniq, mixin(lodash), lodash.clone = clone, lodash.cloneDeep = cloneDeep,
+        lodash.contains = contains, lodash.escape = escape, lodash.every = every, lodash.find = find,
+        lodash.findIndex = findIndex, lodash.findKey = findKey, lodash.has = has, lodash.identity = identity,
+        lodash.indexOf = indexOf, lodash.isArguments = isArguments, lodash.isArray = isArray,
+        lodash.isBoolean = isBoolean, lodash.isDate = isDate, lodash.isElement = isElement,
+        lodash.isEmpty = isEmpty, lodash.isEqual = isEqual, lodash.isFinite = isFinite,
+        lodash.isFunction = isFunction, lodash.isNaN = isNaN, lodash.isNull = isNull, lodash.isNumber = isNumber,
+        lodash.isObject = isObject, lodash.isPlainObject = isPlainObject, lodash.isRegExp = isRegExp,
+        lodash.isString = isString, lodash.isUndefined = isUndefined, lodash.lastIndexOf = lastIndexOf,
+        lodash.mixin = mixin, lodash.noConflict = noConflict, lodash.parseInt = parseInt,
+        lodash.random = random, lodash.reduce = reduce, lodash.reduceRight = reduceRight,
+        lodash.result = result, lodash.runInContext = runInContext, lodash.size = size,
+        lodash.some = some, lodash.sortedIndex = sortedIndex, lodash.template = template,
+        lodash.unescape = unescape, lodash.uniqueId = uniqueId, lodash.all = every, lodash.any = some,
+        lodash.detect = find, lodash.foldl = reduce, lodash.foldr = reduceRight, lodash.include = contains,
         lodash.inject = reduce, forOwn(lodash, function(func, methodName) {
             lodash.prototype[methodName] || (lodash.prototype[methodName] = function() {
                 var args = [ this.__wrapped__ ];
                 return push.apply(args, arguments), func.apply(lodash, args);
             });
-        }), lodash.first = first, lodash.last = last, lodash.take = first, lodash.head = first, 
+        }), lodash.first = first, lodash.last = last, lodash.take = first, lodash.head = first,
         forOwn(lodash, function(func, methodName) {
             lodash.prototype[methodName] || (lodash.prototype[methodName] = function(callback, thisArg) {
                 var result = func(this.__wrapped__, callback, thisArg);
                 return null == callback || thisArg && "function" != typeof callback ? result : new lodashWrapper(result);
             });
-        }), lodash.VERSION = "1.2.1", lodash.prototype.toString = wrapperToString, lodash.prototype.value = wrapperValueOf, 
+        }), lodash.VERSION = "1.2.1", lodash.prototype.toString = wrapperToString, lodash.prototype.value = wrapperValueOf,
         lodash.prototype.valueOf = wrapperValueOf, forEach([ "join", "pop", "shift" ], function(methodName) {
             var func = arrayRef[methodName];
             lodash.prototype[methodName] = function() {
@@ -984,7 +984,7 @@
         "\u2028": "u2028",
         "\u2029": "u2029"
     }, _ = runInContext();
-    "function" == typeof define && "object" == typeof define.amd && define.amd ? (window._ = _, 
+    "function" == typeof define && "object" == typeof define.amd && define.amd ? (window._ = _,
     define(function() {
         return _;
     })) : freeExports && !freeExports.nodeType ? freeModule ? (freeModule.exports = _)._ = _ : freeExports._ = _ : window._ = _;

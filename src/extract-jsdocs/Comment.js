@@ -22,8 +22,27 @@ Comment.prototype.isTagged = function (tag) {
     });
 };
 
-Comment.prototype.tagValue = function (tag) {
-    check.verifyString(tag, 'missing tag string');
+Comment.prototype.tag = function (name) {
+    check.verifyString(name, 'missing tag string');
+    if (!Array.isArray(this.tags)) {
+        return null;
+    }
+    var result = null;
+    this.tags.some(function (t) {
+        check.verifyString(t.type, 'missing type for ' + JSON.stringify(t));
+        if (t.type === name) {
+            result = t;
+            return true;
+        }
+        return false;
+    });
+    return result;
+};
+
+Comment.prototype.tagValue = function (name) {
+    check.verifyString(name, 'missing tag string');
+    var t = this.tag(name);
+    /*
     if (!Array.isArray(this.tags)) {
         return null;
     }
@@ -38,6 +57,12 @@ Comment.prototype.tagValue = function (tag) {
         }
     });
     return value;
+    */
+    if (!t) {
+        console.error('cannot find tag ' + name);
+        return null;
+    }
+    return t.string;
 };
 
 Comment.prototype.isPublic = function () {
@@ -116,6 +141,15 @@ Comment.prototype.getFullDescription = function ()
 Comment.prototype.getReturns = function ()
 {
     return this.tagValue('returns');
+};
+
+Comment.prototype.getMemberOf = function ()
+{
+    var t = this.tag('memberOf');
+    if (!t) {
+        return null;
+    }
+    return t.parent;
 };
 
 module.exports = Comment;
