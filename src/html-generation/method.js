@@ -32,17 +32,7 @@ function methodDiv(commented, framework) {
     var apiComment = commented.comment;
     check.verifyObject(apiComment, 'expected comment object');
 
-    // var name = null;
     var ctx = apiComment.ctx;
-    /*
-    if (ctx) {
-        console.assert(ctx, 'missing ctx property, comment', apiComment);
-        check.verifyString(ctx.name, 'missing function name');
-        name = ctx.name;
-    } else {
-        name = apiComment.tagValue('function');
-    }
-    */
     var name = apiComment.getFullName();
     if (!name) {
         return null;
