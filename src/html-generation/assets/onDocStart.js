@@ -1,5 +1,8 @@
+/*global $:true, document:true*/
 $(document).ready(function () {
-    initToggle(".toggle");
+    'use strict';
+    /*global initToggle:true*/
+    initToggle('.toggle');
     $('.tooltip').tooltipster({
         theme: '.tooltip-theme'
     });

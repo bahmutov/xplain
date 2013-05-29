@@ -38,9 +38,8 @@ function codeElement(name, sourceCode, disabled, type,
         check.verifyString(prettyCode, 'could not reformat\n' + sourceCode);
 
         var inner = html.code(null, sourceCode);
-        var codeElement = html.pre(".prettyprint.linenums", [inner]);
-
-        parts.push(codeElement);
+        var codeTag = html.pre('.prettyprint.linenums', [inner]);
+        parts.push(codeTag);
     }
 
     codeId += 1;

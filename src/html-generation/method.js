@@ -91,12 +91,12 @@ function methodDiv(commented, framework) {
     }
 
     if (apiComment.isDeprecated()) {
-        nameParts.push(html.span(".tag", "deprecated"));
+        nameParts.push(html.span('.tag', 'deprecated'));
     }
     if (!apiComment.isPublic()) {
-        nameParts.push(html.span(".tag", "private"));
+        nameParts.push(html.span('.tag', 'private'));
     }
-    nameParts.push(html.span(".tag", "method"));
+    nameParts.push(html.span('.tag', 'method'));
     var nameElement = html.h3(null, nameParts);
 
     var descriptionElement = (ctx ? html.div('.description',
@@ -122,7 +122,7 @@ function methodDiv(commented, framework) {
             methodParts.push(html.h4(null, ['Returns']));
             methodParts.push(html.p(null, [
                 html.p(null, [new html.SafeString(returns)])
-                ]));
+            ]));
         }
     }
 

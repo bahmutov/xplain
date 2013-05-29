@@ -1,11 +1,7 @@
 var check = require('check-types');
-var reformat = require('../utils/code').reformat;
 var transform = require('../doc-transform/toHumanForm');
-var html = require('pithy');
 var makeToggle = require('./toggle');
 var makeCodeElement = require('./code');
-
-var exampleDivId = 0;
 
 function exampleDiv(name, apiExample, framework) {
     check.verifyString(name, 'missing method name');
