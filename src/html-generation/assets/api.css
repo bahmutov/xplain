@@ -48,10 +48,22 @@ body {
 a:link, a:visited {
   color: #444;
   font-family: Consolas, 'Courier New', monospace;
+  text-decoration: none;
+  border-bottom: 1px solid #ddd;
+}
+
+a:link:hover, a:visited:hover {
+  border-bottom: 1px solid #888;
 }
 
 a:link.private, a:visited.private {
   color: #AAA;
+  text-decoration: none;
+  border-bottom: 1px solid #eee;
+}
+
+a:link.private:hover, a:visited.private:hover {
+  border-bottom: 1px solid #888;
 }
 
 .content #docs {
