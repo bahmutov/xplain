@@ -215,10 +215,12 @@ function docModule(aModule, doc, framework) {
 	var categories = _.groupBy(docs, function (method) {
 		return method.comment.getCategory();
 	});
-	console.dir(categories);
+	// console.dir(categories);
+	var categoryNames = Object.keys(categories);
+	categoryNames = categoryNames.sort();
 
-	Object.keys(categories).forEach(function (category) {
-		console.log('docing category', category);
+	categoryNames.forEach(function (category) {
+		// console.log('docing category', category);
 		if (category !== 'null') {
 			doc.index.push(html.div('.category', [category]));
 		}

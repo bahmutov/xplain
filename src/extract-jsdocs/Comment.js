@@ -44,7 +44,7 @@ Comment.prototype.tagValue = function (name) {
     var t = this.tag(name);
 
     if (!t) {
-        console.error('cannot find tag ' + name);
+        // console.error('cannot find tag ' + name);
         return null;
     }
     return t.string;
