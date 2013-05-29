@@ -45,7 +45,7 @@ function getIndexWithTooltip(options) {
             class: indexClass,
             title: description
         };
-        indexParts = [html.span(simpleAttributes, memberOfName)];
+        indexParts = [html.span(simpleAttributes, fullName)];
     }
     var indexElement = html.div(null, indexParts);
     return indexElement;
