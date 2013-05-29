@@ -29,7 +29,7 @@ function parseImmediateFunction(code) {
 
 	var parsed = {
 		code: matched[1].trim()
-	}
+	};
 	return parsed;
 }
 
@@ -47,7 +47,7 @@ module.exports = {
 	parseName: parseName,
 	parseCode: parseCode,
 	getNameFromTest: getNameFromTest,
-	isSkippedTest: function() {
+	isSkippedTest: function () {
 		return false;
 	}
 };

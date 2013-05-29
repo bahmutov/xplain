@@ -42,7 +42,7 @@ gt.test('empty modules tree', function () {
     gt.object(root, 'returns root module object');
     gt.null(root.name, 'root module has no name');
     gt.equal(root.docNumber(), 0, 'root module has no docs');
-})
+});
 
 gt.test('skip samples', function () {
     // just tests, without functions, so nothing.
@@ -71,7 +71,7 @@ gt.test('submodules', function () {
 
     // console.dir(root);
     gt.null(root.name, 'root module name is undefined');
-    gt.equal(root.modules['A'].name, 'A', 'first module is A');
-    gt.equal(root.modules['B'].name, 'B', 'second module is B');
-    gt.equal(root.modules['A'].modules['C'].name, 'A/C', 'A/C submodule');
+    gt.equal(root.modules.A.name, 'A', 'first module is A');
+    gt.equal(root.modules.B.name, 'B', 'second module is B');
+    gt.equal(root.modules.A.modules.C.name, 'A/C', 'A/C submodule');
 });

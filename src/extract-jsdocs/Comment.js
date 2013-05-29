@@ -56,7 +56,7 @@ Comment.prototype.isPublic = function () {
 
 Comment.prototype.isDeprecated = function () {
     return !!this.isTagged('deprecated');
-}
+};
 
 Comment.prototype.isModule = function () {
     return this.isTagged('module');

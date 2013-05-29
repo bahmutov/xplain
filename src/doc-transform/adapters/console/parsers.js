@@ -37,7 +37,8 @@ function transformAssertion(line) {
     check.verifyString(line, 'missing line');
     var parsed = null;
     lineParsers.some(function (method) {
-        return parsed = method(line);
+        parsed = method(line);
+        return parsed;
     });
     if (check.isString(parsed)) {
         return parsed;
