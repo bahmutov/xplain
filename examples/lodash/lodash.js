@@ -459,6 +459,7 @@
          * `false`, `null`, `0`, `""`, `undefined` and `NaN` are all falsey.
          *
          * @method compact
+         * @memberOf _
          */
         function compact(array) {
             for (var index = -1, length = array ? array.length : 0, result = []; length > ++index; ) {
@@ -473,6 +474,7 @@
          * using strict equality for comparisons, i.e. `===`.
          *
          * @method difference
+         * @memberOf _
          */
         function difference(array) {
             for (var index = -1, length = array ? array.length : 0, flattened = concat.apply(arrayRef, nativeSlice.call(arguments, 1)), contains = cachedContains(flattened), result = []; length > ++index; ) {
@@ -487,6 +489,7 @@
          * the element that passes the callback check, instead of the element itself.
          *
          * @method findIndex
+         * @memberOf _
          */
         function findIndex(array, callback, thisArg) {
             var index = -1, length = array ? array.length : 0;

@@ -19,3 +19,4 @@ gt.test 'basic', ->
     gt.equal c.tagValue('alias'), 'detect'
     gt.equal c.getMemberOf(), '_'
     gt.equal c.tagValue('category'), 'Collections'
+    gt.equal c.getFullName(), '_.first'

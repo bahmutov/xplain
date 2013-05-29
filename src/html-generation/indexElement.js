@@ -31,6 +31,7 @@ function getIndexWithTooltip(options) {
         indexClass += ' ' + options.className;
     }
 
+    var fullName = options.comment.getFullName();
     var indexParts;
     if (options.link) {
         var indexAttributes = {
@@ -38,13 +39,13 @@ function getIndexWithTooltip(options) {
             class: indexClass,
             title: description
         };
-        indexParts = [html.a(indexAttributes, options.name)];
+        indexParts = [html.a(indexAttributes, fullName)];
     } else {
         var simpleAttributes = {
             class: indexClass,
             title: description
         };
-        indexParts = [html.span(simpleAttributes, options.name)];
+        indexParts = [html.span(simpleAttributes, memberOfName)];
     }
     var indexElement = html.div(null, indexParts);
     return indexElement;

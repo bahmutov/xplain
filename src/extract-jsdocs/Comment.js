@@ -137,4 +137,11 @@ Comment.prototype.getMemberOf = function ()
     return t.parent;
 };
 
+Comment.prototype.getFullName = function () {
+    var fullName = this.getMemberOf();
+    var name = this.getMethodName();
+    fullName = fullName ? fullName + '.' + name : name;
+    return fullName;
+};
+
 module.exports = Comment;
