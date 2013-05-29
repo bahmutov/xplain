@@ -203,8 +203,6 @@ function docModule(aModule, doc, framework) {
 	if (aModule.name && docs.length) {
 		check.verifyString(aModule.name, 'missing module name');
 
-		// doc.index.push(html.div('.moduleName', [aModule.name]));
-		// console.dir(aModule);
 		var indexElement = getIndexWithTooltip({
 			comment: aModule.comment,
 			name: aModule.name,
@@ -214,7 +212,6 @@ function docModule(aModule, doc, framework) {
 	}
 
 	docs.forEach(function (method) {
-		// var method = aModule.docs[name];
 		console.log('documenting method', method.name);
 
 		var info = methodDiv(method, framework);
