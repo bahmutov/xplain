@@ -11,11 +11,12 @@ function parseCodeContextExtra(str) {
         return result;
     }
 
-    if (/^function ([\$\w]+) *\(/.exec(str)) {
+    var isFunction = /^function ([\$\w]+) *\(/;
+    if (isFunction.exec(str)) {
         return {
-            type: 'function'
-          , name: RegExp.$1.trim()
-          , string: RegExp.$1 + '()'
+            type: 'function',
+            name: RegExp.$1.trim(),
+            string: RegExp.$1 + '()'
         };
     }
     // console.error('dox: could not parse code\n' + str);

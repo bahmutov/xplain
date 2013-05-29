@@ -42,22 +42,7 @@ Comment.prototype.tag = function (name) {
 Comment.prototype.tagValue = function (name) {
     check.verifyString(name, 'missing tag string');
     var t = this.tag(name);
-    /*
-    if (!Array.isArray(this.tags)) {
-        return null;
-    }
-    var value = null;
-    this.tags.some(function (t) {
-        check.verifyString(t.type, 'missing type for ' + JSON.stringify(t));
-        if (t.type === tag) {
-            value = t.string;
-            return true;
-        } else {
-            return false;
-        }
-    });
-    return value;
-    */
+
     if (!t) {
         console.error('cannot find tag ' + name);
         return null;
@@ -81,7 +66,7 @@ Comment.prototype.isMethod = function () {
     return this.isTagged('method') || this.isTagged('function');
 };
 
-Comment.prototype.isExample = function() {
+Comment.prototype.isExample = function () {
     return this.isTagged('example') || this.isTagged('exampleFor');
 };
 
@@ -89,15 +74,15 @@ Comment.prototype.isSample = function () {
     return this.isTagged('sample') || this.isTagged('sampleFor');
 };
 
-Comment.prototype.exampleFor = function() {
+Comment.prototype.exampleFor = function () {
     return this.tagValue('example') || this.tagValue('exampleFor');
 };
 
-Comment.prototype.sampleFor = function() {
+Comment.prototype.sampleFor = function () {
     return this.tagValue('sample') || this.tagValue('sampleFor');
 };
 
-Comment.prototype.for = function() {
+Comment.prototype.for = function () {
     return this.sampleFor() || this.exampleFor();
 };
 
