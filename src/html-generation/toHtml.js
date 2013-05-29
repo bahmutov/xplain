@@ -2,6 +2,7 @@ var fs = require('fs.extra');
 var path = require('path');
 var check = require('check-types');
 var moment = require('moment');
+var _ = require('lodash');
 
 var methodDiv = require('./method');
 var rethrow = require('../utils/errors').rethrow;
@@ -211,13 +212,36 @@ function docModule(aModule, doc, framework) {
 		doc.index.push(indexElement);
 	}
 
+	var categories = _.groupBy(docs, function (method) {
+		return method.comment.getCategory();
+	});
+	console.dir(categories);
+
+	Object.keys(categories).forEach(function (category) {
+		console.log('docing category', category);
+		if (category !== 'null') {
+			doc.index.push(html.div('.category', [category]));
+		}
+		var items = categories[category];
+
+		items.forEach(function (method) {
+			// console.log('documenting method', method.name);
+
+			var info = methodDiv(method, framework);
+			doc.index.push(info.name);
+			doc.docs.push(info.docs);
+		});
+	});
+
+	/*
 	docs.forEach(function (method) {
-		console.log('documenting method', method.name);
+		// console.log('documenting method', method.name);
 
 		var info = methodDiv(method, framework);
 		doc.index.push(info.name);
 		doc.docs.push(info.docs);
 	});
+	*/
 
 	var submodules = aModule.getSubModules();
 	submodules.forEach(function (subModule) {

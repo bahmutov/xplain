@@ -41,6 +41,11 @@ body {
   font-family: Consolas, 'Courier New', monospace;
 }
 
+.content #index .category {
+  font-weight: bold;
+  padding-top: 1em;
+}
+
 .content .header {
   border-bottom: 1px solid gray;
 }
@@ -60,10 +65,6 @@ a:link.private, a:visited.private {
   color: #AAA;
   text-decoration: none;
   border-bottom: 1px solid #eee;
-}
-
-a:link.private:hover, a:visited.private:hover {
-  border-bottom: 1px solid #888;
 }
 
 .content #docs {
