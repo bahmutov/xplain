@@ -8,6 +8,13 @@ body {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+#mainTitle > #version {
+  font-size: 75%;
+  color: gray;
+  padding-left: 0.5em;
+  vertical-align: sub;
+}
+
 .content {
   width: 85%;
   padding: 5px 5px 0px 5px;

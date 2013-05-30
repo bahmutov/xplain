@@ -95,9 +95,11 @@ function generateTitleElement(options) {
 	var titleElement = null;
 	if (options.title) {
 		if (apiVersion) {
+			var apiElement = html.span('#version', [
+				apiVersion
+			]);
 			titleElement = html.h1('#mainTitle', [
-				options.title,
-				html.sub(null, [apiVersion])
+				options.title, apiElement
 			]);
 		} else {
 			titleElement = html.h1('#mainTitle',
