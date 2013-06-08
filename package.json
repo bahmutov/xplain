@@ -39,7 +39,7 @@
   "license": "MIT",
   "dependencies": {
     "dox": "~0.4.3",
-    "check-types": "~0.6.3",
+    "check-types": "~0.6.4",
     "esprima": "~1.0.2",
     "escodegen": "0.0.20",
     "lodash": "~1.1.1",
@@ -53,11 +53,10 @@
     "fs.extra": "~1.2.0",
     "node-beautify": "0.0.2",
     "optimist": "~0.5.0",
-    "marked": "~0.2.8",
-    "gt": "~0.8.5"
+    "marked": "~0.2.8"
   },
   "devDependencies": {
-    "gt": "~0.8.3",
+    "gt": "~0.8.7",
     "grunt": "~0.4.1",
     "grunt-contrib-jshint": "~0.5.4",
     "grunt-bump": "0.0.2"
