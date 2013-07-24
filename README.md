@@ -3,8 +3,9 @@
 API generation tool for JavaScript that can include unit
 tests as code samples.
 
-[![Build Status](https://drone.io/github.com/bahmutov/xplain/status.png)](https://drone.io/github.com/bahmutov/xplain/latest)
-[![Build Status](https://travis-ci.org/bahmutov/xplain.png?branch=master)](https://travis-ci.org/bahmutov/xplain)
+[![NPM info](https://nodei.co/npm/xplain.png?downloads=true)](https://nodei.co/npm/xplain.png?downloads=true)
+[![Drone build Status](https://drone.io/github.com/bahmutov/xplain/status.png)](https://drone.io/github.com/bahmutov/xplain/latest)
+[![Travis duild Status](https://travis-ci.org/bahmutov/xplain.png?branch=master)](https://travis-ci.org/bahmutov/xplain)
 
 ***This is still very early release, probably would not work right away for your needs.***
 
