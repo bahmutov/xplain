@@ -7,6 +7,7 @@ var mkdirp = require('mkdirp');
 
 var getApi = require('./extract-jsdocs/getTaggedComments').getCommentsFromFiles;
 var toDoc = require('./html-generation/toHtml');
+var updateMd = require('./md-generation/updateMarkdownFile');
 var rethrow = require('./utils/errors').rethrow;
 var docsToModules = require('./doc-model/docsToModules');
 
@@ -14,6 +15,10 @@ var adapter = require('./doc-transform/adapters/adapter');
 check.verifyFunction(adapter.isSupported, 'missing is supported function');
 check.verifyFunction(adapter.supportedFrameworks,
     'missing supported frameworks function ' + JSON.stringify(adapter));
+
+function isMarkdownFilename(name) {
+	return (/\.md$/).test(name);
+}
 
 function generateDocs(options) {
     check.verifyObject(options, 'mising options');
@@ -23,9 +28,11 @@ function generateDocs(options) {
     check.verifyArray(options.patterns, 'missing input files');
     check.verifyString(options.outputFolder, 'missing output folder');
 
-    console.log('deleting output folder', options.outputFolder);
-    fs.rmrfSync(options.outputFolder);
-    mkdirp(options.outputFolder, rethrow);
+    if (!isMarkdownFilename(options.outputFolder)) {
+    	console.log('deleting output folder', options.outputFolder);
+    	fs.rmrfSync(options.outputFolder);
+    	mkdirp(options.outputFolder, rethrow);
+	}
 
     var inputFiles = discoverSourceFiles(options.patterns);
     check.verifyArray(inputFiles, 'could not find filenames');
@@ -39,13 +46,20 @@ function generateDocs(options) {
     var rootModule = docsToModules(api);
     check.verifyObject(rootModule, 'could not convert docs to modules');
 
-    toDoc(rootModule, {
-        outputFolder: options.outputFolder,
-        title: options.title,
-        apiVersion: options.apiVersion,
-        framework: options.framework,
-        header: options.header
-    });
+    if (isMarkdownFilename(options.outputFolder)) {
+    	updateMd(rootModule, {
+    		framework: options.framework,
+    		outputFilename: options.outputFolder
+    	});
+    } else {
+	    toDoc(rootModule, {
+	        outputFolder: options.outputFolder,
+	        title: options.title,
+	        apiVersion: options.apiVersion,
+	        framework: options.framework,
+	        header: options.header
+	    });
+	}
 }
 
 function discoverSourceFiles(patterns) {

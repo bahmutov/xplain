@@ -19,7 +19,7 @@ var program = require('optimist')
     .options('output', {
         alias: 'o',
         string: true,
-        description: 'output folder name',
+        description: 'output folder name / Markdown filename',
         default: 'docs'
     })
     .options('title', {
@@ -67,7 +67,7 @@ check.verifyArray(inputFiles, 'missing input pattern array ' + inputFiles);
 
 check.verifyString(program.output, 'missing output folder');
 var fullFolder = path.resolve(process.cwd(), program.output);
-console.log('generating docs from', inputFiles, 'target folder', fullFolder);
+console.log('generating docs from', inputFiles, 'target', fullFolder);
 
 if (program.version) {
     program.version = '' + program.version;
