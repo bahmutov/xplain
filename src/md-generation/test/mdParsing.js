@@ -45,8 +45,26 @@ var MdParser = require('../mdParsing');
 
 gt.module('MdParser');
 
-gt.test('parse document', function () {
+gt.test('parse simple text', function () {
 	var text = 'text\ntext 2\n';
+	var doc = new MdParser(text);
+	gt.object(doc, 'have parsed doc');
+	var newText = doc.text();
+	gt.string(newText, 'returns string');
+	gt.equal(newText, text, 'no changes to text');
+});
+
+gt.test('parse text with code', function () {
+	var text = 'text\n\tcode\n';
+	var doc = new MdParser(text);
+	gt.object(doc, 'have parsed doc');
+	var newText = doc.text();
+	gt.string(newText, 'returns string');
+	gt.equal(newText, text, 'no changes to text');
+});
+
+gt.test('parse text with more code', function () {
+	var text = 'text\n\tcode\n\tmore code\n\n\tmore code\ntext\n';
 	var doc = new MdParser(text);
 	gt.object(doc, 'have parsed doc');
 	var newText = doc.text();

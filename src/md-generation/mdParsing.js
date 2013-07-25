@@ -29,6 +29,8 @@ MdParser.prototype.parse = function parse(mdText) {
 	this._originalText = mdText;
 	this.parts = [];
 	
+	mdText = mdText.trim();
+
 	var lines = mdText.split('\n');
 	var codeBlock = false;
 	var currentText = '';
@@ -38,11 +40,7 @@ MdParser.prototype.parse = function parse(mdText) {
 			return;
 		}
 		if (!tripleHash.test(line)) {
-			currentText += line;
-			if (!/\n$/.test(line)) {
-				console.log('adding new line to "' + line + '"');
-				currentText += '\n';
-			}
+			currentText += line + '\n';
 		}
 	});
 
