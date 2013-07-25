@@ -53,7 +53,8 @@
     "fs.extra": "~1.2.0",
     "node-beautify": "0.0.2",
     "optimist": "~0.5.0",
-    "marked": "~0.2.8"
+    "marked": "~0.2.8",
+    "xregexp": "~2.0.0"
   },
   "devDependencies": {
     "gt": "~0.8.7",

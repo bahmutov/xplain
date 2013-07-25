@@ -8,5 +8,5 @@ module.exports = function updateMarkdownFile(rootModule, options) {
 	check.verifyString(options.outputFilename, 'missing output filename in ' + JSON.stringify(options));
 
 	console.log('updating Markdown file', options.outputFilename);
-	console.dir(rootModule);
+	console.log(JSON.stringify(rootModule, null, 2));
 };
