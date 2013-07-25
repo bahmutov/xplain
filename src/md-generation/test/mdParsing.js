@@ -15,9 +15,8 @@ gt.test('date parsing', function () {
 
 gt.module('md parsing');
 
-var reg = /\#\#\#\s+[\w\W]$/;
-
-gt.skip('test name after ###', function () {	
+gt.skip('test name after ###', function () {
+	var reg = /\#\#\#\s+[\w\W]$/;
 	var line = '### foo';
 	gt.ok(reg.test(line), 'found name');
 });
@@ -27,4 +26,17 @@ gt.test('simple triple hash', function () {
 	gt.ok(tripleHash.test('### foo'), 'matches foo');
 	gt.ok(tripleHash.test('### foo bar'), 'matches bar');
 	gt.ok(!tripleHash.test('## foo'), 'not matching ##');
+});
+
+gt.test('detect white space offset', function () {
+	var whiteSpaceOffset = /^\t|\ {2}|\ {4}/;	
+	gt.ok(whiteSpaceOffset.test('\t'), 'matches single tab');
+	gt.ok(whiteSpaceOffset.test('\t\t'), 'matches two tabs');
+	gt.ok(whiteSpaceOffset.test('  '), 'matches two spaces');
+	gt.ok(whiteSpaceOffset.test('    '), 'matches four spaces');
+	gt.ok(whiteSpaceOffset.test('      '), 'matches six spaces');
+	gt.ok(whiteSpaceOffset.test('  foo'), 'matches two spaces and word');
+
+	gt.ok(!whiteSpaceOffset.test(''), 'no match if empty string');
+	gt.ok(!whiteSpaceOffset.test('foo'), 'no match if foo');
 });
