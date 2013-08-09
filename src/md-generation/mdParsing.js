@@ -67,7 +67,10 @@ MdParser.prototype.parse = function parse(mdText) {
         parsed.push(codeBlock);
         codeBlock = null;
         // console.log('stopped code block on line', index);
-        parsed.push(line);
+        line.trim();
+        if (line) {
+          parsed.push(line);
+        }
       } else {
         // console.log('keeping text "' + line + '"');
         parsed.push(line);
@@ -83,7 +86,7 @@ MdParser.prototype.parse = function parse(mdText) {
 };
 
 MdParser.prototype.text = function () {
-  return this.parts.join('').trim();
+  return this.parts.join(eol).trim();
 };
 
 MdParser.prototype.codeBlocks = function () {
