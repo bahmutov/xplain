@@ -66,8 +66,10 @@ MdParser.prototype.parse = function parse(mdText) {
       if (codeBlock) {
         parsed.push(codeBlock);
         codeBlock = null;
-        console.log('stopped code block on line', index);
+        // console.log('stopped code block on line', index);
+        parsed.push(line);
       } else {
+        // console.log('keeping text "' + line + '"');
         parsed.push(line);
       }
     }
@@ -76,12 +78,12 @@ MdParser.prototype.parse = function parse(mdText) {
   if (codeBlock) {
     parsed.push(codeBlock);
     codeBlock = null;
-    console.log('finished code block on last line');
+    // console.log('finished code block on last line');
   }
 };
 
 MdParser.prototype.text = function () {
-  return this.parts.join(eol).trim();
+  return this.parts.join('').trim();
 };
 
 MdParser.prototype.codeBlocks = function () {

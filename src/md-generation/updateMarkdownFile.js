@@ -16,4 +16,13 @@ module.exports = function updateMarkdownFile(rootModule, options) {
   var doc = new MdParser(text);
   var blocks = doc.codeBlocks();
   console.log(blocks);
+
+  /*
+  doc.parts.forEach(function (part) {
+    console.log('part "' + part + '"');
+  });
+  */
+
+  var updatedText = doc.text();
+  console.log('updated md\n' + updatedText);
 };
