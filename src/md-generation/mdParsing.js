@@ -1,6 +1,20 @@
 var fs = require('fs.extra');
 var check = require('check-types');
 
+function CodeBlock(name) {
+  this.name = name;
+  this.text = '';
+}
+
+CodeBlock.prototype.toString = function () {
+  return '### ' + this.name;
+};
+
+CodeBlock.prototype.append = function (line) {
+  check.verifyString(line, 'could not append non string ' + line);
+  this.text += line;
+}
+
 /*
 parses markdown document and splits it into blocks.
 Normal text is kept as a string, but whenever it
@@ -21,7 +35,11 @@ function MdParser(mdText) {
 }
 
 var tripleHash = /^###\s+/;
-var whiteSpaceOffset = /^\t|\ {2}|\ {4}/;
+
+function isCodeLine(line) {
+  var whiteSpaceOffset = /^\r|\n|\t|\ {2}|\ {4}/;
+  return whiteSpaceOffset.test(line);
+}
 
 function getBlockName(line) {
   console.assert(tripleHash.test(line),
@@ -35,38 +53,42 @@ MdParser.prototype.parse = function parse(mdText) {
 
   this._originalText = mdText;
   this.parts = [];
+  var parsed = this.parts;
 
   mdText = mdText.trim();
 
   var lines = mdText.split('\n');
-  var codeBlock = false;
-  var currentText = '';
+  var codeBlock = null;
 
   lines.forEach(function (line, index) {
     if (!line && index === lines.length - 1) {
       console.log('skipping line', line);
       return;
     }
-    if (tripleHash.test(line)) {
-      codeBlock = true;
-      var name = getBlockName(line);
-      console.log('starting code block', name);
-      currentText += line + '\n';
-    } else if (codeBlock && whiteSpaceOffset.test(line)) {
-      console.log('code line "' + line + '"');
-    } else {
-      if (codeBlock) {
-        codeBlock = false;
-        console.log('stopped code block on line: ' + line);
-      }
 
-      currentText += line + '\n';
+    if (tripleHash.test(line)) {
+      var name = getBlockName(line);
+      console.log('starting code block "' + name + '" on line', index);
+      codeBlock = new CodeBlock(name);
+    } else if (codeBlock && isCodeLine(line)) {
+      // console.log('code line "' + line + '"');
+      codeBlock.append(line);
+    } else {
+
+      if (codeBlock) {
+        parsed.push(codeBlock);
+        codeBlock = null;
+        console.log('stopped code block on line', index);
+      } else {
+        parsed.push(line);
+      }
     }
   });
 
-  if (currentText) {
-    // console.log('current text "' + currentText + '"');
-    this.parts.push(currentText);
+  if (codeBlock) {
+    parsed.push(codeBlock);
+    codeBlock = null;
+    console.log('finished code block on last line');
   }
 };
 
