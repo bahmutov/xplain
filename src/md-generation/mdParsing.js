@@ -1,4 +1,5 @@
 var fs = require('fs.extra');
+var eol = require('os').EOL;
 var check = require('check-types');
 var CodeBlock = require('./CodeBlock');
 
@@ -80,7 +81,7 @@ MdParser.prototype.parse = function parse(mdText) {
 };
 
 MdParser.prototype.text = function () {
-  return this.parts.join('\n').trim();
+  return this.parts.join(eol).trim();
 };
 
 MdParser.prototype.codeBlocks = function () {

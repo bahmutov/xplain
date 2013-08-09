@@ -1,4 +1,5 @@
 var check = require('check-types');
+var endOfLine = require('os').EOL;
 
 var offset = '  ';
 
@@ -8,7 +9,7 @@ function CodeBlock(name) {
 }
 
 CodeBlock.prototype.toString = function () {
-  return '### ' + this.name + '\n\n' + this.text;
+  return '### ' + this.name + endOfLine + endOfLine + this.text;
 };
 
 CodeBlock.prototype.append = function (line) {
@@ -16,9 +17,9 @@ CodeBlock.prototype.append = function (line) {
   line = line.trim();
   if (line || this.text) {
     if (line) {
-      this.text += offset + line + '\n';
+      this.text += offset + line + endOfLine;
     } else {
-      this.text += '\n';
+      this.text += endOfLine;
     }
   }
 }
