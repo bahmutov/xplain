@@ -1,19 +1,6 @@
 var fs = require('fs.extra');
 var check = require('check-types');
-
-function CodeBlock(name) {
-  this.name = name;
-  this.text = '';
-}
-
-CodeBlock.prototype.toString = function () {
-  return '### ' + this.name;
-};
-
-CodeBlock.prototype.append = function (line) {
-  check.verifyString(line, 'could not append non string ' + line);
-  this.text += line;
-}
+var CodeBlock = require('./CodeBlock');
 
 /*
 parses markdown document and splits it into blocks.
