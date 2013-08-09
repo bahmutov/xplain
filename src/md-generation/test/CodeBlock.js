@@ -13,5 +13,5 @@ gt.test('single line', function () {
   c.append('bar');
   var txt = c.toString();
   console.log(txt);
-  gt.equal(txt, '### foo\n\n  bar');
+  gt.equal(txt, '### foo\n\n  bar\n');
 });

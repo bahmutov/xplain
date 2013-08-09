@@ -79,8 +79,15 @@ MdParser.prototype.parse = function parse(mdText) {
   }
 };
 
-MdParser.prototype.text = function join() {
+MdParser.prototype.text = function () {
   return this.parts.join('\n').trim();
+};
+
+MdParser.prototype.codeBlocks = function () {
+  var blocks = this.parts.filter(function (part) {
+    return part instanceof CodeBlock;
+  });
+  return blocks;
 };
 
 module.exports = MdParser;

@@ -13,7 +13,14 @@ CodeBlock.prototype.toString = function () {
 
 CodeBlock.prototype.append = function (line) {
   check.verifyString(line, 'could not append non string ' + line);
-  this.text += offset + line;
+  line = line.trim();
+  if (line || this.text) {
+    if (line) {
+      this.text += offset + line + '\n';
+    } else {
+      this.text += '\n';
+    }
+  }
 }
 
 module.exports = CodeBlock;

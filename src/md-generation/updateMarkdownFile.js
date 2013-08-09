@@ -14,5 +14,6 @@ module.exports = function updateMarkdownFile(rootModule, options) {
   var text = fs.readFileSync(options.outputFilename, 'utf8');
   check.verifyString(text, 'missing text from file ' + options.outputFilename);
   var doc = new MdParser(text);
-
+  var blocks = doc.codeBlocks();
+  console.log(blocks);
 };
