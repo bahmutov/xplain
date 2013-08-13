@@ -6,6 +6,8 @@ var unary = require('allong.es').es.unary;
 var mkdirp = require('mkdirp');
 
 var getApi = require('./extract-jsdocs/getTaggedComments').getCommentsFromFiles;
+var getSampleTests = require('./extract-jsdocs/getTaggedComments').getSampleTests;
+
 var toDoc = require('./html-generation/toHtml');
 var updateMd = require('./md-generation/updateMarkdownFile');
 var rethrow = require('./utils/errors').rethrow;
@@ -40,18 +42,21 @@ function generateDocs(options) {
     throw new Error('Cannot find any source files for input ' + options.patterns);
   }
 
-  var api = getApi(inputFiles);
-  check.verifyArray(api, 'did not get api from files');
-
-  var rootModule = docsToModules(api);
-  check.verifyObject(rootModule, 'could not convert docs to modules');
-
   if (isMarkdownFilename(options.outputFolder)) {
-    updateMd(rootModule, {
+    var samples = getSampleTests(inputFiles);
+    check.verifyArray(samples, 'could not get samples from ' + 
+      JSON.stringify(inputFiles));
+    updateMd(samples, {
       framework: options.framework,
       outputFilename: options.outputFolder
     });
   } else {
+    var api = getApi(inputFiles);
+    check.verifyArray(api, 'did not get api from files');
+
+    var rootModule = docsToModules(api);
+    check.verifyObject(rootModule, 'could not convert docs to modules');
+
     toDoc(rootModule, {
       outputFolder: options.outputFolder,
       title: options.title,
