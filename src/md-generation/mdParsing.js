@@ -49,34 +49,34 @@ MdParser.prototype.parse = function parse(mdText) {
   mdText = mdText.trim();
 
   var lines = mdText.split(eol);
-  console.log(lines.length + ' lines to process');
+  // console.log(lines.length + ' lines to process');
   var codeBlock = null;
 
   lines.forEach(function (line, index) {
     if (!line && index === lines.length - 1) {
-      console.log('skipping line', line);
+      // console.log('skipping line', line);
       return;
     }
 
     if (tripleHash.test(line)) {
       var name = getBlockName(line);
-      console.log('starting code block "' + name + '" on line', index);
+      // console.log('starting code block "' + name + '" on line', index);
       codeBlock = new CodeBlock(name);
     } else if (codeBlock && isCodeLine(line)) {
-      console.log('code line "' + line + '"');
+      // console.log('code line "' + line + '"');
       codeBlock.append(line);
     } else {
 
       if (codeBlock) {
         parsed.push(codeBlock);
         codeBlock = null;
-        console.log('stopped code block on line', index);
+        // console.log('stopped code block on line', index);
         line.trim();
         if (line) {
           parsed.push(line);
         }
       } else {
-        console.log('keeping text "' + line + '"');
+        // console.log('keeping text "' + line + '"');
         parsed.push(line);
       }
     }

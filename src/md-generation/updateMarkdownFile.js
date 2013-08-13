@@ -15,7 +15,8 @@ module.exports = function updateMarkdownFile(rootModule, options) {
   check.verifyString(text, 'missing text from file ' + options.outputFilename);
   var doc = new MdParser(text);
   var blocks = doc.codeBlocks();
-  console.log(blocks);
+
+  console.log('code blocks\n' + blocks);
 
   /*
   doc.parts.forEach(function (part) {
