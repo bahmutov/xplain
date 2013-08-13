@@ -25,7 +25,7 @@ function MdParser(mdText) {
 var tripleHash = /^###\s+/;
 
 function isCodeLine(line) {
-  var whiteSpaceOffset = /^\r|\n|\r\n|\t|\ {2}|\ {4}/;
+  var whiteSpaceOffset = /^\r|\n|\t|\ {2}|\ {4}/;
   return whiteSpaceOffset.test(line);
 }
 

@@ -1,4 +1,5 @@
 MdParser = require '../mdParsing'
+eol = require('os').EOL
 
 gt.module 'MdParser Advanced'
 
@@ -28,10 +29,22 @@ mdSimple = """
   code1
   code2
 """
+mdSimple = mdSimple.replace /\n/g, eol
+
+gt.test 'splitting lines', ->
+  console.log 'eol has ' + eol.length + ' chars, "' +
+  eol.charCodeAt(0) + '" and "' +
+  eol.charCodeAt(1) + '"'
+  lines = mdSimple.split eol
+  gt.equal lines.length, 4, 'split into four lines'
 
 gt.test 'just code block', ->
   doc = new MdParser(mdSimple)
   gt.object doc, 'have parsed doc'
+  blocks = doc.codeBlocks()
+  gt.equal blocks.length, 1, 'single code block'
+  gt.equal blocks[0].name, 'foo', 'block name'
+
   text = doc.text()
   gt.string text, 'returns string'
   gt.equal text, mdSimple, 'no changes to code block'
