@@ -55,5 +55,7 @@ module.exports = function updateMarkdownFile(samples, options) {
   */
 
   var updatedText = doc.text();
-  console.log('updated md\n' + updatedText);
+  // console.log('updated md\n' + updatedText);
+  fs.writeFileSync(options.outputFilename, updatedText);
+  console.log('saved', options.outputFilename);
 };
