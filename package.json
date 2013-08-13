@@ -5,7 +5,7 @@
   "main": "index.js",
   "bin": "index.js",
   "scripts": {
-    "test": "gt src/**/test/*.js",
+    "test": "gt src/**/test/*.js src/**/test/*.coffee",
     "e2e": "gt test/e2e.js",
     "yuidoc": "yuidoc src test",
     "doc": "gt test/*.js && node index.js -i src/*.js,test/*.js -v 1.0.1",
@@ -26,7 +26,8 @@
     "jasmine": "node index.js -f jasmine -t Jasmine -i examples/jasmine/spec.js -o examples/jasmine/docs",
     "external": "node index.js -f gt -t External -i examples/external/test.js -o examples/external/docs",
     "console": "node index.js -f console -t console.assert -i examples/console/test.js -o examples/console/docs",
-    "instance": "node index.js -f gt -t instance -i examples/object/test.js -o examples/object/docs"
+    "instance": "node index.js -f gt -t instance -i examples/object/test.js -o examples/object/docs",
+    "md": "node index.js -f gt -i examples/readme/add.js -o examples/readme/README.md"
   },
   "repository": "",
   "keywords": [
