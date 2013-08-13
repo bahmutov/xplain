@@ -45,6 +45,36 @@ See the generated [example api](http://bahmutov.github.io/xplain/)
 
 To see (the very few) command line options run `xplain` or `xplain -h` command.
 
+## Updating Markdown doc
+
+**xplain** can update code blocks inside a Markdown file (like this doc) with unit tests marked using *@sample*. If we have:
+
+```
+// add.js
+/** @sample add */
+gt.test('basic addition', function () {
+  gt.equal(add(1, 2), 3, '1 + 2 = 3');
+  gt.equal(add(100, -100), 0, '100 + -100 = 0');
+});
+
+// README.md
+### basic addition
+
+  add(10, 20); // 30
+```
+
+then command `xplain -i add.js -o README.md` will update README.md and it will have:
+
+```
+// README.md
+### basic addition
+
+  add(1, 2); // 3
+  add(100, -100); // 0
+```
+
+This feature makes the package's top level README.md file a great place to provide lots of examples, without needing a separate API docs.
+
 ## Details
 
 Stop writing unmaintainable source samples inside the

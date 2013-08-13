@@ -1,6 +1,6 @@
-/** 
+/**
 	Adds two numbers
-	
+
 	@method add
 */
 function add(a, b) {
