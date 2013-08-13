@@ -3,10 +3,15 @@ var path = require('path');
 var check = require('check-types');
 var MdParser = require('./mdParsing');
 
+var transform = require('../doc-transform/toHumanForm');
+
 module.exports = function updateMarkdownFile(rootModule, options) {
 	check.verifyObject(rootModule, 'could not convert docs to modules');
 	check.verifyObject(options, 'missing options');
 	check.verifyString(options.outputFilename, 'missing output filename in ' + JSON.stringify(options));
+
+  var framework = options.framework || 'qunit';
+  check.verifyString(framework, 'missing testing framework name');
 
 	console.log('updating Markdown file', options.outputFilename);
 	console.log(JSON.stringify(rootModule, null, 2));
