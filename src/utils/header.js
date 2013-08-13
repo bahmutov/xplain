@@ -3,24 +3,23 @@ var marked = require('marked');
 var fs = require('fs');
 
 function isValidHeader(filename) {
-    console.log('checking if', filename, 'is valid header');
-    if (!filename || !check.isString(filename)) {
-        return false;
-    }
+  console.log('checking if', filename, 'is valid header');
+  if (!filename || !check.isString(filename)) {
+    return false;
+  }
 
-    return (/\.md$/).test(filename);
+  return (/\.md$/).test(filename);
 }
 
 function markedToHtml(filename) {
-    if (!isValidHeader(filename)) {
-        throw new Error('Invalid markdown filename ' + filename);
-    }
+  if (!isValidHeader(filename)) {
+    throw new Error('Invalid markdown filename ' + filename);
+  }
 
-    var text = fs.readFileSync(filename, 'utf-8');
-    var html = marked(text);
-    // console.log('marked', filename, 'converted\n' + html);
+  var text = fs.readFileSync(filename, 'utf-8');
+  var html = marked(text);
 
-    return html;
+  return html;
 }
 
 module.exports = markedToHtml;

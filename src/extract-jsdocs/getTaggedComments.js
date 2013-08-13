@@ -40,26 +40,48 @@ function getTaggedComments(inputFiles) {
     return api;
 }
 
+function keepFilename(comments, filename) {
+  return comments.map(function (aComment) {
+    aComment.filename = filename;
+    return aComment;
+  });
+}
+
+function makeComments(comments) {
+  return comments.map(function (rawComment) {
+    return new Comment(rawComment);
+  });
+}
+
 function getFileApi(filename) {
     check.verifyString(filename, 'missing filename');
     var contents = fs.readFileSync(filename, 'utf-8');
     check.verifyString(contents, 'could not load contents of', filename);
 
-    // var tags = dox.parseComments(contents, parsingOptions);
     var raw = getComments(contents);
     check.verifyArray(raw, 'could not get tags array from ' + filename);
-    raw = raw.map(function (aComment) {
-        aComment.filename = filename;
-        return aComment;
-    });
+    raw = keepFilename(raw, filename);
 
-    var comments = raw.map(function (rawComment) {
-        return new Comment(rawComment);
-    });
+    var comments = makeComments(raw);
     return comments;
 }
 
+function getSamples(inputFiles) {
+  if (check.isString(inputFiles)) {
+    inputFiles = [inputFiles];
+  }
+  check.verifyArray(inputFiles, 'missing input filenames');
+
+  var docs = getTaggedComments(inputFiles);
+  // console.dir(docs);
+  var samples = docs.filter(function (comment) {
+    return comment.isSample();
+  });
+  return samples;
+}
+
 module.exports = {
-    getCommentsFromFiles: getTaggedComments,
-    getComments: getComments
+  getCommentsFromFiles: getTaggedComments,
+  getComments: getComments,
+  getSampleTests: getSamples
 };
