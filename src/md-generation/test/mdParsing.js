@@ -1,17 +1,4 @@
-var XRegExp = require('xregexp').XRegExp;
-
-gt.module('XRegExp examples');
-
-gt.test('date parsing', function () {
-	var date = XRegExp('(?<year>  [0-9]{4} ) -?  # year  \n\
-						(?<month> [0-9]{2} ) -?  # month \n\
-						(?<day>   [0-9]{2} )     # day   ', 'x');
-
-	var match = XRegExp.exec('2012-02-22', date);
-	gt.equal(match.year, '2012', 'correct year');
-	gt.equal(match.month, '02', 'correct month');
-	gt.equal(match.day, '22', 'correct day');
-});
+var eol = require('os').EOL;
 
 gt.module('md parsing');
 
@@ -29,7 +16,7 @@ gt.test('simple triple hash', function () {
 });
 
 gt.test('detect white space offset', function () {
-	var whiteSpaceOffset = /^\t|\ {2}|\ {4}/;	
+	var whiteSpaceOffset = /^\t|\ {2}|\ {4}/;
 	gt.ok(whiteSpaceOffset.test('\t'), 'matches single tab');
 	gt.ok(whiteSpaceOffset.test('\t\t'), 'matches two tabs');
 	gt.ok(whiteSpaceOffset.test('  '), 'matches two spaces');
@@ -64,7 +51,11 @@ gt.test('parse text with code', function () {
 });
 
 gt.test('parse text with more code', function () {
-	var text = 'text\n\tcode\n\tmore code\n\n\tmore code\ntext';
+	var text = 'text' + eol +
+		'\tcode' + eol +
+		'\tmore code' + eol + eol +
+		'\tmore code' + eol +
+		'text';
 	var doc = new MdParser(text);
 	gt.object(doc, 'have parsed doc');
 	var newText = doc.text();
