@@ -1,5 +1,5 @@
 var check = require('check-types');
-var endOfLine = require('os').EOL;
+var eol = require('os').EOL;
 
 var offset = '  ';
 
@@ -10,7 +10,7 @@ function CodeBlock(name) {
 }
 
 CodeBlock.prototype.toString = function () {
-  return '### ' + this.name + endOfLine + endOfLine + this.text;
+  return '### ' + this.name + eol + eol + this.text;
 };
 
 CodeBlock.prototype.append = function (line) {
@@ -23,11 +23,28 @@ CodeBlock.prototype.append = function (line) {
   if (line || this.text) {
     if (line) {
       // console.log('adding line "' + line + '"');
-      this.text += offset + line + endOfLine;
+      this.text += offset + line + eol;
     } else {
-      this.text += endOfLine;
+      this.text += eol;
     }
   }
+}
+
+CodeBlock.prototype.setText = function (newCode) {
+  check.verifyString(newCode, 'expected string with new code');
+  var lines = newCode.split('\n');
+  // console.log('have', lines.length, 'lines');
+
+  lines = lines.map(function (line) {
+    if (line) {
+      if (/^\w/.test(line)) {
+        line = offset + line;
+      }
+    }
+
+    return line;
+  });
+  this.text = lines.join('\n');
 }
 
 module.exports = CodeBlock;
