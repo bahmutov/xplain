@@ -44,6 +44,7 @@ gt.test 'just code block', ->
   blocks = doc.codeBlocks()
   gt.equal blocks.length, 1, 'single code block'
   gt.equal blocks[0].name, 'foo', 'block name'
+  gt.equal blocks[0].text, '  code1' + eol + '  code2' + eol
 
   text = doc.text()
   gt.string text, 'returns string'

@@ -25,7 +25,10 @@ function MdParser(mdText) {
 var tripleHash = /^###\s+/;
 
 function isCodeLine(line) {
-  var whiteSpaceOffset = /^\r|\n|\t|\ {2}|\ {4}/;
+  if (!line) {
+    return true;
+  }
+  var whiteSpaceOffset = /^\r|\n|\r\n|\t|\ {2}|\ {4}/;
   return whiteSpaceOffset.test(line);
 }
 
@@ -46,6 +49,7 @@ MdParser.prototype.parse = function parse(mdText) {
   mdText = mdText.trim();
 
   var lines = mdText.split(eol);
+  console.log(lines.length + ' lines to process');
   var codeBlock = null;
 
   lines.forEach(function (line, index) {
@@ -59,20 +63,20 @@ MdParser.prototype.parse = function parse(mdText) {
       console.log('starting code block "' + name + '" on line', index);
       codeBlock = new CodeBlock(name);
     } else if (codeBlock && isCodeLine(line)) {
-      // console.log('code line "' + line + '"');
+      console.log('code line "' + line + '"');
       codeBlock.append(line);
     } else {
 
       if (codeBlock) {
         parsed.push(codeBlock);
         codeBlock = null;
-        // console.log('stopped code block on line', index);
+        console.log('stopped code block on line', index);
         line.trim();
         if (line) {
           parsed.push(line);
         }
       } else {
-        // console.log('keeping text "' + line + '"');
+        console.log('keeping text "' + line + '"');
         parsed.push(line);
       }
     }
