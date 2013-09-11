@@ -5,6 +5,8 @@ tests as code samples.
 
 [![NPM info](https://nodei.co/npm/xplain.png?downloads=true)](https://nodei.co/npm/xplain.png?downloads=true)
 
+[![endorse](https://api.coderwall.com/bahmutov/endorsecount.png)](https://coderwall.com/bahmutov)
+
 ### Build details
 
 [![Drone build Status](https://drone.io/github.com/bahmutov/xplain/status.png)](https://drone.io/github.com/bahmutov/xplain/latest)
