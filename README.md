@@ -9,8 +9,8 @@ tests as code samples.
 
 ### Build details
 
-[![Drone build Status](https://drone.io/github.com/bahmutov/xplain/status.png)](https://drone.io/github.com/bahmutov/xplain/latest)
-[![Travis duild Status](https://travis-ci.org/bahmutov/xplain.png?branch=master)](https://travis-ci.org/bahmutov/xplain)
+[![Drone build status](https://drone.io/github.com/bahmutov/xplain/status.png)](https://drone.io/github.com/bahmutov/xplain/latest)
+[![Travis build status](https://travis-ci.org/bahmutov/xplain.png?branch=master)](https://travis-ci.org/bahmutov/xplain)
 
 ***This is still very early release, probably would not work right away for your needs.***
 
