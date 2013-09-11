@@ -5,10 +5,10 @@
   "main": "index.js",
   "bin": "index.js",
   "scripts": {
-    "test": "gt src/**/test/*.js src/**/test/*.coffee",
-    "e2e": "gt test/e2e.js",
+    "test": "node ./node_modules/gt src/**/test/*.js src/**/test/*.coffee",
+    "e2e": "node ./node_modules/gt test/e2e.js",
     "yuidoc": "yuidoc src test",
-    "doc": "gt test/*.js && node index.js -i src/*.js,test/*.js -v 1.0.1",
+    "doc": "node ./node_modules/gt test/*.js && node index.js -i src/*.js,test/*.js -v 1.0.1",
     "complexity": "jsc -p src/**/*.js --skip src/html-generation/assets/*.js --skip src/**/cover/**/*.js",
     "basic": "node index.js -f gt -i examples/basic/*.js -o examples/basic/docs -t Basic -v 1.0.2 --header examples/basic/header.md",
     "submodules": "node index.js -f gt -i examples/submodules/*.js -o examples/submodules/docs",
@@ -58,7 +58,7 @@
     "xregexp": "~2.0.0"
   },
   "devDependencies": {
-    "gt": "~0.8.7",
+    "gt": "~0.8.8",
     "grunt": "~0.4.1",
     "grunt-contrib-jshint": "~0.5.4",
     "grunt-bump": "0.0.2"
