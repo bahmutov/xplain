@@ -153,6 +153,7 @@ On some systems, OS wildcard expansion can be misleading. For example on Windows
 * [marked](https://npmjs.org/package/marked) to parse optional header markdown document to place in the output.
 
 ### Details
+
 Author: Gleb Bahmutov <gleb.bahmutov@gmail.com>
 License: MIT
 Copyright &copy; 2013 Gleb Bahmutov
