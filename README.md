@@ -11,6 +11,7 @@ tests as code samples.
 
 [![Drone build status](https://drone.io/github.com/bahmutov/xplain/status.png)](https://drone.io/github.com/bahmutov/xplain/latest)
 [![Travis build status](https://travis-ci.org/bahmutov/xplain.png?branch=master)](https://travis-ci.org/bahmutov/xplain)
+[![dependencies][dependencies-image]][dependencies-url]
 
 ***This is still very early release, probably would not work right away for your needs.***
 
@@ -154,8 +155,11 @@ On some systems, OS wildcard expansion can be misleading. For example on Windows
 * [tooltipster](http://calebjacob.com/tooltipster/) is used in the generated API page to display tooltips.
 * [marked](https://npmjs.org/package/marked) to parse optional header markdown document to place in the output.
 
-### Details
+### Fine print
 
 Author: Gleb Bahmutov <gleb.bahmutov@gmail.com>
 License: MIT
 Copyright &copy; 2013 Gleb Bahmutov
+
+[dependencies-image]: https://david-dm.org/bahmutov/xplain.png
+[dependencies-url]: https://david-dm.org/bahmutov/xplain
