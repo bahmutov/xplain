@@ -2,6 +2,7 @@ var fs = require('fs.extra');
 var eol = require('os').EOL;
 var check = require('check-types');
 var CodeBlock = require('./CodeBlock');
+var splitText = require('./splitText');
 
 /*
 parses markdown document and splits it into blocks.
@@ -48,8 +49,8 @@ MdParser.prototype.parse = function parse(mdText) {
 
   mdText = mdText.trim();
 
-  var lines = mdText.split(eol);
-  // console.log(lines.length + ' lines to process');
+  var lines = splitText(mdText);
+  console.log(lines.length + ' lines to process');
   var codeBlock = null;
 
   lines.forEach(function (line, index) {
@@ -60,17 +61,17 @@ MdParser.prototype.parse = function parse(mdText) {
 
     if (tripleHash.test(line)) {
       var name = getBlockName(line);
-      // console.log('starting code block "' + name + '" on line', index);
+      console.log('starting code block "' + name + '" on line', index);
       codeBlock = new CodeBlock(name);
     } else if (codeBlock && isCodeLine(line)) {
-      // console.log('code line "' + line + '"');
+      console.log('code line "' + line + '"');
       codeBlock.append(line);
     } else {
-
+      console.log('stopped code with line', index, line);
       if (codeBlock) {
         parsed.push(codeBlock);
         codeBlock = null;
-        // console.log('stopped code block on line', index);
+        //console.log('stopped code block on line', index);
         line.trim();
         if (line) {
           parsed.push(line);

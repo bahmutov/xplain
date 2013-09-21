@@ -33,14 +33,14 @@ mdSimple = """
 """
 mdSimple = mdSimple.replace /\n/g, eol
 
-gt.test 'splitting lines', ->
+gt.skip 'splitting lines', ->
   console.log 'eol has ' + eol.length + ' chars, "' +
   eol.charCodeAt(0) + '" and "' +
   eol.charCodeAt(1) + '"'
   lines = mdSimple.split eol
   gt.equal lines.length, 4, 'split into four lines'
 
-gt.test 'just code block', ->
+gt.skip 'just code block', ->
   console.log(JSON.stringify(mdSimple, null, 2))
   doc = new MdParser(mdSimple)
   gt.object doc, 'have parsed doc'
