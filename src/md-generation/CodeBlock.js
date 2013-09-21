@@ -1,5 +1,5 @@
 var check = require('check-types');
-var eol = require('os').EOL;
+// var eol = require('os').EOL;
 
 var offset = '  ';
 
@@ -10,7 +10,11 @@ function CodeBlock(name) {
 }
 
 CodeBlock.prototype.toString = function () {
-  return '### ' + this.name + eol + eol + this.text;
+  var str = '### ' + this.name + '\n\n' + this.text;
+  if (/\n$/.test(str)) {
+    str = str.substr(0, str.length - 1);
+  }
+  return str;
 };
 
 CodeBlock.prototype.append = function (line) {
@@ -23,9 +27,9 @@ CodeBlock.prototype.append = function (line) {
   if (line || this.text) {
     if (line) {
       // console.log('adding line "' + line + '"');
-      this.text += offset + line + eol;
+      this.text += offset + line + '\n';
     } else {
-      this.text += eol;
+      this.text += '\n';
     }
   }
 }

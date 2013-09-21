@@ -1,5 +1,8 @@
 MdParser = require '../mdParsing'
 eol = require('os').EOL
+eolRegex = new RegExp eol, 'g'
+
+split = require '../splitText'
 
 gt.module 'MdParser Advanced'
 
@@ -15,15 +18,17 @@ second line
 
 text after code
 """
+mdText = mdText.replace eolRegex, '\n'
 
 gt.test 'md with code', ->
   doc = new MdParser(mdText)
   gt.object doc, 'have parsed doc'
   text = doc.text()
   gt.string text, 'returns string'
+
   console.log(JSON.stringify(mdText, null, 2))
   console.log(JSON.stringify(text, null, 2))
-  gt.equal text, mdText, 'no changes to text'
+  gt.aequal text, mdText, 'no changes to text'
 
 mdSimple = """
 ### foo
@@ -31,7 +36,7 @@ mdSimple = """
   code1
   code2
 """
-mdSimple = mdSimple.replace /\n/g, eol
+# mdSimple = mdSimple.replace /\n/g, eol
 
 gt.skip 'splitting lines', ->
   console.log 'eol has ' + eol.length + ' chars, "' +
