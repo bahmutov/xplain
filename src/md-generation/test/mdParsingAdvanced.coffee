@@ -10,8 +10,8 @@ second line
 
 ### foo
 
-	code1
-	code2
+  code1
+  code2
 
 text after code
 """
