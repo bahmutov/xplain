@@ -17,11 +17,13 @@ text after code
 """
 
 gt.test 'md with code', ->
-	doc = new MdParser(mdText)
-	gt.object doc, 'have parsed doc'
-	text = doc.text()
-	gt.string text, 'returns string'
-	gt.equal text, mdText, 'no changes to text'
+  doc = new MdParser(mdText)
+  gt.object doc, 'have parsed doc'
+  text = doc.text()
+  gt.string text, 'returns string'
+  console.log(JSON.stringify(mdText, null, 2))
+  console.log(JSON.stringify(text, null, 2))
+  gt.equal text, mdText, 'no changes to text'
 
 mdSimple = """
 ### foo
