@@ -39,6 +39,7 @@ gt.test 'splitting lines', ->
   gt.equal lines.length, 4, 'split into four lines'
 
 gt.test 'just code block', ->
+  console.log(JSON.stringify(mdSimple, null, 2))
   doc = new MdParser(mdSimple)
   gt.object doc, 'have parsed doc'
   blocks = doc.codeBlocks()
@@ -48,4 +49,5 @@ gt.test 'just code block', ->
 
   text = doc.text()
   gt.string text, 'returns string'
+  console.log(JSON.stringify(text, null, 2))
   gt.equal text, mdSimple, 'no changes to code block'
