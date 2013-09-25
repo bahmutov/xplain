@@ -55,7 +55,8 @@
     "node-beautify": "0.0.2",
     "optimist": "~0.6.0",
     "marked": "~0.2.8",
-    "xregexp": "~2.0.0"
+    "xregexp": "~2.0.0",
+    "update-notifier": "~0.1.5"
   },
   "devDependencies": {
     "gt": "~0.8.10",

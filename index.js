@@ -1,5 +1,11 @@
 #!/usr/bin/env node
 
+var updateNotifier = require('update-notifier');
+var notifier = updateNotifier();
+if (notifier.update) {
+  notifier.notify();
+}
+
 var path = require('path');
 var check = require('check-types');
 var xplain = require('./src/xplain');
@@ -12,7 +18,7 @@ var info = 'xplain - JavaScript API documentation generator\n' +
 var program = require('optimist')
 .usage(info)
 .options('input', {
-  alias: 'i',
+  alias: 'i', 
   string: true,
   description: 'input file(s), you can use wildcards'
 })
