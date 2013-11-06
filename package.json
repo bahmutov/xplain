@@ -29,6 +29,13 @@
     "instance": "node index.js -f gt -t instance -i examples/object/test.js -o examples/object/docs",
     "md": "node index.js -f gt -i examples/readme/add.js -o examples/readme/README.md"
   },
+  "pre-commit": "npm test",
+  "pre-push": [
+    "rm -rf node_modules",
+    "npm install",
+    "grunt",
+    "npm test"
+  ],
   "repository": "",
   "keywords": [
     "javascript",
@@ -62,6 +69,7 @@
     "gt": "~0.8.12",
     "grunt": "~0.4.1",
     "grunt-contrib-jshint": "~0.6.4",
-    "grunt-bump": "0.0.11"
+    "grunt-bump": "0.0.11",
+    "pre-git": "0.0.13"
   }
 }
