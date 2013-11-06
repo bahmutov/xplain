@@ -48,10 +48,10 @@
     "dox": "~0.4.4",
     "check-types": "~0.6.5",
     "esprima": "~1.0.4",
-    "escodegen": "0.0.27",
+    "escodegen": "0.0.28",
     "lodash": "~2.2.1",
-    "js-beautify": "~1.4.0",
-    "moment": "~2.3.1",
+    "js-beautify": "~1.4.1",
+    "moment": "~2.4.0",
     "glob": "~3.2.6",
     "allong.es": "~0.14.0",
     "pithy": "0.0.4",
@@ -60,14 +60,14 @@
     "fs.extra": "~1.2.1",
     "node-beautify": "0.0.2",
     "optimist": "~0.6.0",
-    "marked": "~0.2.9",
+    "marked": "~0.2.10",
     "xregexp": "~2.0.0",
-    "update-notifier": "~0.1.6"
+    "update-notifier": "~0.1.7"
   },
   "devDependencies": {
-    "gt": "~0.8.12",
+    "gt": "~0.8.16",
     "grunt": "~0.4.1",
-    "grunt-contrib-jshint": "~0.6.4",
+    "grunt-contrib-jshint": "~0.7.1",
     "grunt-bump": "0.0.11",
     "pre-git": "0.0.13"
   }
