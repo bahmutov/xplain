@@ -15,6 +15,9 @@ tests as code samples.
 
 ***This is still very early release, probably would not work right away for your needs.***
 
+**xplain** takes unit tests and generates documentation examples. Check out the reverse:
+[jsmd](https://github.com/vesln/jsmd) takes code blocks in Markdown and runs them as unit tests.
+
 ### inputs
 
 *src/add.js*
