@@ -67,7 +67,7 @@
   "devDependencies": {
     "gt": "~0.8.21",
     "grunt": "~0.4.2",
-    "grunt-contrib-jshint": "~0.7.2",
+    "grunt-contrib-jshint": "~0.8.0",
     "grunt-bump": "0.0.13",
     "pre-git": "0.0.14"
   }
