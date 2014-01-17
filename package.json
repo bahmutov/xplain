@@ -46,13 +46,13 @@
   "license": "MIT",
   "dependencies": {
     "dox": "~0.4.4",
-    "check-types": "~0.6.5",
+    "check-types": "~0.8.1",
     "esprima": "~1.0.4",
     "escodegen": "~1.0.1",
     "lodash": "~2.4.1",
     "js-beautify": "~1.4.2",
     "moment": "~2.5.0",
-    "glob": "~3.2.7",
+    "glob": "~3.2.8",
     "allong.es": "~0.14.0",
     "pithy": "0.0.4",
     "html": "0.0.7",
@@ -65,7 +65,7 @@
     "update-notifier": "~0.1.7"
   },
   "devDependencies": {
-    "gt": "~0.8.21",
+    "gt": "~0.8.29",
     "grunt": "~0.4.2",
     "grunt-contrib-jshint": "~0.8.0",
     "grunt-bump": "0.0.13",
