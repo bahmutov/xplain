@@ -4,6 +4,7 @@ var check = require('check-types');
 var glob = require('glob');
 var unary = require('allong.es').es.unary;
 var mkdirp = require('mkdirp');
+require('console.json');
 
 var getApi = require('./extract-jsdocs/getTaggedComments').getCommentsFromFiles;
 var getSampleTests = require('./extract-jsdocs/getTaggedComments').getSampleTests;
