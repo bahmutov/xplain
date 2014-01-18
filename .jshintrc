@@ -43,7 +43,7 @@
   "multistr"      : false,
   "proto"         : false,
   "scripturl"     : false,
-  "smarttabs"     : false,
+  "smarttabs"     : true,
   "shadow"        : false,
   "sub"           : false,
   "supernew"      : false,

@@ -29,7 +29,7 @@ CodeBlock.prototype.append = function (line) {
       this.text += '\n';
     }
   }
-}
+};
 
 CodeBlock.prototype.setText = function (newCode) {
   verify.string(newCode, 'expected string with new code');
@@ -46,6 +46,6 @@ CodeBlock.prototype.setText = function (newCode) {
     return line;
   });
   this.text = lines.join('\n');
-}
+};
 
 module.exports = CodeBlock;

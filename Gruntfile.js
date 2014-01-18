@@ -16,13 +16,17 @@ module.exports = function (grunt) {
         },
         jshint: {
             options: {
-                jshintrc: '.jshintrc',
+                reporter: require('jshint-stylish'),
+                // jshintrc: '.jshintrc',
                 ignores: [
                 'src/html-generation/assets/jquery-2.0.0.min.js',
                 'src/html-generation/assets/jquery.tooltipster.min.js',
                 'src/**/test/**/*.js',
                 'src/**/cover/**'
-                ]
+                ],
+                '-W015': true,
+                '-W084': true,
+                '-W093': true
             },
             'default': {
                 src: [ 'index.js', 'src/**/*.js' ]
@@ -69,8 +73,7 @@ module.exports = function (grunt) {
     plugins.forEach(grunt.loadNpmTasks);
 
     grunt.registerTask('pre-check', ['deps-ok', 'jsonlint',
-        'jshint', 'jshint-solid',
-        'nice-package', 'complexity']);
+        'jshint', 'nice-package', 'complexity']);
     grunt.registerTask('default', ['pre-check', 'lineending']);
     grunt.registerTask('release', ['bump-only:patch', 'readme', 'bump-commit']);
 };

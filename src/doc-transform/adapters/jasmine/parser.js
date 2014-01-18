@@ -68,7 +68,7 @@ function parseImmediateFunction(code) {
 
 	var parsed = {
 		code: matched[1].trim()
-	}
+	};
 	return parsed;
 }
 

@@ -76,6 +76,9 @@
     "grunt-deps-ok": "~0.1.7",
     "grunt-complexity": "~0.1.4",
     "grunt-readme": "~0.4.5",
-    "grunt-jsonlint": "~1.0.4"
+    "grunt-jsonlint": "~1.0.4",
+    "grunt-lineending": "~0.2.1",
+    "jshint-solid": "0.0.3",
+    "jshint-stylish": "~0.1.5"
   }
 }

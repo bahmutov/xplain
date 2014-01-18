@@ -13,7 +13,7 @@ function splitToLines(text) {
   var lines = text.split(sep);
   console.log('eol', JSON.stringify(eol));
   console.log('split text');
-  console.log(JSON.stringify(text, null, 2))
+  console.log(JSON.stringify(text, null, 2));
   console.log(lines);
   return lines;
 }
