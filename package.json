@@ -27,7 +27,7 @@
     "external": "node index.js -f gt -t External -i examples/external/test.js -o examples/external/docs",
     "console": "node index.js -f console -t console.assert -i examples/console/test.js -o examples/console/docs",
     "instance": "node index.js -f gt -t instance -i examples/object/test.js -o examples/object/docs",
-    "md": "node index.js -f gt -i examples/readme/add.js -o examples/readme/README.md"
+    "md": "node node_modules/gt test/md.js --output"
   },
   "pre-commit": "npm test",
   "pre-push": [
