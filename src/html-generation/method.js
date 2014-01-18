@@ -1,4 +1,4 @@
-var check = require('check-types');
+var verify = require('check-types').verify;
 var html = require('pithy');
 
 var sampleDiv = require('./sample');
@@ -8,8 +8,8 @@ var makeCodeElement = require('./code');
 var getIndexWithTooltip = require('./indexElement');
 
 function examplesToHtml(name, apiExamples, framework) {
-    check.verifyString(name, 'missing name');
-    check.verifyArray(apiExamples, 'missing api examples');
+    verify.string(name, 'missing name');
+    verify.array(apiExamples, 'missing api examples');
 
     var examples = apiExamples.map(function (example) {
         return exampleDiv(name, example.comment, framework);
@@ -18,7 +18,7 @@ function examplesToHtml(name, apiExamples, framework) {
 }
 
 function samplesToHtml(apiSamples, framework) {
-    check.verifyArray(apiSamples, 'missing api samples');
+    verify.array(apiSamples, 'missing api samples');
     var samples = apiSamples.map(function (example) {
         return sampleDiv(example, framework);
     });
@@ -26,11 +26,11 @@ function samplesToHtml(apiSamples, framework) {
 }
 
 function methodDiv(commented, framework) {
-    check.verifyObject(commented, 'missing api comment object');
-    check.verifyString(framework, 'missing framework');
+    verify.object(commented, 'missing api comment object');
+    verify.string(framework, 'missing framework');
 
     var apiComment = commented.comment;
-    check.verifyObject(apiComment, 'expected comment object');
+    verify.object(apiComment, 'expected comment object');
 
     var ctx = apiComment.ctx;
     var name = apiComment.getFullName();
@@ -40,7 +40,7 @@ function methodDiv(commented, framework) {
     console.log('documenting method', name);
 
     var params = apiComment.getArguments();
-    check.verifyArray(params, 'expected array of arguments');
+    verify.array(params, 'expected array of arguments');
 
     var toggles = [];
     var exampleElements = [];
@@ -48,8 +48,8 @@ function methodDiv(commented, framework) {
     var samples = samplesToHtml(commented.sample, framework);
     var examples = examplesToHtml(name, commented.example, framework);
 
-    check.verifyArray(samples, 'could not get examples tags');
-    check.verifyArray(examples, 'could not get examples tags');
+    verify.array(samples, 'could not get examples tags');
+    verify.array(examples, 'could not get examples tags');
 
     examples.forEach(function (example) {
         toggles.push(example.toggle);
@@ -111,12 +111,10 @@ function methodDiv(commented, framework) {
     }
     var returns = apiComment.getReturns();
     if (returns) {
-        if (returns) {
-            methodParts.push(html.h4(null, ['Returns']));
-            methodParts.push(html.p(null, [
-                html.p(null, [new html.SafeString(returns)])
-            ]));
-        }
+        methodParts.push(html.h4(null, ['Returns']));
+        methodParts.push(html.p(null, [
+            html.p(null, [new html.SafeString(returns)])
+        ]));
     }
 
     methodParts = methodParts

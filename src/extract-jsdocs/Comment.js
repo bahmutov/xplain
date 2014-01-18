@@ -1,4 +1,4 @@
-var check = require('check-types');
+var verify = require('check-types').verify;
 var _ = require('lodash');
 var count = require('../utils/code').countLines;
 
@@ -12,24 +12,24 @@ Comment.prototype.hasTags = function () {
 };
 
 Comment.prototype.isTagged = function (tag) {
-    check.verifyString(tag, 'missing tag string');
+    verify.string(tag, 'missing tag string');
     if (!Array.isArray(this.tags)) {
         return false;
     }
     return this.tags.some(function (t) {
-        check.verifyString(t.type, 'missing type for ' + JSON.stringify(t));
+        verify.string(t.type, 'missing type for ' + JSON.stringify(t));
         return t.type === tag;
     });
 };
 
 Comment.prototype.tag = function (name) {
-    check.verifyString(name, 'missing tag string');
+    verify.string(name, 'missing tag string');
     if (!Array.isArray(this.tags)) {
         return null;
     }
     var result = null;
     this.tags.some(function (t) {
-        check.verifyString(t.type, 'missing type for ' + JSON.stringify(t));
+        verify.string(t.type, 'missing type for ' + JSON.stringify(t));
         if (t.type === name) {
             result = t;
             return true;
@@ -40,7 +40,7 @@ Comment.prototype.tag = function (name) {
 };
 
 Comment.prototype.tagValue = function (name) {
-    check.verifyString(name, 'missing tag string');
+    verify.string(name, 'missing tag string');
     var t = this.tag(name);
 
     if (!t) {

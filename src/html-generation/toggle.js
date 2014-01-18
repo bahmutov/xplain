@@ -1,9 +1,9 @@
-var check = require('check-types');
+var verify = require('check-types').verify;
 var html = require('pithy');
 
 function makeToggle(id, label, visibleByDefault) {
-    check.verifyString(id, 'missing id');
-    check.verifyString(label, 'missing toggle label');
+    verify.string(id, 'missing id');
+    verify.string(label, 'missing toggle label');
 
     // make sure id's don't include invalid characters
     id = id.replace(/[$]/i, '_');

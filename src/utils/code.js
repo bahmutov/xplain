@@ -1,6 +1,6 @@
 var esprima = require('esprima');
 var generator = require('escodegen');
-var check = require('check-types');
+var verify = require('check-types').verify;
 var beautify = require('js-beautify').js_beautify;
 
 var options = {
@@ -42,7 +42,7 @@ function split(expressions) {
 
 // see https://github.com/Constellation/escodegen/issues/10
 function reformat(code, keepComments) {
-	check.verifyString(code, 'expected code string');
+	verify.string(code, 'expected code string');
 	keepComments = !!keepComments;
 
 	if (keepComments) {
@@ -67,7 +67,7 @@ function countLines(code) {
 	if (!code) {
 		return 0;
 	}
-	check.verifyString(code, 'expected code string');
+	verify.string(code, 'expected code string');
 	var lines = code.split('\n');
 	// console.dir(lines);
 	var count = 0;

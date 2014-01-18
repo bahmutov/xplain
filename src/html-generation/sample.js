@@ -1,17 +1,17 @@
-var check = require('check-types');
+var verify = require('check-types').verify;
 var transform = require('../doc-transform/toHumanForm');
 var makeCodeElement = require('./code');
 
 function sampleDiv(apiExample, framework) {
-    check.verifyObject(apiExample, 'missing documented');
-    check.verifyObject(apiExample.comment, 'missing comment');
-    check.verifyString(framework, 'missing framework name');
+    verify.object(apiExample, 'missing documented');
+    verify.object(apiExample.comment, 'missing comment');
+    verify.string(framework, 'missing framework name');
 
     var code = apiExample.comment.code;
-    check.verifyString(code, 'missing code');
+    verify.string(code, 'missing code');
     var humanForm = transform(code, framework);
-    check.verifyObject(humanForm, 'could not convert code ' + code + ' to human form');
-    check.verifyString(humanForm.code, 'missing human form from code ' + code);
+    verify.object(humanForm, 'could not convert code ' + code + ' to human form');
+    verify.string(humanForm.code, 'missing human form from code ' + code);
     var sample = makeCodeElement(humanForm.name,
         humanForm.code, humanForm.disabled, 'sample');
     return sample.element;

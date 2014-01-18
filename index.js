@@ -18,7 +18,7 @@ var info = 'xplain - JavaScript API documentation generator\n' +
 var program = require('optimist')
 .usage(info)
 .options('input', {
-  alias: 'i', 
+  alias: 'i',
   string: true,
   description: 'input file(s), you can use wildcards'
 })
@@ -69,22 +69,21 @@ var inputFiles = program.input;
 if (typeof inputFiles === 'string') {
   inputFiles = [inputFiles];
 }
-check.verifyArray(inputFiles, 'missing input pattern array ' + inputFiles);
-
-check.verifyString(program.output, 'missing output folder');
+check.verify.array(inputFiles, 'missing input pattern array ' + inputFiles);
+check.verify.string(program.output, 'missing output folder');
 var fullFolder = path.resolve(process.cwd(), program.output);
 console.log('generating docs from', inputFiles, 'target', fullFolder);
 
 if (program.version) {
   program.version = '' + program.version;
   if (program.version) {
-    check.verifyString(program.version, 'invalid API version ' + program.version);
+    check.verify.string(program.version, 'invalid API version ' + program.version);
   }
 }
 if (program.title) {
   program.title = '' + program.title;
   if (program.title) {
-    check.verifyString(program.title, 'invalid API title ' + program.title);
+    check.verify.string(program.title, 'invalid API title ' + program.title);
   }
 }
 if (program.title) {
@@ -97,7 +96,7 @@ if (program.header) {
   console.log('header', program.header);
 }
 
-check.verifyFunction(xplain.document, 'xplain have document function');
+check.verify.fn(xplain.document, 'xplain have document function');
 xplain.document({
   patterns: inputFiles,
   outputFolder: fullFolder,

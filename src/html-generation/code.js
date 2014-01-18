@@ -1,11 +1,11 @@
-var check = require('check-types');
+var verify = require('check-types').verify;
 var reformat = require('../utils/code').reformat;
 var html = require('pithy');
 
 var codeId = 0;
 
 function isValidCodeType(type) {
-    check.verifyString(type, 'code type should be a string');
+    verify.string(type, 'code type should be a string');
     var allowedTypes = {
         'sample': true,
         'example': true,
@@ -18,7 +18,7 @@ function codeElement(name, sourceCode, disabled, type,
     visibleByDefault) {
     console.assert(isValidCodeType(type), 'invalid code type', type);
     if (name) {
-        check.verifyString(name, 'missing test name');
+        verify.string(name, 'missing test name');
     }
 
     var parts = [];
@@ -33,9 +33,9 @@ function codeElement(name, sourceCode, disabled, type,
         }, 'not tested'));
     }
     if (sourceCode) {
-        check.verifyString(sourceCode, 'missing code');
+        verify.string(sourceCode, 'missing code');
         var prettyCode = reformat(sourceCode, true);
-        check.verifyString(prettyCode, 'could not reformat\n' + sourceCode);
+        verify.string(prettyCode, 'could not reformat\n' + sourceCode);
 
         var inner = html.code(null, sourceCode);
         var codeTag = html.pre('.prettyprint.linenums', [inner]);

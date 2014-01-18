@@ -46,7 +46,7 @@
   "license": "MIT",
   "dependencies": {
     "dox": "~0.4.4",
-    "check-types": "~0.8.1",
+    "check-types": "~1.1.1",
     "esprima": "~1.0.4",
     "escodegen": "~1.0.1",
     "lodash": "~2.4.1",

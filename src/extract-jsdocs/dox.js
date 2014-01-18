@@ -2,7 +2,7 @@ var dox = require('dox');
 var check = require('check-types');
 
 var parseCode = dox.parseCodeContext;
-check.verifyFunction(parseCode, 'expected a function parseCodeContext');
+check.verify.fn(parseCode, 'expected a function parseCodeContext');
 
 // wrap dox's code parsing function with more robust one
 function parseCodeContextExtra(str) {

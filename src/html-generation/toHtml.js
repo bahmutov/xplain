@@ -1,6 +1,6 @@
 var fs = require('fs.extra');
 var path = require('path');
-var check = require('check-types');
+var verify = require('check-types').verify;
 var moment = require('moment');
 var _ = require('lodash');
 
@@ -14,11 +14,11 @@ var pretty = require('html/lib/html').prettyPrint;
 var prettyOptions = { indent_size: 2 };
 
 function copyAndIncludeScript(filename, destinationFolder) {
-	check.verifyString(filename, 'missing script filename');
-	check.verifyString(destinationFolder, 'missing destination folder');
+	verify.string(filename, 'missing script filename');
+	verify.string(destinationFolder, 'missing destination folder');
 
 	var basename = path.basename(filename);
-	check.verifyString(basename, 'could not get base name from ' + filename);
+	verify.string(basename, 'could not get base name from ' + filename);
 	fs.copy(path.join(__dirname, filename),
 		path.join(destinationFolder, basename),
 		rethrow);
@@ -29,7 +29,7 @@ function copyAndIncludeScript(filename, destinationFolder) {
 }
 
 function generateHeadElement(options) {
-	check.verifyString(options.outputFolder, 'missing output folder');
+	verify.string(options.outputFolder, 'missing output folder');
 
 	/* disable IE shim for now, need to figure out how to include this in pithy */
 	/*
@@ -119,7 +119,7 @@ function generateHtmlElement(rootModule, options) {
 	var headElement = generateHeadElement(options);
 
 	var framework = options.framework || 'qunit';
-	check.verifyString(framework, 'missing framework string ' + framework);
+	verify.string(framework, 'missing framework string ' + framework);
 
 	var doc = {
 		index: [],
@@ -160,18 +160,18 @@ function generateHtmlElement(rootModule, options) {
 }
 
 module.exports = function (rootModule, options) {
-	check.verifyObject(rootModule, 'could not convert docs to modules');
-	check.verifyObject(options, 'missing options');
+	verify.object(rootModule, 'could not convert docs to modules');
+	verify.object(options, 'missing options');
 
 	// console.dir(rootModule);
-	check.verifyString(options.outputFolder, 'missing output folder in ' + JSON.stringify(options));
+	verify.string(options.outputFolder, 'missing output folder in ' + JSON.stringify(options));
 	var htmlFilename = path.join(options.outputFolder, 'index.html');
-	check.verifyString(htmlFilename, 'missing output filename');
+	verify.string(htmlFilename, 'missing output filename');
 
 	console.log('generating docs', options.outputFolder);
 
 	if (options.title) {
-		check.verifyString(options.title, 'missing title ' + options.title);
+		verify.string(options.title, 'missing title ' + options.title);
 	}
 
 	var htmlElement = generateHtmlElement(rootModule, options);
@@ -186,25 +186,25 @@ module.exports = function (rootModule, options) {
 };
 
 function prettifyHtml(str) {
-	check.verifyString(str, 'missing input html string');
+	verify.string(str, 'missing input html string');
 	var result = pretty(str, prettyOptions);
 	result = result.replace(/<\/code>\n\s*<\/pre>/g, '</code></pre>');
 	return result;
 }
 
 function docModule(aModule, doc, framework) {
-	check.verifyObject(aModule, 'missing module');
-	check.verifyArray(doc.index, 'missing index array');
-	check.verifyArray(doc.docs, 'missing docs array');
-	check.verifyString(framework, 'missing framework string');
+	verify.object(aModule, 'missing module');
+	verify.array(doc.index, 'missing index array');
+	verify.array(doc.docs, 'missing docs array');
+	verify.string(framework, 'missing framework string');
 
 	console.log('documenting module', aModule.name);
 
 	var docs = aModule.getDocs();
-	check.verifyArray(docs, 'expected an array of docs');
+	verify.array(docs, 'expected an array of docs');
 
 	if (aModule.name && docs.length) {
-		check.verifyString(aModule.name, 'missing module name');
+		verify.string(aModule.name, 'missing module name');
 
 		var indexElement = getIndexWithTooltip({
 			comment: aModule.comment,

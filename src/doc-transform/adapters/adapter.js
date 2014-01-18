@@ -1,4 +1,4 @@
-var check = require('check-types');
+var verify = require('check-types').verify;
 
 var supported = {
     gt: true,
@@ -8,7 +8,7 @@ var supported = {
 };
 
 function isSupported(framework) {
-    check.verifyString(framework, 'missing testing framework name');
+    verify.string(framework, 'missing testing framework name');
     return !!supported[framework];
 }
 
@@ -17,7 +17,7 @@ function supportedFrameworks() {
 }
 
 function adapter(framework) {
-    check.verifyString(framework, 'missing testing framework name');
+    verify.string(framework, 'missing testing framework name');
     if (!isSupported(framework)) {
         return null;
     }

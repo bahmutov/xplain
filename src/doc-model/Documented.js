@@ -1,8 +1,8 @@
-var check = require('check-types');
+var verify = require('check-types').verify;
 
 // documented method/function/attribute/class
 function Documented(apiComment) {
-    check.verifyObject(apiComment, 'expected api comment');
+    verify.object(apiComment, 'expected api comment');
     this.comment = apiComment;
     this.sample = [];
     this.example = [];
@@ -14,8 +14,8 @@ Documented.prototype.isMethod = function () {
 
 Documented.prototype.add = function (documented, commentType) {
     console.assert(documented instanceof Documented, 'need documented sample');
-    check.verifyString(commentType, 'need comment type');
-    check.verifyArray(this[commentType], 'do not have comment type ' + commentType);
+    verify.string(commentType, 'need comment type');
+    verify.array(this[commentType], 'do not have comment type ' + commentType);
     this[commentType].push(documented);
 };
 

@@ -1,11 +1,10 @@
-var check = require('check-types');
+var verify = require('check-types').verify;
 var html = require('pithy');
 
 function getIndexWithTooltip(options) {
-    check.verifyObject(options, 'missing options object');
-
-    check.verifyObject(options.comment, 'missing api comment object');
-    check.verifyString(options.name, 'missing name');
+    verify.object(options, 'missing options object');
+    verify.object(options.comment, 'missing api comment object');
+    verify.string(options.name, 'missing name');
 
     var description = '<strong>' + options.name + '</strong>';
     var summary = options.comment.getSummary();

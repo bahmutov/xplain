@@ -20,29 +20,29 @@ function docsToModules(collectedDocs) {
 
 function primaryParsing(collectedDocs) {
     init();
-    check.verifyArray(collectedDocs, 'need collected docs');
+    check.verify.array(collectedDocs, 'need collected docs');
 
     collectedDocs.forEach(function (apiComment) {
         console.assert(apiComment, 'need comment as input');
-        check.verifyString(apiComment.filename, 'missing filename');
+        check.verify.string(apiComment.filename, 'missing filename');
         if (apiComment.filename !== prevFilename) {
             prevFilename = apiComment.filename;
             currentModule = rootModule;
         }
         if (apiComment.isModule()) {
             var name = apiComment.getModuleName();
-            check.verifyString(name, 'invalid module name');
+            check.verify.string(name, 'invalid module name');
             currentModule = setupModule(name, rootModule);
             currentModule.comment = apiComment;
             return;
         }
 
-        check.verifyObject(currentModule, 'invalid current module');
+        check.verify.object(currentModule, 'invalid current module');
 
         var documented = new Documented(apiComment);
         if (apiComment.isMethod()) {
             var methodName = apiComment.getMethodName();
-            check.verifyString(methodName, 'missing method name');
+            check.verify.string(methodName, 'missing method name');
             currentModule.add(methodName, documented);
         }
     });
@@ -52,18 +52,18 @@ function primaryParsing(collectedDocs) {
 
 // attach samples and examples to primary code fragments
 function secondaryParsing(collectedDocs) {
-    check.verifyArray(collectedDocs, 'need collected docs');
-    check.verifyObject(rootModule, 'missing root module');
+    check.verify.array(collectedDocs, 'need collected docs');
+    check.verify.object(rootModule, 'missing root module');
 
     collectedDocs.forEach(function (apiComment) {
-        check.verifyString(apiComment.filename, 'missing filename');
+        check.verify.string(apiComment.filename, 'missing filename');
         if (apiComment.filename !== prevFilename) {
             prevFilename = apiComment.filename;
             currentModule = rootModule;
         }
         if (apiComment.isModule()) {
             var name = apiComment.getModuleName();
-            check.verifyString(name, 'invalid module name');
+            check.verify.string(name, 'invalid module name');
             currentModule = setupModule(name, rootModule);
             return;
         }
@@ -84,18 +84,18 @@ function secondaryParsing(collectedDocs) {
 }
 
 function attachComment(documented, commentType) {
-    check.verifyString(commentType, 'missing comment type');
+    check.verify.string(commentType, 'missing comment type');
     var targetName = documented.comment.for();
-    check.verifyString(targetName,
+    check.verify.string(targetName,
         'could not get target from ' + JSON.stringify(documented));
     var target = findDocumented(targetName);
-    check.verifyObject(target, 'could not find method for ' + targetName);
+    check.verify.object(target, 'could not find method for ' + targetName);
     target.add(documented, commentType);
 }
 
 function findDocumented(name) {
-    check.verifyString(name, 'missing name');
-    check.verifyObject(rootModule, 'missing root module');
+    check.verify.string(name, 'missing name');
+    check.verify.object(rootModule, 'missing root module');
     var parts = name.split('/');
     console.assert(parts.length, 'empty name');
 
@@ -109,21 +109,21 @@ function findDocumented(name) {
             throw new Error('cannot find path ' + name);
         }
     }
-    check.verifyObject(m, 'could not find module for ' + name);
-    check.verifyObject(m.docs, 'missing method docs in ' + m.name);
+    check.verify.object(m, 'could not find module for ' + name);
+    check.verify.object(m.docs, 'missing method docs in ' + m.name);
     return m.docs[parts[parts.length - 1]];
 }
 
 function setupModule(name, rootModule)
 {
-    check.verifyString(name, 'invalid module name');
-    check.verifyObject(rootModule, 'invalid root module');
+    check.verify.string(name, 'invalid module name');
+    check.verify.object(rootModule, 'invalid root module');
     var parts = name.split('/');
     var currentModule = rootModule;
     var fullPath = null;
 
     parts.forEach(function (part) {
-        check.verifyString(part, 'missing part module string from ' + name);
+        check.verify.string(part, 'missing part module string from ' + name);
         fullPath = (fullPath ? fullPath + '/' + part : part);
 
         if (currentModule.hasSubModule(part)) {
@@ -132,7 +132,7 @@ function setupModule(name, rootModule)
             currentModule = currentModule.addSubModule(part);
         }
     });
-    check.verifyObject(currentModule, 'missing module');
+    check.verify.object(currentModule, 'missing module');
     return currentModule;
 }
 

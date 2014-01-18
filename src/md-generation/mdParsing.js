@@ -1,5 +1,4 @@
 var fs = require('fs.extra');
-// var eol = require('os').EOL;
 var check = require('check-types');
 var CodeBlock = require('./CodeBlock');
 var splitText = require('./splitText');
@@ -41,7 +40,7 @@ function getBlockName(line) {
 }
 
 MdParser.prototype.parse = function parse(mdText) {
-  check.verifyString(mdText, 'missing md text');
+  check.verify.string(mdText, 'missing md text');
 
   this._originalText = mdText;
   this.parts = [];

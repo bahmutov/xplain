@@ -8,8 +8,8 @@ var DocModule = function () {
 };
 
 DocModule.prototype.add = function (name, doc) {
-    check.verifyString(name, 'missing doc name');
-    check.verifyObject(doc, 'missing documentation');
+    check.verify.string(name, 'missing doc name');
+    check.verify.object(doc, 'missing documentation');
     doc.name = name;
     this.docs[name] = doc;
 };
@@ -24,12 +24,12 @@ DocModule.prototype.docNumber = function () {
 };
 
 DocModule.prototype.hasSubModule = function (name) {
-    check.verifyString(name, 'missing module name');
+    check.verify.string(name, 'missing module name');
     return !!this.modules[name];
 };
 
 DocModule.prototype.addSubModule = function (name) {
-    check.verifyString(name, 'missing name');
+    check.verify.string(name, 'missing name');
     this.modules[name] = new DocModule();
     var fullName = this.name ? this.name + '/' + name : name;
     this.modules[name].name = fullName;

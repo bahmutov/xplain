@@ -7,7 +7,7 @@ var postprocess = require('./postprocess').comments;
 var dox = require('./dox');
 
 function getComments(source) {
-    check.verifyString(source, 'missing source string ' + source);
+    check.verify.string(source, 'missing source string ' + source);
     var cleaned = preprocess(source);
     // console.log('cleaned', cleaned);
 
@@ -16,7 +16,7 @@ function getComments(source) {
     };
     // console.log(cleaned);
     var comments = dox.parseComments(cleaned, parsingOptions);
-    if (!check.isArray(comments)) {
+    if (!check.array(comments)) {
         console.log('could not extract comments from source');
         comments = [];
     }
@@ -26,15 +26,15 @@ function getComments(source) {
 }
 
 function getTaggedComments(inputFiles) {
-    if (check.isString(inputFiles)) {
+    if (check.string(inputFiles)) {
         inputFiles = [inputFiles];
     }
-    check.verifyArray(inputFiles, 'missing input filenames');
+    check.verify.array(inputFiles, 'missing input filenames');
 
     var api = [];
     inputFiles.forEach(function (filename) {
         var fileApi = getFileApi(filename);
-        check.verifyArray(api, 'could not get api array from', filename);
+        check.verify.array(api, 'could not get api array from', filename);
         api = api.concat(fileApi);
     });
     return api;
@@ -54,12 +54,12 @@ function makeComments(comments) {
 }
 
 function getFileApi(filename) {
-    check.verifyString(filename, 'missing filename');
+    check.verify.string(filename, 'missing filename');
     var contents = fs.readFileSync(filename, 'utf-8');
-    check.verifyString(contents, 'could not load contents of', filename);
+    check.verify.string(contents, 'could not load contents of', filename);
 
     var raw = getComments(contents);
-    check.verifyArray(raw, 'could not get tags array from ' + filename);
+    check.verify.array(raw, 'could not get tags array from ' + filename);
     raw = keepFilename(raw, filename);
 
     var comments = makeComments(raw);
@@ -67,10 +67,10 @@ function getFileApi(filename) {
 }
 
 function getSamples(inputFiles) {
-  if (check.isString(inputFiles)) {
+  if (check.string(inputFiles)) {
     inputFiles = [inputFiles];
   }
-  check.verifyArray(inputFiles, 'missing input filenames');
+  check.verify.array(inputFiles, 'missing input filenames');
 
   var docs = getTaggedComments(inputFiles);
   // console.dir(docs);
