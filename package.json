@@ -69,6 +69,7 @@
     "grunt": "~0.4.2",
     "grunt-contrib-jshint": "~0.8.0",
     "grunt-bump": "0.0.13",
-    "pre-git": "0.0.14"
+    "pre-git": "0.0.14",
+    "time-grunt": "~0.2.8"
   }
 }
