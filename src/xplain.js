@@ -10,7 +10,7 @@ var getApi = require('./extract-jsdocs/getTaggedComments').getCommentsFromFiles;
 var getSampleTests = require('./extract-jsdocs/getTaggedComments').getSampleTests;
 
 var toDoc = require('./html-generation/toHtml');
-var updateMd = require('./md-generation/updateMarkdownFile');
+var xplainMarkdown = require('./md-generation/xplainMarkdown');
 var rethrow = require('./utils/errors').rethrow;
 var docsToModules = require('./doc-model/docsToModules');
 
@@ -44,10 +44,8 @@ function generateDocs(options) {
   }
 
   if (isMarkdownFilename(options.outputFolder)) {
-    var samples = getSampleTests(inputFiles);
-    verify.array(samples, 'could not get samples from ' +
-      JSON.stringify(inputFiles));
-    updateMd(samples, {
+    xplainMarkdown({
+      inputFiles: inputFiles,
       framework: options.framework,
       outputFilename: options.outputFolder
     });
