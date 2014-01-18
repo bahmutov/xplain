@@ -68,7 +68,7 @@ function secondaryParsing(collectedDocs) {
             return;
         }
 
-        check.verifyObject(currentModule, 'invalid current module');
+        check.verify.object(currentModule, 'invalid current module');
 
         try {
             var documented = new Documented(apiComment);

@@ -1,7 +1,7 @@
 var check = require('check-types');
 
 function parseName(code) {
-	check.verifyString(code, 'missing code');
+	check.verify.string(code, 'missing code');
 	var reg = /(?:'|")(\s*[\w\W\s]+\s*)(?:'|")/;
 	var matched = reg.exec(code);
 	// console.log(matched);
@@ -12,7 +12,7 @@ function parseName(code) {
 }
 
 function parseNamedCode(code) {
-	check.verifyString(code, 'missing code, have ' + code);
+	check.verify.string(code, 'missing code, have ' + code);
 	var reg = /(?:gt)\.test\(([\W\w]+),\s*function\s*\(\)\s*\{([\W\w]*)}\s*\)/;
 
 	var matched = reg.exec(code);
@@ -20,7 +20,7 @@ function parseNamedCode(code) {
 	if (!Array.isArray(matched)) {
 		return null;
 	}
-	if (!check.isString(matched[1])) {
+	if (!check.string(matched[1])) {
 		return null;
 	}
 
@@ -32,7 +32,7 @@ function parseNamedCode(code) {
 }
 
 function parseImplicitNameCode(code) {
-	check.verifyString(code, 'missing code, have ' + code);
+	check.verify.string(code, 'missing code, have ' + code);
 	var reg = /^\s*(?:gt\.)(?:test)\(\s*function\s*([\W\w]+)\s*\(\)\s*\{([\W\w]*)}\s*\)/;
 
 	var matched = reg.exec(code);
@@ -40,7 +40,7 @@ function parseImplicitNameCode(code) {
 	if (!Array.isArray(matched)) {
 		return null;
 	}
-	if (!check.isString(matched[1])) {
+	if (!check.string(matched[1])) {
 		return null;
 	}
 
@@ -52,7 +52,7 @@ function parseImplicitNameCode(code) {
 }
 
 function parseSkippedTestCode(code) {
-	check.verifyString(code, 'missing code, have ' + code);
+	check.verify.string(code, 'missing code, have ' + code);
 	var reg = /(?:gt)\.skip\(([\W\w]+),\s*function\s*\(\)\s*\{([\W\w]*)}\s*\)/;
 
 	var matched = reg.exec(code);
@@ -60,7 +60,7 @@ function parseSkippedTestCode(code) {
 	if (!Array.isArray(matched)) {
 		return null;
 	}
-	if (!check.isString(matched[1])) {
+	if (!check.string(matched[1])) {
 		return null;
 	}
 
@@ -74,7 +74,7 @@ function parseSkippedTestCode(code) {
 
 function parseAnonymousCode(code) {
 	// console.log('parsing anonymous code');
-	check.verifyString(code, 'missing code, have ' + code);
+	check.verify.string(code, 'missing code, have ' + code);
 	var reg = /(?:gt|QUnit)\.test\(\s*function\s*\(\)\s*\{([\W\w]*)}\s*\)/;
 
 	var matched = reg.exec(code);
@@ -82,7 +82,7 @@ function parseAnonymousCode(code) {
 	if (!Array.isArray(matched)) {
 		return null;
 	}
-	if (!check.isString(matched[1])) {
+	if (!check.string(matched[1])) {
 		return null;
 	}
 
@@ -94,7 +94,7 @@ function parseAnonymousCode(code) {
 
 function parseImmediateFunction(code) {
 	// console.log('parsing immediate function');
-	check.verifyString(code, 'missing code, have ' + code);
+	check.verify.string(code, 'missing code, have ' + code);
 	var reg = /\(\s*function\s*\(\s*\)\s*\{([\W\w]*)}\s*(?:\)\s*\(\s*\)|\(\s*\)\s*\))/;
 
 	var matched = reg.exec(code);
@@ -103,7 +103,7 @@ function parseImmediateFunction(code) {
 	if (!Array.isArray(matched)) {
 		return null;
 	}
-	if (!check.isString(matched[1])) {
+	if (!check.string(matched[1])) {
 		return null;
 	}
 
@@ -114,7 +114,7 @@ function parseImmediateFunction(code) {
 }
 
 function parseCode(code) {
-	check.verifyString(code, 'missing code, have ' + code);
+	check.verify.string(code, 'missing code, have ' + code);
 	var parsed;
 
 	if (parsed = parseNamedCode(code)) { return parsed; }

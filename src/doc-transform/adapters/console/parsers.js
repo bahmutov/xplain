@@ -3,10 +3,10 @@ var code = require('../../../utils/code');
 
 // duplicate from qunit, gt
 function parseOkArguments(args) {
-    check.verifyString(args, 'args is not a string');
+    check.verify.string(args, 'args is not a string');
 
     var split = code.split(args);
-    check.verifyArray(split, 'did not get array from', args);
+    check.verify.array(split, 'did not get array from', args);
     var result = {
         op: split[0]
     };
@@ -22,9 +22,9 @@ function parseOk(line) {
     var matches = reg.exec(line);
     // console.log('ok matches', matches);
     var args = matches[1];
-    check.verifyString(args, 'invalid number arguments');
+    check.verify.string(args, 'invalid number arguments');
     var parsed = parseOkArguments(args);
-    check.verifyObject(parsed, 'did not get parsed arguments');
+    check.verify.object(parsed, 'did not get parsed arguments');
     return parsed.op + '; // true';
 }
 
@@ -34,13 +34,13 @@ var lineParsers = [
 
 // duplicate from qunit, gt
 function transformAssertion(line) {
-    check.verifyString(line, 'missing line');
+    check.verify.string(line, 'missing line');
     var parsed = null;
     lineParsers.some(function (method) {
         parsed = method(line);
         return parsed;
     });
-    if (check.isString(parsed)) {
+    if (check.string(parsed)) {
         return parsed;
     }
     return line;

@@ -2,12 +2,11 @@ var eol = require('os').EOL;
 var check = require('check-types');
 var sep = '\n';
 
-
 // splits text, usually from file,
 // using multiple end of line characters
 // returns an array, maybe even empty
 function splitToLines(text) {
-  if (!check.isString(text) || !text) {
+  if (!check.string(text) || !text) {
     return [];
   }
 

@@ -4,7 +4,7 @@ var fs = require('fs');
 
 function isValidHeader(filename) {
   console.log('checking if', filename, 'is valid header');
-  if (!filename || !check.isString(filename)) {
+  if (!filename || !check.string(filename)) {
     return false;
   }
 

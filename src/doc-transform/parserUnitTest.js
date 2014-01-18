@@ -12,7 +12,7 @@ function parseUnitTestCode(code, framework) {
     verify.string(code, 'missing code');
 
     framework = framework || 'qunit';
-    verifyString(framework, 'missing framework name, try gt or qunit');
+    verify.string(framework, 'missing framework name, try gt or qunit');
     var parsers = adapter(framework);
     verify.object(parsers, 'could not get parsers for ' + framework +
             ', have ' + JSON.stringify(parsers));

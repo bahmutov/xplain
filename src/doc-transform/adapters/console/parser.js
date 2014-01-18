@@ -2,7 +2,7 @@ var check = require('check-types');
 
 // duplicate from qunit, gt
 function parseName(code) {
-	check.verifyString(code, 'missing code');
+	check.verify.string(code, 'missing code');
 	var reg = /(?:'|")(\s*[\w\W\s]+\s*)(?:'|")/;
 	var matched = reg.exec(code);
 	// console.log(matched);
@@ -14,7 +14,7 @@ function parseName(code) {
 
 function parseImmediateFunction(code) {
 	//console.log('parsing immediate function');
-	check.verifyString(code, 'missing code, have ' + code);
+	check.verify.string(code, 'missing code, have ' + code);
 	var reg = /^\s*\(\s*function\s*\(\s*\)\s*\{([\W\w]*)}\s*(?:\)\s*\(\s*\)|\(\s*\)\s*\))/;
 
 	var matched = reg.exec(code);
@@ -23,7 +23,7 @@ function parseImmediateFunction(code) {
 	if (!Array.isArray(matched)) {
 		return null;
 	}
-	if (!check.isString(matched[1])) {
+	if (!check.string(matched[1])) {
 		return null;
 	}
 
@@ -34,7 +34,7 @@ function parseImmediateFunction(code) {
 }
 
 function parseCode(code) {
-	check.verifyString(code, 'missing code, have ' + code);
+	check.verify.string(code, 'missing code, have ' + code);
 	return parseImmediateFunction(code);
 }
 
