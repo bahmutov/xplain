@@ -35,7 +35,10 @@
     "npm install",
     "npm test"
   ],
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bahmutov/xplain.git"
+  },
   "keywords": [
     "javascript",
     "api",
