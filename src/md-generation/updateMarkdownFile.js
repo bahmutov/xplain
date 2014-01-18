@@ -15,13 +15,13 @@ module.exports = function updateMarkdownFile(samples, options) {
   verify.string(framework, 'missing testing framework name');
 
 	console.log('updating Markdown file', options.outputFilename);
-	// console.log(JSON.stringify(rootModule, null, 2));
+	console.json('samples', samples);
 
   var readableSamples = samples.map(function (sample) {
     return transform(sample.code, framework);
   });
   verify.array(readableSamples, 'could not convert to human readable samples');
-  console.log(JSON.stringify(readableSamples, null, 2));
+  console.json('readable samples', readableSamples);
 
   var text = fs.readFileSync(options.outputFilename, 'utf8');
   verify.string(text, 'missing text from file ' + options.outputFilename);
