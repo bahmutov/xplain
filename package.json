@@ -1,7 +1,7 @@
 {
   "name": "xplain",
   "version": "0.0.14",
-  "description": "Generates API documentation with unit tested examples",
+  "description": "Generates API documentation / markdown inserts from unit tests",
   "main": "index.js",
   "bin": "index.js",
   "scripts": {
@@ -70,6 +70,12 @@
     "grunt-contrib-jshint": "~0.8.0",
     "grunt-bump": "0.0.13",
     "pre-git": "0.0.14",
-    "time-grunt": "~0.2.8"
+    "time-grunt": "~0.2.8",
+    "matchdep": "~0.3.0",
+    "grunt-nice-package": "~0.1.5",
+    "grunt-deps-ok": "~0.1.7",
+    "grunt-complexity": "~0.1.4",
+    "grunt-readme": "~0.4.5",
+    "grunt-jsonlint": "~1.0.4"
   }
 }
