@@ -52,7 +52,7 @@
     "dox": "~0.4.4",
     "check-types": "~1.1.1",
     "esprima": "~1.0.4",
-    "escodegen": "~1.0.1",
+    "escodegen": "~1.1.0",
     "lodash": "~2.4.1",
     "js-beautify": "~1.4.2",
     "moment": "~2.5.0",
@@ -67,14 +67,14 @@
     "marked": "~0.3.0",
     "xregexp": "~2.0.0",
     "update-notifier": "~0.1.7",
-    "console.json": "~0.1.0"
+    "console.json": "~0.1.1"
   },
   "devDependencies": {
     "gt": "~0.8.29",
     "grunt": "~0.4.2",
     "grunt-contrib-jshint": "~0.8.0",
     "grunt-bump": "0.0.13",
-    "pre-git": "0.0.14",
+    "pre-git": "0.0.15",
     "time-grunt": "~0.2.8",
     "matchdep": "~0.3.0",
     "grunt-nice-package": "~0.1.5",
