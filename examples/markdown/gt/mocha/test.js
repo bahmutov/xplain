@@ -48,7 +48,7 @@ describe('parsing gt test', function () {
     var transformedCode = transform(innerCode.code, 'gt');
     assert(_.isObject(transformedCode), 'returned object');
     assert(_.isString(transformedCode.code), 'has code string');
-    console.log('transformed code', transformedCode.code);
+    console.log('transformed code\n' + transformedCode.code);
     assert(transformedCode.code.length > 0, 'string is unempty');
   });
 });

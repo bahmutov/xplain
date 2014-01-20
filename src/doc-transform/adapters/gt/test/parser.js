@@ -62,7 +62,7 @@ gt.test('name and code', function () {
 	gt.equal(p.code, 'var foo;');
 });
 
-gt.test('name and code using QUnit are not parsed', function () {
+gt.test('name and code using QUnit are parsed', function () {
 	var p = parseCode("QUnit.test('foo', function () {})");
 	gt.equal(p.code, '', 'does not parse QUnit, got', p);
 });

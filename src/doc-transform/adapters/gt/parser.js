@@ -114,7 +114,7 @@ function parseImmediateFunction(code) {
 }
 
 function parsePlainFunction(code) {
-	console.log('parsing plain function from\n' + code);
+	// console.log('parsing plain function from\n' + code);
 	check.verify.string(code, 'missing code, have ' + code);
 	var reg = /\s*function\s*\(\s*\)\s*\{([\W\w]*)}\s*/;
 
