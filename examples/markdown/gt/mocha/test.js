@@ -41,14 +41,13 @@ describe('parsing gt test', function () {
     var t = tests[0];
     assert(_.isFunction(transform), 'transform is a function');
     var code = t.code.toString();
-    var innerCode = parseCode(code);
-    assert(innerCode, 'could not get inner code from ' + code);
-    assert(_.isObject(innerCode), 'returns an object');
-    assert(_.isString(innerCode.code), 'has code string');
-    var transformedCode = transform(innerCode.code, 'gt');
+
+    var transformedCode = transform(code, 'gt');
     assert(_.isObject(transformedCode), 'returned object');
     assert(_.isString(transformedCode.code), 'has code string');
-    console.log('transformed code\n' + transformedCode.code);
+
+    // console.log('transformed code\n' + transformedCode.code);
     assert(transformedCode.code.length > 0, 'string is unempty');
+    assert(/add\(2, 3\); \/\/ 5/.test(transformedCode.code), 'transforms equal');
   });
 });
