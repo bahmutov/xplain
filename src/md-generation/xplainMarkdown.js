@@ -20,11 +20,13 @@ module.exports = function xplainMarkdown(options) {
   var doc = new parser(txt);
   var blocks = doc.codeBlocks();
   verify.array(blocks, 'expected array of blocks from ' + options.outputFilename);
+  console.log('' + blocks.length, 'code blocks');
 
   framework.init();
   framework.collect(options.inputFiles);
   var tests = framework.getAllTests();
   verify.array(tests, 'tests should be an array');
+  console.log('' + tests.length, 'tests');
 
   blocks.forEach(function (block) {
     var test = _.find(tests, { name: block.name });
