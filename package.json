@@ -29,7 +29,7 @@
     "console": "node index.js -f console -t console.assert -i examples/console/test.js -o examples/console/docs",
     "instance": "node index.js -f gt -t instance -i examples/object/test.js -o examples/object/docs",
     "md": "node node_modules/gt test/md.js --output",
-    "mocha": "node node_modules/mocha/bin/mocha examples/markdown/gt/mocha/test.js"
+    "mocha": "node node_modules/mocha/bin/mocha examples/markdown/gt/mocha/test.js -R spec"
   },
   "pre-commit": "npm test",
   "pre-push": [
@@ -68,10 +68,10 @@
     "marked": "~0.3.0",
     "xregexp": "~2.0.0",
     "update-notifier": "~0.1.7",
-    "console.json": "~0.1.1"
+    "console.json": "~0.1.1",
+    "gt": "~0.8.32"
   },
   "devDependencies": {
-    "gt": "~0.8.30",
     "grunt": "~0.4.2",
     "grunt-contrib-jshint": "~0.8.0",
     "grunt-bump": "0.0.13",

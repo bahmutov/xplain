@@ -7,7 +7,7 @@ if (notifier.update) {
 }
 
 var path = require('path');
-var check = require('check-types');
+var verify = require('check-types').verify;
 var xplain = require('./src/xplain');
 var package = require('./package.json');
 
@@ -69,21 +69,21 @@ var inputFiles = program.input;
 if (typeof inputFiles === 'string') {
   inputFiles = [inputFiles];
 }
-check.verify.array(inputFiles, 'missing input pattern array ' + inputFiles);
-check.verify.string(program.output, 'missing output folder');
+verify.array(inputFiles, 'missing input pattern array ' + inputFiles);
+verify.string(program.output, 'missing output folder ' + JSON.stringify(program, null, 2));
 var fullFolder = path.resolve(process.cwd(), program.output);
 console.log('generating docs from', inputFiles, 'target', fullFolder);
 
 if (program.version) {
   program.version = '' + program.version;
   if (program.version) {
-    check.verify.string(program.version, 'invalid API version ' + program.version);
+    verify.string(program.version, 'invalid API version ' + program.version);
   }
 }
 if (program.title) {
   program.title = '' + program.title;
   if (program.title) {
-    check.verify.string(program.title, 'invalid API title ' + program.title);
+    verify.string(program.title, 'invalid API title ' + program.title);
   }
 }
 if (program.title) {
@@ -96,7 +96,7 @@ if (program.header) {
   console.log('header', program.header);
 }
 
-check.verify.fn(xplain.document, 'xplain have document function');
+verify.fn(xplain.document, 'xplain have document function');
 xplain.document({
   patterns: inputFiles,
   outputFolder: fullFolder,

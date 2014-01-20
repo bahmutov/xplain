@@ -1,26 +1,47 @@
 var verify = require('check-types').verify;
-var update = require('./updateMarkdownFile');
-var getSampleTests = require('../extract-jsdocs/getTaggedComments').getSampleTests;
+// var update = require('./updateMarkdownFile');
+// var getSampleTests = require('../extract-jsdocs/getTaggedComments').getSampleTests;
+var transform = require('../doc-transform/toHumanForm');
 var getBlocks = require('./getBlocks');
+var parser = require('./mdParsing');
+var read = require('fs').readFileSync;
+var write = require('fs').writeFileSync;
+var eol = require('os').EOL;
 var _ = require('lodash');
+var _gt = require('gt');
+var framework = _gt.TestingFramework;
 
 module.exports = function xplainMarkdown(options) {
   verify.object(options, 'expecting options');
 
-  var blocks = getBlocks(options.outputFilename);
-  var names = _.pluck(blocks, 'name');
-  verify.array(names, 'expected array of names for code blocks from ' + options.outputFilename);
-  if (!names.length) {
-    console.log('no code blocks found in', options.outputFilename);
-    return;
-  }
+  verify.unemptyString(options.outputFilename, 'missing output filename in ' +
+    JSON.stringify(options, null, 2));
+  var txt = read(options.outputFilename, 'utf8');
+  var doc = new parser(txt);
+  var blocks = doc.codeBlocks();
+  verify.array(blocks, 'expected array of blocks from ' + options.outputFilename);
 
-  var samples = getSampleTests(options.inputFiles);
-  verify.array(samples, 'could not get samples from ' +
-    JSON.stringify(options.inputFiles));
+  framework.init();
+  framework.collect(options.inputFiles);
+  var tests = framework.getAllTests();
+  verify.array(tests, 'tests should be an array');
 
-  update(samples, {
-    framework: options.framework,
-    outputFilename: options.outputFilename
+  blocks.forEach(function (block) {
+    var test = _.find(tests, { name: block.name });
+    if (!test) {
+      return;
+    }
+    // console.log('block', block.name, 'found unit test', test);
+    var human = transform(test.code.toString(), options.framework);
+    if (human && _.isString(human.code)) {
+      console.log('human code\n' + human.code);
+      block.setText(human.code + eol + eol);
+    }
   });
+
+  var updatedText = doc.text();
+  verify.unemptyString(updatedText, 'empty updated text for ' + options.outputFilename);
+  // console.log('updated md\n' + updatedText);
+  write(options.outputFilename, updatedText);
+  console.log('saved', options.outputFilename);
 }
