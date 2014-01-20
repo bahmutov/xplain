@@ -19,6 +19,8 @@ function parseUnitTestCode(code, framework) {
 
     var testName = parsers.topLevelParser.getNameFromTest(code);
     var innerCode = parsers.topLevelParser.parseCode(code);
+    console.log('test name', testName);
+    console.log('inner code', innerCode);
     var disabled = parsers.topLevelParser.isSkippedTest(code);
     // console.log('from code\n', code, 'got', innerCode);
     var outputCode = null;
