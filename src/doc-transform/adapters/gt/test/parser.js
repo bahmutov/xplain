@@ -64,7 +64,7 @@ gt.test('name and code', function () {
 
 gt.test('name and code using QUnit are not parsed', function () {
 	var p = parseCode("QUnit.test('foo', function () {})");
-	gt.null(p, 'does not parse QUnit');
+	gt.equal(p.code, '', 'does not parse QUnit, got', p);
 });
 
 gt.test('empty code', function () {

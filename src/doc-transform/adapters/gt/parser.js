@@ -136,14 +136,14 @@ function parsePlainFunction(code) {
 
 function parseCode(code) {
 	check.verify.string(code, 'missing code, have ' + code);
+	var methods = [parseNamedCode, parseSkippedTestCode, parseImplicitNameCode,
+		parseAnonymousCode, parseImmediateFunction, parsePlainFunction];
 	var parsed;
-
-	if (parsed = parseNamedCode(code)) { return parsed; }
-	if (parsed = parseSkippedTestCode(code)) { return parsed; }
-	if (parsed = parseImplicitNameCode(code)) { return parsed; }
-	if (parsed = parseAnonymousCode(code)) { return parsed; }
-	if (parsed = parseImmediateFunction(code)) { return parsed; }
-	return parsePlainFunction(code);
+	methods.some(function (method) {
+		parsed = method(code);
+		return parsed;
+	});
+	return parsed;
 }
 
 function getNameFromTest(code) {
