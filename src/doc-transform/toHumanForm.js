@@ -1,12 +1,13 @@
 var check = require('check-types');
+var verify = check.verify;
 var parseUnitTestCode = require('./parserUnitTest').parseUnitTestCode;
 
 function transform(code, framework) {
-    check.verify.string(code, 'missing code to parse');
-    check.verify.string(framework, 'missing framework');
+    verify.string(code, 'missing code to parse');
+    verify.string(framework, 'missing framework');
 
     var humanForm = parseUnitTestCode(code, framework);
-    check.verify.object(humanForm, 'could not convert to human form', code);
+    verify.object(humanForm, 'could not convert to human form', code);
 
     if (!check.string(humanForm.code)) {
         console.log('could not convert', code, 'to human form');
