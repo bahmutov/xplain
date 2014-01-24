@@ -71,7 +71,7 @@ gt.test('gt.equal with foobar', function () {
   var human = transform(code, 'gt');
   gt.string(human, 'returns a string', human);
   gt.ok(!/equal/.test(human), 'there is no more gt.equal syntax');
-  console.log(human);
+  // console.log(human);
 });
 
 gt.test('gt.equal without ;', function () {
@@ -82,5 +82,28 @@ gt.test('gt.equal without ;', function () {
   var human = transform(code, 'gt');
   gt.string(human, 'returns a string', human);
   gt.ok(!/equal/.test(human), 'there is no more gt.equal syntax');
+});
+
+gt.module('transforming console.assert calls');
+
+gt.test('single assert', function () {
+  gt.func(transform, 'transform is a function');  
+  var code = 'console.assert(x > 5, "x is large");';
+  gt.ok(/assert/.test(code), 'there is assert syntax');
+
+  var human = transform(code, 'console');
+  gt.string(human, 'returns a string', human);
+  gt.ok(!/assert/.test(human), 'there is no more assert syntax');
+  console.log(human);
+});
+
+gt.test('single assert without ;', function () {
+  gt.func(transform, 'transform is a function');  
+  var code = 'console.assert(x > 5, "x is large")';
+  gt.ok(/assert/.test(code), 'there is assert syntax');
+
+  var human = transform(code, 'console');
+  gt.string(human, 'returns a string', human);
+  gt.ok(!/assert/.test(human), 'there is no more assert syntax');
   console.log(human);
 });

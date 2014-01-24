@@ -15,7 +15,7 @@ function parseOkArguments(args) {
 
 // top level parsers for individual assertions
 function parseOk(line) {
-    var reg = /\s*console\.assert\(([\W\w]+)\);/;
+    var reg = /\s*console\.assert\(([\W\w]+)\);?/;
     if (!reg.test(line)) {
         return null;
     }
