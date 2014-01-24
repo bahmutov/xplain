@@ -13,3 +13,7 @@
 ## MIT License
 
 {%= _.doc("./LICENSE-MIT") %}
+
+## History
+
+{%= _.doc("./History.md") %}

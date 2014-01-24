@@ -210,3 +210,14 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 
 
+
+## History
+
+
+0.0.16 / 2014-01-23 
+==================
+
+ * parsing markdown block correctly with comments
+ * working on markdown update
+
+
