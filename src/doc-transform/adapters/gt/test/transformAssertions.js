@@ -39,3 +39,8 @@ gt.test('comments are preserved', function () {
     var text = '// a comment';
     gt.equal(transform(text), text);
 });
+
+gt.test('single gt.equal with strings', function () {
+    var code = 'gt.equal(add("a", "b"), "ab");';
+    gt.equal(transform(code), 'add(\'a\',\'b\'); // \'ab\'');
+});

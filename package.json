@@ -56,7 +56,7 @@
     "escodegen": "~1.1.0",
     "lodash": "~2.4.1",
     "js-beautify": "~1.4.2",
-    "moment": "~2.5.0",
+    "moment": "~2.5.1",
     "glob": "~3.2.8",
     "allong.es": "~0.14.0",
     "pithy": "0.0.4",
@@ -69,7 +69,7 @@
     "xregexp": "~2.0.0",
     "update-notifier": "~0.1.7",
     "console.json": "~0.1.1",
-    "gt": "~0.8.32"
+    "gt": "~0.8.33"
   },
   "devDependencies": {
     "grunt": "~0.4.2",
