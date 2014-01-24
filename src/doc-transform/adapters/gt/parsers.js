@@ -1,12 +1,13 @@
 var check = require('check-types');
+var verify = check.verify;
 var code = require('../../../utils/code');
 
 function parseEqualArguments(equal) {
-    check.verify.string(equal, 'equal is not a string');
+    verify.string(equal, 'equal is not a string');
 
-    // console.log('splitting', equal);
+    //console.log('splitting', equal);
     var split = code.split(equal);
-    check.verify.array(split, 'did not get array from', equal);
+    verify.array(split, 'did not get array from', equal);
     // console.log(split);
     var result = {
         op: split[0],
@@ -16,7 +17,7 @@ function parseEqualArguments(equal) {
 }
 
 function parseNumberArguments(args) {
-    check.verify.string(args, 'args is not a string');
+    verify.string(args, 'args is not a string');
 
     // console.log('splitting', args);
     var split = code.split(args);
@@ -28,11 +29,11 @@ function parseNumberArguments(args) {
 }
 
 function parseOkArguments(args) {
-    check.verify.string(args, 'args is not a string');
+    verify.string(args, 'args is not a string');
 
     // console.log('splitting', args);
     var split = code.split(args);
-    check.verify.array(split, 'did not get array from', args);
+    verify.array(split, 'did not get array from', args);
     var result = {
         op: split[0]
     };
@@ -40,9 +41,9 @@ function parseOkArguments(args) {
 }
 
 function parseFuncArguments(args) {
-    check.verify.string(args, 'args is not a string');
+    verify.string(args, 'args is not a string');
     var split = code.split(args);
-    check.verify.array(split, 'did not get array from', args);
+    verify.array(split, 'did not get array from', args);
     var result = {
         op: split[0]
     };
@@ -50,9 +51,9 @@ function parseFuncArguments(args) {
 }
 
 function parseArityArguments(args) {
-    check.verify.string(args, 'args is not a string');
+    verify.string(args, 'args is not a string');
     var split = code.split(args);
-    check.verify.array(split, 'did not get array from', args);
+    verify.array(split, 'did not get array from', args);
     var result = {
         op: split[0],
         number: split[1]
@@ -69,9 +70,9 @@ function parseEqual(line) {
     var matches = isEqualReg.exec(line);
     // console.log('matches', matches);
     var equalArguments = matches[1];
-    check.verify.string(equalArguments, 'invalid equal arguments');
+    verify.string(equalArguments, 'invalid equal arguments');
     var parsed = parseEqualArguments(equalArguments);
-    check.verify.object(parsed, 'did not get parsed arguments');
+    verify.object(parsed, 'did not get parsed arguments');
     return parsed.op + '; // ' + parsed.expected;
 }
 
@@ -83,9 +84,9 @@ function parseArrayEqual(line) {
     var matches = isEqualReg.exec(line);
     // console.log('matches', matches);
     var equalArguments = matches[1];
-    check.verify.string(equalArguments, 'invalid array equal arguments');
+    verify.string(equalArguments, 'invalid array equal arguments');
     var parsed = parseEqualArguments(equalArguments);
-    check.verify.object(parsed, 'did not get parsed arguments');
+    verify.object(parsed, 'did not get parsed arguments');
     // console.log('array expression', parsed.op);
     return parsed.op + '; // ' + parsed.expected;
 }
@@ -97,9 +98,9 @@ function parseNumber(line) {
     }
     var matches = reg.exec(line);
     var args = matches[1];
-    check.verify.string(args, 'invalid number arguments');
+    verify.string(args, 'invalid number arguments');
     var parsed = parseNumberArguments(args);
-    check.verify.object(parsed, 'did not get parsed arguments');
+    verify.object(parsed, 'did not get parsed arguments');
     return parsed.op + '; // a number';
 }
 
@@ -110,9 +111,9 @@ function parseArray(line) {
     }
     var matches = reg.exec(line);
     var args = matches[1];
-    check.verify.string(args, 'invalid array arguments');
+    verify.string(args, 'invalid array arguments');
     var parsed = parseNumberArguments(args);
-    check.verify.object(parsed, 'did not get parsed arguments');
+    verify.object(parsed, 'did not get parsed arguments');
     return parsed.op + '; // Array';
 }
 
@@ -124,9 +125,9 @@ function parseOk(line) {
     var matches = reg.exec(line);
     // console.log('ok matches', matches);
     var args = matches[1];
-    check.verify.string(args, 'invalid number arguments');
+    verify.string(args, 'invalid number arguments');
     var parsed = parseOkArguments(args);
-    check.verify.object(parsed, 'did not get parsed arguments');
+    verify.object(parsed, 'did not get parsed arguments');
     return parsed.op + '; // true';
 }
 
@@ -137,9 +138,9 @@ function parseFunc(line) {
     }
     var matches = reg.exec(line);
     var args = matches[1];
-    check.verify.string(args, 'invalid number arguments');
+    verify.string(args, 'invalid number arguments');
     var parsed = parseFuncArguments(args);
-    check.verify.object(parsed, 'did not get parsed arguments');
+    verify.object(parsed, 'did not get parsed arguments');
     return '// ' + parsed.op + ' is a function';
 }
 
@@ -150,9 +151,9 @@ function parseArity(line) {
     }
     var matches = reg.exec(line);
     var args = matches[1];
-    check.verify.string(args, 'invalid number arguments');
+    verify.string(args, 'invalid number arguments');
     var parsed = parseArityArguments(args);
-    check.verify.object(parsed, 'did not get parsed arguments');
+    verify.object(parsed, 'did not get parsed arguments');
     return '// ' + parsed.op + ' is a function that expects ' +
         parsed.number + ' arguments';
 }
@@ -163,7 +164,7 @@ var lineParsers = [
 ];
 
 function transformAssertion(line) {
-    check.verify.string(line, 'missing line');
+    verify.string(line, 'missing line');
     var parsed = null;
     lineParsers.some(function (method) {
         return parsed = method(line);

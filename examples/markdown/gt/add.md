@@ -7,4 +7,6 @@
 
 Run unit tests `gt add-test.js`
 
-Update markdown using `xplain -i add-test.js -o add.md -f gt`
+Update markdown using `xplain -i add-test.js -o add.md -f gt` 
+or with 
+node ../../../index.js -i add-test.js -o add.md -f gt

@@ -99,3 +99,10 @@ gt.test('skipped test', function () {
 	gt.equal(p.code, '', 'there is no source code');
 	gt.ok(isSkippedTest(txt));
 });
+
+gt.test('two gt.equals', function () {
+    var code = 'gt.equal(add(2, 3), 5);\ngt.equal(add(2, 3), 5);';
+    gt.object(code, 'returns an object', code);
+    var p = parseCode(code);
+    gt.equal(p.code, '');
+});

@@ -1,13 +1,12 @@
 var verify = require('check-types').verify;
 
 var adapter = require('./adapters/adapter').adapter;
-var reformat = require('../utils/code').reformat;
-verify.fn(reformat, 'could not get code reformat');
+// var reformat = require('../utils/code').reformat;
+// verify.fn(reformat, 'could not get code reformat');
+var blockTransform = require('./transformBlock');
+verify.fn(blockTransform, 'missing block transform function');
 
-// parses multiline list of assertions in the code
-// replaces all gt.ok(...) and other assertions with
-// human-readable code,
-// returns object with pretty code and extracted test name
+// parses function with assertions
 function parseUnitTestCode(code, framework) {
     verify.string(code, 'missing code');
 
@@ -23,22 +22,13 @@ function parseUnitTestCode(code, framework) {
     // console.log('inner code', innerCode);
     var disabled = parsers.topLevelParser.isSkippedTest(code);
     // console.log('from code\n', code, 'got', innerCode);
-    var outputCode = null;
-
-    if (innerCode) {
-        verify.string(innerCode.code, 'missing inner code ' + JSON.stringify(innerCode));
-        var lines = innerCode.code.split('\n');
-        var transformedLines = lines.map(parsers.lineTransformer);
-        outputCode = transformedLines.join('\n');
-    } else {
-        outputCode = code;
-    }
-
-    var pretty = reformat(outputCode, true);
-    verify.string(pretty, 'could not reformat output\n' + outputCode);
+    var outputCode = innerCode && innerCode.code || code;
+    var prettyCode = blockTransform(outputCode, framework) || outputCode;
+    verify.string(prettyCode, 'pretty code is a string, not ' + 
+        JSON.stringify(prettyCode, null, 2));
 
     return {
-        code: pretty.trim(),
+        code: prettyCode,
         name: testName,
         disabled: disabled
     };
