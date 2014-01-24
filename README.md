@@ -1,4 +1,4 @@
-# xplain v0.0.17
+# xplain v0.0.18
 
 > Generates API documentation / markdown inserts from unit tests
 
@@ -213,6 +213,13 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 ## History
 
+
+0.0.17 / 2014-01-23 
+==================
+
+ * made ; at the end optional for gt, qunit and console.assert
+ * refactoring block transform for testing
+ * including changelog history into readme
 
 0.0.16 / 2014-01-23 
 ==================
