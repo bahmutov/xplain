@@ -18,7 +18,9 @@ function transform(code, framework) {
         ', have ' + JSON.stringify(parsers, null, 2));
 
     var lines = code.split('\n');
-    var transformedLines = lines.map(parsers.lineTransformer);
+    var transformedLines = lines.map(function (line) {
+        return parsers.lineTransformer(line);
+    });
     var outputCode = transformedLines.join('\n');
 
     var pretty = reformat(outputCode, true);

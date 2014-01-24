@@ -63,12 +63,12 @@ function parseArityArguments(args) {
 
 // top level parsers for individual assertions
 function parseEqual(line) {
-    var isEqualReg = /(?:gt)\.equal\(([\W\w]+)\);/;
+    var isEqualReg = /(?:gt)\.equal\(([\W\w]+)\);?/;
     if (!isEqualReg.test(line)) {
         return null;
     }
     var matches = isEqualReg.exec(line);
-    // console.log('matches', matches);
+    // console.log('gt.equal matches', matches);
     var equalArguments = matches[1];
     verify.string(equalArguments, 'invalid equal arguments');
     var parsed = parseEqualArguments(equalArguments);
@@ -77,7 +77,7 @@ function parseEqual(line) {
 }
 
 function parseArrayEqual(line) {
-    var isEqualReg = /(?:gt)\.aequal\(([\W\w]+)\);/;
+    var isEqualReg = /(?:gt)\.aequal\(([\W\w]+)\);?/;
     if (!isEqualReg.test(line)) {
         return null;
     }
@@ -92,7 +92,7 @@ function parseArrayEqual(line) {
 }
 
 function parseNumber(line) {
-    var reg = /(?:gt)\.number\(([\W\w]+)\);/;
+    var reg = /(?:gt)\.number\(([\W\w]+)\);?/;
     if (!reg.test(line)) {
         return null;
     }
@@ -105,7 +105,7 @@ function parseNumber(line) {
 }
 
 function parseArray(line) {
-    var reg = /(?:gt)\.array\(([\W\w]+)\);/;
+    var reg = /(?:gt)\.array\(([\W\w]+)\);?/;
     if (!reg.test(line)) {
         return null;
     }
@@ -118,7 +118,7 @@ function parseArray(line) {
 }
 
 function parseOk(line) {
-    var reg = /(?:gt)\.ok\(([\W\w]+)\);/;
+    var reg = /(?:gt)\.ok\(([\W\w]+)\);?/;
     if (!reg.test(line)) {
         return null;
     }
@@ -132,7 +132,7 @@ function parseOk(line) {
 }
 
 function parseFunc(line) {
-    var reg = /(?:gt)\.func\(([\W\w]+)\);/;
+    var reg = /(?:gt)\.func\(([\W\w]+)\);?/;
     if (!reg.test(line)) {
         return null;
     }
@@ -145,7 +145,7 @@ function parseFunc(line) {
 }
 
 function parseArity(line) {
-    var reg = /(?:gt)\.arity\(([\W\w]+)\);/;
+    var reg = /(?:gt)\.arity\(([\W\w]+)\);?/;
     if (!reg.test(line)) {
         return null;
     }
@@ -165,9 +165,13 @@ var lineParsers = [
 
 function transformAssertion(line) {
     verify.string(line, 'missing line');
+    // console.log('transforming line\n' + line);
+
     var parsed = null;
     lineParsers.some(function (method) {
-        return parsed = method(line);
+        // console.log('checking', method.name, 'line', line);
+        parsed = method(line);
+        return parsed;
     });
     if (check.string(parsed)) {
         return parsed;

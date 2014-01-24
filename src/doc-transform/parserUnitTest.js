@@ -1,8 +1,6 @@
 var verify = require('check-types').verify;
 
 var adapter = require('./adapters/adapter').adapter;
-// var reformat = require('../utils/code').reformat;
-// verify.fn(reformat, 'could not get code reformat');
 var blockTransform = require('./transformBlock');
 verify.fn(blockTransform, 'missing block transform function');
 
@@ -18,10 +16,7 @@ function parseUnitTestCode(code, framework) {
 
     var testName = parsers.topLevelParser.getNameFromTest(code);
     var innerCode = parsers.topLevelParser.parseCode(code);
-    // console.log('test name', testName);
-    // console.log('inner code', innerCode);
     var disabled = parsers.topLevelParser.isSkippedTest(code);
-    // console.log('from code\n', code, 'got', innerCode);
     var outputCode = innerCode && innerCode.code || code;
     var prettyCode = blockTransform(outputCode, framework) || outputCode;
     verify.string(prettyCode, 'pretty code is a string, not ' + 
