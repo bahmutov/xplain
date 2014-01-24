@@ -1,10 +1,11 @@
 var verify = require('check-types').verify;
-var offset = '  ';
 
 function CodeBlock(name) {
   this.name = name.trim();
   this.text = '';
 }
+
+CodeBlock.prototype.offset = '    ';
 
 CodeBlock.prototype.toString = function () {
   var str = '### ' + this.name + '\n\n' + this.text;
@@ -24,7 +25,7 @@ CodeBlock.prototype.append = function (line) {
   if (line || this.text) {
     if (line) {
       // console.log('adding line "' + line + '"');
-      this.text += offset + line + '\n';
+      this.text += this.offset + line + '\n';
     } else {
       this.text += '\n';
     }
@@ -38,13 +39,13 @@ CodeBlock.prototype.setText = function (newCode) {
 
   lines = lines.map(function (line) {
     if (line) {
-      if (/^\w/.test(line)) {
-        line = offset + line;
+      if (/^[\w\/\/\/\*]/.test(line)) {
+        line = this.offset + line;
       }
     }
 
     return line;
-  });
+  }, this);
   this.text = lines.join('\n');
 };
 

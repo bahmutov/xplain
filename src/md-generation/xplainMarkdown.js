@@ -46,4 +46,4 @@ module.exports = function xplainMarkdown(options) {
   // console.log('updated md\n' + updatedText);
   write(options.outputFilename, updatedText);
   console.log('saved', options.outputFilename);
-}
+};

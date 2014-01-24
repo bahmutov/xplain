@@ -13,8 +13,8 @@ second line
 
 ### foo
 
-  code1
-  code2
+    code1
+    code2
 
 text after code
 """
@@ -33,8 +33,8 @@ gt.test 'md with code', ->
 mdSimple = """
 ### foo
 
-  code1
-  code2
+    code1
+    code2
 """
 # mdSimple = mdSimple.replace /\n/g, eol
 
