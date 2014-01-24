@@ -1,7 +1,10 @@
 ### add example
 
-  add function does something
+    // add function returns sum of numbers
+    add(2, 3); // 5
+    // it also concatenates strings
+    QUnit.equal(add('foo', 'bar'), 'foobar')
 
 Run unit tests `gt add-test.js`
 
-Update markdown using `xplain -i add-test.js -o add.md`
+Update this markdown example using `xplain -i add-test.js -o add.md`

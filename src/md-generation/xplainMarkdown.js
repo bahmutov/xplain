@@ -1,6 +1,4 @@
 var verify = require('check-types').verify;
-// var update = require('./updateMarkdownFile');
-// var getSampleTests = require('../extract-jsdocs/getTaggedComments').getSampleTests;
 var transform = require('../doc-transform/toHumanForm');
 var getBlocks = require('./getBlocks');
 var parser = require('./mdParsing');
