@@ -1,6 +1,6 @@
 {
   "name": "xplain",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "Generates API documentation / markdown inserts from unit tests",
   "main": "index.js",
   "bin": "index.js",
