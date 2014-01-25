@@ -1,4 +1,4 @@
-# xplain v0.0.18
+# xplain v0.1.0
 
 > Generates API documentation / markdown inserts from unit tests
 
