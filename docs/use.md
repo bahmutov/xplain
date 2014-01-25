@@ -64,7 +64,8 @@ then command `xplain -i add.js -o README.md` will update README.md and it will h
   add(100, -100); // 0
 ```
 
-This feature makes the package's top level README.md file a great place to provide lots of examples, without needing a separate API docs.
+This feature makes the package's top level README.md file a great place to provide lots of examples, without needing a separate API docs. It can be also used to
+[unit test blog posts](http://bahmutov.calepin.co/unit-testing-blog-posts.html).
 
 ## Details
 
