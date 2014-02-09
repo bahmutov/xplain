@@ -1,9 +1,66 @@
 {
   "name": "xplain",
-  "version": "0.1.0",
   "description": "Generates API documentation / markdown inserts from unit tests",
-  "main": "index.js",
+  "version": "0.1.0",
+  "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
   "bin": "index.js",
+  "dependencies": {
+    "allong.es": "~0.14.0",
+    "check-types": "~1.1.1",
+    "console.json": "~0.1.1",
+    "dox": "~0.4.4",
+    "escodegen": "~1.2.0",
+    "esprima": "~1.0.4",
+    "fs.extra": "~1.2.1",
+    "glob": "~3.2.8",
+    "gt": "~0.8.33",
+    "html": "0.0.7",
+    "js-beautify": "~1.4.2",
+    "lodash": "~2.4.1",
+    "marked": "~0.3.1",
+    "mkdirp": "~0.3.5",
+    "moment": "~2.5.1",
+    "node-beautify": "0.0.2",
+    "optimist": "~0.6.1",
+    "pithy": "0.0.4",
+    "update-notifier": "~0.1.7",
+    "xregexp": "~2.0.0"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-bump": "0.0.13",
+    "grunt-complexity": "~0.1.4",
+    "grunt-contrib-jshint": "~0.8.0",
+    "grunt-deps-ok": "~0.1.7",
+    "grunt-jsonlint": "~1.0.4",
+    "grunt-lineending": "~0.2.2",
+    "grunt-nice-package": "~0.2.1",
+    "grunt-readme": "~0.4.5",
+    "jshint-solid": "~0.1.0",
+    "jshint-stylish": "~0.1.5",
+    "matchdep": "~0.3.0",
+    "mocha": "~1.17.1",
+    "pre-git": "0.0.15",
+    "time-grunt": "~0.2.9"
+  },
+  "keywords": [
+    "javascript",
+    "api",
+    "doc",
+    "node"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "pre-commit": "npm test",
+  "pre-push": [
+    "rm -rf node_modules",
+    "npm install",
+    "npm test"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bahmutov/xplain.git"
+  },
   "scripts": {
     "test": "grunt && npm run unit && npm run md && npm run mocha",
     "unit": "node ./node_modules/gt src/**/test/*.js src/**/test/*.coffee --output",
@@ -30,62 +87,5 @@
     "instance": "node index.js -f gt -t instance -i examples/object/test.js -o examples/object/docs",
     "md": "node node_modules/gt test/md.js --output",
     "mocha": "node node_modules/mocha/bin/mocha examples/markdown/gt/mocha/test.js -R spec"
-  },
-  "pre-commit": "npm test",
-  "pre-push": [
-    "rm -rf node_modules",
-    "npm install",
-    "npm test"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/bahmutov/xplain.git"
-  },
-  "keywords": [
-    "javascript",
-    "api",
-    "doc",
-    "node"
-  ],
-  "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
-  "license": "MIT",
-  "dependencies": {
-    "dox": "~0.4.4",
-    "check-types": "~1.1.1",
-    "esprima": "~1.0.4",
-    "escodegen": "~1.1.0",
-    "lodash": "~2.4.1",
-    "js-beautify": "~1.4.2",
-    "moment": "~2.5.1",
-    "glob": "~3.2.8",
-    "allong.es": "~0.14.0",
-    "pithy": "0.0.4",
-    "html": "0.0.7",
-    "mkdirp": "~0.3.5",
-    "fs.extra": "~1.2.1",
-    "node-beautify": "0.0.2",
-    "optimist": "~0.6.0",
-    "marked": "~0.3.0",
-    "xregexp": "~2.0.0",
-    "update-notifier": "~0.1.7",
-    "console.json": "~0.1.1",
-    "gt": "~0.8.33"
-  },
-  "devDependencies": {
-    "grunt": "~0.4.2",
-    "grunt-contrib-jshint": "~0.8.0",
-    "grunt-bump": "0.0.13",
-    "pre-git": "0.0.15",
-    "time-grunt": "~0.2.8",
-    "matchdep": "~0.3.0",
-    "grunt-nice-package": "~0.1.5",
-    "grunt-deps-ok": "~0.1.7",
-    "grunt-complexity": "~0.1.4",
-    "grunt-readme": "~0.4.5",
-    "grunt-jsonlint": "~1.0.4",
-    "grunt-lineending": "~0.2.1",
-    "jshint-solid": "0.0.3",
-    "jshint-stylish": "~0.1.5",
-    "mocha": "~1.17.1"
   }
 }
