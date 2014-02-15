@@ -40,7 +40,7 @@
     "grunt-lineending": "~0.2.2",
     "grunt-nice-package": "~0.2.1",
     "grunt-readme": "~0.4.5",
-    "jshint-solid": "~0.1.0",
+    "jshint-solid": "~0.1.1",
     "jshint-stylish": "~0.1.5",
     "matchdep": "~0.3.0",
     "mocha": "~1.17.1",
