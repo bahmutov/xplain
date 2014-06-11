@@ -11,6 +11,7 @@
     "allong.es": "0.14.0",
     "check-types": "^1.3.1",
     "console.json": "0.1.1",
+    "debug": "^0.7.4",
     "dox": "0.4.4",
     "escodegen": "^1.3.3",
     "esprima": "^1.2.2",
@@ -27,8 +28,7 @@
     "optimist": "0.6.1",
     "pithy": "0.0.4",
     "update-notifier": "^0.1.10",
-    "xregexp": "2.0.0",
-    "debug": "^0.7.4"
+    "xregexp": "2.0.0"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
