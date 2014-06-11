@@ -27,7 +27,8 @@
     "optimist": "0.6.1",
     "pithy": "0.0.4",
     "update-notifier": "^0.1.10",
-    "xregexp": "2.0.0"
+    "xregexp": "2.0.0",
+    "debug": "^0.7.4"
   },
   "devDependencies": {
     "grunt": "^0.4.5",

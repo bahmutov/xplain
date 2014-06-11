@@ -13,6 +13,8 @@ var html = require('pithy');
 var pretty = require('html/lib/html').prettyPrint;
 var prettyOptions = { indent_size: 2 };
 
+var debug = require('debug')('2html');
+
 function copyAndIncludeScript(filename, destinationFolder) {
 	verify.string(filename, 'missing script filename');
 	verify.string(destinationFolder, 'missing destination folder');
@@ -198,13 +200,14 @@ function docModule(aModule, doc, framework) {
 	verify.array(doc.docs, 'missing docs array');
 	verify.string(framework, 'missing framework string');
 
-	console.log('documenting module', aModule.name);
+	debug('documenting module', aModule.name);
 
 	var docs = aModule.getDocs();
 	verify.array(docs, 'expected an array of docs');
 
 	if (aModule.name && docs.length) {
 		verify.string(aModule.name, 'missing module name');
+		debug('docing module', aModule.name, 'with comment', aModule.comment);
 
 		var indexElement = getIndexWithTooltip({
 			comment: aModule.comment,
@@ -222,14 +225,14 @@ function docModule(aModule, doc, framework) {
 	categoryNames = categoryNames.sort();
 
 	categoryNames.forEach(function (category) {
-		// console.log('docing category', category);
+		debug('docing category', category);
 		if (category !== 'null') {
 			doc.index.push(html.div('.category', [category]));
 		}
 		var items = categories[category];
 
 		items.forEach(function (method) {
-			// console.log('documenting method', method.name);
+			debug('documenting method', method.name);
 
 			var info = methodDiv(method, framework);
 			doc.index.push(info.name);
