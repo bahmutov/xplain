@@ -6,6 +6,7 @@ if (notifier.update) {
   notifier.notify();
 }
 
+require('lazy-ass');
 var path = require('path');
 var verify = require('check-types').verify;
 var xplain = require('./src/xplain');

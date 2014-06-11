@@ -25,6 +25,11 @@ function samplesToHtml(apiSamples, framework) {
     return samples;
 }
 
+function shouldShowCode(samples, apiComment) {
+    var MAX_CODE_LINES = 10;
+    return !samples.length && apiComment.getCodeLines() < MAX_CODE_LINES;
+}
+
 function methodDiv(commented, framework) {
     verify.object(commented, 'missing api comment object');
     verify.string(framework, 'missing framework');
@@ -37,7 +42,6 @@ function methodDiv(commented, framework) {
     if (!name) {
         return null;
     }
-    console.log('documenting method', name);
 
     var params = apiComment.getArguments();
     verify.array(params, 'expected array of arguments');
@@ -57,8 +61,7 @@ function methodDiv(commented, framework) {
     });
 
     var MAX_CODE_LINES = 10;
-    var visibleCode = !samples.length &&
-        apiComment.getCodeLines() < MAX_CODE_LINES;
+    var visibleCode = shouldShowCode(samples, apiComment);
 
     var codeElement = makeCodeElement(name, apiComment.code,
         false, 'methodCode', visibleCode);

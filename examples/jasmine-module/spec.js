@@ -1,6 +1,5 @@
 /**
   Few math operations
-
   @module Math
 */
 
@@ -10,6 +9,27 @@ Adds two numbers
 */
 function add(a, b) {
   return a + b;
+}
+
+/**
+Subtracts b from a
+@function sub
+*/
+function sub(a, b) {
+  return a - b;
+}
+
+/**
+  String ops
+  @module String
+*/
+
+/**
+Returns string length
+@function length
+*/
+function sub(str) {
+  return str.length;
 }
 
 describe("add", function() {

@@ -1,6 +1,7 @@
 var fs = require('fs.extra');
 var path = require('path');
-var verify = require('check-types').verify;
+var check = require('check-types');
+var verify = check.verify;
 var moment = require('moment');
 var _ = require('lodash');
 
@@ -206,7 +207,7 @@ function docModule(aModule, doc, framework) {
 	verify.array(docs, 'expected an array of docs');
 
 	if (aModule.name && docs.length) {
-		verify.string(aModule.name, 'missing module name');
+		lazyAss(check.unemptyString(aModule.name), 'missing module name', aModule);
 		debug('docing module', aModule.name, 'with comment', aModule.comment);
 
 		var indexElement = getIndexWithTooltip({

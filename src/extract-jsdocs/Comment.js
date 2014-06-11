@@ -1,4 +1,4 @@
-var verify = require('check-types').verify;
+var check = require('check-types');
 var _ = require('lodash');
 var count = require('../utils/code').countLines;
 
@@ -12,24 +12,24 @@ Comment.prototype.hasTags = function () {
 };
 
 Comment.prototype.isTagged = function (tag) {
-    verify.string(tag, 'missing tag string');
+    lazyAss(check.unemptyString(tag), 'missing tag string');
     if (!Array.isArray(this.tags)) {
         return false;
     }
     return this.tags.some(function (t) {
-        verify.string(t.type, 'missing type for ' + JSON.stringify(t));
+        lazyAss(check.unemptyString(t.type), 'missing type in', t);
         return t.type === tag;
     });
 };
 
 Comment.prototype.tag = function (name) {
-    verify.string(name, 'missing tag string');
+    lazyAss(check.unemptyString(name), 'missing tag string');
     if (!Array.isArray(this.tags)) {
         return null;
     }
     var result = null;
     this.tags.some(function (t) {
-        verify.string(t.type, 'missing type for ' + JSON.stringify(t));
+        lazyAss(check.unemptyString(t.type), 'missing type', t);
         if (t.type === name) {
             result = t;
             return true;
@@ -40,7 +40,7 @@ Comment.prototype.tag = function (name) {
 };
 
 Comment.prototype.tagValue = function (name) {
-    verify.string(name, 'missing tag string');
+    lazyAss(check.unemptyString(name), 'missing tag string');
     var t = this.tag(name);
 
     if (!t) {
@@ -104,7 +104,7 @@ Comment.prototype.getCodeLines = function ()
 
 Comment.prototype.getArguments = function ()
 {
-    console.assert(this.isMethod(), 'cannot get arguments from', this, 'not a function');
+    lazyAss(this.isMethod(), 'cannot get arguments from', this, 'not a function');
     if (!this.hasTags()) {
         return [];
     }

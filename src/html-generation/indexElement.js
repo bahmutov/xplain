@@ -1,11 +1,12 @@
-var verify = require('check-types').verify;
+var check = require('check-types');
+var verify = check.verify;
 var html = require('pithy');
 var debug = require('debug')('index');
 
 function getIndexWithTooltip(options) {
     verify.object(options, 'missing options object');
     verify.object(options.comment, 'missing api comment object');
-    verify.string(options.name, 'missing name');
+    lazyAss(check.unemptyString(options.name), 'missing name', options);
     debug('index for', options.name, '-', options.comment.getFullName());
 
     var description = '<strong>' + options.name + '</strong>';
@@ -46,7 +47,7 @@ function getIndexWithTooltip(options) {
             class: indexClass,
             title: description
         };
-        indexParts = [html.span(simpleAttributes, fullName)];
+        indexParts = [html.span(simpleAttributes, fullName || options.name)];
     }
     var indexElement = html.div(null, indexParts);
     return indexElement;

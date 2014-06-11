@@ -1,10 +1,12 @@
 var fs = require('fs.extra');
 var path = require('path');
-var verify = require('check-types').verify;
+var check = require('check-types');
+var verify = check.verify;
 var glob = require('glob');
 var unary = require('allong.es').es.unary;
 var mkdirp = require('mkdirp');
 require('console.json');
+var debug = require('debug')('xplain');
 
 var getApi = require('./extract-jsdocs/getTaggedComments').getCommentsFromFiles;
 var getSampleTests = require('./extract-jsdocs/getTaggedComments').getSampleTests;
@@ -51,7 +53,8 @@ function generateDocs(options) {
     });
   } else {
     var api = getApi(inputFiles);
-    verify.array(api, 'did not get api from files');
+    lazyAss(check.array(api), 'did not get api from files');
+    debug('extracted api', api);
 
     var rootModule = docsToModules(api);
     verify.object(rootModule, 'could not convert docs to modules');
