@@ -7,6 +7,17 @@ if (notifier.update) {
 }
 
 require('lazy-ass');
+
+function hasOption(option) {
+  return process.argv.some(function (str) {
+    return str === option;
+  });
+}
+
+var bunyan = require('bunyan');
+var log = bunyan.createLogger({ name: 'xplain' });
+log.level(hasOption('--debug') ? 'debug' : 'info');
+
 var path = require('path');
 var verify = require('check-types').verify;
 var xplain = require('./src/xplain');
@@ -15,6 +26,11 @@ var package = require('./package.json');
 var info = 'xplain - JavaScript API documentation generator\n' +
 '  version: ' + package.version + '\n' +
 '  author: ' + JSON.stringify(package.author);
+
+if (hasOption('--version') || hasOption('-v')) {
+  console.log(info);
+  process.exit(0);
+}
 
 var program = require('optimist')
 .usage(info)
