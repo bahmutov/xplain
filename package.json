@@ -65,8 +65,8 @@
   "main": "index.js",
   "pre-commit": "npm test",
   "pre-push": [
-    "rm -rf node_modules",
     "npm install",
+    "grunt",
     "npm test"
   ],
   "repository": {
