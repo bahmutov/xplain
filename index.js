@@ -15,7 +15,7 @@ function hasOption(option) {
 }
 
 var bunyan = require('bunyan');
-var log = bunyan.createLogger({ name: 'xplain' });
+global.log = bunyan.createLogger({ name: 'xplain' });
 log.level(hasOption('--debug') ? 'debug' : 'info');
 
 var path = require('path');

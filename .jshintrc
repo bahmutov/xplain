@@ -69,6 +69,7 @@
   "white"         : true,
 
   "globals"       : {
-    "gt": true
+    "gt": true,
+    "log": true
   }
 }

@@ -31,7 +31,8 @@ function primaryParsing(collectedDocs) {
         }
         if (apiComment.isModule()) {
             var name = apiComment.getModuleName();
-            check.verify.string(name, 'invalid module name');
+            lazyAss(check.unemptyString(name), 'invalid module name', name);
+            log.debug('setupModule', { name: name });
             currentModule = setupModule(name, rootModule);
             currentModule.comment = apiComment;
             return;
@@ -118,6 +119,7 @@ function setupModule(name, rootModule)
 {
     check.verify.string(name, 'invalid module name');
     check.verify.object(rootModule, 'invalid root module');
+
     var parts = name.split('/');
     var currentModule = rootModule;
     var fullPath = null;
