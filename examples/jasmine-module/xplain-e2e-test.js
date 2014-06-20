@@ -8,7 +8,7 @@ gt.async('verify xplain run', function () {
     gt.equal(stderr, '', 'no stderr');
     var moduleSetups = bgt(stdout, 'xplain', 'setupModule');
     gt.equal(moduleSetups.length, 2, 'found modules');
-    gt.equal(moduleSetups[0].setupModule.name, 'Math', 'first module');
-    gt.equal(moduleSetups[1].setupModule.name, 'String', 'second module');
+    gt.equal(moduleSetups[0].name, 'Math', 'first module');
+    gt.equal(moduleSetups[1].name, 'String', 'second module');
   });
 }, 10000);
