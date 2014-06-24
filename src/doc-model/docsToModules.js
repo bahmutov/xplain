@@ -46,6 +46,7 @@ function primaryParsing(collectedDocs) {
             lazyAss(check.unemptyString(methodName), 'missing method name', apiComment);
             currentModule.add(methodName, documented);
             log.debug('adding method', { name: methodName });
+            log.debug('method source', { source: apiComment.code });
         }
     });
 

@@ -2,9 +2,10 @@
 Adds two numbers
 @function add
 */
-function add(a, b) {
-  return a + b;
-}
+function add(a, b) { return a + b; }
+
+// single line is important - we are checking if
+// the start and end of the function are detected correctly
 
 describe("add", function() {
   /** @sample add */

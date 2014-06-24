@@ -30,7 +30,8 @@
     "optimist": "0.6.1",
     "pithy": "0.0.4",
     "update-notifier": "0.1.10",
-    "xregexp": "2.0.0"
+    "xregexp": "2.0.0",
+    "string": "^1.9.0"
   },
   "devDependencies": {
     "bunyan-gt": "0.2.0",
