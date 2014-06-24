@@ -1,4 +1,5 @@
 var path = require('path');
+require('lazy-ass');
 
 gt.module('getTaggedComments');
 
@@ -29,9 +30,17 @@ gt.test('add(a, b)', function () {
 gt.module('get sample tests');
 var getSampleTests = require('../getTaggedComments').getSampleTests;
 
-gt.test('add', function () {
+gt.test('get sample add', function () {
   gt.func(getSampleTests, 'getSampleTests is a function');
   var samples = getSampleTests(path.join(__dirname, 'data/add.js'));
   gt.array(samples, 'got back an array of samples');
   gt.equal(samples.length, 1, 'single sample');
+});
+
+gt.test('sample add does not include stuff after', function () {
+  var samples = getSampleTests(path.join(__dirname, 'data/add.js'));
+  var code = samples[0].code;
+  gt.string(code, 'sample code');
+  var extraLines = /not/i;
+  gt.ok(!extraLines.test(code), 'extra lines present', code);
 });
