@@ -1,7 +1,7 @@
 {
   "name": "xplain",
   "description": "Generates API documentation / markdown inserts from unit tests",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
   "bin": "index.js",
   "bugs": {
