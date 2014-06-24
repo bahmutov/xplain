@@ -19,7 +19,8 @@ global.log = bunyan.createLogger({ name: 'xplain' });
 log.level(hasOption('--debug') ? 'debug' : 'info');
 
 var path = require('path');
-var verify = require('check-types').verify;
+var check = require('check-types');
+var verify = check.verify;
 var xplain = require('./src/xplain');
 var package = require('./package.json');
 
@@ -61,8 +62,7 @@ var program = require('optimist')
   alias: 'f',
   string: true,
   description: 'unit testing framework name',
-  default: 'qunit',
-  check: xplain.isSupported
+  default: ''
 })
 .options('header', {
   alias: 'e',
@@ -76,20 +76,26 @@ var program = require('optimist')
 .demand(['input'])
 .argv;
 
+var inputFiles = program.input;
+if (typeof inputFiles === 'string') {
+  inputFiles = [inputFiles];
+}
+lazyAss(check.array(inputFiles), 'missing input pattern array', inputFiles);
+lazyAss(check.string(program.output), 'missing output folder', program);
+var fullFolder = path.resolve(process.cwd(), program.output);
+console.log('generating docs from', inputFiles, 'target', fullFolder);
+
+if (!program.framework) {
+  program.framework = xplain.detectFramework(inputFiles);
+  lazyAss(check.unemptyString(program.framework), 'could not guess framework from source filenames',
+    inputFiles);
+}
+log.debug('framework', { name: program.framework });
 if (!xplain.isSupported(program.framework)) {
   console.error('Invalid framework ' + program.framework);
   console.error('Available', xplain.supportedFrameworks());
   process.exit(-1);
 }
-
-var inputFiles = program.input;
-if (typeof inputFiles === 'string') {
-  inputFiles = [inputFiles];
-}
-verify.array(inputFiles, 'missing input pattern array ' + inputFiles);
-verify.string(program.output, 'missing output folder ' + JSON.stringify(program, null, 2));
-var fullFolder = path.resolve(process.cwd(), program.output);
-console.log('generating docs from', inputFiles, 'target', fullFolder);
 
 if (program.version) {
   program.version = '' + program.version;

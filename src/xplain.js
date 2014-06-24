@@ -83,8 +83,20 @@ function discoverSourceFiles(patterns) {
   return filenames;
 }
 
+function isSpec(filename) {
+  var spec = /spec\.js$/;
+  lazyAss(check.unemptyString(filename), 'missing filename', filename);
+  return spec.test(filename);
+}
+
+function detectFramework(inputFiles) {
+  lazyAss(check.array(inputFiles), 'missing input files list', inputFiles);
+  return inputFiles.some(isSpec) ? 'jasmine' : 'qunit';
+}
+
 module.exports = {
   document: generateDocs,
   isSupported: adapter.isSupported,
-  supportedFrameworks: adapter.supportedFrameworks
+  supportedFrameworks: adapter.supportedFrameworks,
+  detectFramework: detectFramework
 };
