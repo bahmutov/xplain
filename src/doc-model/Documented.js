@@ -1,4 +1,5 @@
-var verify = require('check-types').verify;
+var check = require('check-types');
+var verify = check.verify;
 
 // documented method/function/attribute/class
 function Documented(apiComment) {
@@ -15,7 +16,8 @@ Documented.prototype.isMethod = function () {
 Documented.prototype.add = function (documented, commentType) {
     console.assert(documented instanceof Documented, 'need documented sample');
     verify.string(commentType, 'need comment type');
-    verify.array(this[commentType], 'do not have comment type ' + commentType);
+    lazyAss(check.array(this[commentType]), 'invalid comment type', commentType);
+
     this[commentType].push(documented);
 };
 

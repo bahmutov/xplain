@@ -43,8 +43,9 @@ function primaryParsing(collectedDocs) {
         var documented = new Documented(apiComment);
         if (apiComment.isMethod()) {
             var methodName = apiComment.getMethodName();
-            check.verify.string(methodName, 'missing method name');
+            lazyAss(check.unemptyString(methodName), 'missing method name', apiComment);
             currentModule.add(methodName, documented);
+            log.debug('adding method', { name: methodName });
         }
     });
 
