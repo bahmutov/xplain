@@ -1,4 +1,4 @@
-# xplain v0.1.2
+# xplain v0.2.0
 
 > Generates API documentation / markdown inserts from unit tests
 
@@ -105,6 +105,14 @@ There are 4 levels of details captured in the API.
 3. Unit test source code tagged *@example* can be displayed by clicking on the toggle
 4. Finally the original function source code can be shown by clicking on the *source* button.
 
+### Supported frameworks
+
+* [QUnit](http://qunitjs.com/)
+* [gt](https://github.com/bahmutov/gt)
+* [Jasmine/Mocha/Bdd](http://visionmedia.github.io/mocha/)
+* `console.assert` statements
+* [lazy-ass](https://github.com/bahmutov/lazy-ass) assertions
+
 ### Inspiration
 
 There are several API examples that I found particularly useful.
@@ -210,22 +218,5 @@ WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 
-
-
-## History
-
-
-0.0.17 / 2014-01-23 
-==================
-
- * made ; at the end optional for gt, qunit and console.assert
- * refactoring block transform for testing
- * including changelog history into readme
-
-0.0.16 / 2014-01-23 
-==================
-
- * parsing markdown block correctly with comments
- * working on markdown update
 
 

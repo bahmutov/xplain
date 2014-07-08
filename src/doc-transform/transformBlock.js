@@ -18,10 +18,12 @@ function transform(code, framework) {
     var parsers = adapter(framework);
     lazyAss(check.object(parsers),
         'could not get parsers for', framework, 'have', parsers);
+    var lazyAssTransform = require('./adapters/lazy-ass/parsers');
+    lazyAss(check.fn(lazyAssTransform), 'could not get lazy-ass transformer');
 
     var lines = code.split('\n');
     var transformedLines = lines.map(function (line) {
-        return parsers.lineTransformer(line);
+        return lazyAssTransform(parsers.lineTransformer(line));
     });
     var outputCode = transformedLines.join('\n');
 

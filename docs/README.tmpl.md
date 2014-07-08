@@ -14,6 +14,3 @@
 
 {%= _.doc("./LICENSE-MIT") %}
 
-## History
-
-{%= _.doc("./History.md") %}
