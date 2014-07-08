@@ -36,8 +36,9 @@ function codeElement(name, sourceCode, disabled, type,
         verify.string(sourceCode, 'missing code');
         var prettyCode = reformat(sourceCode, true);
         verify.string(prettyCode, 'could not reformat\n' + sourceCode);
+        // console.log('source code\n' + prettyCode);
 
-        var inner = html.code(null, sourceCode);
+        var inner = html.code(null, prettyCode);
         var codeTag = html.pre('.prettyprint.linenums', [inner]);
         parts.push(codeTag);
     }

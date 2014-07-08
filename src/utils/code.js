@@ -46,10 +46,14 @@ function reformat(code, keepComments) {
 	keepComments = !!keepComments;
 
 	if (keepComments) {
+		// console.log('keeping comments\n' + code);
 		// https://npmjs.org/package/js-beautify
 		var opts = {
 			indent_size: 2,
-			keep_array_indentation: true
+			indent_char: ' ',
+			indent_level: 0,
+			preserve_newlines: false,
+			keep_array_indentation: true,
 		};
 		return beautify(code, opts);
 	}

@@ -1,4 +1,4 @@
-var code = require('../code').reformat;
+var reformat = require('../code').reformat;
 var split = require('../code').split;
 var count = require('../code').countLines;
 
@@ -31,27 +31,50 @@ gt.test('split single string', function () {
 gt.module('code.reformat');
 
 gt.test(function basic() {
-    gt.func(code, 'reformat is a function');
+    gt.func(reformat, 'reformat is a function');
 });
 
 gt.test('reformat simple', function () {
-    gt.string(code('var f = "foo";'), 'one liner');
+    gt.string(reformat('var f = "foo";'), 'one liner');
 });
 
 gt.test('single with comments', function () {
     var original = 'var f = "foo"; // comments';
-    var str = code(original);
+    var str = reformat(original);
     gt.string(str, 'one liner with comments');
     gt.ok(!/comments/.test(str), 'comments are kept');
 
-    str = code(original, true);
+    str = reformat(original, true);
     gt.string(str, 'one liner with comments');
     // console.log('reformatted\n' + str);
 });
 
 gt.test('two lines with comment', function () {
     var original = 'var f = "foo"; // comments\nvar b;';
-    var str = code(original, true);
+    var str = reformat(original, true);
     gt.string(str, 'reformatted code');
     // console.log('reformatted\n' + str);
+});
+
+gt.module('js-beautify');
+
+var beautify = require('js-beautify').js_beautify;
+
+gt.test('remove without white space in the beginning', function () {
+    var src = 'foo("boo", function () {' +
+        'console.log("nothing");' +
+        '});';
+    var str = beautify(src, {
+        indent_size: 2,
+        preserve_newlines: false
+    });
+    //console.log('output\n' + str);
+});
+
+gt.test('function with callback', function () {
+    var src = 'foo("boo", function () {\n' +
+        '    console.log("nothing");\n' +
+        '  });';
+    var str = beautify(src);
+    // console.log('output\n' + str);
 });
