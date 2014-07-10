@@ -22,4 +22,25 @@ describe("add", function() {
     lazyAss(add('foo', 10) === 'foo10');
   });
 
+  /** @sample add */
+  it('works with expect too', function () {
+    expect(add(2, 2)).toEqual(4);
+  });
+
+  /** @sample add */
+  it('works with conditions ending in l', function () {
+    function all() {
+      return true;
+    }
+    expect(all()).toEqual(true);
+  });
+
+  /** @sample add */
+  it('works with conditions ending in l and arguments', function () {
+    function all(value) {
+      return value;
+    }
+    expect(all(true)).toEqual(true);
+  });
+
 });

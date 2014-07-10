@@ -15,7 +15,7 @@ function parseLazyAssArguments(args) {
 }
 
 function parseLazyAss(line) {
-    var reg = /[lazyAss|la]\(([\W\w]+)\);?/;
+    var reg = /^\s*(?:lazyAss|la)\(([\W\w]+)\);?/;
     if (!reg.test(line)) {
         return null;
     }
