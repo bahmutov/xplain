@@ -31,7 +31,8 @@
     "pithy": "0.0.4",
     "string": "1.9.0",
     "update-notifier": "0.1.10",
-    "xregexp": "2.0.0"
+    "xregexp": "2.0.0",
+    "q": "^1.0.1"
   },
   "devDependencies": {
     "bunyan-gt": "0.2.0",

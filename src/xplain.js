@@ -5,6 +5,7 @@ var verify = check.verify;
 var glob = require('glob');
 var unary = require('allong.es').es.unary;
 var mkdirp = require('mkdirp');
+var Q = require('Q');
 require('console.json');
 var debug = require('debug')('xplain');
 
@@ -41,9 +42,8 @@ function generateDocs(options) {
 
   var inputFiles = discoverSourceFiles(options.patterns);
   verify.array(inputFiles, 'could not find filenames');
-  if (!inputFiles.length) {
-    throw new Error('Cannot find any source files for input ' + options.patterns);
-  }
+  lazyAss(check.positiveNumber(inputFiles.length),
+    'Cannot find any source files for input', options.patterns);
 
   if (!check.unemptyString(options.framework)) {
     options.framework = detectFramework(inputFiles);
@@ -63,13 +63,14 @@ function generateDocs(options) {
     var rootModule = docsToModules(api);
     verify.object(rootModule, 'could not convert docs to modules');
 
-    toDoc(rootModule, {
+    var docOptions = {
       outputFolder: options.outputFolder,
       title: options.title,
       apiVersion: options.apiVersion,
       framework: options.framework,
       header: options.header
-    });
+    };
+    return Q(toDoc(rootModule, docOptions));
   }
 }
 

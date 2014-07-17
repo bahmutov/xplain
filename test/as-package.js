@@ -2,9 +2,9 @@ var check = require('check-types');
 require('lazy-ass');
 var xplain = require('..');
 var path = require('path');
+var Q = require('Q');
 
 describe('using xplain as package', function () {
-  var testFolder = path.join(__dirname, '../examples/jasmine');
 
   it('is defined', function () {
     lazyAss(check.object(xplain));
@@ -15,13 +15,22 @@ describe('using xplain as package', function () {
   });
 
   it('works', function () {
+    var testFolder = path.join(__dirname, '../examples/jasmine');
     return xplain.document({
       patterns: testFolder + '/sp*.js',
       outputFolder: testFolder + '/docs',
       title: 'as module works'
-    })/*.then(function (result) {
-      lazyAss(check.object(result),
-        'xplain.document resolves with object', result);
-    })*/;
+    });
+  });
+
+  it('returns a promise', function () {
+    var testFolder = path.join(__dirname, '../examples/jasmine-module');
+    var p = xplain.document({
+      patterns: testFolder + '/sp*.js',
+      outputFolder: testFolder + '/docs',
+      title: 'as module works'
+    });
+    lazyAss(Q.isPromise(p));
+    return p;
   });
 });
