@@ -2,7 +2,7 @@ var check = require('check-types');
 require('lazy-ass');
 var xplain = require('..');
 var path = require('path');
-var Q = require('Q');
+var Q = require('q');
 
 describe('using xplain as package', function () {
 
