@@ -1,12 +1,18 @@
 #!/usr/bin/env node
 
+require('lazy-ass');
+var xplain = require('./src/xplain');
+
+if (module.parent) {
+  module.exports = xplain;
+  return;
+}
+
 var updateNotifier = require('update-notifier');
 var notifier = updateNotifier();
 if (notifier.update) {
   notifier.notify();
 }
-
-require('lazy-ass');
 
 function hasOption(option) {
   return process.argv.some(function (str) {
@@ -21,7 +27,6 @@ log.level(hasOption('--debug') ? 'debug' : 'info');
 var path = require('path');
 var check = require('check-types');
 var verify = check.verify;
-var xplain = require('./src/xplain');
 var package = require('./package.json');
 
 var info = 'xplain - JavaScript API documentation generator\n' +

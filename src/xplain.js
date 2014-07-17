@@ -45,6 +45,10 @@ function generateDocs(options) {
     throw new Error('Cannot find any source files for input ' + options.patterns);
   }
 
+  if (!check.unemptyString(options.framework)) {
+    options.framework = detectFramework(inputFiles);
+  }
+
   if (isMarkdownFilename(options.outputFolder)) {
     xplainMarkdown({
       inputFiles: inputFiles,

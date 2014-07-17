@@ -47,6 +47,7 @@
     "grunt-readme": "0.4.5",
     "jshint-solid": "0.2.0",
     "jshint-stylish": "0.2.0",
+    "lazy-ass-helpful": "0.4.1",
     "matchdep": "0.3.0",
     "mocha": "1.20.1",
     "pre-git": "0.0.16",
@@ -99,6 +100,6 @@
     "console": "node index.js -f console -t console.assert -i examples/console/test.js -o examples/console/docs",
     "instance": "node index.js -f gt -t instance -i examples/object/test.js -o examples/object/docs",
     "md": "node node_modules/gt test/md.js --output",
-    "mocha": "node node_modules/mocha/bin/mocha examples/markdown/gt/mocha/test.js test/misc-spec.js -R spec"
+    "mocha": "node node_modules/mocha/bin/mocha examples/markdown/gt/mocha/test.js test/misc-spec.js test/as-package.js -R spec"
   }
 }
