@@ -25,7 +25,13 @@ function parseLazyAss(line) {
     verify.string(args, 'invalid number arguments');
     var parsed = parseLazyAssArguments(args);
     verify.object(parsed, 'did not get parsed arguments');
-    return parsed.op + '; // true';
+
+    verify.unemptyString(parsed.op, 'missing operator');
+    if (/^!/.test(parsed.op)) {
+        return parsed.op.substr(1) + '; // false';
+    } else {
+        return parsed.op + '; // true';
+    }
 }
 
 var lineParsers = [
