@@ -5,7 +5,7 @@ var verify = check.verify;
 var glob = require('glob');
 var unary = require('allong.es').es.unary;
 var mkdirp = require('mkdirp');
-var Q = require('Q');
+var Q = require('q');
 require('console.json');
 var debug = require('debug')('xplain');
 
