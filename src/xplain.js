@@ -70,7 +70,12 @@ function generateDocs(options) {
       framework: options.framework,
       header: options.header
     };
-    return Q(toDoc(rootModule, docOptions));
+    return Q(toDoc(rootModule, docOptions)).then(function (result) {
+      return {
+        inputOptions: docOptions,
+        inputFiles: inputFiles
+      };
+    });
   }
 }
 

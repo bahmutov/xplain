@@ -20,7 +20,7 @@ describe('using xplain as package', function () {
       patterns: testFolder + '/sp*.js',
       outputFolder: testFolder + '/docs',
       title: 'as module works'
-    });
+    }).done();
   });
 
   it('returns a promise', function () {
@@ -31,6 +31,23 @@ describe('using xplain as package', function () {
       title: 'as module works'
     });
     lazyAss(Q.isPromise(p));
-    return p;
+    return p.done();
+  });
+
+  it('discovers jasmine', function () {
+    var testFolder = path.join(__dirname, '../examples/jasmine-lazy-ass');
+    var p = xplain.document({
+      patterns: testFolder + '/s*.js',
+      outputFolder: testFolder + '/docs'
+    });
+    return p.then(function (result) {
+      lazyAss(check.object(result), 'has result');
+      lazyAss(check.object(result.inputOptions), 'has input options');
+      lazyAss(check.array(result.inputFiles), 'has input files');
+      lazyAss(result.inputFiles.length === 1,
+        'should have single inputfile', result);
+      lazyAss(result.inputOptions.framework === 'jasmine',
+        'should be jasmine', result);
+    }).done();
   });
 });
