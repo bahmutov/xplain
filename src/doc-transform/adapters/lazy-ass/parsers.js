@@ -14,6 +14,28 @@ function parseLazyAssArguments(args) {
     return result;
 }
 
+function isNegative(str) {
+    lazyAss(check.string(str), 'mising string');
+    return /^!/.test(str);
+}
+
+function simplifyNegative(str) {
+    lazyAss(check.unemptyString(str), 'expected string', str);
+    return str.substr(1) + '; // false';
+}
+
+function isStrictEquality(str) {
+    return check.unemptyString(str) && str.indexOf('===') > -1;
+}
+
+function simplifyStrictEquality(str) {
+    var k = str.indexOf('===');
+    lazyAss(k > -1, 'could not find strict equality in', str);
+    var actual = str.substr(0, k);
+    var expected = str.substr(k + 3);
+    return actual + '; // ' + expected;
+}
+
 function parseLazyAss(line) {
     var reg = /^\s*(?:lazyAss|la)\(([\W\w]+)\);?/;
     if (!reg.test(line)) {
@@ -27,11 +49,13 @@ function parseLazyAss(line) {
     verify.object(parsed, 'did not get parsed arguments');
 
     verify.unemptyString(parsed.op, 'missing operator');
-    if (/^!/.test(parsed.op)) {
-        return parsed.op.substr(1) + '; // false';
-    } else {
-        return parsed.op + '; // true';
+    if (isNegative(parsed.op)) {
+        return simplifyNegative(parsed.op);
     }
+    if (isStrictEquality(parsed.op)) {
+        return simplifyStrictEquality(parsed.op);
+    }
+    return parsed.op + '; // true';
 }
 
 var lineParsers = [
