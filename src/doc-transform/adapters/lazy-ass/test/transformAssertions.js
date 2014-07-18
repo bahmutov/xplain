@@ -67,3 +67,22 @@ gt.test('without spaces', function () {
     var code = 'lazyAss(2===2);';
     gt.equal(transform(code), '2; // 2');
 });
+
+gt.module('simplify ==');
+
+gt.test('lazyAss(foo == bar)', function () {
+    var foo = 'foo', bar = 'foo';
+    var code = 'lazyAss(foo == bar);';
+    gt.equal(transform(code), 'foo; // bar');
+});
+
+gt.test('lazyAss with message', function () {
+    var code = 'lazyAss(2 + 2 == 4, "something");';
+    // hmm, for some reason the spaces were removed
+    gt.equal(transform(code), '2+2; // 4');
+});
+
+gt.test('without spaces', function () {
+    var code = 'lazyAss(2=="2");';
+    gt.equal(transform(code), '2; // \'2\'');
+});

@@ -36,6 +36,18 @@ function simplifyStrictEquality(str) {
     return actual + '; // ' + expected;
 }
 
+function isEquality(str) {
+    return check.unemptyString(str) && str.indexOf('==') > -1;
+}
+
+function simplifyEquality(str) {
+    var k = str.indexOf('==');
+    lazyAss(k > -1, 'could not find equality in', str);
+    var actual = str.substr(0, k);
+    var expected = str.substr(k + 2);
+    return actual + '; // ' + expected;
+}
+
 function parseLazyAss(line) {
     var reg = /^\s*(?:lazyAss|la)\(([\W\w]+)\);?/;
     if (!reg.test(line)) {
@@ -54,6 +66,9 @@ function parseLazyAss(line) {
     }
     if (isStrictEquality(parsed.op)) {
         return simplifyStrictEquality(parsed.op);
+    }
+    if (isEquality(parsed.op)) {
+        return simplifyEquality(parsed.op);
     }
     return parsed.op + '; // true';
 }
