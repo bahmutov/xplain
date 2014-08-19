@@ -29,7 +29,7 @@ function copyAndIncludeScript(filename, destinationFolder) {
 	var inputFilename = path.join(__dirname, filename);
 	var outputFilename = path.join(destinationFolder, basename);
 
-	console.log('Copying', inputFilename, '-->', outputFilename);
+	// console.log('Copying', inputFilename, '-->', outputFilename);
 	return q.nfcall(fs.copy, inputFilename, outputFilename).then(function () {
 
 		return html.script({
@@ -39,7 +39,7 @@ function copyAndIncludeScript(filename, destinationFolder) {
 }
 
 function generateHeadElement(options) {
-	console.log('generateHeadElement');
+	// console.log('generateHeadElement');
 	verify.string(options.outputFolder, 'missing output folder');
 
 	/* disable IE shim for now, need to figure out how to include this in pithy */
@@ -71,19 +71,17 @@ function generateHeadElement(options) {
 	var input = path.join(__dirname, 'assets/background.png');
 	return q.nfcall(fs.copy, input, path.join(options.outputFolder, 'background.png'))
 		.then(function () {
-			console.log('copied background');
+			// console.log('copied background');
 			return q.nfcall(fs.copy, path.join(__dirname, 'assets/api.css'),
 				path.join(options.outputFolder, 'api.css'));
 		}).then(function () {
-			console.log('copying tooltips');
+			// console.log('copying tooltips');
 
 			return q.nfcall(fs.copy,
 				path.join(__dirname, 'assets/tooltipster.css'),
 				path.join(options.outputFolder, 'tooltipster.css'));
 		}).then(function () {
-			console.log('copying more scripts');
-
-
+			// console.log('copying more scripts');
 			return copyAndIncludeScript('assets/jquery-2.0.0.min.js', options.outputFolder)
 				.then(function (jqueryJs) {
 					return copyAndIncludeScript('assets/toggle.js', options.outputFolder)
@@ -192,13 +190,13 @@ module.exports = function (rootModule, options) {
 	// fs.rmrfSync(options.outputFolder);
 	// console.log('removed output folder', options.outputFolder);
 
-	console.log('making folder', options.outputFolder);
+	// console.log('making folder', options.outputFolder);
 	var promise = q.nfcall(fs.mkdirRecursive, options.outputFolder);
 	return promise.then(function () {
 		var htmlFilename = path.join(options.outputFolder, 'index.html');
 		verify.string(htmlFilename, 'missing output filename');
 
-		console.log('generating docs', options.outputFolder);
+		// console.log('generating docs', options.outputFolder);
 
 		if (options.title) {
 			verify.string(options.title, 'missing title ' + options.title);
