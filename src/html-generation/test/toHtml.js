@@ -23,7 +23,7 @@ gt.async('html generation', function () {
   gt.func(p.then, 'returned thenable');
   p.then(function () {
     var apiCssFilename = path.join(__dirname, '/out/api.css');
-    gt.ok(fs.existsSync(apiCssFilename), 'file exists');
+    gt.ok(fs.existsSync(apiCssFilename), 'file ' + apiCssFilename + ' exists');
     gt.start();
   }).done();
 });
