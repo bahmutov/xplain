@@ -30,7 +30,7 @@ function copyAndIncludeScript(filename, destinationFolder) {
 	var outputFilename = path.join(destinationFolder, basename);
 
 	// console.log('Copying', inputFilename, '-->', outputFilename);
-	return q.nfcall(fs.copy, inputFilename, outputFilename).then(function () {
+	return q(fs).ninvoke('copy', inputFilename, outputFilename).then(function () {
 
 		return html.script({
 			src: basename
@@ -69,15 +69,15 @@ function generateHeadElement(options) {
 	});
 
 	var input = path.join(__dirname, 'assets/background.png');
-	return q.nfcall(fs.copy, input, path.join(options.outputFolder, 'background.png'))
+	return q(fs).ninvoke('copy', input, path.join(options.outputFolder, 'background.png'))
 		.then(function () {
 			// console.log('copied background');
-			return q.nfcall(fs.copy, path.join(__dirname, 'assets/api.css'),
+			return q(fs).ninvoke('copy', path.join(__dirname, 'assets/api.css'),
 				path.join(options.outputFolder, 'api.css'));
 		}).then(function () {
 			// console.log('copying tooltips');
 
-			return q.nfcall(fs.copy,
+			return q(fs).ninvoke('copy',
 				path.join(__dirname, 'assets/tooltipster.css'),
 				path.join(options.outputFolder, 'tooltipster.css'));
 		}).then(function () {
@@ -191,7 +191,7 @@ module.exports = function (rootModule, options) {
 	// console.log('removed output folder', options.outputFolder);
 
 	// console.log('making folder', options.outputFolder);
-	var promise = q.nfcall(fs.mkdirRecursive, options.outputFolder);
+	var promise = q(fs).ninvoke('mkdirRecursive', options.outputFolder);
 	return promise.then(function () {
 		var htmlFilename = path.join(options.outputFolder, 'index.html');
 		verify.string(htmlFilename, 'missing output filename');
