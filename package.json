@@ -1,7 +1,7 @@
 {
   "name": "xplain",
   "description": "Generates API documentation / markdown inserts from unit tests",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
   "bin": "index.js",
   "bugs": {
@@ -18,7 +18,7 @@
     "esprima": "1.2.2",
     "fs.extra": "1.2.1",
     "glob": "4.0.5",
-    "gt": "0.8.38",
+    "gt": "0.8.39",
     "html": "0.0.7",
     "js-beautify": "1.5.1",
     "lazy-ass": "0.5.1",
