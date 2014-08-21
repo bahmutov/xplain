@@ -10,6 +10,11 @@ describe('using xplain as package', function () {
     lazyAss(check.object(xplain));
   });
 
+  it('initializes global log object', function () {
+    lazyAss(check.object(global.log), 'missing global log');
+    lazyAss(check.fn(global.log.debug), 'missing log.debug');
+  });
+
   it('has .document', function () {
     lazyAss(check.fn(xplain.document));
   });

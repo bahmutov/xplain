@@ -1,8 +1,26 @@
 #!/usr/bin/env node
 
 require('lazy-ass');
-var xplain = require('./src/xplain');
+var check = require('check-types');
+var verify = check.verify;
 
+function hasOption(option) {
+  return process.argv.some(function (str) {
+    return str === option;
+  });
+}
+
+(function initGlobalLog() {
+  if (!global.log) {
+    var bunyan = require('bunyan');
+    global.log = bunyan.createLogger({ name: 'xplain' });
+    log.level(hasOption('--debug') ? 'debug' : 'info');
+  }
+  lazyAss(check.object(global.log), 'missing global log');
+  lazyAss(check.fn(global.log.debug), 'log.debug function missing');
+}());
+
+var xplain = require('./src/xplain');
 if (module.parent) {
   module.exports = xplain;
   return;
@@ -14,19 +32,8 @@ if (notifier.update) {
   notifier.notify();
 }
 
-function hasOption(option) {
-  return process.argv.some(function (str) {
-    return str === option;
-  });
-}
-
-var bunyan = require('bunyan');
-global.log = bunyan.createLogger({ name: 'xplain' });
-log.level(hasOption('--debug') ? 'debug' : 'info');
 
 var path = require('path');
-var check = require('check-types');
-var verify = check.verify;
 var package = require('./package.json');
 
 var info = 'xplain - JavaScript API documentation generator\n' +

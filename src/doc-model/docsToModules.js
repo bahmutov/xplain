@@ -1,4 +1,5 @@
 var check = require('check-types');
+lazyAss(check.object(global.log), 'missing global log object');
 var Documented = require('./Documented');
 var DocModule = require('./DocModule');
 
