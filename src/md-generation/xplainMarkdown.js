@@ -6,10 +6,9 @@ var read = require('fs').readFileSync;
 var write = require('fs').writeFileSync;
 var eol = require('os').EOL;
 var _ = require('lodash');
-var _gt = require('gt');
-var framework = _gt.TestingFramework;
 
 module.exports = function xplainMarkdown(options) {
+  var framework = require('gt').TestingFramework;
   verify.object(options, 'expecting options');
 
   verify.unemptyString(options.outputFilename, 'missing output filename in ' +
