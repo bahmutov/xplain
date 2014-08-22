@@ -1,4 +1,5 @@
-var verify = require('check-types').verify;
+var check = require('check-types');
+require('lazy-ass');
 var transform = require('../doc-transform/toHumanForm');
 var getBlocks = require('./getBlocks');
 var parser = require('./mdParsing');
@@ -7,22 +8,30 @@ var write = require('fs').writeFileSync;
 var eol = require('os').EOL;
 var _ = require('lodash');
 
-module.exports = function xplainMarkdown(options) {
-  var framework = require('gt').TestingFramework;
-  verify.object(options, 'expecting options');
+function getGtTests(options) {
+  la(check.object(options), 'missing options');
+  la(check.array(options.inputFiles), 'missing inputFiles', options);
 
-  verify.unemptyString(options.outputFilename, 'missing output filename in ' +
-    JSON.stringify(options, null, 2));
-  var txt = read(options.outputFilename, 'utf8');
-  var doc = new parser(txt);
-  var blocks = doc.codeBlocks();
-  verify.array(blocks, 'expected array of blocks from ' + options.outputFilename);
-  console.log('' + blocks.length, 'code blocks');
+  var framework = require('gt').TestingFramework;
+  la(check.object(options), 'expecting options');
 
   framework.init();
   framework.collect(options.inputFiles);
   var tests = framework.getAllTests();
-  verify.array(tests, 'tests should be an array');
+  return tests;
+}
+
+module.exports = function xplainMarkdown(options) {
+  la(check.unemptyString(options.outputFilename),
+    'missing output filename in', options);
+  var txt = read(options.outputFilename, 'utf8');
+  var doc = new parser(txt);
+  var blocks = doc.codeBlocks();
+  la(check.array(blocks), 'expected array of blocks from', options.outputFilename);
+  console.log('' + blocks.length, 'code blocks');
+
+  var tests = getGtTests(options);
+  la(check.array(tests), 'tests should be an array');
   console.log('' + tests.length, 'tests');
 
   blocks.forEach(function (block) {
@@ -39,7 +48,7 @@ module.exports = function xplainMarkdown(options) {
   });
 
   var updatedText = doc.text();
-  verify.unemptyString(updatedText, 'empty updated text for ' + options.outputFilename);
+  la(check.unemptyString(updatedText), 'empty updated text for', options.outputFilename);
   // console.log('updated md\n' + updatedText);
   write(options.outputFilename, updatedText);
   console.log('saved', options.outputFilename);

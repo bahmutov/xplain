@@ -101,6 +101,7 @@
     "console": "node index.js -f console -t console.assert -i examples/console/test.js -o examples/console/docs",
     "instance": "node index.js -f gt -t instance -i examples/object/test.js -o examples/object/docs",
     "md": "node node_modules/gt test/md.js --output",
+    "md-bdd": "node index.js -i examples/markdown/bdd/add-spec.js -o examples/markdown/bdd/add.md",
     "mocha": "node node_modules/mocha/bin/mocha examples/markdown/gt/mocha/test.js test/misc-spec.js test/as-package.js -R spec"
   }
 }
