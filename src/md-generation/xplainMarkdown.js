@@ -21,6 +21,28 @@ function getGtTests(options) {
   return tests;
 }
 
+function getBddTests(options) {
+  la(check.object(options), 'missing options');
+  la(check.array(options.inputFiles), 'missing inputFiles', options);
+
+  var bdd2Tree = require('bdd-tree');
+  la(check.fn(bdd2Tree), 'missing bdd-tree function');
+  var tests = [];
+  options.inputFiles.forEach(function (filename) {
+    var source = read(filename, 'utf8');
+    var describes = bdd2Tree(source);
+    la(check.array(describes), 'could not get tests from', filename);
+
+    describes.forEach(function (describe) {
+      la(check.array(describe.its), 'block', describe.name, 'does not have its tests');
+      tests = tests.concat(describe.its);
+    });
+
+  });
+
+  return tests;
+}
+
 module.exports = function xplainMarkdown(options) {
   la(check.unemptyString(options.outputFilename),
     'missing output filename in', options);
@@ -30,7 +52,15 @@ module.exports = function xplainMarkdown(options) {
   la(check.array(blocks), 'expected array of blocks from', options.outputFilename);
   console.log('' + blocks.length, 'code blocks');
 
-  var tests = getGtTests(options);
+
+  var tests;
+  if (options.framework === 'gt' || options.framework === 'qunit') {
+    tests = getGtTests(options);
+  } else if (options.framework === 'jasmine' || options.framework === 'mocha' || options.framework === 'bdd') {
+    tests = getBddTests(options);
+  } else {
+    throw new Error('Unknown test framework ' + options.framework);
+  }
   la(check.array(tests), 'tests should be an array');
   console.log('' + tests.length, 'tests');
 

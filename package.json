@@ -1,7 +1,7 @@
 {
   "name": "xplain",
   "description": "Generates API documentation / markdown inserts from unit tests",
-  "version": "0.4.5",
+  "version": "0.5.0",
   "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
   "bin": "index.js",
   "bugs": {
@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "allong.es": "0.14.0",
+    "bdd-tree": "0.2.0",
     "bunyan": "1.0.0",
     "check-types": "1.3.1",
     "console.json": "0.1.1",
@@ -77,7 +78,7 @@
     "url": "https://github.com/bahmutov/xplain.git"
   },
   "scripts": {
-    "test": "grunt && npm run unit && npm run md && npm run mocha",
+    "test": "grunt && npm run unit && npm run md && npm run md-bdd && npm run mocha",
     "unit": "node ./node_modules/gt src/**/test/*.js src/**/test/*.coffee --output",
     "e2e": "node ./node_modules/gt test/e2e.js",
     "yuidoc": "yuidoc src test",
