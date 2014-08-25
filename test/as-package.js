@@ -45,6 +45,31 @@ describe('using xplain as package', function () {
       patterns: testFolder + '/s*.js',
       outputFolder: testFolder + '/docs'
     });
+
+    la(p, 'has not returned a value');
+    la(check.fn(p.then), 'returned value is not a promise');
+
+    return p.then(function (result) {
+      lazyAss(check.object(result), 'has result');
+      lazyAss(check.object(result.inputOptions), 'has input options');
+      lazyAss(check.array(result.inputFiles), 'has input files');
+      lazyAss(result.inputFiles.length === 1,
+        'should have single inputfile', result);
+      lazyAss(result.inputOptions.framework === 'jasmine',
+        'should be jasmine', result);
+    }).done();
+  });
+
+  it('returns promise BDD -> markdown', function () {
+    var testFolder = path.join(__dirname, '../examples/markdown/bdd');
+    var p = xplain.document({
+      patterns: testFolder + '/*-spec.js',
+      outputFolder: testFolder + '/add.md'
+    });
+
+    la(p, 'has not returned a value');
+    la(check.fn(p.then), 'returned value is not a promise');
+
     return p.then(function (result) {
       lazyAss(check.object(result), 'has result');
       lazyAss(check.object(result.inputOptions), 'has input options');

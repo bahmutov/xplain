@@ -7,6 +7,7 @@ var read = require('fs').readFileSync;
 var write = require('fs').writeFileSync;
 var eol = require('os').EOL;
 var _ = require('lodash');
+var q = require('q');
 
 function getGtTests(options) {
   la(check.object(options), 'missing options');
@@ -50,8 +51,7 @@ module.exports = function xplainMarkdown(options) {
   var doc = new parser(txt);
   var blocks = doc.codeBlocks();
   la(check.array(blocks), 'expected array of blocks from', options.outputFilename);
-  console.log('' + blocks.length, 'code blocks');
-
+  // console.log('' + blocks.length, 'code blocks');
 
   var tests;
   if (options.framework === 'gt' || options.framework === 'qunit') {
@@ -62,7 +62,7 @@ module.exports = function xplainMarkdown(options) {
     throw new Error('Unknown test framework ' + options.framework);
   }
   la(check.array(tests), 'tests should be an array');
-  console.log('' + tests.length, 'tests');
+  // console.log('' + tests.length, 'tests');
 
   blocks.forEach(function (block) {
     var test = _.find(tests, { name: block.name });
@@ -72,7 +72,7 @@ module.exports = function xplainMarkdown(options) {
     // console.log('block', block.name, 'found unit test', test);
     var human = transform(test.code.toString(), options.framework);
     if (human && _.isString(human.code)) {
-      console.log('human code\n' + human.code);
+      // console.log('human code\n' + human.code);
       block.setText(human.code + eol + eol);
     }
   });
@@ -82,4 +82,9 @@ module.exports = function xplainMarkdown(options) {
   // console.log('updated md\n' + updatedText);
   write(options.outputFilename, updatedText);
   console.log('saved', options.outputFilename);
+
+  return q({
+    inputOptions: options,
+    inputFiles: options.inputFiles
+  });
 };

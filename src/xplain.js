@@ -50,7 +50,7 @@ function generateDocs(options) {
   }
 
   if (isMarkdownFilename(options.outputFolder)) {
-    xplainMarkdown({
+    return xplainMarkdown({
       inputFiles: inputFiles,
       framework: options.framework,
       outputFilename: options.outputFolder
