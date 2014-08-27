@@ -1,4 +1,4 @@
-# xplain v0.5.1
+# xplain v0.5.2
 
 > Generates API documentation / markdown inserts from unit tests
 

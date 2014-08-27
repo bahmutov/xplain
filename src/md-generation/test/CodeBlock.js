@@ -25,7 +25,7 @@ gt.test('has offset', function () {
 gt.test('setting text with tabs', function () {
   var c = new CodeBlock('foo');
   console.log('c\n' + c.toString());
-  var txt = '\tfirst\n' + 
+  var txt = '\tfirst\n' +
   '\tsecond\n' +
   '\t// a comment\n' +
   '\tthird\n';
@@ -36,10 +36,20 @@ gt.test('setting text with tabs', function () {
 gt.test('setting code text', function () {
   var c = new CodeBlock('foo');
   console.log('c\n' + c.toString());
-  var txt = 'first\n' + 
+  var txt = 'first\n' +
   'second\n' +
   '// a comment\n' +
   'third\n';
+  c.setText(txt);
+  console.log('new text\n' + c.toString());
+  gt.ok(!/undefined/.test(c.toString()), 'cobe block does not have undefined in text', c.toString());
+});
+
+gt.test('setting code text with formatting', function () {
+  var c = new CodeBlock('foo');
+  var txt = 'var foo = {\n' +
+  '  bar: 2\n' +
+  '};\n';
   c.setText(txt);
   console.log('new text\n' + c.toString());
   gt.ok(!/undefined/.test(c.toString()), 'cobe block does not have undefined in text', c.toString());

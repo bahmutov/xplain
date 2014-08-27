@@ -24,8 +24,8 @@ Here is another code block inserted from another unit test
 ### identity
 
     var foo = {
-  bar: 'bar'
-};
+      bar: 'bar'
+    };
     I(foo); // foo
 
 Run unit tests `gt add-test.js`

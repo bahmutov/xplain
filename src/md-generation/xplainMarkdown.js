@@ -81,7 +81,7 @@ module.exports = function xplainMarkdown(options) {
   la(check.unemptyString(updatedText), 'empty updated text for', options.outputFilename);
   // console.log('updated md\n' + updatedText);
   write(options.outputFilename, updatedText);
-  console.log('saved', options.outputFilename);
+  // console.log('saved', options.outputFilename);
 
   return q({
     inputOptions: options,

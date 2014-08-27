@@ -39,9 +39,9 @@ CodeBlock.prototype.setText = function (newCode) {
 
   lines = lines.map(function (line) {
     if (line) {
-      if (/^[\w\/\/\/\*]/.test(line)) {
+      //if (/^[\w\/\/\/\*]/.test(line)) {
         line = this.offset + line;
-      }
+      //}
     }
 
     return line;
