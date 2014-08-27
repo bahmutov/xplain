@@ -12,6 +12,22 @@ Here is another code block inserted from another unit test
 
     add('foo', 'bar'); // 'foobar'
 
+---
+
+### can be applied
+
+    var args = ['foo', 'bar'];
+    add.apply(null, args); // 'foobar'
+
+---
+
+### identity
+
+    var foo = {
+  bar: 'bar'
+};
+    I(foo); // foo
+
 Run unit tests `gt add-test.js`
 
 Update markdown using `xplain -i add-spec.js -o add.md -f bdd`
