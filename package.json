@@ -68,11 +68,15 @@
   ],
   "license": "MIT",
   "main": "index.js",
-  "pre-commit": "npm test",
+  "pre-commit": [
+    "npm test",
+    "npm version"
+  ],
   "pre-push": [
     "npm install",
     "grunt",
-    "npm test"
+    "npm test",
+    "npm version"
   ],
   "repository": {
     "type": "git",
