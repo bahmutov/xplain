@@ -103,6 +103,11 @@ if (!program.framework) {
     inputFiles);
 }
 log.debug('framework', { name: program.framework });
+
+if (program.framework === 'bdd') {
+  program.framework = 'jasmine';
+}
+
 if (!xplain.isSupported(program.framework)) {
   console.error('Invalid framework ' + program.framework);
   console.error('Available', xplain.supportedFrameworks());
