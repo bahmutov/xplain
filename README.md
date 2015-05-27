@@ -1,4 +1,4 @@
-# xplain v0.5.2
+# xplain v0.5.3
 
 > Generates API documentation / markdown inserts from unit tests
 
@@ -109,7 +109,7 @@ There are 4 levels of details captured in the API.
 
 * [QUnit](http://qunitjs.com/)
 * [gt](https://github.com/bahmutov/gt)
-* [Jasmine/Mocha/Bdd](http://visionmedia.github.io/mocha/)
+* [Jasmine/Mocha/Bdd](http://mochajs.org/)
 * `console.assert` statements
 * [lazy-ass](https://github.com/bahmutov/lazy-ass) assertions
 
