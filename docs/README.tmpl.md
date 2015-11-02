@@ -4,6 +4,8 @@
 
 {%= _.doc("./docs/badges.md") %}
 
+![xplain screenshot](xplain-screenshot.png)
+
 {%= _.doc("./docs/use.md") %}
 
 {%= _.doc("./docs/third-party.md") %}
