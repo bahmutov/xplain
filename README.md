@@ -19,6 +19,8 @@
 
 
 
+![xplain screenshot](xplain-screenshot.png)
+
 ***This is still very early release, probably would not work right away for your needs.***
 
 **xplain** takes unit tests and generates documentation examples. Check out the reverse:
