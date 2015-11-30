@@ -23,7 +23,8 @@
     },
     "next-update": {
       "skip": [
-        "q"
+        "q",
+        "check-types"
       ]
     }
   },
@@ -40,7 +41,7 @@
     "esprima": "2.7.0",
     "fs.extra": "1.3.2",
     "glob": "6.0.1",
-    "gt": "0.8.48",
+    "gt": "0.9.1",
     "html": "0.0.10",
     "js-beautify": "1.5.5",
     "lazy-ass": "0.5.8",
@@ -110,8 +111,8 @@
     "complexity": "jsc -p src/**/*.js --skip src/html-generation/assets/*.js --skip src/**/cover/**/*.js",
     "console": "node index.js -f console -t console.assert -i examples/console/test.js -o examples/console/docs",
     "deprecated": "node index.js -i examples/deprecated/*.js -o examples/deprecated/docs -t deprecated",
-    "doc": "node ./node_modules/gt test/*.js && node index.js -i src/*.js,test/*.js -v 1.0.1",
-    "e2e": "node ./node_modules/gt test/e2e.js",
+    "doc": "gt test/*.js && node index.js -i src/*.js,test/*.js -v 1.0.1",
+    "e2e": "gt test/e2e.js",
     "external": "node index.js -f gt -t External -i examples/external/test.js -o examples/external/docs",
     "immediate": "node index.js -f gt -i examples/immediate/*.js -o examples/immediate/docs",
     "instance": "node index.js -f gt -t instance -i examples/object/test.js -o examples/object/docs",
@@ -119,9 +120,9 @@
     "jasmine": "node index.js -f jasmine -t Jasmine -i examples/jasmine/spec.js -o examples/jasmine/docs",
     "lodash": "node index.js -i examples/lodash/*.js -o examples/lodash/docs",
     "long": "node index.js -i examples/long/test.js -o examples/long/docs",
-    "md": "node node_modules/gt test/md.js --output",
+    "md": "gt test/md.js --output",
     "md-bdd": "node index.js -i examples/markdown/bdd/add-spec.js -o examples/markdown/bdd/add.md",
-    "mocha": "node node_modules/mocha/bin/mocha examples/markdown/gt/mocha/test.js test/misc-spec.js test/as-package.js -R spec",
+    "mocha": "mocha examples/markdown/gt/mocha/test.js test/misc-spec.js test/as-package.js -R spec",
     "qunit": "node index.js -i examples/qunit/*.js -o examples/qunit/docs",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "size": "t=\"$(npm pack .)\"; wc -c \"${t}\"; tar tvf \"${t}\"; rm \"${t}\";",
@@ -130,7 +131,7 @@
     "submodules2": "node index.js -f gt -i examples/submodules/*.js",
     "test": "grunt && npm run unit && npm run md && npm run md-bdd && npm run mocha",
     "underscore": "node index.js -i examples/underscore/*.js -o examples/underscore/docs --title underscore",
-    "unit": "node ./node_modules/gt src/**/test/*.js src/**/test/*.coffee --output",
+    "unit": "gt src/**/test/*.js src/**/test/*.coffee --output",
     "unnamed": "node index.js -f gt -i examples/unnamed/*.js -o examples/unnamed/docs",
     "yuidoc": "yuidoc src test"
   }
