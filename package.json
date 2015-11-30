@@ -7,6 +7,21 @@
   "bugs": {
     "url": "https://github.com/bahmutov/xplain/issues"
   },
+  "config": {
+    "pre-git": {
+      "commit-msg": "validate-commit-msg",
+      "pre-commit": [
+        "npm test"
+      ],
+      "pre-push": [
+        "npm run size"
+      ],
+      "post-commit": [
+        "npm version"
+      ],
+      "post-merge": []
+    }
+  },
   "contributors": [],
   "dependencies": {
     "allong.es": "0.14.0",
@@ -55,12 +70,12 @@
     "lazy-ass-helpful": "0.6.1",
     "matchdep": "0.3.0",
     "mocha": "2.2.5",
-    "pre-git": "0.2.1",
+    "pre-git": "1.4.0",
     "semantic-release": "4.3.5",
     "time-grunt": "1.2.1"
   },
   "engines": {
-    "node": "0.10.*"
+    "node": ">0.10.0"
   },
   "homepage": "https://github.com/bahmutov/xplain",
   "keywords": [
@@ -71,16 +86,6 @@
   ],
   "license": "MIT",
   "main": "index.js",
-  "pre-commit": [
-    "npm test",
-    "npm version"
-  ],
-  "pre-push": [
-    "npm install",
-    "grunt",
-    "npm test",
-    "npm version"
-  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/bahmutov/xplain.git"
@@ -114,6 +119,8 @@
     "md-bdd": "node index.js -i examples/markdown/bdd/add-spec.js -o examples/markdown/bdd/add.md",
     "mocha": "node node_modules/mocha/bin/mocha examples/markdown/gt/mocha/test.js test/misc-spec.js test/as-package.js -R spec",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
-    "issues": "git-issues"
+    "issues": "git-issues",
+    "commit": "git-issues && commit-wizard",
+    "size": "t=\"$(npm pack .)\"; wc -c \"${t}\"; tar tvf \"${t}\"; rm \"${t}\";"
   }
 }
