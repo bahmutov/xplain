@@ -77,6 +77,12 @@
   "engines": {
     "node": ">0.10.0"
   },
+  "files": [
+    "LICENSE-MIT",
+    "index.js",
+    "src",
+    "*.png"
+  ],
   "homepage": "https://github.com/bahmutov/xplain",
   "keywords": [
     "javascript",
