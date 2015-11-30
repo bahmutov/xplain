@@ -1,7 +1,7 @@
 {
   "name": "xplain",
   "description": "Generates API documentation / markdown inserts from unit tests",
-  "version": "0.5.4",
+  "version": "0.0.0-semantic-release",
   "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
   "bin": "index.js",
   "bugs": {
@@ -38,8 +38,10 @@
   },
   "devDependencies": {
     "bunyan-gt": "0.2.0",
+    "git-issues": "1.2.0",
     "grunt": "0.4.5",
     "grunt-bump": "0.3.1",
+    "grunt-cli": "0.1.13",
     "grunt-complexity": "0.3.0",
     "grunt-contrib-jshint": "0.11.2",
     "grunt-deps-ok": "0.7.1",
@@ -54,6 +56,7 @@
     "matchdep": "0.3.0",
     "mocha": "2.2.5",
     "pre-git": "0.2.1",
+    "semantic-release": "4.3.5",
     "time-grunt": "1.2.1"
   },
   "engines": {
@@ -83,6 +86,7 @@
     "url": "https://github.com/bahmutov/xplain.git"
   },
   "scripts": {
+    "build": "grunt",
     "test": "grunt && npm run unit && npm run md && npm run md-bdd && npm run mocha",
     "unit": "node ./node_modules/gt src/**/test/*.js src/**/test/*.coffee --output",
     "e2e": "node ./node_modules/gt test/e2e.js",
@@ -108,6 +112,8 @@
     "instance": "node index.js -f gt -t instance -i examples/object/test.js -o examples/object/docs",
     "md": "node node_modules/gt test/md.js --output",
     "md-bdd": "node index.js -i examples/markdown/bdd/add-spec.js -o examples/markdown/bdd/add.md",
-    "mocha": "node node_modules/mocha/bin/mocha examples/markdown/gt/mocha/test.js test/misc-spec.js test/as-package.js -R spec"
+    "mocha": "node node_modules/mocha/bin/mocha examples/markdown/gt/mocha/test.js test/misc-spec.js test/as-package.js -R spec",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "issues": "git-issues"
   }
 }
