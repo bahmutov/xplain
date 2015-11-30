@@ -1,3 +1,4 @@
+var lazyAss = require('lazy-ass');
 var check = require('check-types');
 var fs = require('fs.extra');
 var Comment = require('./Comment');

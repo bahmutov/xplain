@@ -1,5 +1,5 @@
 var check = require('check-types');
-require('lazy-ass');
+var la = require('lazy-ass');
 var transform = require('../doc-transform/toHumanForm');
 var getBlocks = require('./getBlocks');
 var parser = require('./mdParsing');

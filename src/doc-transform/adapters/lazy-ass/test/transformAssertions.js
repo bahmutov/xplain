@@ -1,7 +1,7 @@
 gt.module('parsing lazy-ass assertions');
 
 var transform = require('../parsers');
-require('lazy-ass');
+var la = require('lazy-ass');
 var check = require('check-types');
 
 gt.test(function basics() {

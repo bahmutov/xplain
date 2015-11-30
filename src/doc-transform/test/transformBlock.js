@@ -1,4 +1,4 @@
-require('lazy-ass');
+var la = require('lazy-ass');
 var transform = require('../transformBlock');
 
 gt.module('transforming a block of statements');

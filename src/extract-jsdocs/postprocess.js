@@ -1,3 +1,4 @@
+var lazyAss = require('lazy-ass');
 var check = require('check-types');
 
 function postProcessTags(tags) {

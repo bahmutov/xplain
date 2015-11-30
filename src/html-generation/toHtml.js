@@ -5,7 +5,7 @@ var verify = check.verify;
 var moment = require('moment');
 var _ = require('lodash');
 var q = require('q');
-require('lazy-ass');
+var lazyAss = require('lazy-ass');
 
 var methodDiv = require('./method');
 var rethrow = require('../utils/errors').rethrow;

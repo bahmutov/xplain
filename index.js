@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-require('lazy-ass');
+var lazyAss = require('lazy-ass');
 var check = require('check-types');
 var verify = check.verify;
 

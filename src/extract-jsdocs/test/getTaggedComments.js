@@ -1,5 +1,5 @@
 var path = require('path');
-require('lazy-ass');
+var la = require('lazy-ass');
 
 gt.module('getTaggedComments');
 

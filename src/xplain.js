@@ -1,3 +1,4 @@
+var lazyAss = require('lazy-ass');
 var fs = require('fs.extra');
 var path = require('path');
 var check = require('check-types');

@@ -1,6 +1,6 @@
 gt.module('docs to modules');
 
-require('lazy-ass');
+var la = require('lazy-ass');
 var getComments = require('../../extract-jsdocs/getTaggedComments').getCommentsFromFiles;
 var d2m = require('../docsToModules');
 var path = require('path');

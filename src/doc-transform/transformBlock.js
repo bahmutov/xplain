@@ -1,5 +1,5 @@
 var check = require('check-types');
-require('lazy-ass');
+var lazyAss = require('lazy-ass');
 
 var adapter = require('./adapters/adapter').adapter;
 var reformat = require('../utils/code').reformat;
