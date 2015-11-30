@@ -65,19 +65,19 @@
     "grunt-complexity": "0.3.0",
     "grunt-contrib-jshint": "0.11.3",
     "grunt-deps-ok": "0.8.0",
-    "grunt-jshint-solid": "0.1.0",
-    "grunt-jsonlint": "1.0.4",
+    "grunt-jshint-solid": "0.1.1",
+    "grunt-jsonlint": "1.0.6",
     "grunt-lineending": "0.2.4",
     "grunt-nice-package": "0.9.6",
     "grunt-readme": "0.4.5",
-    "jshint-solid": "0.2.1",
-    "jshint-stylish": "2.0.0",
+    "jshint-solid": "0.2.2",
+    "jshint-stylish": "2.1.0",
     "lazy-ass-helpful": "0.6.1",
-    "matchdep": "0.3.0",
-    "mocha": "2.2.5",
+    "matchdep": "1.0.0",
+    "mocha": "2.3.4",
     "pre-git": "1.4.0",
-    "semantic-release": "4.3.5",
-    "time-grunt": "1.2.1"
+    "semantic-release": "6.0.3",
+    "time-grunt": "1.2.2"
   },
   "engines": {
     "node": ">0.10.0"
