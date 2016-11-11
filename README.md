@@ -2,7 +2,7 @@
 
 > Generates API documentation / markdown inserts from unit tests
 
-[![NPM][xplain-icon] ][xplain-url]
+[![npm version](https://badge.fury.io/js/xplain.svg)](https://badge.fury.io/js/xplain)
 
 [![Build status][xplain-ci-image] ][xplain-ci-url]
 [![dependencies][xplain-dependencies-image] ][xplain-dependencies-url]
